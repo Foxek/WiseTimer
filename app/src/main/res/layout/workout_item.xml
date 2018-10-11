@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/workout_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/item_bg"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground">
+
+    <TextView
+        android:id="@+id/workout_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_image"
+        app:layout_constraintStart_toEndOf="@+id/workout_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/workout_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/workout_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/workout_name"
+        app:srcCompat="@drawable/ic_stopwatch"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/arrow_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_navigate_white"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/workout_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto_condensed_light"
+        android:textColor="@color/colorTransparentWhite"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_image"
+        app:layout_constraintStart_toEndOf="@+id/workout_image"
+        app:layout_constraintTop_toBottomOf="@+id/workout_name" />
+
+</android.support.constraint.ConstraintLayout>

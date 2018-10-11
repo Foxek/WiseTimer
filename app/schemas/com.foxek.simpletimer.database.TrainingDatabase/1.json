@@ -1,0 +1,95 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "51ca440013994de7484e6e11b7cd2baf",
+    "entities": [
+      {
+        "tableName": "trainings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`training_name` TEXT, `uid` INTEGER NOT NULL, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "training_name",
+            "columnName": "training_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Interval",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`work_intervals` INTEGER NOT NULL, `rest_intervals` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `position_id` INTEGER NOT NULL, `trainingID` INTEGER NOT NULL, FOREIGN KEY(`trainingID`) REFERENCES `trainings`(`uid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "workInterval",
+            "columnName": "work_intervals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "restInterval",
+            "columnName": "rest_intervals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "position_id",
+            "columnName": "position_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trainingID",
+            "columnName": "trainingID",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "trainings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "trainingID"
+            ],
+            "referencedColumns": [
+              "uid"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"51ca440013994de7484e6e11b7cd2baf\")"
+    ]
+  }
+}

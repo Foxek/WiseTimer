@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">WiseTimer</string>
+
+    <string name="training_desc">You can add, edit and start an already created workout</string>
+
+    <string name="timer_prepare">Prepare</string>
+    <string name="timer_prepare_number">Start soon</string>
+    <string name="timer_work_time">Work time</string>
+    <string name="timer_rest_time">Rest time</string>
+
+    <string name="time_min_hint">min</string>
+    <string name="timer_pause_button">Pause</string>
+    <string name="timer_continue_button">Continue</string>
+
+
+
+
+    /* Training activity and dialog */
+    <string name="dialog_training_setting_title">Workout settings</string>
+    <string name="dialog_training_create_title">Create workout</string>
+    <string name="dialog_training_setting_description">Change the name of the workout or delete it altogether</string>
+    <string name="dialog_training_create_description">To create a new workout, enter its name</string>
+    <string name="dialog_training_error_hint">Name must contain at least one letter or number</string>
+
+    <string name="dialog_interval_setting_title">Interval settings</string>
+    <string name="dialog_interval_create_title">Create interval</string>
+    <string name="dialog_interval_setting_description">Set the work time and rest time for a given interval</string>
+    <string name="dialog_interval_setting_divider">:</string>
+
+    <string name="training_subtitle">Welcome to</string>
+    <string name="training_title">WiseTimer</string>
+    <string name="training_sector_title">Workout list</string>
+
+    <string name="number_of_intervals_text">Number of intervals: %1$d</string>
+
+    <string name="delete_training_button">Delete workout</string>
+    <string name="save_training_button">Save changes</string>
+    <string name="create_training_button">Create workout</string>
+
+    <string name="delete_interval_button">Delete interval</string>
+    <string name="save_interval_button">Save interval</string>
+    <string name="start_workout_button">Start workout</string>
+
+    <string name="interval_title">Interval List</string>
+</resources>

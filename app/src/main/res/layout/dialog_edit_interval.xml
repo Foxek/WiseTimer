@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dialog_horizontal_padding"
+    android:paddingTop="@dimen/dialog_vertical_padding"
+    android:paddingEnd="@dimen/dialog_horizontal_padding"
+    android:paddingBottom="@dimen/dialog_vertical_padding">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:text="@string/dialog_interval_setting_title"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/dialog_header_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dialog_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_condensed_light"
+        android:text="@string/dialog_interval_setting_description"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+
+    <TextView
+        android:id="@+id/work_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/timer_work_time"
+        android:textColor="#424242"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
+
+    <TextView
+        android:id="@+id/work_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/dialog_interval_setting_divider"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dialog_header_size"
+        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
+        app:layout_constraintEnd_toStartOf="@+id/work_second_text"
+        app:layout_constraintTop_toTopOf="@+id/work_minute_text"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <EditText
+        android:id="@+id/work_minute_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:singleLine="false"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/work_divider"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
+
+    <EditText
+        android:id="@+id/work_second_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
+
+    <TextView
+        android:id="@+id/rest_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/timer_rest_time"
+        android:textColor="#424242"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rest_minute_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rest_minute_text" />
+
+    <TextView
+        android:id="@+id/rest_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_interval_setting_divider"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dialog_header_size"
+        app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
+        app:layout_constraintEnd_toStartOf="@+id/rest_second_text"
+        app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
+
+    <EditText
+        android:id="@+id/rest_second_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/work_second_text" />
+
+    <EditText
+        android:id="@+id/rest_minute_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
+        app:layout_constraintEnd_toStartOf="@+id/rest_divider"
+        app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
+
+    <TextView
+        android:id="@+id/delete_button"
+        style="@style/CustomDialogButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/delete_interval_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rest_minute_text" />
+
+    <TextView
+        android:id="@+id/save_button"
+        style="@style/CustomDialogButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/save_interval_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+
+</android.support.constraint.ConstraintLayout>

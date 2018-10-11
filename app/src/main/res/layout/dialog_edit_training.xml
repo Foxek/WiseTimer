@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dialog_horizontal_padding"
+    android:paddingTop="@dimen/dialog_vertical_padding"
+    android:paddingEnd="@dimen/dialog_horizontal_padding"
+    android:paddingBottom="@dimen/dialog_vertical_padding">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:text="@string/dialog_training_setting_title"
+        android:textColor="#424242"
+        android:textSize="@dimen/dialog_header_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dialog_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_condensed_light"
+        android:text="@string/dialog_training_setting_description"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+
+    <EditText
+        android:id="@+id/training_edit_text"
+        style="@style/CustomEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text|textCapSentences|textNoSuggestions"
+        android:textColorHighlight="@color/colorTint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
+
+    <TextView
+        android:id="@+id/delete_button"
+        style="@style/CustomDialogButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/delete_training_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_edit_text" />
+
+    <TextView
+        android:id="@+id/save_button"
+        style="@style/CustomDialogButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/save_training_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+
+</android.support.constraint.ConstraintLayout>
