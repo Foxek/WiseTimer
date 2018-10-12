@@ -67,6 +67,8 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:inputType="textNoSuggestions|number"
         android:singleLine="false"
+        android:digits="0123456789"
+        android:maxLength="2"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/work_divider"
         app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
@@ -80,6 +82,8 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:inputType="textNoSuggestions|number"
         android:textSize="24sp"
+        android:digits="0123456789"
+        android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
@@ -117,6 +121,8 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:inputType="textNoSuggestions|number"
         android:textSize="24sp"
+        android:digits="0123456789"
+        android:maxLength="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/work_second_text" />
 
@@ -129,6 +135,8 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:inputType="textNoSuggestions|number"
         android:textSize="24sp"
+        android:digits="0123456789"
+        android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
         app:layout_constraintEnd_toStartOf="@+id/rest_divider"
         app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
