@@ -80,11 +80,19 @@ public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> 
 
     @OnClick(R.id.save_button)
     public void onSaveButtonClick(){
-        int work_time = convertToSeconds(mWorkMinuteText.getText().toString(), mWorkSecondText.getText().toString());
-        if (work_time == 0) work_time = 1;
+        int work_time, rest_time;
+        if (!mWorkMinuteText.getText().toString().equals("") && !mWorkSecondText.getText().toString().equals("")) {
+            work_time = convertToSeconds(mWorkMinuteText.getText().toString(), mWorkSecondText.getText().toString());
+            if (work_time == 0) work_time = 1;
+        }else
+            work_time = 1;
 
-        int rest_time = convertToSeconds(mRestMinuteText.getText().toString(), mRestSecondText.getText().toString());
-        if (rest_time == 0) rest_time = 1;
+
+        if (!mRestMinuteText.getText().toString().equals("") && !mRestSecondText.getText().toString().equals("")) {
+            rest_time = convertToSeconds(mRestMinuteText.getText().toString(), mRestSecondText.getText().toString());
+            if (rest_time == 0) rest_time = 1;
+        }else
+            rest_time = 1;
 
         getPresenter().onIntervalCreated(work_time, rest_time);
         repairMemoryLeak();
