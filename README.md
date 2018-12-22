@@ -1,5 +1,5 @@
-# WiseTimer-Simple-android-interval-timer
-This repository contains a detailed simple app WiseTimer that implements MVP architecture using Dagger2, RxJava, and Room.
+# WiseTimer
+This repository contains a detailed simple android interval timer that implements MVP architecture using Dagger2, RxJava, and Room.
 <p>
 <a href='https://play.google.com/store/apps/details?id=com.foxek.simpletimer&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Доступно в Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/ru_badge_web_generic.png'/ width="200"></a>
 <p>
