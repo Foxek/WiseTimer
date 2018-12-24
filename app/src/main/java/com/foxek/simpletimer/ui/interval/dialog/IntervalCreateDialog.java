@@ -20,7 +20,7 @@ import butterknife.Unbinder;
 import static com.foxek.simpletimer.data.model.interval.IntervalUtils.convertToSeconds;
 import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatEditTextData;
 
-public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView{
+public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView {
 
     private Unbinder mBinder;
 
@@ -42,6 +42,9 @@ public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> 
     @BindView(R.id.rest_second_text)
     EditText mRestSecondText;
 
+    @BindView(R.id.repeats_edit_text)
+    EditText mRepeatText;
+
     public static IntervalCreateDialog newInstance() {
         return new IntervalCreateDialog();
     }
@@ -62,39 +65,52 @@ public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> 
         return dialogView;
     }
 
-    private void prepareEditText(){
+    private void prepareEditText() {
         mWorkMinuteText.setText(formatEditTextData(0));
         mWorkSecondText.setText(formatEditTextData(0));
 
         mRestMinuteText.setText(formatEditTextData(0));
         mRestSecondText.setText(formatEditTextData(0));
+
+        mRepeatText.setText("1");
     }
 
-    private void repairMemoryLeak(){
+    private void repairMemoryLeak() {
         mWorkMinuteText.setCursorVisible(false);
         mWorkSecondText.setCursorVisible(false);
 
         mRestMinuteText.setCursorVisible(false);
         mRestSecondText.setCursorVisible(false);
+
+        mRepeatText.setCursorVisible(false);
     }
 
     @OnClick(R.id.save_button)
-    public void onSaveButtonClick(){
-        int work_time, rest_time;
+    public void onSaveButtonClick() {
+        int work_time, rest_time, repeat;
+
         if (!mWorkMinuteText.getText().toString().equals("") && !mWorkSecondText.getText().toString().equals("")) {
             work_time = convertToSeconds(mWorkMinuteText.getText().toString(), mWorkSecondText.getText().toString());
             if (work_time == 0) work_time = 1;
-        }else
+        } else
             work_time = 1;
 
 
         if (!mRestMinuteText.getText().toString().equals("") && !mRestSecondText.getText().toString().equals("")) {
             rest_time = convertToSeconds(mRestMinuteText.getText().toString(), mRestSecondText.getText().toString());
             if (rest_time == 0) rest_time = 1;
-        }else
+        } else
             rest_time = 1;
 
-        getPresenter().onIntervalCreated(work_time, rest_time);
+        if (!mRepeatText.getText().toString().equals("")) {
+            repeat = Integer.valueOf(mRepeatText.getText().toString());
+            if (repeat == 0) repeat = 1;
+        } else
+            repeat = 1;
+
+        for (int i=1; i<=repeat; i++)
+            getPresenter().onIntervalCreated(work_time, rest_time);
+
         repairMemoryLeak();
         dismiss();
     }

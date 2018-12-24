@@ -37,7 +37,7 @@ public interface IntervalContact {
 
         void onIntervalChanged(int work_time, int rest_time);
 
-        void onIntervalCreated(int work_time, int rest_time);
+        void onIntervalCreated(int work_time, int rest_timez);
 
         void onDeleteInterval();
 

@@ -7,6 +7,7 @@
     <string name="timer_prepare_number">Start soon</string>
     <string name="timer_work_time">Work time</string>
     <string name="timer_rest_time">Rest time</string>
+    <string name="timer_repeat">Repeat</string>
 
     <string name="time_min_hint">min</string>
     <string name="timer_pause_button">Pause</string>

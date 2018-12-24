@@ -39,6 +39,12 @@ public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> im
     @BindView(R.id.rest_second_text)
     EditText mRestSecondText;
 
+    @BindView(R.id.repeats_edit_text)
+    EditText mRepeatText;
+
+    @BindView(R.id.repeat_name)
+    TextView mRepeatName;
+
     public static IntervalEditDialog newInstance(int work_time,int rest_time) {
         IntervalEditDialog mIntervalEditDialog = new IntervalEditDialog();
         Bundle args = new Bundle();
@@ -55,6 +61,9 @@ public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> im
         mBinder = ButterKnife.bind(this, dialogView);
 
         prepareEditText(getArguments().getInt("work_time"),getArguments().getInt("rest_time"));
+
+        mRepeatText.setVisibility(View.GONE);
+        mRepeatName.setVisibility(View.GONE);
 
         getPresenter().attachDialog(this);
         getDialog().setCanceledOnTouchOutside(true);
@@ -76,6 +85,8 @@ public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> im
 
         mRestMinuteText.setCursorVisible(false);
         mRestSecondText.setCursorVisible(false);
+
+        mRepeatText.setCursorVisible(false);
     }
 
     @OnClick(R.id.save_button)
