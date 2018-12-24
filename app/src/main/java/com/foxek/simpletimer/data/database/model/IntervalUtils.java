@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data.model.interval;
+package com.foxek.simpletimer.data.database.model;
 
 public class IntervalUtils {
 

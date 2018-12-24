@@ -1,6 +1,7 @@
-package com.foxek.simpletimer.data.model.workout;
+package com.foxek.simpletimer.data.database.repository;
 
-import com.foxek.simpletimer.data.TrainingDatabase;
+import com.foxek.simpletimer.data.database.TrainingDatabase;
+import com.foxek.simpletimer.data.database.model.Workout;
 import com.foxek.simpletimer.di.RoomDatabase;
 
 import java.util.List;

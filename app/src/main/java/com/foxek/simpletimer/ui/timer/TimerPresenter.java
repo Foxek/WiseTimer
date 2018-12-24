@@ -9,8 +9,8 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.foxek.simpletimer.common.Constants.TIMER_PLAYING;
 import static com.foxek.simpletimer.common.Constants.TIMER_STOPPED;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatIntervalData;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatIntervalNumber;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatIntervalData;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatIntervalNumber;
 
 public class TimerPresenter extends BasePresenter<TimerContact.View> implements TimerContact.Presenter{
 

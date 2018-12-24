@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -17,8 +18,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.convertToSeconds;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatEditTextData;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.convertToSeconds;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatEditTextData;
 
 public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView {
 
@@ -45,6 +46,12 @@ public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> 
     @BindView(R.id.repeats_edit_text)
     EditText mRepeatText;
 
+    @BindView(R.id.repeat_name)
+    TextView mRepeatName;
+
+    @BindView(R.id.repeat_checkBox)
+    CheckBox mCheckBox;
+
     public static IntervalCreateDialog newInstance() {
         return new IntervalCreateDialog();
     }
@@ -56,7 +63,18 @@ public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> 
         mBinder = ButterKnife.bind(this, dialogView);
 
         mDeleteButton.setVisibility(View.GONE);
+
         mDialogTitle.setText(R.string.dialog_interval_create_title);
+
+        mCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                mRepeatName.setVisibility(View.VISIBLE);
+                mRepeatText.setVisibility(View.VISIBLE);
+            }else{
+                mRepeatName.setVisibility(View.GONE);
+                mRepeatText.setVisibility(View.GONE);
+            }
+        });
 
         prepareEditText();
         getPresenter().attachDialog(this);

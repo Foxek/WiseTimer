@@ -3,7 +3,7 @@ package com.foxek.simpletimer.di.component;
 import android.content.Context;
 
 import com.foxek.simpletimer.common.MainApplication;
-import com.foxek.simpletimer.data.TrainingDatabase;
+import com.foxek.simpletimer.data.database.TrainingDatabase;
 import com.foxek.simpletimer.di.ApplicationContext;
 import com.foxek.simpletimer.di.RoomDatabase;
 import com.foxek.simpletimer.di.module.ApplicationModule;

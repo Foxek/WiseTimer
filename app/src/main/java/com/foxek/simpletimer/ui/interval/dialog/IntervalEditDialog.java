@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -17,8 +18,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.convertToSeconds;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatEditTextData;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.convertToSeconds;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatEditTextData;
 
 public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView{
 
@@ -42,8 +43,8 @@ public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> im
     @BindView(R.id.repeats_edit_text)
     EditText mRepeatText;
 
-    @BindView(R.id.repeat_name)
-    TextView mRepeatName;
+    @BindView(R.id.repeat_checkBox)
+    CheckBox mCheckBox;
 
     public static IntervalEditDialog newInstance(int work_time,int rest_time) {
         IntervalEditDialog mIntervalEditDialog = new IntervalEditDialog();
@@ -63,7 +64,7 @@ public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> im
         prepareEditText(getArguments().getInt("work_time"),getArguments().getInt("rest_time"));
 
         mRepeatText.setVisibility(View.GONE);
-        mRepeatName.setVisibility(View.GONE);
+        mCheckBox.setVisibility(View.GONE);
 
         getPresenter().attachDialog(this);
         getDialog().setCanceledOnTouchOutside(true);

@@ -1,9 +1,9 @@
 package com.foxek.simpletimer.ui.timer;
 
-import com.foxek.simpletimer.data.model.AlarmHelper;
-import com.foxek.simpletimer.data.model.TimerHelper;
-import com.foxek.simpletimer.data.model.interval.Interval;
-import com.foxek.simpletimer.data.model.interval.IntervalRepository;
+import com.foxek.simpletimer.data.AlarmHelper;
+import com.foxek.simpletimer.data.TimerHelper;
+import com.foxek.simpletimer.data.database.model.Interval;
+import com.foxek.simpletimer.data.database.repository.IntervalRepository;
 
 import java.util.ArrayList;
 

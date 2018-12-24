@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.data.model.workout.Workout;
+import com.foxek.simpletimer.data.database.model.Workout;
 import com.foxek.simpletimer.ui.base.MvpDialog;
 import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;

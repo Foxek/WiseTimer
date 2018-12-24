@@ -5,7 +5,7 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.migration.Migration;
 
-import com.foxek.simpletimer.data.TrainingDatabase;
+import com.foxek.simpletimer.data.database.TrainingDatabase;
 import com.foxek.simpletimer.di.RoomDatabase;
 
 import dagger.Module;
@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class DatabaseModule {
 
-    private TrainingDatabase            mRoomDatabase;
+    private TrainingDatabase mRoomDatabase;
 
     public DatabaseModule(Application application) {
         mRoomDatabase = Room.databaseBuilder(application, TrainingDatabase.class, "training.db")

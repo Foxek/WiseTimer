@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.ui.interval;
 
-import com.foxek.simpletimer.data.model.interval.Interval;
+import com.foxek.simpletimer.data.database.model.Interval;
 import com.foxek.simpletimer.ui.base.MvpDialog;
 import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;

@@ -1,9 +1,9 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.data.model.interval.Interval;
-import com.foxek.simpletimer.data.model.interval.IntervalRepository;
-import com.foxek.simpletimer.data.model.workout.Workout;
-import com.foxek.simpletimer.data.model.workout.WorkoutRepository;
+import com.foxek.simpletimer.data.database.model.Interval;
+import com.foxek.simpletimer.data.database.repository.IntervalRepository;
+import com.foxek.simpletimer.data.database.model.Workout;
+import com.foxek.simpletimer.data.database.repository.WorkoutRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data;
+package com.foxek.simpletimer.data.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.foxek.simpletimer.data.model.interval.Interval;
+import com.foxek.simpletimer.data.database.model.Interval;
 
 import java.util.List;
 

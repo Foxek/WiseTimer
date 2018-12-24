@@ -1,15 +1,14 @@
-package com.foxek.simpletimer.data.model.interval;
+package com.foxek.simpletimer.data.database.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-
-import com.foxek.simpletimer.data.model.workout.Workout;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = Workout.class, parentColumns = "uid", childColumns = "trainingID", onDelete = CASCADE))
+@Entity(indices = {@Index("trainingID")},foreignKeys = @ForeignKey(entity = Workout.class, parentColumns = "uid", childColumns = "trainingID", onDelete = CASCADE))
 
 public class Interval {
 

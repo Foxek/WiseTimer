@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.data.model.interval.Interval;
+import com.foxek.simpletimer.data.database.model.Interval;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatIntervalData;
+import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatIntervalData;
 
 public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.ViewHolder> {
 

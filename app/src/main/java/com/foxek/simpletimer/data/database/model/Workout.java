@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data.model.workout;
+package com.foxek.simpletimer.data.database.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

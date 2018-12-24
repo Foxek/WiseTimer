@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data.model;
+package com.foxek.simpletimer.data;
 
 import android.os.CountDownTimer;
 
