@@ -1,8 +1,6 @@
 package com.foxek.simpletimer.ui.interval.dialog;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,8 @@ import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

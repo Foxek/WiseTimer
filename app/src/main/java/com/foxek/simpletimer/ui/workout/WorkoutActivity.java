@@ -2,8 +2,6 @@ package com.foxek.simpletimer.ui.workout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.foxek.simpletimer.ui.interval.IntervalActivity;
@@ -12,6 +10,8 @@ import com.foxek.simpletimer.ui.base.BaseView;
 
 import javax.inject.Inject;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

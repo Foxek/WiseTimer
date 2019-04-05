@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.ui.base;
 
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 
 public abstract class BaseDialog<T extends  MvpMultiPresenter> extends DialogFragment implements MvpDialog<T> {
 

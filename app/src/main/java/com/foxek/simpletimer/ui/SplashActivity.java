@@ -2,9 +2,10 @@ package com.foxek.simpletimer.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.foxek.simpletimer.ui.workout.WorkoutActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

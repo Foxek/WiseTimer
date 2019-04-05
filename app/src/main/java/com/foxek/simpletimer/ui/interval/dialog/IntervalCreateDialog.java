@@ -1,7 +1,7 @@
 package com.foxek.simpletimer.ui.interval.dialog;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
+import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
