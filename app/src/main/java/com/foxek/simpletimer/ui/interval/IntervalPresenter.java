@@ -25,7 +25,6 @@ public class IntervalPresenter extends BaseMultiPresenter<IntervalContact.View,I
 
     @Override
     public void viewIsReady() {
-
     }
 
     @Override
@@ -39,6 +38,7 @@ public class IntervalPresenter extends BaseMultiPresenter<IntervalContact.View,I
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adapter -> {
                     getView().setIntervalList(adapter);
+                    getView().setVolumeState(mInteractor.getCurrentWorkout().volumeState);
                     registerItemCallback();
                 }, throwable -> {}));
     }
@@ -47,6 +47,23 @@ public class IntervalPresenter extends BaseMultiPresenter<IntervalContact.View,I
     @Override
     public void editButtonPressed(){
         getView().showWorkoutEditDialog();
+    }
+
+    @Override
+    public void setVolumeButtonPressed() {
+        int state;
+
+        if (mInteractor.getCurrentWorkout().volumeState == 1)
+            state = 0;
+        else
+            state = 1;
+
+        mDisposable.add(mInteractor.updateWorkoutVolume(state)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+                    getView().setVolumeState(state);
+                }, throwable -> {}));
     }
 
     @Override

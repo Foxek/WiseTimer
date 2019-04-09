@@ -1,10 +1,12 @@
 package com.foxek.simpletimer.ui.interval;
 
 import com.foxek.simpletimer.data.database.model.Interval;
+import com.foxek.simpletimer.data.database.model.Workout;
 import com.foxek.simpletimer.ui.base.MvpDialog;
 import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -14,6 +16,8 @@ public interface IntervalContact {
     interface View extends MvpView {
 
         void setIntervalList(IntervalAdapter adapter);
+
+        void setVolumeState(int state);
 
         void startWorkoutActivity();
 
@@ -37,7 +41,7 @@ public interface IntervalContact {
 
         void onIntervalChanged(int work_time, int rest_time);
 
-        void onIntervalCreated(int work_time, int rest_timez);
+        void onIntervalCreated(int work_time, int rest_time);
 
         void onDeleteInterval();
 
@@ -48,6 +52,8 @@ public interface IntervalContact {
         void startWorkout();
 
         void editButtonPressed();
+
+        void setVolumeButtonPressed();
 
         void addIntervalButtonPressed();
     }
@@ -66,6 +72,10 @@ public interface IntervalContact {
 
         Observable<Interval> onIntervalItemClick();
 
+        Completable updateWorkoutVolume(int state);
+
         void deleteWorkout();
+
+        Workout getCurrentWorkout();
     }
 }

@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers;
 public class WorkoutPresenter extends BaseMultiPresenter<WorkoutContact.View, WorkoutContact.DialogView> implements WorkoutContact.Presenter{
 
     private CompositeDisposable         mDisposable;
-    private WorkoutInteractor mInteractor;
+    private WorkoutInteractor           mInteractor;
 
     public WorkoutPresenter(WorkoutInteractor interactor){
         mInteractor = interactor;

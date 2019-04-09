@@ -19,9 +19,6 @@ public interface WorkoutDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addWorkout(Workout workout);
 
-    @Update
-    void updateWorkout(Workout workout);
-
     @Query("DELETE FROM trainings WHERE uid = :WorkoutID")
     void deleteWorkout(int WorkoutID);
 
@@ -31,6 +28,9 @@ public interface WorkoutDAO {
     @Query("SELECT *, COUNT(*) AS intervalNumber FROM trainings,Interval WHERE trainingID = uid GROUP BY trainingID HAVING intervalNumber != 0")
     Flowable<List<Workout>> getAllWorkout();
 
+    @Query("UPDATE trainings SET volumeState=:state WHERE uid = :id")
+    void updateVolumeState(int state, int id);
 
-
+    @Query("UPDATE trainings SET training_name=:name WHERE uid = :id")
+    void updateWorkoutName(String name, int id);
 }

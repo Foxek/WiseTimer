@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
@@ -33,10 +34,12 @@ public class WorkoutRepository {
         return mDatabase.getWorkoutDAO().getWorkoutById(workoutId);
     }
 
-    public void updateWorkout(Workout workout){
-        mDatabase.getWorkoutDAO().updateWorkout(workout);
+    public Completable updateWorkoutName(String name, int id){
+        return Completable.fromAction(() -> mDatabase.getWorkoutDAO().updateWorkoutName(name, id));
     }
-
+    public Completable updateWorkoutVolumeState(int state, int id){
+        return Completable.fromAction(() -> mDatabase.getWorkoutDAO().updateVolumeState(state, id));
+    }
     public void deleteWorkout(int workoutId){
         mDatabase.getWorkoutDAO().deleteWorkout(workoutId);
     }

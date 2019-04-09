@@ -3,6 +3,7 @@ package com.foxek.simpletimer.ui.interval;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
@@ -28,6 +29,9 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
 
     @BindView(R.id.workout_name)
     TextView mWorkoutName;
+
+    @BindView(R.id.set_volume_button)
+    ImageButton mVolumeButton;
 
     @Inject
     IntervalPresenter       mPresenter;
@@ -89,6 +93,14 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
     }
 
     @Override
+    public void setVolumeState(int state) {
+        if (state == 1)
+            mVolumeButton.setImageResource(R.drawable.ic_menu_volume_on_white);
+        else
+            mVolumeButton.setImageResource(R.drawable.ic_menu_volume_off_white);
+    }
+
+    @Override
     public void startWorkoutActivity() {
         onBackPressed();
     }
@@ -102,7 +114,8 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
         finish();
     }
 
-    @OnClick({R.id.back_button,R.id.edit_button,R.id.add_interval_button,R.id.start_workout_button})
+    @OnClick({R.id.back_button,R.id.edit_button,R.id.add_interval_button,
+              R.id.start_workout_button, R.id.set_volume_button})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -111,6 +124,9 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
                 break;
             case R.id.edit_button:
                 mPresenter.editButtonPressed();
+                break;
+            case R.id.set_volume_button:
+                mPresenter.setVolumeButtonPressed();
                 break;
             case R.id.add_interval_button:
                 mPresenter.addIntervalButtonPressed();

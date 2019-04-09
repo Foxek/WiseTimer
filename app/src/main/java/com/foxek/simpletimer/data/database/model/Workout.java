@@ -14,6 +14,9 @@ public class Workout {
     @PrimaryKey
     public int uid;
 
+    @ColumnInfo(name = "volumeState")
+    public int volumeState;
+
 //    @Ignore
     @ColumnInfo(name = "intervalNumber")
     public int intervalNumber;

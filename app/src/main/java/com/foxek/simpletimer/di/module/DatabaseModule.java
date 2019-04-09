@@ -18,7 +18,7 @@ public class DatabaseModule {
 
     public DatabaseModule(Application application) {
         mRoomDatabase = Room.databaseBuilder(application, TrainingDatabase.class, "training.db")
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2,MIGRATION_2_3)
                 .allowMainThreadQueries()
                 .build();
     }
@@ -33,6 +33,12 @@ public class DatabaseModule {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE trainings ADD COLUMN intervalNumber INTEGER DEFAULT 1 NOT NULL");
+        }
+    };
+    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE trainings ADD COLUMN volumeState INTEGER DEFAULT 1 NOT NULL");
         }
     };
 }
