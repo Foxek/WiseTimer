@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data;
+package com.foxek.simpletimer.utils;
 
 import android.os.CountDownTimer;
 
@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-import static com.foxek.simpletimer.common.Constants.TIMER_STOPPED;
+import static com.foxek.simpletimer.utils.Constants.TIMER_STOPPED;
 
 
 public class TimerHelper {

@@ -7,10 +7,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.foxek.simpletimer.common.Constants.TIMER_PLAYING;
-import static com.foxek.simpletimer.common.Constants.TIMER_STOPPED;
-import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatIntervalData;
-import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatIntervalNumber;
+import static com.foxek.simpletimer.utils.Constants.TIMER_PLAYING;
+import static com.foxek.simpletimer.utils.Constants.TIMER_STOPPED;
+import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalData;
+import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalNumber;
 
 public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact.Interactor> implements TimerContact.Presenter{
 

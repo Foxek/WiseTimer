@@ -2,8 +2,8 @@ package com.foxek.simpletimer.di.component;
 
 import android.content.Context;
 
-import com.foxek.simpletimer.common.BaseApplication;
-import com.foxek.simpletimer.data.database.TrainingDatabase;
+import com.foxek.simpletimer.BaseApplication;
+import com.foxek.simpletimer.data.database.LocalDatabase;
 import com.foxek.simpletimer.di.ApplicationContext;
 import com.foxek.simpletimer.di.module.ApplicationModule;
 
@@ -21,5 +21,5 @@ public interface ApplicationComponent {
     @ApplicationContext
     Context context();
 
-    TrainingDatabase databaseHelper();
+    LocalDatabase databaseHelper();
 }

@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data;
+package com.foxek.simpletimer.utils;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;

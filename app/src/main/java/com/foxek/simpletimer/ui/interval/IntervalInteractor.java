@@ -1,9 +1,8 @@
 package com.foxek.simpletimer.ui.interval;
 
-import com.foxek.simpletimer.data.database.model.Interval;
-import com.foxek.simpletimer.data.database.model.Workout;
-import com.foxek.simpletimer.data.database.repository.IntervalRepository;
-import com.foxek.simpletimer.data.database.repository.WorkoutRepository;
+import com.foxek.simpletimer.data.database.LocalDatabase;
+import com.foxek.simpletimer.data.model.Interval;
+import com.foxek.simpletimer.data.model.Workout;
 
 import javax.inject.Inject;
 
@@ -16,24 +15,22 @@ import io.reactivex.schedulers.Schedulers;
 
 public class IntervalInteractor implements IntervalContact.Interactor {
 
-    private WorkoutRepository mWorkoutRepository;
-    private IntervalRepository      mIntervalRepository;
+    private LocalDatabase           mDatabase;
     private IntervalAdapter         mIntervalAdapter;
     private Workout                 mWorkout;
     private int                     mClickedIntervalPosition;
 
     @Inject
-    public IntervalInteractor(WorkoutRepository workoutRepository, IntervalRepository intervalRepository){
-        mWorkoutRepository = workoutRepository;
-        mIntervalRepository = intervalRepository;
+    IntervalInteractor(LocalDatabase database){
+        mDatabase = database;
     }
 
     @Override
     public Single<IntervalAdapter> fetchIntervalList(int workoutId){
-        return mWorkoutRepository.getWorkoutById(workoutId)
+        return mDatabase.getWorkoutDAO().getById(workoutId)
                 .flatMap(workout -> {
                     mWorkout = workout;
-                    return mIntervalRepository.getAllInterval(workoutId);
+                    return mDatabase.getIntervalDAO().getAll(workoutId);
                 })
                 .map(intervals -> {
                     mIntervalAdapter = new IntervalAdapter(intervals);
@@ -44,8 +41,8 @@ public class IntervalInteractor implements IntervalContact.Interactor {
     @Override
     public Disposable addNewInterval(int work_time,int rest_time){
         int position = mIntervalAdapter.getItemCount();
-        mIntervalRepository.createNewInterval(new Interval(work_time,rest_time,mWorkout.uid,position));
-        return mIntervalRepository.getLastInterval()
+        mDatabase.getIntervalDAO().add(new Interval(work_time,rest_time,mWorkout.uid,position));
+        return mDatabase.getIntervalDAO().getLast()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(interval -> mIntervalAdapter.addInterval(interval), throwable -> {});
@@ -53,33 +50,33 @@ public class IntervalInteractor implements IntervalContact.Interactor {
 
     @Override
     public Disposable updateInterval(int work_time,int rest_time) {
-        return mIntervalRepository.getIntervalById(mIntervalAdapter.getInterval(mClickedIntervalPosition).getID(), mWorkout.uid)
+        return mDatabase.getIntervalDAO().getById(mIntervalAdapter.getInterval(mClickedIntervalPosition).getID(), mWorkout.uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(interval -> {
                     interval.workInterval = work_time;
                     interval.restInterval = rest_time;
                     mIntervalAdapter.updateInterval(mClickedIntervalPosition,work_time,rest_time);
-                    mIntervalRepository.updateInterval(interval);
+                    mDatabase.getIntervalDAO().update(interval);
                 }, throwable -> {});
     }
 
     @Override
     public Disposable deleteInterval() {
-        return mIntervalRepository.getIntervalById(mIntervalAdapter.getInterval(mClickedIntervalPosition).getID(), mWorkout.uid)
+        return mDatabase.getIntervalDAO().getById(mIntervalAdapter.getInterval(mClickedIntervalPosition).getID(), mWorkout.uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(interval -> {
                     if (mIntervalAdapter.getItemCount() != 1) {
                         mIntervalAdapter.deleteInterval(mClickedIntervalPosition);
-                        mIntervalRepository.deleteInterval(interval);
+                        mDatabase.getIntervalDAO().delete(interval);
                     }
                 }, throwable -> {});
     }
 
     @Override
     public Disposable updateWorkout(String workoutName) {
-        return mWorkoutRepository.updateWorkoutName(workoutName, mWorkout.uid)
+        return Completable.fromAction(() -> mDatabase.getWorkoutDAO().update(workoutName, mWorkout.uid))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {}, throwable -> {});
@@ -87,7 +84,7 @@ public class IntervalInteractor implements IntervalContact.Interactor {
 
     @Override
     public Completable updateWorkoutVolume(int state) {
-        return mWorkoutRepository.updateWorkoutVolumeState(state, mWorkout.uid)
+        return Completable.fromAction(() -> mDatabase.getWorkoutDAO().update(state, mWorkout.uid))
                 .subscribeOn(Schedulers.io());
     }
 
@@ -102,7 +99,7 @@ public class IntervalInteractor implements IntervalContact.Interactor {
 
     @Override
     public void deleteWorkout() {
-        mWorkoutRepository.deleteWorkout(mWorkout.uid);
+        mDatabase.getWorkoutDAO().delete(mWorkout.uid);
     }
 
     @Override

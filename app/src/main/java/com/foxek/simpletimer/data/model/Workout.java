@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.data.database.model;
+package com.foxek.simpletimer.data.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

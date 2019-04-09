@@ -2,7 +2,7 @@ package com.foxek.simpletimer.ui.base;
 
 import android.os.Bundle;
 
-import com.foxek.simpletimer.common.BaseApplication;
+import com.foxek.simpletimer.BaseApplication;
 import com.foxek.simpletimer.di.component.ActivityComponent;
 import com.foxek.simpletimer.di.component.DaggerActivityComponent;
 import com.foxek.simpletimer.di.module.ActivityModule;

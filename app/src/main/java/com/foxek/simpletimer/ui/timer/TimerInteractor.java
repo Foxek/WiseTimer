@@ -1,9 +1,10 @@
 package com.foxek.simpletimer.ui.timer;
 
-import com.foxek.simpletimer.data.AlarmHelper;
-import com.foxek.simpletimer.data.TimerHelper;
-import com.foxek.simpletimer.data.database.model.Interval;
-import com.foxek.simpletimer.data.database.repository.IntervalRepository;
+import com.foxek.simpletimer.data.model.Interval;
+import com.foxek.simpletimer.utils.AlarmHelper;
+import com.foxek.simpletimer.utils.TimerHelper;
+import com.foxek.simpletimer.data.database.LocalDatabase;
+
 
 import java.util.ArrayList;
 
@@ -12,18 +13,18 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
-import static com.foxek.simpletimer.common.Constants.PREPARE_INTERVAL;
+import static com.foxek.simpletimer.utils.Constants.PREPARE_INTERVAL;
 
 public class TimerInteractor implements TimerContact.Interactor{
 
-    private IntervalRepository          mIntervalRepository;
+    private LocalDatabase               mDatabase;
     private ArrayList<Integer>          mInterval;
     private TimerHelper                 mTimerHelper;
     private AlarmHelper                 mAlarmHelper;
 
     @Inject
-    TimerInteractor(IntervalRepository repository, AlarmHelper alarmHelper, TimerHelper timer){
-        mIntervalRepository = repository;
+    TimerInteractor(LocalDatabase database, AlarmHelper alarmHelper, TimerHelper timer){
+        mDatabase = database;
         mTimerHelper = timer;
         mAlarmHelper = alarmHelper;
     }
@@ -38,7 +39,7 @@ public class TimerInteractor implements TimerContact.Interactor{
     public Single<Integer> fetchIntervalList(int workoutId){
         mInterval = new ArrayList<>();
         mInterval.add(PREPARE_INTERVAL);
-        return mIntervalRepository.getAllInterval(workoutId)
+        return mDatabase.getIntervalDAO().getAll(workoutId)
                 .map(intervals -> {
                     for (Interval interval : intervals) {
                         mInterval.add(interval.workInterval);

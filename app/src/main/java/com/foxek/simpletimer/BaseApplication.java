@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.common;
+package com.foxek.simpletimer;
 
 import android.app.Application;
 

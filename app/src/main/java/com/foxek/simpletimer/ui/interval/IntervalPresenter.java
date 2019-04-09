@@ -8,8 +8,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class IntervalPresenter extends BasePresenter<IntervalContact.View,IntervalContact.Interactor> implements IntervalContact.Presenter{
 
-    public IntervalPresenter(IntervalContact.Interactor mvpInteractor, CompositeDisposable compositeDisposable) {
-        super(mvpInteractor, compositeDisposable);
+    public IntervalPresenter(IntervalContact.Interactor interactor, CompositeDisposable disposable) {
+        super(interactor, disposable);
     }
 
     @Override

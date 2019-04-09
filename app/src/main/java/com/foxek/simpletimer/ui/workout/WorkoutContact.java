@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.data.database.model.Workout;
+import com.foxek.simpletimer.data.model.Workout;
 import com.foxek.simpletimer.ui.base.MvpInteractor;
 import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
@@ -27,7 +27,7 @@ interface WorkoutContact {
 
         WorkoutAdapter createWorkoutListAdapter();
 
-        Disposable scheduleListChanged();
+        Disposable fetchWorkoutList();
 
         Observable<Workout> onWorkoutItemClick();
 

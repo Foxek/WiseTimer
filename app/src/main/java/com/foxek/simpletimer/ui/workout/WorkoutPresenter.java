@@ -8,30 +8,23 @@ import io.reactivex.schedulers.Schedulers;
 
 public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter{
 
-    public WorkoutPresenter(WorkoutContact.Interactor mvpInteractor, CompositeDisposable compositeDisposable) {
-        super(mvpInteractor, compositeDisposable);
+    public WorkoutPresenter(WorkoutContact.Interactor interactor, CompositeDisposable disposable) {
+        super(interactor, disposable);
     }
 
     @Override
     public void viewIsReady() {
-        createTrainingListAdapter();
-    }
-
-    private void createTrainingListAdapter (){
         getView().setWorkoutList(getInteractor().createWorkoutListAdapter());
+        getDisposable().add(getInteractor().fetchWorkoutList());
         registerItemCallback();
-        registerListUpdateCallback();
-    }
-
-    private void registerListUpdateCallback(){
-        getDisposable().add(getInteractor().scheduleListChanged());
     }
 
     private void registerItemCallback() {
         getDisposable().add(getInteractor().onWorkoutItemClick()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(workout -> getView().startIntervalActivity(workout.uid, workout.training_name), throwable -> {}));
+                .subscribe(workout -> getView().startIntervalActivity(workout.uid, workout.training_name),
+                        throwable -> {}));
 
     }
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.data.database.model.Workout;
+import com.foxek.simpletimer.data.model.Workout;
 
 import java.util.List;
 

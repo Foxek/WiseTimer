@@ -3,7 +3,7 @@ package com.foxek.simpletimer.di.module;
 import android.app.Application;
 import android.content.Context;
 
-import com.foxek.simpletimer.data.database.TrainingDatabase;
+import com.foxek.simpletimer.data.database.LocalDatabase;
 import com.foxek.simpletimer.di.ApplicationContext;
 
 import javax.inject.Singleton;
@@ -31,8 +31,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    TrainingDatabase providesDatabaseHelper() {
-        return  Room.databaseBuilder(mApplication, TrainingDatabase.class, "training.db")
+    LocalDatabase providesDatabaseHelper() {
+        return  Room.databaseBuilder(mApplication, LocalDatabase.class, "training.db")
                 .addMigrations(MIGRATION_1_2,MIGRATION_2_3)
                 .allowMainThreadQueries()
                 .build();

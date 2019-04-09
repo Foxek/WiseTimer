@@ -59,7 +59,7 @@ public class WorkoutEditDialog {/*extends BaseDialog<IntervalContact.Presenter> 
             if (getShowsDialog()) {
                 mWorkoutEditText.setCursorVisible(false);
                 getDialog().cancel();
-                getPresenter().deleteWorkout();
+                getPresenter().delete();
             }
             else
                 dismiss();

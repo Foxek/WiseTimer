@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.common;
+package com.foxek.simpletimer.utils;
 
 public class Constants {
 

@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.data.database;
 
-import com.foxek.simpletimer.data.database.model.Interval;
+import com.foxek.simpletimer.data.model.Interval;
 
 import java.util.List;
 
@@ -15,20 +15,20 @@ import io.reactivex.Single;
 public interface IntervalDAO {
 
     @Insert
-    void addInterval(Interval interval);
+    void add(Interval interval);
 
     @Delete()
-    void deleteInterval(Interval interval);
+    void delete(Interval interval);
 
     @Update
-    void updateInterval(Interval interval);
+    void update(Interval interval);
 
     @Query("SELECT * FROM Interval WHERE id IS :id AND trainingID IS :workoutId")
-    Single<Interval> getIntervalByID(int id, int workoutId);
+    Single<Interval> getById(int id, int workoutId);
 
     @Query("SELECT * FROM Interval WHERE ID = (SELECT MAX(ID)  FROM Interval)")
-    Single<Interval> getLastInterval();
+    Single<Interval> getLast();
 
-    @Query("SELECT * FROM Interval WHERE trainingID IS :Id")
-    Single<List<Interval>> getIntervalForWorkout(int Id);
+    @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
+    Single<List<Interval>> getAll(int workoutId);
 }
