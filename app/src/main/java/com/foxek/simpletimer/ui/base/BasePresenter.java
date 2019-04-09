@@ -1,21 +1,42 @@
 package com.foxek.simpletimer.ui.base;
 
-public abstract class BasePresenter<T extends MvpView> implements MvpPresenter<T> {
+import io.reactivex.disposables.CompositeDisposable;
 
-    private T view;
+public abstract class BasePresenter <V extends MvpView,I extends MvpInteractor> implements MvpPresenter<V,I> {
+
+    private V view;
+    private I interactor;
+
+    private final CompositeDisposable disposable;
+
+    public BasePresenter(I mvpInteractor, CompositeDisposable compositeDisposable) {
+        interactor = mvpInteractor;
+        disposable = compositeDisposable;
+    }
 
     @Override
-    public void attachView(T mvpView) {
+    public void attachView(V mvpView) {
         view = mvpView;
     }
 
     @Override
     public void detachView() {
+        disposable.dispose();
         view = null;
+        interactor = null;
     }
 
-    protected T getView() {
+    @Override
+    public V getView() {
         return view;
     }
 
+    @Override
+    public I getInteractor() {
+        return interactor;
+    }
+
+    public CompositeDisposable getDisposable() {
+        return disposable;
+    }
 }

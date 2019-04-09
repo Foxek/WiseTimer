@@ -1,19 +1,15 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.ui.base.BaseMultiPresenter;
+import com.foxek.simpletimer.ui.base.BasePresenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class WorkoutPresenter extends BaseMultiPresenter<WorkoutContact.View, WorkoutContact.DialogView> implements WorkoutContact.Presenter{
+public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter{
 
-    private CompositeDisposable         mDisposable;
-    private WorkoutInteractor           mInteractor;
-
-    public WorkoutPresenter(WorkoutInteractor interactor){
-        mInteractor = interactor;
-        mDisposable = new CompositeDisposable();
+    public WorkoutPresenter(WorkoutContact.Interactor mvpInteractor, CompositeDisposable compositeDisposable) {
+        super(mvpInteractor, compositeDisposable);
     }
 
     @Override
@@ -21,29 +17,18 @@ public class WorkoutPresenter extends BaseMultiPresenter<WorkoutContact.View, Wo
         createTrainingListAdapter();
     }
 
-    @Override
-    public void detachView() {
-        super.detachView();
-        mDisposable.dispose();
-        mInteractor = null;
-    }
-
-    @Override
-    public void DialogIsReady(){
-    }
-
     private void createTrainingListAdapter (){
-        getView().setWorkoutList(mInteractor.createWorkoutListAdapter());
+        getView().setWorkoutList(getInteractor().createWorkoutListAdapter());
         registerItemCallback();
         registerListUpdateCallback();
     }
 
     private void registerListUpdateCallback(){
-        mDisposable.add(mInteractor.scheduleListChanged());
+        getDisposable().add(getInteractor().scheduleListChanged());
     }
 
     private void registerItemCallback() {
-        mDisposable.add(mInteractor.onWorkoutItemClick()
+        getDisposable().add(getInteractor().onWorkoutItemClick()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(workout -> getView().startIntervalActivity(workout.uid, workout.training_name), throwable -> {}));
@@ -52,6 +37,6 @@ public class WorkoutPresenter extends BaseMultiPresenter<WorkoutContact.View, Wo
 
     @Override
     public void createNewWorkout(String workoutName) {
-        mInteractor.createNewWorkout(workoutName);
+        getInteractor().createNewWorkout(workoutName);
     }
 }

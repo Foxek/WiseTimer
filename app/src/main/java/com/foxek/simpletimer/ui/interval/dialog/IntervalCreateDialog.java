@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
 import androidx.annotation.NonNull;
@@ -22,7 +21,7 @@ import butterknife.Unbinder;
 import static com.foxek.simpletimer.data.database.model.IntervalUtils.convertToSeconds;
 import static com.foxek.simpletimer.data.database.model.IntervalUtils.formatEditTextData;
 
-public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView {
+public class IntervalCreateDialog {/*extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView {
 
     private Unbinder mBinder;
 
@@ -141,5 +140,5 @@ public class IntervalCreateDialog extends BaseDialog<IntervalContact.Presenter> 
         repairMemoryLeak();
         mBinder.unbind();
         getPresenter().detachDialog();
-    }
+    }*/
 }

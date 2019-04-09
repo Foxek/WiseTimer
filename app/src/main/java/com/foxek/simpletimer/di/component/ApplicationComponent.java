@@ -2,12 +2,10 @@ package com.foxek.simpletimer.di.component;
 
 import android.content.Context;
 
-import com.foxek.simpletimer.common.MainApplication;
+import com.foxek.simpletimer.common.BaseApplication;
 import com.foxek.simpletimer.data.database.TrainingDatabase;
 import com.foxek.simpletimer.di.ApplicationContext;
-import com.foxek.simpletimer.di.RoomDatabase;
 import com.foxek.simpletimer.di.module.ApplicationModule;
-import com.foxek.simpletimer.di.module.DatabaseModule;
 
 import javax.inject.Singleton;
 
@@ -15,14 +13,13 @@ import dagger.Component;
 
 
 @Singleton
-@Component(modules = {ApplicationModule.class,DatabaseModule.class})
+@Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
 
-    void inject(MainApplication app);
+    void inject(BaseApplication app);
 
     @ApplicationContext
     Context context();
 
-    @RoomDatabase
-    TrainingDatabase database();
+    TrainingDatabase databaseHelper();
 }

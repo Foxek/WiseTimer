@@ -2,8 +2,8 @@ package com.foxek.simpletimer.ui.interval;
 
 import com.foxek.simpletimer.data.database.model.Interval;
 import com.foxek.simpletimer.data.database.model.Workout;
-import com.foxek.simpletimer.ui.base.MvpDialog;
-import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
+import com.foxek.simpletimer.ui.base.MvpInteractor;
+import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
 import io.reactivex.Completable;
@@ -32,10 +32,7 @@ public interface IntervalContact {
         void setWorkoutName(String name);
     }
 
-    interface DialogView extends MvpDialog<IntervalContact.Presenter> {
-    }
-
-    interface Presenter extends MvpMultiPresenter<IntervalContact.View,IntervalContact.DialogView> {
+    interface Presenter extends MvpPresenter<View, Interactor> {
 
         void createIntervalListAdapter (int workoutId);
 
@@ -58,7 +55,7 @@ public interface IntervalContact {
         void addIntervalButtonPressed();
     }
 
-    interface Interactor {
+    interface Interactor extends MvpInteractor {
 
         Single<IntervalAdapter> fetchIntervalList(int workoutId);
 

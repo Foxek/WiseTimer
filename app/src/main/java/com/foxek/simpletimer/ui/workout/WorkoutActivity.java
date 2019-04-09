@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.foxek.simpletimer.ui.base.BaseView;
 import com.foxek.simpletimer.ui.interval.IntervalActivity;
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.ui.base.BaseView;
 
 import javax.inject.Inject;
 
@@ -62,9 +62,9 @@ public class WorkoutActivity extends BaseView implements WorkoutContact.View,Vie
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_workout_button:
-                WorkoutDialog mWorkoutDialog = WorkoutDialog.newInstance();
-                mPresenter.setDialogPresenter(mWorkoutDialog);
-                mWorkoutDialog.show(getSupportFragmentManager(), "workout_dialog");
+//                WorkoutDialog mWorkoutDialog = WorkoutDialog.newInstance();
+//                mPresenter.setDialogPresenter(mWorkoutDialog);
+//                mWorkoutDialog.show(getSupportFragmentManager(), "workout_dialog");
                 break;
         }
     }

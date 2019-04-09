@@ -62,23 +62,23 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
 
     @Override
     public void showIntervalEditDialog(int work_time,int rest_time) {
-        IntervalEditDialog mIntervalEditDialog = IntervalEditDialog.newInstance(work_time,rest_time);
-        mPresenter.setDialogPresenter(mIntervalEditDialog);
-        mIntervalEditDialog.show(getSupportFragmentManager(), "interval_edit_dialog");
+//        IntervalEditDialog mIntervalEditDialog = IntervalEditDialog.newInstance(work_time,rest_time);
+//        mPresenter.setDialogPresenter(mIntervalEditDialog);
+//        mIntervalEditDialog.show(getSupportFragmentManager(), "interval_edit_dialog");
     }
 
     @Override
     public void showIntervalCreateDialog() {
-        IntervalCreateDialog mIntervalCreateDialog = IntervalCreateDialog.newInstance();
-        mPresenter.setDialogPresenter(mIntervalCreateDialog);
-        mIntervalCreateDialog.show(getSupportFragmentManager(), "interval_create_dialog");
+//        IntervalCreateDialog mIntervalCreateDialog = IntervalCreateDialog.newInstance();
+//        mPresenter.setDialogPresenter(mIntervalCreateDialog);
+//        mIntervalCreateDialog.show(getSupportFragmentManager(), "interval_create_dialog");
     }
 
     @Override
     public void showWorkoutEditDialog() {
-        WorkoutEditDialog mWorkoutEditDialog = WorkoutEditDialog.newInstance(intent.getStringExtra("workout_name"));
-        mPresenter.setDialogPresenter(mWorkoutEditDialog);
-        mWorkoutEditDialog.show(getSupportFragmentManager(), "workout_edit_dialog");
+//        WorkoutEditDialog mWorkoutEditDialog = WorkoutEditDialog.newInstance(intent.getStringExtra("workout_name"));
+//        mPresenter.setDialogPresenter(mWorkoutEditDialog);
+//        mWorkoutEditDialog.show(getSupportFragmentManager(), "workout_edit_dialog");
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.foxek.simpletimer.data.database.repository;
 
 import com.foxek.simpletimer.data.database.TrainingDatabase;
 import com.foxek.simpletimer.data.database.model.Interval;
-import com.foxek.simpletimer.di.RoomDatabase;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class IntervalRepository {
     private TrainingDatabase mDatabase;
 
     @Inject
-    public IntervalRepository(@RoomDatabase TrainingDatabase database){
+    public IntervalRepository(TrainingDatabase database){
         mDatabase = database;
     }
 

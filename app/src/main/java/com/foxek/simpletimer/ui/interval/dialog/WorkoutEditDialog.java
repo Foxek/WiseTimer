@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class WorkoutEditDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView{
+public class WorkoutEditDialog {/*extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView{
 
     private Unbinder mBinder;
 
@@ -84,5 +83,5 @@ public class WorkoutEditDialog extends BaseDialog<IntervalContact.Presenter> imp
         mWorkoutEditText.setCursorVisible(false);
         mBinder.unbind();
         getPresenter().detachDialog();
-    }
+    }*/
 }

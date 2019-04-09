@@ -1,8 +1,8 @@
 package com.foxek.simpletimer.ui.workout;
 
 import com.foxek.simpletimer.data.database.model.Workout;
-import com.foxek.simpletimer.ui.base.MvpDialog;
-import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
+import com.foxek.simpletimer.ui.base.MvpInteractor;
+import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
 import io.reactivex.Observable;
@@ -17,17 +17,13 @@ interface WorkoutContact {
         void setWorkoutList(WorkoutAdapter adapter);
     }
 
-    interface DialogView extends MvpDialog<WorkoutContact.Presenter> {
-
-    }
-
-    interface Presenter extends MvpMultiPresenter<WorkoutContact.View,WorkoutContact.DialogView> {
+    interface Presenter extends MvpPresenter<View, Interactor> {
 
         void createNewWorkout(String workoutName);
 
     }
 
-    interface Interactor{
+    interface Interactor extends MvpInteractor {
 
         WorkoutAdapter createWorkoutListAdapter();
 

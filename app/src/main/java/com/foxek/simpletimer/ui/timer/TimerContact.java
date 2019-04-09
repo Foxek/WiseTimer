@@ -1,5 +1,6 @@
 package com.foxek.simpletimer.ui.timer;
 
+import com.foxek.simpletimer.ui.base.MvpInteractor;
 import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
@@ -23,7 +24,7 @@ interface TimerContact {
 
     }
 
-    interface Presenter extends MvpPresenter<TimerContact.View> {
+    interface Presenter extends MvpPresenter<View, Interactor> {
 
         void prepareIntervals(int workoutId);
 
@@ -32,7 +33,7 @@ interface TimerContact {
         void resetButtonPressed();
     }
 
-    interface Interactor {
+    interface Interactor extends MvpInteractor {
 
         Single<Integer> fetchIntervalList(int workoutId);
 
@@ -57,5 +58,7 @@ interface TimerContact {
         void indicateEndOfInterval();
 
         void indicateLastSeconds();
+
+        void deleteDependencies();
     }
 }
