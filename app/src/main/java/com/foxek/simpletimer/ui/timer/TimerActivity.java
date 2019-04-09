@@ -36,7 +36,7 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
     TextView mWorkoutName;
 
     @Inject
-    TimerPresenter mPresenter;
+    TimerContact.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,7 +34,7 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
     ImageButton mVolumeButton;
 
     @Inject
-    IntervalPresenter       mPresenter;
+    IntervalContact.Presenter       mPresenter;
 
     private Intent intent;
 

@@ -5,6 +5,7 @@ import com.foxek.simpletimer.di.module.ActivityModule;
 import com.foxek.simpletimer.ui.interval.IntervalActivity;
 import com.foxek.simpletimer.ui.timer.TimerActivity;
 import com.foxek.simpletimer.ui.workout.WorkoutActivity;
+import com.foxek.simpletimer.ui.workout.WorkoutDialog;
 
 import dagger.Component;
 
@@ -15,4 +16,6 @@ public interface ActivityComponent {
     void inject(WorkoutActivity activity);
     void inject(IntervalActivity activity);
     void inject(TimerActivity activity);
+
+    void inject(WorkoutDialog dialog);
 }

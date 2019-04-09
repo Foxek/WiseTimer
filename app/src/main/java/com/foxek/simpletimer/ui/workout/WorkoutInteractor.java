@@ -50,7 +50,7 @@ public class WorkoutInteractor implements WorkoutContact.Interactor {
         else
             trainingID = mWorkoutAdapter.getWorkout(mWorkoutAdapter.getItemCount()-1).uid + 1;
 
-        Workout mWorkout = new Workout(workoutName,trainingID,1);
+        Workout mWorkout = new Workout(workoutName,trainingID,1,1);
         mWorkoutAdapter.addWorkout(mWorkout);
 
         mDatabase.getWorkoutDAO().add(mWorkout);

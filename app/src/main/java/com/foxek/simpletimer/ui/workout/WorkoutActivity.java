@@ -16,13 +16,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WorkoutActivity extends BaseView implements WorkoutContact.View,View.OnClickListener{
+public class WorkoutActivity extends BaseView implements WorkoutContact.View, View.OnClickListener{
 
     @BindView(R.id.workout_list)
     RecyclerView mWorkoutList;
 
     @Inject
-    WorkoutPresenter mPresenter;
+    WorkoutContact.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +62,8 @@ public class WorkoutActivity extends BaseView implements WorkoutContact.View,Vie
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_workout_button:
-//                WorkoutDialog mWorkoutDialog = WorkoutDialog.newInstance();
-//                mPresenter.setDialogPresenter(mWorkoutDialog);
-//                mWorkoutDialog.show(getSupportFragmentManager(), "workout_dialog");
+                WorkoutDialog mWorkoutDialog = WorkoutDialog.newInstance();
+                mWorkoutDialog.show(getSupportFragmentManager(), "workout_dialog");
                 break;
         }
     }

@@ -21,10 +21,11 @@ public class Workout {
     @ColumnInfo(name = "intervalNumber")
     public int intervalNumber;
 
-    public Workout(String training_name, int uid, int intervalNumber) {
+    public Workout(String training_name, int uid, int intervalNumber, int volumeState) {
         this.training_name = training_name;
         this.intervalNumber = intervalNumber;
         this.uid = uid;
+        this.volumeState = volumeState;
     }
 
     public String getTraining_name() {

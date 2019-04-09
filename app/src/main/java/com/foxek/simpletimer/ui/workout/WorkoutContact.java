@@ -8,7 +8,7 @@ import com.foxek.simpletimer.ui.base.MvpView;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
-interface WorkoutContact {
+public interface WorkoutContact {
 
     interface View extends MvpView {
 

@@ -7,7 +7,7 @@ import com.foxek.simpletimer.ui.base.MvpView;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
-interface TimerContact {
+public interface TimerContact {
     interface View extends MvpView {
 
         void startWorkoutActivity();
