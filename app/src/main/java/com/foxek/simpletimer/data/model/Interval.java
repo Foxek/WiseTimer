@@ -9,7 +9,6 @@ import androidx.room.PrimaryKey;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys = @ForeignKey(entity = Workout.class, parentColumns = "uid", childColumns = "trainingID", onDelete = CASCADE))
-
 public class Interval {
 
     @ColumnInfo(name = "work_intervals")

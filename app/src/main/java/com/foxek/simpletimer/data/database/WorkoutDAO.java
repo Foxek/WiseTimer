@@ -9,10 +9,13 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RoomWarnings;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 @Dao
+@SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
 public interface WorkoutDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -28,7 +31,7 @@ public interface WorkoutDAO {
     void update(String name, int id);
 
     @Query("SELECT MAX(uid) FROM trainings")
-    Single<Integer> getLastId();
+    Maybe<Integer> getLastId();
 
     @Query("SELECT * FROM trainings WHERE uid = :WorkoutID")
     Single<Workout> getById(int WorkoutID);

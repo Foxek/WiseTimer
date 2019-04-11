@@ -33,6 +33,7 @@ public class WorkoutInteractor implements WorkoutContact.Interactor {
     @Override
     public Disposable createWorkout(String name){
         return database.getWorkoutDAO().getLastId()
+                .defaultIfEmpty(0)
                 .flatMapCompletable(id -> {
 
                     Workout workout = new Workout(name, id + 1, 1, true);
