@@ -1,11 +1,15 @@
 package com.foxek.simpletimer.ui.interval;
 
-import com.foxek.simpletimer.data.model.interval.Interval;
-import com.foxek.simpletimer.ui.base.MvpDialog;
-import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
+import com.foxek.simpletimer.data.model.Interval;
+import com.foxek.simpletimer.data.model.Workout;
+import com.foxek.simpletimer.ui.base.MvpInteractor;
+import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
-import io.reactivex.Observable;
+import java.util.List;
+
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 
@@ -13,59 +17,70 @@ public interface IntervalContact {
 
     interface View extends MvpView {
 
-        void setIntervalList(IntervalAdapter adapter);
+        void setIntervalList();
+
+        void renderIntervalList(List<Interval> intervalList);
+
+        void setVolumeState(boolean state);
+
+        void setWorkoutName(String name);
 
         void startWorkoutActivity();
 
         void startTimerActivity();
 
-        void showIntervalEditDialog(int work_time,int rest_time);
+        void showIntervalEditDialog(int workTime,int restTime);
 
         void showIntervalCreateDialog();
 
         void showWorkoutEditDialog();
-
-        void setWorkoutName(String name);
     }
 
-    interface DialogView extends MvpDialog<IntervalContact.Presenter> {
+    interface Presenter extends MvpPresenter<View, Interactor> {
+
+        void viewIsReady(int id);
+
+        void saveIntervalButtonClicked(int workTime, int restTime);
+
+        void createIntervalButtonClicked(int workTime, int restTime);
+
+        void deleteIntervalButtonClicked();
+
+        void saveWorkoutButtonClicked(String name);
+
+        void editWorkoutButtonClicked();
+
+        void deleteWorkoutButtonClicked();
+
+        void startWorkoutButtonClicked();
+
+        void changeVolumeButtonClicked();
+
+        void addIntervalButtonClicked();
+
+        void intervalItemClicked(Interval item);
     }
 
-    interface Presenter extends MvpMultiPresenter<IntervalContact.View,IntervalContact.DialogView> {
+    interface Interactor extends MvpInteractor {
 
-        void createIntervalListAdapter (int workoutId);
+        Flowable<List<Interval>> fetchIntervalList();
 
-        void onIntervalChanged(int work_time, int rest_time);
-
-        void onIntervalCreated(int work_time, int rest_time);
-
-        void onDeleteInterval();
-
-        void editWorkout(String name);
-
-        void deleteWorkout();
-
-        void startWorkout();
-
-        void editButtonPressed();
-
-        void addIntervalButtonPressed();
-    }
-
-    interface Interactor {
-
-        Single<IntervalAdapter> fetchIntervalList(int workoutId);
-
-        Disposable addNewInterval(int work_time,int rest_time);
+        Disposable addInterval(int work_time, int rest_time);
 
         Disposable updateInterval(int work_time,int rest_time);
 
         Disposable deleteInterval();
 
+        Single<Workout> getWorkout(int id);
+
         Disposable updateWorkout(String workoutName);
 
-        Observable<Interval> onIntervalItemClick();
+        Completable deleteWorkout();
 
-        void deleteWorkout();
+        Completable updateVolume(boolean state);
+
+        Single<Boolean> getVolume();
+
+        void setCurrentInterval(int id);
     }
 }

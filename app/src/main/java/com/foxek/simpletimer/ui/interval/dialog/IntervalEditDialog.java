@@ -1,117 +1,136 @@
 package com.foxek.simpletimer.ui.interval.dialog;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.ui.base.BaseDialog;
+import com.foxek.simpletimer.di.component.ActivityComponent;
+import com.foxek.simpletimer.ui.base.BaseFragment;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
+import javax.inject.Inject;
+
+import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.convertToSeconds;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatEditTextData;
+import static com.foxek.simpletimer.utils.Constants.EXTRA_REST_TIME;
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORK_TIME;
+import static com.foxek.simpletimer.utils.IntervalUtils.convertToSeconds;
+import static com.foxek.simpletimer.utils.IntervalUtils.formatEditTextData;
 
-public class IntervalEditDialog extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView{
+public class IntervalEditDialog extends BaseFragment {
 
-    private Unbinder mBinder;
+    @Inject
+    IntervalContact.Presenter presenter;
 
-    @BindView(R.id.delete_button)
-    TextView mDeleteButton;
+    private Unbinder binder;
 
     @BindView(R.id.work_minute_text)
-    EditText mWorkMinuteText;
+    EditText workMinuteText;
 
     @BindView(R.id.work_second_text)
-    EditText mWorkSecondText;
+    EditText workSecondText;
 
     @BindView(R.id.rest_minute_text)
-    EditText mRestMinuteText;
+    EditText restMinuteText;
 
     @BindView(R.id.rest_second_text)
-    EditText mRestSecondText;
+    EditText restSecondText;
+
+    @BindView(R.id.repeats_edit_text)
+    EditText repeatText;
+
+    @BindView(R.id.repeat_checkBox)
+    CheckBox checkBox;
 
     public static IntervalEditDialog newInstance(int work_time,int rest_time) {
         IntervalEditDialog mIntervalEditDialog = new IntervalEditDialog();
         Bundle args = new Bundle();
-        args.putInt("work_time", work_time);
-        args.putInt("rest_time", rest_time);
+        args.putInt(EXTRA_WORK_TIME, work_time);
+        args.putInt(EXTRA_REST_TIME, rest_time);
         mIntervalEditDialog.setArguments(args);
         return mIntervalEditDialog;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View dialogView = inflater.inflate(R.layout.dialog_edit_interval, container, false);
-        mBinder = ButterKnife.bind(this, dialogView);
 
-        prepareEditText(getArguments().getInt("work_time"),getArguments().getInt("rest_time"));
+        ActivityComponent component = getActivityComponent();
 
-        getPresenter().attachDialog(this);
+        if (component != null) {
+            component.inject(this);
+            binder = ButterKnife.bind(this, dialogView);
+        }
+
+        prepareEditText(getArguments().getInt(EXTRA_WORK_TIME),getArguments().getInt(EXTRA_REST_TIME));
+
+        repeatText.setVisibility(View.GONE);
+        checkBox.setVisibility(View.GONE);
+
         getDialog().setCanceledOnTouchOutside(true);
 
         return dialogView;
     }
 
     private void prepareEditText(int work_time,int rest_time){
-        mWorkMinuteText.setText(formatEditTextData(work_time / 60));
-        mWorkSecondText.setText(formatEditTextData(work_time % 60));
+        workMinuteText.setText(formatEditTextData(work_time / 60));
+        workSecondText.setText(formatEditTextData(work_time % 60));
 
-        mRestMinuteText.setText(formatEditTextData(rest_time / 60));
-        mRestSecondText.setText(formatEditTextData(rest_time % 60));
+        restMinuteText.setText(formatEditTextData(rest_time / 60));
+        restSecondText.setText(formatEditTextData(rest_time % 60));
     }
 
     private void repairMemoryLeak(){
-        mWorkMinuteText.setCursorVisible(false);
-        mWorkSecondText.setCursorVisible(false);
+        workMinuteText.setCursorVisible(false);
+        workSecondText.setCursorVisible(false);
 
-        mRestMinuteText.setCursorVisible(false);
-        mRestSecondText.setCursorVisible(false);
+        restMinuteText.setCursorVisible(false);
+        restSecondText.setCursorVisible(false);
+
+        repeatText.setCursorVisible(false);
     }
 
     @OnClick(R.id.save_button)
-    public void onSaveButtonClick(){
-        int work_time, rest_time;
-        if (!mWorkMinuteText.getText().toString().equals("") && !mWorkSecondText.getText().toString().equals("")) {
-            work_time = convertToSeconds(mWorkMinuteText.getText().toString(), mWorkSecondText.getText().toString());
-            if (work_time == 0) work_time = 1;
+    void onSaveButtonClick(){
+        int workTime, restTime;
+        if (!workMinuteText.getText().toString().equals("") && !workSecondText.getText().toString().equals("")) {
+            workTime = convertToSeconds(workMinuteText.getText().toString(), workSecondText.getText().toString());
+            if (workTime == 0) workTime = 1;
         }else
-            work_time = 1;
+            workTime = 1;
 
 
-        if (!mRestMinuteText.getText().toString().equals("") && !mRestSecondText.getText().toString().equals("")) {
-            rest_time = convertToSeconds(mRestMinuteText.getText().toString(), mRestSecondText.getText().toString());
-            if (rest_time == 0) rest_time = 1;
+        if (!restMinuteText.getText().toString().equals("") && !restSecondText.getText().toString().equals("")) {
+            restTime = convertToSeconds(restMinuteText.getText().toString(), restSecondText.getText().toString());
+            if (restTime == 0) restTime = 1;
         }else
-            rest_time = 1;
+            restTime = 1;
 
 
-        getPresenter().onIntervalChanged(work_time, rest_time);
+        presenter.saveIntervalButtonClicked(workTime, restTime);
         repairMemoryLeak();
         dismiss();
     }
 
     @OnClick(R.id.delete_button)
-    public void onDeleteButtonClick(){
+    void onDeleteButtonClick(){
         repairMemoryLeak();
         dismiss();
-        getPresenter().onDeleteInterval();
+        presenter.deleteIntervalButtonClicked();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         repairMemoryLeak();
-        mBinder.unbind();
-        getPresenter().detachDialog();
+        binder.unbind();
     }
 }

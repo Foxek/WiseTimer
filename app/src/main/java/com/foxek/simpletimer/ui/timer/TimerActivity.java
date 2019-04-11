@@ -15,28 +15,31 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID;
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME;
+
 public class TimerActivity extends BaseView implements TimerContact.View,View.OnClickListener {
 
     @BindView(R.id.reset_button)
-    ImageButton mResetButton;
+    ImageButton resetButton;
 
     @BindView(R.id.pause_button)
-    TextView mPauseButton;
+    TextView pauseButton;
 
     @BindView(R.id.counter_view)
-    TextView mCounterText;
+    TextView counterText;
 
     @BindView(R.id.counter_type)
-    TextView mCounterType;
+    TextView counterType;
 
     @BindView(R.id.counter_number)
-    TextView mCounterNumber;
+    TextView counterNumber;
 
     @BindView(R.id.workout_name)
-    TextView mWorkoutName;
+    TextView workoutName;
 
     @Inject
-    TimerPresenter mPresenter;
+    TimerContact.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +48,19 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        mWorkoutName.setText(intent.getStringExtra("workout_name"));
+        workoutName.setText(intent.getStringExtra(EXTRA_WORKOUT_NAME));
 
         getActivityComponent().inject(this);
-        mPresenter.attachView(this);
+        presenter.attachView(this);
 
-        mPresenter.prepareIntervals(intent.getIntExtra("workout_id",0));
-        mPresenter.viewIsReady();
+        presenter.prepareIntervals(intent.getIntExtra(EXTRA_WORKOUT_ID,0));
+        presenter.viewIsReady();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
+        presenter.detachView();
     }
 
     @Override
@@ -73,10 +76,10 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.pause_button:
-                mPresenter.pauseButtonPressed();
+                presenter.pauseButtonClicked();
                 break;
             case R.id.reset_button:
-                mPresenter.resetButtonPressed();
+                presenter.resetButtonClicked();
                 break;
         }
     }
@@ -88,30 +91,30 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
 
     @Override
     public void showPauseInterface() {
-        mResetButton.setVisibility(View.VISIBLE);
-        mPauseButton.setText(R.string.timer_continue_button);
+        resetButton.setVisibility(View.VISIBLE);
+        pauseButton.setText(R.string.timer_continue_button);
     }
 
     @Override
     public void showPlayInterface() {
-        mResetButton.setVisibility(View.GONE);
-        mPauseButton.setText(R.string.timer_pause_button);
+        resetButton.setVisibility(View.GONE);
+        pauseButton.setText(R.string.timer_pause_button);
     }
 
     @Override
     public void showCurrentCounter(String time) {
-        mCounterText.setText(time);
+        counterText.setText(time);
     }
 
     @Override
     public void showCounterType(int type) {
-        mCounterType.setText(type);
+        counterType.setText(type);
     }
 
 
     @Override
     public void showCounterNumber(String number) {
-        mCounterNumber.setText(number);
+        counterNumber.setText(number);
     }
 
 }

@@ -1,41 +1,43 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.data.model.workout.Workout;
-import com.foxek.simpletimer.ui.base.MvpDialog;
-import com.foxek.simpletimer.ui.base.MvpMultiPresenter;
+import com.foxek.simpletimer.data.model.Workout;
+import com.foxek.simpletimer.ui.base.MvpInteractor;
+import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
-import io.reactivex.Observable;
+import java.util.List;
+
+import io.reactivex.Flowable;
 import io.reactivex.disposables.Disposable;
 
-interface WorkoutContact {
+public interface WorkoutContact {
 
     interface View extends MvpView {
 
         void startIntervalActivity(int position, String name);
 
-        void setWorkoutList(WorkoutAdapter adapter);
+        void setWorkoutList();
+
+        void renderWorkoutList(List<Workout> workoutList);
+
+        void showCreateDialog();
     }
 
-    interface DialogView extends MvpDialog<WorkoutContact.Presenter> {
+    interface Presenter extends MvpPresenter<View, Interactor> {
+
+        void saveButtonClicked(String workoutName);
+
+        void createButtonClicked();
+
+        void onListItemClicked(Workout workout);
 
     }
 
-    interface Presenter extends MvpMultiPresenter<WorkoutContact.View,WorkoutContact.DialogView> {
+    interface Interactor extends MvpInteractor {
 
-        void createNewWorkout(String workoutName);
+        Flowable<List<Workout>> fetchWorkoutList();
 
-    }
-
-    interface Interactor{
-
-        WorkoutAdapter createWorkoutListAdapter();
-
-        Disposable scheduleListChanged();
-
-        Observable<Workout> onWorkoutItemClick();
-
-        void createNewWorkout(String workoutName);
+        Disposable createWorkout(String workoutName);
     }
 }
 

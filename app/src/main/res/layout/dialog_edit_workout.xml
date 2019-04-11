@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,8 +13,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_bold"
-        android:text="@string/dialog_training_create_title"
-        android:textColor="@color/colorTextHeader"
+        android:text="@string/dialog_training_setting_title"
+        android:textColor="#424242"
         android:textSize="@dimen/dialog_header_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +23,10 @@
     <TextView
         android:id="@+id/dialog_description"
         android:layout_width="0dp"
-        android:layout_height="39dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_condensed_light"
-        android:text="@string/dialog_training_create_description"
+        android:text="@string/dialog_training_setting_description"
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,43 +37,38 @@
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:fontFamily="@font/roboto_condensed_regular"
+        android:importantForAutofill="no"
         android:inputType="text|textCapSentences|textNoSuggestions"
-        android:textSize="16sp"
+        android:textColorHighlight="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
 
     <TextView
-        android:id="@+id/create_button"
+        android:id="@+id/delete_button"
         style="@style/CustomDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/create_training_button"
-        android:textSize="16sp"
+        android:text="@string/delete_training_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_edit_text" />
+
+    <TextView
+        android:id="@+id/save_button"
+        style="@style/CustomDialogButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/save_training_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_hint" />
+        app:layout_constraintTop_toBottomOf="@+id/delete_button" />
 
-    <TextView
-        android:id="@+id/error_hint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="1dp"
-        android:fontFamily="@font/roboto_condensed_regular"
-        android:text="@string/dialog_training_error_hint"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/training_edit_text" />
-
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

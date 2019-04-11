@@ -1,12 +1,15 @@
 package com.foxek.simpletimer.ui.timer;
 
+import com.foxek.simpletimer.ui.base.MvpInteractor;
 import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
 
-interface TimerContact {
+public interface TimerContact {
     interface View extends MvpView {
 
         void startWorkoutActivity();
@@ -23,22 +26,24 @@ interface TimerContact {
 
     }
 
-    interface Presenter extends MvpPresenter<TimerContact.View> {
+    interface Presenter extends MvpPresenter<View, Interactor> {
 
         void prepareIntervals(int workoutId);
 
-        void pauseButtonPressed();
+        void pauseButtonClicked();
 
-        void resetButtonPressed();
+        void resetButtonClicked();
     }
 
-    interface Interactor {
+    interface Interactor extends MvpInteractor {
 
-        Single<Integer> fetchIntervalList(int workoutId);
+        Flowable<Integer> fetchIntervalList(int workoutId);
 
-        Observable<Integer> IntervalFinishedCallback();
+        Observable<Integer> intervalFinishedCallback();
 
-        Observable<Integer> onTickCallback();
+        Observable<Integer> tickCallback();
+
+        Disposable getVolume(int id);
 
         boolean getTimerState();
 
@@ -57,5 +62,7 @@ interface TimerContact {
         void indicateEndOfInterval();
 
         void indicateLastSeconds();
+
+        void deleteDependencies();
     }
 }

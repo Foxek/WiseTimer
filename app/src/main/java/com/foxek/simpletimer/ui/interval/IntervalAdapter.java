@@ -1,70 +1,44 @@
 package com.foxek.simpletimer.ui.interval;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.data.model.interval.Interval;
+import com.foxek.simpletimer.data.model.Interval;
 
-import java.util.List;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
 
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatIntervalData;
+import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalData;
 
-public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.ViewHolder> {
+public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewHolder> {
 
-    private List<Interval>                  mInterval;
+    private Callback        mCallback;
 
-    private final PublishSubject<Integer> onClickSubject = PublishSubject.create();
+    public IntervalAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
-    IntervalAdapter(List<Interval> dataset) {
-        mInterval = dataset;
+    public interface Callback {
+        void onListItemClick(Interval item);
+    }
+
+    void setCallback(Callback callback) {
+        mCallback = callback;
     }
 
     @Override
     public void onBindViewHolder(@NonNull IntervalAdapter.ViewHolder holder, int position) {
 
-        holder.mWorkIntervalText.setText(formatIntervalData(mInterval.get(position).workInterval));
-        holder.mRestIntervalText.setText(formatIntervalData(mInterval.get(position).restInterval));
-    }
-
-    Observable<Integer> getPositionClicks(){
-        return onClickSubject;
-    }
-
-    @Override
-    public int getItemCount() {
-        return mInterval.size();
-    }
-
-    void addInterval(Interval interval) {
-        mInterval.add(interval);
-        notifyDataSetChanged();
-    }
-
-    Interval getInterval(int position) {
-        return mInterval.get(position);
-    }
-
-    void updateInterval(int position, int work_time, int rest_time) {
-        Interval Interval = mInterval.get(position);
-        Interval.workInterval = work_time;
-        Interval.restInterval = rest_time;
-        notifyDataSetChanged();
-    }
-
-    void deleteInterval(int position){
-        mInterval.remove(position);
-        notifyDataSetChanged();
+        holder.mWorkIntervalText.setText(formatIntervalData(getItem(position).getWorkTime()));
+        holder.mRestIntervalText.setText(formatIntervalData(getItem(position).getRestTime()));
     }
 
     @NonNull
@@ -73,6 +47,22 @@ public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.ViewHo
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.interval_item, parent, false);
         return new IntervalAdapter.ViewHolder(view);
     }
+
+    private static final DiffUtil.ItemCallback<Interval> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Interval>() {
+                @Override
+                public boolean areItemsTheSame(
+                        @NonNull Interval oldInterval, @NonNull Interval newInterval) {
+                    return ((oldInterval.getWorkTime() == newInterval.getWorkTime()) &&
+                            (oldInterval.getRestTime() == newInterval.getRestTime()));
+                }
+                @Override
+                public boolean areContentsTheSame(
+                        @NonNull Interval oldInterval, @NonNull Interval newInterval) {
+                    return ((oldInterval.getWorkTime() == newInterval.getWorkTime()) &&
+                            (oldInterval.getRestTime() == newInterval.getRestTime()));
+                }
+            };
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -90,7 +80,7 @@ public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.ViewHo
         @OnClick({R.id.interval_item})
         @Override
         public void onClick(View v) {
-            onClickSubject.onNext(getAdapterPosition());
+            mCallback.onListItemClick(getItem(getAdapterPosition()));
         }
 
     }

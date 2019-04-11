@@ -1,13 +1,14 @@
 package com.foxek.simpletimer.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
-import com.foxek.simpletimer.common.MainApplication;
+import com.foxek.simpletimer.BaseApplication;
 import com.foxek.simpletimer.di.component.ActivityComponent;
 import com.foxek.simpletimer.di.component.DaggerActivityComponent;
 import com.foxek.simpletimer.di.module.ActivityModule;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class BaseView extends AppCompatActivity implements MvpView {
 
@@ -16,16 +17,16 @@ public abstract class BaseView extends AppCompatActivity implements MvpView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule())
-                .applicationComponent(((MainApplication) getApplication()).getComponent())
-                .build();
 
+        Bundle args = getIntent().getExtras();
+
+        mActivityComponent = DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this, args))
+                .applicationComponent(((BaseApplication) getApplication()).getComponent())
+                .build();
     }
 
     protected ActivityComponent getActivityComponent() {
         return mActivityComponent;
     }
-
 }
-

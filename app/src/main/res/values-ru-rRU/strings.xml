@@ -7,6 +7,7 @@
     <string name="timer_prepare_number">Скоро начинаем</string>
     <string name="timer_work_time">Время работы</string>
     <string name="timer_rest_time">Время отдыха</string>
+    <string name="timer_repeat">Повторы</string>
 
     <string name="time_min_hint">мин</string>
 
@@ -33,6 +34,7 @@
     <string name="dialog_interval_create_title">Создание интервала</string>
     <string name="dialog_interval_setting_description">Установите время работы и время отдыха для данного интервала</string>
     <string name="dialog_interval_setting_divider">:</string>
+    <string name="dialog_interval_setting_checkBox">Повторить несколько раз</string>
 
     <string name="training_sector_title">Список тренировок</string>
     <string name="training_subtitle">Добро пожаловать</string>

@@ -1,57 +1,41 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.ui.base.BaseMultiPresenter;
+import com.foxek.simpletimer.data.model.Workout;
+import com.foxek.simpletimer.ui.base.BasePresenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
-public class WorkoutPresenter extends BaseMultiPresenter<WorkoutContact.View, WorkoutContact.DialogView> implements WorkoutContact.Presenter{
+public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter{
 
-    private CompositeDisposable         mDisposable;
-    private WorkoutInteractor mInteractor;
-
-    public WorkoutPresenter(WorkoutInteractor interactor){
-        mInteractor = interactor;
-        mDisposable = new CompositeDisposable();
+    public WorkoutPresenter(WorkoutContact.Interactor interactor, CompositeDisposable disposable) {
+        super(interactor, disposable);
     }
 
     @Override
     public void viewIsReady() {
-        createTrainingListAdapter();
-    }
+        getView().setWorkoutList();
 
-    @Override
-    public void detachView() {
-        super.detachView();
-        mDisposable.dispose();
-        mInteractor = null;
-    }
-
-    @Override
-    public void DialogIsReady(){
-    }
-
-    private void createTrainingListAdapter (){
-        getView().setWorkoutList(mInteractor.createWorkoutListAdapter());
-        registerItemCallback();
-        registerListUpdateCallback();
-    }
-
-    private void registerListUpdateCallback(){
-        mDisposable.add(mInteractor.scheduleListChanged());
-    }
-
-    private void registerItemCallback() {
-        mDisposable.add(mInteractor.onWorkoutItemClick()
-                .subscribeOn(Schedulers.io())
+        getDisposable().add(getInteractor()
+                .fetchWorkoutList()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(workout -> getView().startIntervalActivity(workout.uid, workout.training_name), throwable -> {}));
-
+                .subscribe(workoutList -> getView().renderWorkoutList(workoutList),
+                        error -> {})
+        );
     }
 
     @Override
-    public void createNewWorkout(String workoutName) {
-        mInteractor.createNewWorkout(workoutName);
+    public void saveButtonClicked(String workoutName) {
+        getDisposable().add(getInteractor().createWorkout(workoutName));
+    }
+
+    @Override
+    public void createButtonClicked() {
+        getView().showCreateDialog();
+    }
+
+    @Override
+    public void onListItemClicked(Workout workout) {
+        getView().startIntervalActivity(workout.getUid(), workout.getName());
     }
 }

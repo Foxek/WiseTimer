@@ -7,40 +7,39 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.foxek.simpletimer.common.Constants.TIMER_PLAYING;
-import static com.foxek.simpletimer.common.Constants.TIMER_STOPPED;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatIntervalData;
-import static com.foxek.simpletimer.data.model.interval.IntervalUtils.formatIntervalNumber;
+import static com.foxek.simpletimer.utils.Constants.TIMER_PLAYING;
+import static com.foxek.simpletimer.utils.Constants.TIMER_STOPPED;
+import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalData;
+import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalNumber;
 
-public class TimerPresenter extends BasePresenter<TimerContact.View> implements TimerContact.Presenter{
+public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact.Interactor> implements TimerContact.Presenter{
 
-    private CompositeDisposable         mDisposable;
-    private TimerInteractor             mInteractor;
-    private int                         mCurrentInterval;
+    private int currentInterval;
 
-    public TimerPresenter(TimerInteractor interactor){
-        mInteractor = interactor;
-        mDisposable = new CompositeDisposable();
+    public TimerPresenter(TimerContact.Interactor mvpInteractor, CompositeDisposable compositeDisposable) {
+        super(mvpInteractor, compositeDisposable);
     }
 
     @Override
     public void detachView() {
+        getInteractor().deleteDependencies();
         super.detachView();
-        mInteractor.deleteDependencies();
-        mInteractor = null;
-        mDisposable.dispose();
     }
 
     @Override
     public void prepareIntervals(int workoutId){
-        mDisposable.add(mInteractor.fetchIntervalList(workoutId)
+
+        getDisposable().add(getInteractor().getVolume(workoutId));
+
+
+        getDisposable().add(getInteractor().fetchIntervalList(workoutId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(intervalSize -> {
-                    mInteractor.setTimerState(TIMER_PLAYING);
+                    getInteractor().setTimerState(TIMER_PLAYING);
                     getView().showCounterType(R.string.timer_prepare);
                     getView().showPlayInterface();
-                    mInteractor.loadIntervalListToTimer();
+                    getInteractor().loadIntervalListToTimer();
                 }, throwable -> {}));
     }
 
@@ -53,46 +52,46 @@ public class TimerPresenter extends BasePresenter<TimerContact.View> implements 
 
 
     @Override
-    public void pauseButtonPressed(){
-        if (mInteractor.getTimerState()) {
-            mInteractor.stopTimer();
+    public void pauseButtonClicked(){
+        if (getInteractor().getTimerState()) {
+            getInteractor().stopTimer();
             getView().showPauseInterface();
-            mInteractor.setTimerState(TIMER_STOPPED);
+            getInteractor().setTimerState(TIMER_STOPPED);
         }else{
-            mInteractor.continueTimer();
+            getInteractor().continueTimer();
             getView().showPlayInterface();
-            mInteractor.setTimerState(TIMER_PLAYING);
+            getInteractor().setTimerState(TIMER_PLAYING);
         }
     }
 
     @Override
-    public void resetButtonPressed(){
+    public void resetButtonClicked(){
         getView().startWorkoutActivity();
     }
 
     private void registerTimerCallback() {
-        mDisposable.add(mInteractor.IntervalFinishedCallback()
+        getDisposable().add(getInteractor().intervalFinishedCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(intervalNumber -> {
-                    if (intervalNumber < mInteractor.getIntervalSize()) {
-                        mInteractor.indicateEndOfInterval();
+                    if (intervalNumber < getInteractor().getIntervalSize()) {
+                        getInteractor().indicateEndOfInterval();
                         if ((intervalNumber & 1) == 0)
                             getView().showCounterType(R.string.timer_rest_time);
                         else {
                             getView().showCounterType(R.string.timer_work_time);
-                            getView().showCounterNumber(formatIntervalNumber(++mCurrentInterval));
+                            getView().showCounterNumber(formatIntervalNumber(++currentInterval));
                         }
                     }
                     else {
-                        mInteractor.indicateEndOfWorkout();
+                        getInteractor().indicateEndOfWorkout();
                         getView().startWorkoutActivity();
                     }
                 }, throwable -> {})
         );
     }
     private void registerTickCallback() {
-        mDisposable.add(mInteractor.onTickCallback()
+        getDisposable().add(getInteractor().tickCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(time-> getView().showCurrentCounter(formatIntervalData(time)),
