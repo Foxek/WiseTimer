@@ -18,31 +18,31 @@ import static android.content.Context.VIBRATOR_SERVICE;
 
 public class AlarmHelper {
 
-    private Context     mContext;
-    private Vibrator    mVibrator;
-    private SoundPool   mSoundPool;
-    private int         mBeepSound,mLongBeepSound;
+    private Context     context;
+    private Vibrator    vibrator;
+    private SoundPool   soundPool;
+    private int         beepSound, longBeepSound, volume;
 
     @Inject
-    public AlarmHelper(@ApplicationContext Context context){
-        mContext = context;
-        mVibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+    AlarmHelper(@ApplicationContext Context context){
+        this.context = context;
+        vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
         createNewSoundPool();
     }
 
     public void oneShotVibrate(){
         if (Build.VERSION.SDK_INT >= 26)
-            mVibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+            vibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
         else
-            mVibrator.vibrate(500);
+            vibrator.vibrate(500);
     }
 
     public void patternVibrate(){
         long[] pattern = {0, 800, 200, 800, 200, 800};
         if (Build.VERSION.SDK_INT >= 26)
-            mVibrator.vibrate(VibrationEffect.createWaveform(pattern,-1));
+            vibrator.vibrate(VibrationEffect.createWaveform(pattern,-1));
         else
-            mVibrator.vibrate(pattern,-1);
+            vibrator.vibrate(pattern,-1);
     }
 
     private void createNewSoundPool() {
@@ -50,33 +50,37 @@ public class AlarmHelper {
                 .setUsage(AudioAttributes.USAGE_GAME)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build();
-        mSoundPool = new SoundPool.Builder()
+        soundPool = new SoundPool.Builder()
                 .setAudioAttributes(attributes)
                 .build();
 
-        mBeepSound = loadSound("beep.mp3");
-        mLongBeepSound = loadSound("long_beep.mp3");
+        beepSound = loadSound("beep.mp3");
+        longBeepSound = loadSound("long_beep.mp3");
     }
 
     private int loadSound(String fileName) {
         AssetFileDescriptor afd = null;
         try {
-            afd = mContext.getAssets().openFd(fileName);
+            afd = context.getAssets().openFd(fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return mSoundPool.load(afd, 1);
+        return soundPool.load(afd, 1);
     }
 
     public void playLongSound(){
-        mSoundPool.play(mLongBeepSound, 1, 1, 1, 0, 1);
+        soundPool.play(longBeepSound, volume, volume, 1, 0, 1);
     }
 
     public void playSound(){
-        mSoundPool.play(mBeepSound, 1, 1, 1, 0, 1);
+        soundPool.play(beepSound, volume, volume, 1, 0, 1);
     }
 
     public  void playFinalSound(){
-        mSoundPool.play(mLongBeepSound, 1, 1, 1, 2, 1);
+        soundPool.play(longBeepSound, volume, volume, 1, 2, 1);
+    }
+
+    public void setVolume(Boolean state){
+        volume = (state) ? 1 : 0;
     }
 }

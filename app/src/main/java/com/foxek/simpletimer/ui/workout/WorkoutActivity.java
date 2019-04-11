@@ -2,11 +2,14 @@ package com.foxek.simpletimer.ui.workout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
+import com.foxek.simpletimer.data.model.Workout;
 import com.foxek.simpletimer.ui.base.BaseView;
 import com.foxek.simpletimer.ui.interval.IntervalActivity;
 import com.foxek.simpletimer.R;
+import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -16,13 +19,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WorkoutActivity extends BaseView implements WorkoutContact.View, View.OnClickListener{
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID;
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME;
+import static com.foxek.simpletimer.utils.Constants.WORKOUT_CREATE_DIALOG;
 
-    @BindView(R.id.workout_list)
-    RecyclerView mWorkoutList;
+public class WorkoutActivity extends BaseView implements WorkoutContact.View, WorkoutAdapter.Callback {
 
-    @Inject
-    WorkoutContact.Presenter mPresenter;
+    @BindView (R.id.workout_list)
+    RecyclerView workoutList;
+
+    @Inject WorkoutContact.Presenter    presenter;
+    @Inject WorkoutAdapter              adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,39 +39,54 @@ public class WorkoutActivity extends BaseView implements WorkoutContact.View, Vi
 
         getActivityComponent().inject(this);
 
-        mPresenter.attachView(this);
-        mPresenter.viewIsReady();
+        presenter.attachView(this);
+        presenter.viewIsReady();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
+        presenter.detachView();
     }
 
     @Override
     public void startIntervalActivity(int position, String name) {
         Intent intent = new Intent(this, IntervalActivity.class);
-        intent.putExtra("workout_id", position);
-        intent.putExtra("workout_name", name);
+        intent.putExtra(EXTRA_WORKOUT_ID, position)
+              .putExtra(EXTRA_WORKOUT_NAME, name);
         startActivity(intent);
     }
 
     @Override
-    public void setWorkoutList(WorkoutAdapter adapter) {
-        mWorkoutList.setLayoutManager(new LinearLayoutManager(this));
-        mWorkoutList.setAdapter(adapter);
-        mWorkoutList.setNestedScrollingEnabled(false);
+    public void setWorkoutList() {
+        adapter.setCallback(this);
+
+        workoutList.setItemAnimator(null);
+        workoutList.setLayoutManager(new LinearLayoutManager(this));
+        workoutList.setAdapter(adapter);
+        workoutList.setNestedScrollingEnabled(false);
     }
 
-    @OnClick({R.id.add_workout_button})
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.add_workout_button:
-                WorkoutDialog mWorkoutDialog = WorkoutDialog.newInstance();
-                mWorkoutDialog.show(getSupportFragmentManager(), "workout_dialog");
-                break;
-        }
+    public void renderWorkoutList(List<Workout> workoutList) {
+        adapter.submitList(workoutList);
     }
+
+    @Override
+    public void showCreateDialog() {
+        WorkoutCreateDialog
+                .newInstance()
+                .show(getSupportFragmentManager(), WORKOUT_CREATE_DIALOG);
+    }
+
+    @OnClick({R.id.create_workout_button})
+    public void onCreateButtonClick() {
+        presenter.createButtonClicked();
+    }
+
+    @Override
+    public void onListItemClick(Workout workout) {
+        presenter.onListItemClicked(workout);
+    }
+
 }

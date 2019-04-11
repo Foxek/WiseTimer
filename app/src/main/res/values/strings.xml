@@ -25,7 +25,7 @@
 
     <string name="dialog_interval_setting_title">Interval settings</string>
     <string name="dialog_interval_create_title">Create interval</string>
-    <string name="dialog_interval_setting_description">Set the work time and rest time for a given interval</string>
+    <string name="dialog_interval_setting_description">Set the workTime time and restTime time for a given interval</string>
     <string name="dialog_interval_setting_divider">:</string>
     <string name="dialog_interval_setting_checkBox">Repeat several times</string>
 

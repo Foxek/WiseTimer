@@ -5,7 +5,9 @@ import com.foxek.simpletimer.ui.base.MvpInteractor;
 import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
-import io.reactivex.Observable;
+import java.util.List;
+
+import io.reactivex.Flowable;
 import io.reactivex.disposables.Disposable;
 
 public interface WorkoutContact {
@@ -14,24 +16,28 @@ public interface WorkoutContact {
 
         void startIntervalActivity(int position, String name);
 
-        void setWorkoutList(WorkoutAdapter adapter);
+        void setWorkoutList();
+
+        void renderWorkoutList(List<Workout> workoutList);
+
+        void showCreateDialog();
     }
 
     interface Presenter extends MvpPresenter<View, Interactor> {
 
-        void createNewWorkout(String workoutName);
+        void saveButtonClicked(String workoutName);
+
+        void createButtonClicked();
+
+        void onListItemClicked(Workout workout);
 
     }
 
     interface Interactor extends MvpInteractor {
 
-        WorkoutAdapter createWorkoutListAdapter();
+        Flowable<List<Workout>> fetchWorkoutList();
 
-        Disposable fetchWorkoutList();
-
-        Observable<Workout> onWorkoutItemClick();
-
-        void createNewWorkout(String workoutName);
+        Disposable createWorkout(String workoutName);
     }
 }
 

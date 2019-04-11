@@ -8,31 +8,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
+import com.foxek.simpletimer.di.component.ActivityComponent;
+import com.foxek.simpletimer.ui.base.BaseFragment;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class WorkoutEditDialog {/*extends BaseDialog<IntervalContact.Presenter> implements IntervalContact.DialogView{
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME;
 
-    private Unbinder mBinder;
+public class WorkoutEditDialog extends BaseFragment {
 
-    @BindView(R.id.delete_button)
-    TextView mDeleteButton;
+    @Inject
+    IntervalContact.Presenter presenter;
 
-    @BindView(R.id.save_button)
-    TextView mSaveButton;
+    private Unbinder binder;
 
     @BindView(R.id.training_edit_text)
-    EditText mWorkoutEditText;
+    EditText workoutEditText;
 
     public static WorkoutEditDialog newInstance(String workoutName) {
         WorkoutEditDialog mWorkoutEditDialog = new WorkoutEditDialog();
         Bundle args = new Bundle();
-        args.putString("workout_name", workoutName);
+        args.putString(EXTRA_WORKOUT_NAME, workoutName);
         mWorkoutEditDialog.setArguments(args);
         return mWorkoutEditDialog;
     }
@@ -45,43 +49,48 @@ public class WorkoutEditDialog {/*extends BaseDialog<IntervalContact.Presenter> 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View dialogView = inflater.inflate(R.layout.dialog_edit_workout, container, false);
 
-        View dialogView = inflater.inflate(R.layout.dialog_edit_training, container, false);
-        mBinder = ButterKnife.bind(this, dialogView);
+        ActivityComponent component = getActivityComponent();
 
-        mWorkoutEditText.setText(getArguments().getString("workout_name"));
-        mWorkoutEditText.setSelection(mWorkoutEditText.getText().length());
+        if (component != null) {
+            component.inject(this);
+            binder = ButterKnife.bind(this, dialogView);
+        }
 
-        getPresenter().attachDialog(this);
+        workoutEditText.setText(getArguments().getString(EXTRA_WORKOUT_NAME));
+        workoutEditText.setSelection(workoutEditText.getText().length());
+
         getDialog().setCanceledOnTouchOutside(true);
-
-        mDeleteButton.setOnClickListener(v->{
-            if (getShowsDialog()) {
-                mWorkoutEditText.setCursorVisible(false);
-                getDialog().cancel();
-                getPresenter().delete();
-            }
-            else
-                dismiss();
-        });
-
-        mSaveButton.setOnClickListener(v->{
-            if (!mWorkoutEditText.getText().toString().isEmpty()) {
-                mWorkoutEditText.setCursorVisible(false);
-                dismiss();
-                getPresenter().editWorkout(mWorkoutEditText.getText().toString());
-            }else{
-                dismiss();
-            }
-        });
 
         return dialogView;
     }
+
+    @OnClick(R.id.delete_button)
+    void onDeleteButtonClick(){
+        if (getShowsDialog()) {
+            workoutEditText.setCursorVisible(false);
+            getDialog().cancel();
+            presenter.deleteWorkoutButtonClicked();
+        }
+        else
+            dismiss();
+    }
+
+    @OnClick(R.id.save_button)
+    void onSaveButtonClick(){
+        if (!workoutEditText.getText().toString().isEmpty()) {
+            workoutEditText.setCursorVisible(false);
+            dismiss();
+            presenter.saveWorkoutButtonClicked(workoutEditText.getText().toString());
+        }else
+            dismiss();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mWorkoutEditText.setCursorVisible(false);
-        mBinder.unbind();
-        getPresenter().detachDialog();
-    }*/
+        workoutEditText.setCursorVisible(false);
+        binder.unbind();
+    }
 }

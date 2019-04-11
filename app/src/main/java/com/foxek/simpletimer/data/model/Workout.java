@@ -8,31 +8,55 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "trainings")
 public class Workout {
 
-    @ColumnInfo(name = "training_name")
-    public String training_name;
-
     @PrimaryKey
-    public int uid;
+    private int uid;
+
+    @ColumnInfo(name = "training_name")
+    private String name;
 
     @ColumnInfo(name = "volumeState")
-    public int volumeState;
+    private boolean volume;
 
-//    @Ignore
     @ColumnInfo(name = "intervalNumber")
-    public int intervalNumber;
+    private int intervalCount;
 
-    public Workout(String training_name, int uid, int intervalNumber, int volumeState) {
-        this.training_name = training_name;
-        this.intervalNumber = intervalNumber;
+    public Workout(String name, int uid, int intervalCount, boolean volume) {
+        this.name = name;
+        this.intervalCount = intervalCount;
         this.uid = uid;
-        this.volumeState = volumeState;
+        this.volume = volume;
     }
 
-    public String getTraining_name() {
-        return training_name;
+    public int getUid() {
+        return uid;
     }
 
-    public void setTraining_name(String name) {
-        this.training_name = name;
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public boolean isVolume() {
+        return volume;
+    }
+
+    public void setVolume(boolean volume) {
+        this.volume = volume;
+    }
+
+    public int getIntervalCount() {
+        return intervalCount;
+    }
+
+    public void setIntervalCount(int intervalCount) {
+        this.intervalCount = intervalCount;
     }
 }

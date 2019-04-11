@@ -14,7 +14,7 @@ import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalNumber;
 
 public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact.Interactor> implements TimerContact.Presenter{
 
-    private int                         mCurrentInterval;
+    private int currentInterval;
 
     public TimerPresenter(TimerContact.Interactor mvpInteractor, CompositeDisposable compositeDisposable) {
         super(mvpInteractor, compositeDisposable);
@@ -22,12 +22,16 @@ public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact
 
     @Override
     public void detachView() {
-        super.detachView();
         getInteractor().deleteDependencies();
+        super.detachView();
     }
 
     @Override
     public void prepareIntervals(int workoutId){
+
+        getDisposable().add(getInteractor().getVolume(workoutId));
+
+
         getDisposable().add(getInteractor().fetchIntervalList(workoutId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,7 +52,7 @@ public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact
 
 
     @Override
-    public void pauseButtonPressed(){
+    public void pauseButtonClicked(){
         if (getInteractor().getTimerState()) {
             getInteractor().stopTimer();
             getView().showPauseInterface();
@@ -61,12 +65,12 @@ public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact
     }
 
     @Override
-    public void resetButtonPressed(){
+    public void resetButtonClicked(){
         getView().startWorkoutActivity();
     }
 
     private void registerTimerCallback() {
-        getDisposable().add(getInteractor().IntervalFinishedCallback()
+        getDisposable().add(getInteractor().intervalFinishedCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(intervalNumber -> {
@@ -76,7 +80,7 @@ public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact
                             getView().showCounterType(R.string.timer_rest_time);
                         else {
                             getView().showCounterType(R.string.timer_work_time);
-                            getView().showCounterNumber(formatIntervalNumber(++mCurrentInterval));
+                            getView().showCounterNumber(formatIntervalNumber(++currentInterval));
                         }
                     }
                     else {
@@ -87,7 +91,7 @@ public class TimerPresenter extends BasePresenter<TimerContact.View,TimerContact
         );
     }
     private void registerTickCallback() {
-        getDisposable().add(getInteractor().onTickCallback()
+        getDisposable().add(getInteractor().tickCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(time-> getView().showCurrentCounter(formatIntervalData(time)),

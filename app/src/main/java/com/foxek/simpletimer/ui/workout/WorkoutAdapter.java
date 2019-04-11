@@ -9,56 +9,42 @@ import android.widget.TextView;
 import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.data.model.Workout;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
 
-public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHolder> {
+public class WorkoutAdapter extends ListAdapter <Workout, WorkoutAdapter.ViewHolder> {
 
-    private List<Workout>                  mWorkout;
-    private Context                         mContext;
+    private Context             mContext;
+    private Callback            mCallback;
 
-    private final PublishSubject<Workout> onClickSubject = PublishSubject.create();
+    @Inject
+    public WorkoutAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
-    WorkoutAdapter(List<Workout> dataset) {
-        mWorkout = dataset;
+    public interface Callback {
+        void onListItemClick(Workout workout);
+    }
+
+    void setCallback(Callback callback) {
+        mCallback = callback;
     }
 
     @Override
     public void onBindViewHolder(@NonNull WorkoutAdapter.ViewHolder holder, int position) {
-        holder.mWorkoutName.setText(mWorkout.get(position).training_name);
+        holder.mWorkoutName.setText(getItem(position).getName());
         holder.mWorkoutDescription.setText(mContext.getString(R.string.number_of_intervals_text,
-                mWorkout.get(position).intervalNumber));
-    }
-
-    @Override
-    public int getItemCount() {
-        return mWorkout.size();
-    }
-
-    void addWorkout(Workout workout) {
-        mWorkout.add(workout);
-        notifyDataSetChanged();
-    }
-
-    void addAllWorkouts(List<Workout> workouts) {
-        mWorkout.clear();
-        mWorkout.addAll(workouts);
-        notifyDataSetChanged();
-    }
-
-    Observable<Workout> getPositionClicks(){
-        return onClickSubject;
-    }
-
-    Workout getWorkout(int position) {
-        return mWorkout.get(position);
+                getItem(position).getIntervalCount()));
     }
 
     @NonNull
@@ -68,7 +54,25 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         return new WorkoutAdapter.ViewHolder(view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private static final DiffUtil.ItemCallback<Workout> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Workout>() {
+                @Override
+                public boolean areItemsTheSame(
+                        @NonNull Workout oldWorkout, @NonNull Workout newWorkout) {
+                    return ((oldWorkout.getName().equals(newWorkout.getName())) &&
+                            (oldWorkout.getIntervalCount() == newWorkout.getIntervalCount()) &&
+                            (oldWorkout.getUid() == newWorkout.getUid()));
+                }
+                @Override
+                public boolean areContentsTheSame(
+                        @NonNull Workout oldWorkout, @NonNull Workout newWorkout) {
+                    return ((oldWorkout.getName().equals(newWorkout.getName())) &&
+                            (oldWorkout.getIntervalCount() == newWorkout.getIntervalCount()) &&
+                            (oldWorkout.getUid() == newWorkout.getUid()));
+                }
+            };
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.workout_name)
         TextView mWorkoutName;
@@ -85,7 +89,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         @OnClick({R.id.workout_item})
         @Override
         public void onClick(View v) {
-            onClickSubject.onNext(mWorkout.get(getAdapterPosition()));
+            mCallback.onListItemClick(getItem(getAdapterPosition()));
         }
     }
 }

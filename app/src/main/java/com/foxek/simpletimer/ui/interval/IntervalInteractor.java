@@ -4,10 +4,12 @@ import com.foxek.simpletimer.data.database.LocalDatabase;
 import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.data.model.Workout;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -15,95 +17,94 @@ import io.reactivex.schedulers.Schedulers;
 
 public class IntervalInteractor implements IntervalContact.Interactor {
 
-    private LocalDatabase           mDatabase;
-    private IntervalAdapter         mIntervalAdapter;
-    private Workout                 mWorkout;
-    private int                     mClickedIntervalPosition;
+    private LocalDatabase   database;
+    private int             workoutId;
+    private int             intervalId;
 
     @Inject
     IntervalInteractor(LocalDatabase database){
-        mDatabase = database;
+        this.database = database;
     }
 
     @Override
-    public Single<IntervalAdapter> fetchIntervalList(int workoutId){
-        return mDatabase.getWorkoutDAO().getById(workoutId)
-                .flatMap(workout -> {
-                    mWorkout = workout;
-                    return mDatabase.getIntervalDAO().getAll(workoutId);
+    public Single<Workout> getWorkout(int id) {
+        workoutId = id;
+        return database.getWorkoutDAO().getById(workoutId)
+                .subscribeOn(Schedulers.io());
+    }
+
+    @Override
+    public Flowable<List<Interval>> fetchIntervalList(){
+        return database.getIntervalDAO().getAll(workoutId)
+                .subscribeOn(Schedulers.io());
+    }
+
+    @Override
+    public Disposable addInterval(int work, int rest){
+        return database.getIntervalDAO().getLastId()
+                .flatMapCompletable(id -> {
+                    Interval interval = new Interval(work, rest, workoutId, id + 1);
+                    return Completable.fromAction(() ->  database.getIntervalDAO().add(interval));
                 })
-                .map(intervals -> {
-                    mIntervalAdapter = new IntervalAdapter(intervals);
-                    return mIntervalAdapter;
-                });
-    }
-
-    @Override
-    public Disposable addNewInterval(int work_time,int rest_time){
-        int position = mIntervalAdapter.getItemCount();
-        mDatabase.getIntervalDAO().add(new Interval(work_time,rest_time,mWorkout.uid,position));
-        return mDatabase.getIntervalDAO().getLast()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(interval -> mIntervalAdapter.addInterval(interval), throwable -> {});
-    }
-
-    @Override
-    public Disposable updateInterval(int work_time,int rest_time) {
-        return mDatabase.getIntervalDAO().getById(mIntervalAdapter.getInterval(mClickedIntervalPosition).getID(), mWorkout.uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(interval -> {
-                    interval.workInterval = work_time;
-                    interval.restInterval = rest_time;
-                    mIntervalAdapter.updateInterval(mClickedIntervalPosition,work_time,rest_time);
-                    mDatabase.getIntervalDAO().update(interval);
-                }, throwable -> {});
-    }
-
-    @Override
-    public Disposable deleteInterval() {
-        return mDatabase.getIntervalDAO().getById(mIntervalAdapter.getInterval(mClickedIntervalPosition).getID(), mWorkout.uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(interval -> {
-                    if (mIntervalAdapter.getItemCount() != 1) {
-                        mIntervalAdapter.deleteInterval(mClickedIntervalPosition);
-                        mDatabase.getIntervalDAO().delete(interval);
-                    }
-                }, throwable -> {});
-    }
-
-    @Override
-    public Disposable updateWorkout(String workoutName) {
-        return Completable.fromAction(() -> mDatabase.getWorkoutDAO().update(workoutName, mWorkout.uid))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {}, throwable -> {});
     }
 
     @Override
-    public Completable updateWorkoutVolume(int state) {
-        return Completable.fromAction(() -> mDatabase.getWorkoutDAO().update(state, mWorkout.uid))
+    public Disposable updateInterval(int work,int rest) {
+        return database.getIntervalDAO().getById(intervalId, workoutId)
+                .flatMapCompletable(interval -> {
+                    interval.setWorkTime(work);
+                    interval.setRestTime(rest);
+                    return Completable.fromAction(() -> database.getIntervalDAO().update(interval));
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {}, throwable -> {});
+    }
+
+    @Override
+    public Disposable deleteInterval() {
+        return database.getIntervalDAO().size(workoutId)
+                .filter(size -> size != 1)
+                .flatMapCompletable(size ->
+                        Completable.fromAction(() -> database.getIntervalDAO().delete(intervalId, workoutId)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {}, throwable -> {});
+    }
+
+    @Override
+    public Disposable updateWorkout(String workoutName) {
+        return Completable.fromAction(() -> database.getWorkoutDAO().update(workoutName, workoutId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {}, throwable -> {});
+    }
+
+    @Override
+    public Completable updateVolume(boolean state) {
+        return Completable.fromAction(() -> database.getWorkoutDAO().update(state, workoutId))
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public Observable<Interval> onIntervalItemClick() {
-        return mIntervalAdapter.getPositionClicks()
-                .map(position->{
-                    mClickedIntervalPosition = position;
-                    return mIntervalAdapter.getInterval(position);
-                });
+    public Completable deleteWorkout() {
+        return Completable.fromAction(() -> database.getWorkoutDAO().delete(workoutId))
+                .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public void deleteWorkout() {
-        mDatabase.getWorkoutDAO().delete(mWorkout.uid);
+    public Single<Boolean> getVolume() {
+        return database.getWorkoutDAO().getVolume(workoutId)
+                .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public Workout getCurrentWorkout() {
-        return mWorkout;
+    public void setCurrentInterval(int id) {
+        intervalId = id;
     }
+
+
 }

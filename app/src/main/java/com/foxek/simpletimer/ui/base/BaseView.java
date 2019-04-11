@@ -21,7 +21,7 @@ public abstract class BaseView extends AppCompatActivity implements MvpView {
         Bundle args = getIntent().getExtras();
 
         mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(args))
+                .activityModule(new ActivityModule(this, args))
                 .applicationComponent(((BaseApplication) getApplication()).getComponent())
                 .build();
     }

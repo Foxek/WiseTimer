@@ -10,70 +10,79 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.foxek.simpletimer.utils.Constants.PREPARE_INTERVAL;
 
 public class TimerInteractor implements TimerContact.Interactor{
 
-    private LocalDatabase               mDatabase;
-    private ArrayList<Integer>          mInterval;
-    private TimerHelper                 mTimerHelper;
-    private AlarmHelper                 mAlarmHelper;
+    private LocalDatabase           database;
+    private ArrayList<Integer>      intervalList;
+    private TimerHelper             timerHelper;
+    private AlarmHelper             alarmHelper;
 
     @Inject
-    TimerInteractor(LocalDatabase database, AlarmHelper alarmHelper, TimerHelper timer){
-        mDatabase = database;
-        mTimerHelper = timer;
-        mAlarmHelper = alarmHelper;
+    TimerInteractor(LocalDatabase database, AlarmHelper alarmHelper, TimerHelper timerHelper){
+        this.database = database;
+        this.timerHelper = timerHelper;
+        this.alarmHelper = alarmHelper;
     }
 
     public void deleteDependencies(){
-        mTimerHelper.timerDelete();
-        mTimerHelper = null;
-        mAlarmHelper = null;
+        timerHelper.timerDelete();
     }
 
     @Override
-    public Single<Integer> fetchIntervalList(int workoutId){
-        mInterval = new ArrayList<>();
-        mInterval.add(PREPARE_INTERVAL);
-        return mDatabase.getIntervalDAO().getAll(workoutId)
+    public Flowable<Integer> fetchIntervalList(int workoutId){
+        intervalList = new ArrayList<>();
+        intervalList.add(PREPARE_INTERVAL);
+        return database.getIntervalDAO().getAll(workoutId)
                 .map(intervals -> {
                     for (Interval interval : intervals) {
-                        mInterval.add(interval.workInterval);
-                        mInterval.add(interval.restInterval);
+                        intervalList.add(interval.getWorkTime());
+                        intervalList.add(interval.getRestTime());
                     }
-                    return mInterval.size();
+                    return intervalList.size();
                 });
     }
 
     @Override
+    public Disposable getVolume(int id) {
+        return database.getWorkoutDAO().getVolume(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(volume -> alarmHelper.setVolume(volume), throwable -> {});
+    }
+
+    @Override
     public void loadIntervalListToTimer(){
-        mTimerHelper.loadIntervalList(mInterval);
+        timerHelper.loadIntervalList(intervalList);
     }
 
     @Override
     public void continueTimer(){
-        mTimerHelper.timerRecreate();
+        timerHelper.timerRecreate();
     }
 
     @Override
     public void stopTimer(){
-        mTimerHelper.timerDelete();
+        timerHelper.timerDelete();
     }
 
     @Override
-    public Observable<Integer> IntervalFinishedCallback() {
-        return mTimerHelper.onIntervalFinished();
+    public Observable<Integer> intervalFinishedCallback() {
+        return timerHelper.onIntervalFinished();
 
     }
 
     @Override
-    public Observable<Integer> onTickCallback() {
-        return mTimerHelper.onTimerTickHappened()
-                .map(time->{
+    public Observable<Integer> tickCallback() {
+        return timerHelper.onTimerTickHappened()
+                .map(time -> {
                     if (((time > 500) && (time < 1000)) || ((time > 1500) && (time < 2000)) ||
                             ((time > 2500) && (time < 3000)))
                         indicateLastSeconds();
@@ -83,33 +92,33 @@ public class TimerInteractor implements TimerContact.Interactor{
 
     @Override
     public boolean getTimerState(){
-        return mTimerHelper.getTimerState();
+        return timerHelper.getTimerState();
     }
 
     @Override
     public void setTimerState(boolean timerState){
-        mTimerHelper.setTimerState(timerState);
+        timerHelper.setTimerState(timerState);
     }
 
     @Override
     public int getIntervalSize(){
-        return mInterval.size();
+        return intervalList.size();
     }
 
     @Override
     public void indicateEndOfWorkout(){
-        mAlarmHelper.patternVibrate();
-        mAlarmHelper.playFinalSound();
+        alarmHelper.patternVibrate();
+        alarmHelper.playFinalSound();
     }
 
     @Override
     public void indicateEndOfInterval(){
-        mAlarmHelper.oneShotVibrate();
-        mAlarmHelper.playLongSound();
+        alarmHelper.oneShotVibrate();
+        alarmHelper.playLongSound();
     }
 
     @Override
     public void indicateLastSeconds(){
-        mAlarmHelper.playSound();
+        alarmHelper.playSound();
     }
 }

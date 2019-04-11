@@ -1,5 +1,6 @@
 package com.foxek.simpletimer.ui.interval;
 
+import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.ui.base.BasePresenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,82 +18,88 @@ public class IntervalPresenter extends BasePresenter<IntervalContact.View,Interv
     }
 
     @Override
-    public void createIntervalListAdapter (int workoutId){
-        getDisposable().add(getInteractor().fetchIntervalList(workoutId)
-                .subscribeOn(Schedulers.io())
+    public void viewIsReady(int id) {
+        getView().setIntervalList();
+
+        getDisposable().add(getInteractor()
+                .getWorkout(id)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(adapter -> {
-                    getView().setIntervalList(adapter);
-                    getView().setVolumeState(getInteractor().getCurrentWorkout().volumeState);
-                    registerItemCallback();
-                }, throwable -> {}));
+                .subscribe(workout -> {
+                    getView().setWorkoutName(workout.getName());
+                    getView().setVolumeState(workout.isVolume());
+                }, throwable -> {})
+        );
+
+        getDisposable().add(getInteractor()
+                .fetchIntervalList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(intervalList -> getView().renderIntervalList(intervalList),
+                        error -> {})
+        );
     }
 
-
     @Override
-    public void editButtonPressed(){
+    public void editWorkoutButtonClicked(){
         getView().showWorkoutEditDialog();
     }
 
     @Override
-    public void setVolumeButtonPressed() {
-        int state;
-
-        if (getInteractor().getCurrentWorkout().volumeState == 1)
-            state = 0;
-        else
-            state = 1;
-
-        getDisposable().add(getInteractor().updateWorkoutVolume(state)
+    public void changeVolumeButtonClicked() {
+        getDisposable().add(getInteractor()
+                .getVolume()
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMapCompletable(state ->{
+                    getView().setVolumeState(!state);
+                    return getInteractor().updateVolume(!state);
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    getView().setVolumeState(state);
-                }, throwable -> {}));
+                .subscribe(() -> {}, throwable -> {}));
     }
 
     @Override
-    public void addIntervalButtonPressed(){
+    public void addIntervalButtonClicked(){
         getView().showIntervalCreateDialog();
     }
 
     @Override
-    public void onIntervalChanged(int work_time, int rest_time) {
-        getDisposable().add(getInteractor().updateInterval(work_time,rest_time));
+    public void saveIntervalButtonClicked(int workTime, int restTime) {
+        getDisposable().add(getInteractor().updateInterval(workTime, restTime));
     }
 
     @Override
-    public void onIntervalCreated(int work_time, int rest_time) {
-        getDisposable().add(getInteractor().addNewInterval(work_time,rest_time));
+    public void createIntervalButtonClicked(int workTime, int restTime) {
+        getDisposable().add(getInteractor().addInterval(workTime, restTime));
     }
 
     @Override
-    public void onDeleteInterval() {
+    public void deleteIntervalButtonClicked() {
         getDisposable().add(getInteractor().deleteInterval());
     }
 
     @Override
-    public void editWorkout(String name) {
+    public void saveWorkoutButtonClicked(String name) {
         getDisposable().add(getInteractor().updateWorkout(name));
         getView().setWorkoutName(name);
     }
 
     @Override
-    public void deleteWorkout() {
-        getInteractor().deleteWorkout();
-        getView().startWorkoutActivity();
+    public void deleteWorkoutButtonClicked() {
+        getDisposable().add(getInteractor()
+                .deleteWorkout()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> getView().startWorkoutActivity(), throwable -> {})
+        );
     }
 
     @Override
-    public void startWorkout() {
+    public void startWorkoutButtonClicked() {
         getView().startTimerActivity();
     }
 
-    private void registerItemCallback() {
-        getDisposable().add(getInteractor().onIntervalItemClick()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(interval -> getView().showIntervalEditDialog(interval.workInterval,interval.restInterval), throwable -> {}));
-
+    @Override
+    public void intervalItemClicked(Interval item) {
+        getInteractor().setCurrentInterval(item.getId());
+        getView().showIntervalEditDialog(item.getWorkTime(), item.getRestTime());
     }
 }

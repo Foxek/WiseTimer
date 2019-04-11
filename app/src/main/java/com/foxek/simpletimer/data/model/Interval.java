@@ -13,29 +13,64 @@ import static androidx.room.ForeignKey.CASCADE;
 public class Interval {
 
     @ColumnInfo(name = "work_intervals")
-    public int workInterval;
+    private int workTime;
 
     @ColumnInfo(name = "rest_intervals")
-    public int restInterval;
+    private int restTime;
 
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ColumnInfo(name = "position_id")
-    public int position_id;
+    @ColumnInfo(name = "positionId")
+    private int position;
 
     @ColumnInfo(name = "trainingID")
-    public int trainingID;
+    private int workoutId;
 
-    public Interval(int workInterval, int restInterval, int trainingID, int position_id) {
-        this.workInterval = workInterval;
-        this.restInterval = restInterval;
-        this.trainingID = trainingID;
-        this.position_id = position_id;
+    public Interval(int workTime, int restTime, int workoutId, int position) {
+        this.workTime = workTime;
+        this.restTime = restTime;
+        this.workoutId = workoutId;
+        this.position = position;
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 
+    public int setID() {
+        return id;
+    }
+
+    public int getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(int workTime) {
+        this.workTime = workTime;
+    }
+
+    public int getRestTime() {
+        return restTime;
+    }
+
+    public void setRestTime(int restTime) {
+        this.restTime = restTime;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getWorkoutId() {
+        return workoutId;
+    }
+
+    public void setWorkoutId(int workoutId) {
+        this.workoutId = workoutId;
+    }
 }

@@ -9,6 +9,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 @Dao
@@ -17,8 +18,8 @@ public interface IntervalDAO {
     @Insert
     void add(Interval interval);
 
-    @Delete()
-    void delete(Interval interval);
+    @Query("DELETE FROM Interval WHERE id IS :id AND trainingID IS :workoutId")
+    void delete(int id, int workoutId);
 
     @Update
     void update(Interval interval);
@@ -26,9 +27,12 @@ public interface IntervalDAO {
     @Query("SELECT * FROM Interval WHERE id IS :id AND trainingID IS :workoutId")
     Single<Interval> getById(int id, int workoutId);
 
-    @Query("SELECT * FROM Interval WHERE ID = (SELECT MAX(ID)  FROM Interval)")
-    Single<Interval> getLast();
+    @Query("SELECT COUNT(*) FROM Interval WHERE trainingID IS :workoutId")
+    Single<Integer> size(int workoutId);
 
     @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
-    Single<List<Interval>> getAll(int workoutId);
+    Flowable<List<Interval>> getAll(int workoutId);
+
+    @Query("SELECT MAX(id)  FROM Interval")
+    Single<Integer> getLastId();
 }

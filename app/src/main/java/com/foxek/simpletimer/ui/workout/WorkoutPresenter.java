@@ -1,10 +1,10 @@
 package com.foxek.simpletimer.ui.workout;
 
+import com.foxek.simpletimer.data.model.Workout;
 import com.foxek.simpletimer.ui.base.BasePresenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter{
 
@@ -14,22 +14,28 @@ public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, Workout
 
     @Override
     public void viewIsReady() {
-        getView().setWorkoutList(getInteractor().createWorkoutListAdapter());
-        getDisposable().add(getInteractor().fetchWorkoutList());
-        registerItemCallback();
-    }
+        getView().setWorkoutList();
 
-    private void registerItemCallback() {
-        getDisposable().add(getInteractor().onWorkoutItemClick()
-                .subscribeOn(Schedulers.io())
+        getDisposable().add(getInteractor()
+                .fetchWorkoutList()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(workout -> getView().startIntervalActivity(workout.uid, workout.training_name),
-                        throwable -> {}));
-
+                .subscribe(workoutList -> getView().renderWorkoutList(workoutList),
+                        error -> {})
+        );
     }
 
     @Override
-    public void createNewWorkout(String workoutName) {
-        getInteractor().createNewWorkout(workoutName);
+    public void saveButtonClicked(String workoutName) {
+        getDisposable().add(getInteractor().createWorkout(workoutName));
+    }
+
+    @Override
+    public void createButtonClicked() {
+        getView().showCreateDialog();
+    }
+
+    @Override
+    public void onListItemClicked(Workout workout) {
+        getView().startIntervalActivity(workout.getUid(), workout.getName());
     }
 }

@@ -7,36 +7,42 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
+import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.ui.base.BaseView;
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog;
 import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog;
 import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog;
 import com.foxek.simpletimer.ui.timer.TimerActivity;
 
+import java.util.List;
 
 import javax.inject.Inject;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class IntervalActivity extends BaseView implements IntervalContact.View, View.OnClickListener{
+import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID;
+import static com.foxek.simpletimer.utils.Constants.INTERVAL_CREATE_DIALOG;
+import static com.foxek.simpletimer.utils.Constants.INTERVAL_EDIT_DIALOG;
+import static com.foxek.simpletimer.utils.Constants.WORKOUT_EDIT_DIALOG;
+
+public class IntervalActivity extends BaseView implements IntervalContact.View, IntervalAdapter.Callback{
 
     @BindView(R.id.interval_list)
-    RecyclerView mIntervalList;
+    RecyclerView intervalList;
 
     @BindView(R.id.workout_name)
-    TextView mWorkoutName;
+    TextView workoutName;
 
     @BindView(R.id.set_volume_button)
-    ImageButton mVolumeButton;
+    ImageButton volumeButton;
 
-    @Inject
-    IntervalContact.Presenter       mPresenter;
-
-    private Intent intent;
+    @Inject IntervalContact.Presenter   presenter;
+    @Inject IntervalAdapter             adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,62 +50,65 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
         setContentView(R.layout.activity_interval);
         ButterKnife.bind(this);
 
-        intent = getIntent();
-        setWorkoutName(intent.getStringExtra("workout_name"));
-
         getActivityComponent().inject(this);
 
-        mPresenter.attachView(this);
-        mPresenter.createIntervalListAdapter(intent.getIntExtra("workout_id",0));
-        mPresenter.viewIsReady();
+        presenter.attachView(this);
+        presenter.viewIsReady(getIntent().getIntExtra(EXTRA_WORKOUT_ID,0));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
-    }
-
-    @Override
-    public void showIntervalEditDialog(int work_time,int rest_time) {
-//        IntervalEditDialog mIntervalEditDialog = IntervalEditDialog.newInstance(work_time,rest_time);
-//        mPresenter.setDialogPresenter(mIntervalEditDialog);
-//        mIntervalEditDialog.show(getSupportFragmentManager(), "interval_edit_dialog");
-    }
-
-    @Override
-    public void showIntervalCreateDialog() {
-//        IntervalCreateDialog mIntervalCreateDialog = IntervalCreateDialog.newInstance();
-//        mPresenter.setDialogPresenter(mIntervalCreateDialog);
-//        mIntervalCreateDialog.show(getSupportFragmentManager(), "interval_create_dialog");
-    }
-
-    @Override
-    public void showWorkoutEditDialog() {
-//        WorkoutEditDialog mWorkoutEditDialog = WorkoutEditDialog.newInstance(intent.getStringExtra("workout_name"));
-//        mPresenter.setDialogPresenter(mWorkoutEditDialog);
-//        mWorkoutEditDialog.show(getSupportFragmentManager(), "workout_edit_dialog");
+        presenter.detachView();
     }
 
     @Override
     public void setWorkoutName(String name) {
-        mWorkoutName.setText(name);
+        workoutName.setText(name);
     }
 
     @Override
-    public void setIntervalList(IntervalAdapter adapter) {
-        mIntervalList.setLayoutManager(new LinearLayoutManager(this));
-        mIntervalList.setAdapter(adapter);
+    public void setIntervalList() {
+        adapter.setCallback(this);
+
+        intervalList.setItemAnimator(null);
+        intervalList.setLayoutManager(new LinearLayoutManager(this));
+        intervalList.setAdapter(adapter);
     }
 
     @Override
-    public void setVolumeState(int state) {
-        if (state == 1)
-            mVolumeButton.setImageResource(R.drawable.ic_menu_volume_on_white);
+    public void renderIntervalList(List<Interval> intervalList) {
+        adapter.submitList(intervalList);
+    }
+
+    @Override
+    public void setVolumeState(boolean state) {
+        if (state)
+            volumeButton.setImageResource(R.drawable.ic_menu_volume_on_white);
         else
-            mVolumeButton.setImageResource(R.drawable.ic_menu_volume_off_white);
+            volumeButton.setImageResource(R.drawable.ic_menu_volume_off_white);
     }
 
+    @Override
+    public void showIntervalEditDialog(int workTime, int restTime) {
+        IntervalEditDialog
+                .newInstance(workTime, restTime)
+                .show(getSupportFragmentManager(), INTERVAL_EDIT_DIALOG);
+    }
+
+    @Override
+    public void showIntervalCreateDialog() {
+        IntervalCreateDialog
+                .newInstance()
+                .show(getSupportFragmentManager(), INTERVAL_CREATE_DIALOG);
+    }
+
+    @Override
+    public void showWorkoutEditDialog() {
+        WorkoutEditDialog
+                .newInstance(getIntent().getStringExtra(EXTRA_WORKOUT_ID))
+                .show(getSupportFragmentManager(), WORKOUT_EDIT_DIALOG);
+    }
     @Override
     public void startWorkoutActivity() {
         onBackPressed();
@@ -107,33 +116,38 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
 
     @Override
     public void startTimerActivity() {
-        Intent TimerIntent = new Intent(this, TimerActivity.class);
-        TimerIntent.putExtra("workout_id", intent.getIntExtra("workout_id",0));
-        TimerIntent.putExtra("workout_name", intent.getStringExtra("workout_name"));
-        startActivity(TimerIntent);
+        Intent timerIntent = new Intent(this, TimerActivity.class);
+        timerIntent
+                .putExtra(EXTRA_WORKOUT_ID, getIntent().getIntExtra(EXTRA_WORKOUT_ID,0))
+                .putExtra("workout_name", getIntent().getStringExtra("workout_name"));
+        startActivity(timerIntent);
         finish();
     }
 
     @OnClick({R.id.back_button,R.id.edit_button,R.id.add_interval_button,
               R.id.start_workout_button, R.id.set_volume_button})
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.back_button:
                 onBackPressed();
                 break;
             case R.id.edit_button:
-                mPresenter.editButtonPressed();
+                presenter.editWorkoutButtonClicked();
                 break;
             case R.id.set_volume_button:
-                mPresenter.setVolumeButtonPressed();
+                presenter.changeVolumeButtonClicked();
                 break;
             case R.id.add_interval_button:
-                mPresenter.addIntervalButtonPressed();
+                presenter.addIntervalButtonClicked();
                 break;
             case R.id.start_workout_button:
-                mPresenter.startWorkout();
+                presenter.startWorkoutButtonClicked();
                 break;
         }
+    }
+
+    @Override
+    public void onListItemClick(Interval item) {
+        presenter.intervalItemClicked(item);
     }
 }
