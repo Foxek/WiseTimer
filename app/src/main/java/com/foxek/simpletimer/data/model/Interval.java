@@ -20,7 +20,7 @@ public class Interval {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ColumnInfo(name = "positionId")
+    @ColumnInfo(name = "position_id")
     private int position;
 
     @ColumnInfo(name = "trainingID")
