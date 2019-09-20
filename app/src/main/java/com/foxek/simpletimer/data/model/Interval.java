@@ -35,6 +35,7 @@ public class Interval {
         this.workoutId = workoutId;
         this.position = position;
     }
+
     public String getName() {
         return name;
     }

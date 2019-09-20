@@ -17,4 +17,6 @@ public class Constants {
 
     public static final String WORKOUT_CREATE_DIALOG = "workout_create_dialog";
     public static final String WORKOUT_EDIT_DIALOG = "workout_edit_dialog";
+
+    public static final String EMPTY = "";
 }

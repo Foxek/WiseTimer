@@ -9,6 +9,7 @@ import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.data.model.Interval;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.foxek.simpletimer.utils.Constants.EMPTY;
 import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalData;
 
 public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewHolder> {
@@ -37,6 +39,13 @@ public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewH
     @Override
     public void onBindViewHolder(@NonNull IntervalAdapter.ViewHolder holder, int position) {
 
+        if (getItem(position).getName().equals(EMPTY)){
+            holder.mTitleGroup.setVisibility(View.GONE);
+        }else{
+            holder.mTitleGroup.setVisibility(View.VISIBLE);
+            holder.mTitle.setText(getItem(position).getName());
+        }
+
         holder.mWorkIntervalText.setText(formatIntervalData(getItem(position).getWorkTime()));
         holder.mRestIntervalText.setText(formatIntervalData(getItem(position).getRestTime()));
     }
@@ -54,13 +63,15 @@ public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewH
                 public boolean areItemsTheSame(
                         @NonNull Interval oldInterval, @NonNull Interval newInterval) {
                     return ((oldInterval.getWorkTime() == newInterval.getWorkTime()) &&
-                            (oldInterval.getRestTime() == newInterval.getRestTime()));
+                            (oldInterval.getRestTime() == newInterval.getRestTime()) &&
+                            (oldInterval.getName().equals(newInterval.getName())));
                 }
                 @Override
                 public boolean areContentsTheSame(
                         @NonNull Interval oldInterval, @NonNull Interval newInterval) {
                     return ((oldInterval.getWorkTime() == newInterval.getWorkTime()) &&
-                            (oldInterval.getRestTime() == newInterval.getRestTime()));
+                            (oldInterval.getRestTime() == newInterval.getRestTime()) &&
+                            (oldInterval.getName().equals(newInterval.getName())));
                 }
             };
 
@@ -71,6 +82,12 @@ public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewH
 
         @BindView(R.id.rest_interval_text)
         TextView mRestIntervalText;
+
+        @BindView(R.id.title)
+        TextView mTitle;
+
+        @BindView(R.id.title_group)
+        Group mTitleGroup;
 
         ViewHolder(View v) {
             super(v);

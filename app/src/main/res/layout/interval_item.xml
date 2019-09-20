@@ -11,6 +11,28 @@
     android:layout_marginBottom="4dp"
     android:background="@drawable/item_bg">
 
+    <ImageView
+        android:id="@+id/work_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/work_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/work_name"
+        app:srcCompat="@drawable/ic_hourglass"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/rest_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rest_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rest_name"
+        app:srcCompat="@drawable/ic_hourglass"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/work_interval_text"
         android:layout_width="wrap_content"
@@ -21,7 +43,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/dialog_header_size"
         app:layout_constraintEnd_toStartOf="@+id/work_time_unit"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/work_time_unit"
@@ -87,26 +109,35 @@
         app:layout_constraintBottom_toBottomOf="@+id/rest_interval_text"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/work_image"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/work_name"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/work_name"
-        app:srcCompat="@drawable/ic_hourglass"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/rest_image"
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorTint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/title_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rest_name"
-        app:srcCompat="@drawable/ic_hourglass"
-        tools:ignore="ContentDescription" />
+        app:constraint_referenced_ids="title,divider"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
