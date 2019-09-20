@@ -90,9 +90,9 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
     }
 
     @Override
-    public void showIntervalEditDialog(int workTime, int restTime) {
+    public void showIntervalEditDialog(String name, int workTime, int restTime) {
         IntervalEditDialog
-                .newInstance(workTime, restTime)
+                .newInstance(name, workTime, restTime)
                 .show(getSupportFragmentManager(), INTERVAL_EDIT_DIALOG);
     }
 

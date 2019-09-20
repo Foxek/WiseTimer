@@ -29,7 +29,8 @@ public class Interval {
     @ColumnInfo(name = "trainingID")
     private int workoutId;
 
-    public Interval(int workTime, int restTime, int workoutId, int position) {
+    public Interval(String name, int workTime, int restTime, int workoutId, int position) {
+        this.name = name;
         this.workTime = workTime;
         this.restTime = restTime;
         this.workoutId = workoutId;

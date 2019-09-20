@@ -40,10 +40,10 @@ public class IntervalInteractor implements IntervalContact.Interactor {
     }
 
     @Override
-    public Disposable addInterval(int work, int rest){
+    public Disposable addInterval(String name, int work, int rest){
         return database.getIntervalDAO().getLastId()
                 .flatMapCompletable(id -> {
-                    Interval interval = new Interval(work, rest, workoutId, id + 1);
+                    Interval interval = new Interval(name, work, rest, workoutId, id + 1);
                     return Completable.fromAction(() ->  database.getIntervalDAO().add(interval));
                 })
                 .subscribeOn(Schedulers.io())
@@ -52,9 +52,10 @@ public class IntervalInteractor implements IntervalContact.Interactor {
     }
 
     @Override
-    public Disposable updateInterval(int work,int rest) {
+    public Disposable updateInterval(String name, int work,int rest) {
         return database.getIntervalDAO().getById(intervalId, workoutId)
                 .flatMapCompletable(interval -> {
+                    interval.setName(name);
                     interval.setWorkTime(work);
                     interval.setRestTime(rest);
                     return Completable.fromAction(() -> database.getIntervalDAO().update(interval));

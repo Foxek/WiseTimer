@@ -15,11 +15,15 @@ import com.foxek.simpletimer.ui.interval.IntervalContact;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.Group;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.foxek.simpletimer.utils.Constants.EMPTY;
+import static com.foxek.simpletimer.utils.Constants.EXTRA_INTERVAL_NAME;
 import static com.foxek.simpletimer.utils.Constants.EXTRA_REST_TIME;
 import static com.foxek.simpletimer.utils.Constants.EXTRA_WORK_TIME;
 import static com.foxek.simpletimer.utils.IntervalUtils.convertToSeconds;
@@ -47,14 +51,21 @@ public class IntervalEditDialog extends BaseFragment {
     @BindView(R.id.repeats_edit_text)
     EditText repeatText;
 
-    @BindView(R.id.repeat_checkBox)
-    CheckBox checkBox;
+    @BindView(R.id.repeats_group)
+    Group repeatGroup;
 
-    public static IntervalEditDialog newInstance(int work_time,int rest_time) {
+    @BindView(R.id.name_checkBox)
+    CheckBox nameCheckBox;
+
+    @BindView(R.id.name_edit_text)
+    EditText nameText;
+
+    public static IntervalEditDialog newInstance(String name, int work_time, int rest_time) {
         IntervalEditDialog mIntervalEditDialog = new IntervalEditDialog();
         Bundle args = new Bundle();
         args.putInt(EXTRA_WORK_TIME, work_time);
         args.putInt(EXTRA_REST_TIME, rest_time);
+        args.putString(EXTRA_INTERVAL_NAME, name);
         mIntervalEditDialog.setArguments(args);
         return mIntervalEditDialog;
     }
@@ -70,17 +81,34 @@ public class IntervalEditDialog extends BaseFragment {
             binder = ButterKnife.bind(this, dialogView);
         }
 
-        prepareEditText(getArguments().getInt(EXTRA_WORK_TIME),getArguments().getInt(EXTRA_REST_TIME));
+        prepareEditText(getArguments().getString(EXTRA_INTERVAL_NAME),
+                getArguments().getInt(EXTRA_WORK_TIME),
+                getArguments().getInt(EXTRA_REST_TIME));
 
-        repeatText.setVisibility(View.GONE);
-        checkBox.setVisibility(View.GONE);
+        nameCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                nameText.setText(EMPTY);
+                nameText.setVisibility(View.GONE);
+            }else{
+                nameText.setVisibility(View.VISIBLE);
+            }
+        });
+
+        repeatGroup.setVisibility(View.GONE);
 
         getDialog().setCanceledOnTouchOutside(true);
 
         return dialogView;
     }
 
-    private void prepareEditText(int work_time,int rest_time){
+    private void prepareEditText(String name, int work_time, int rest_time) {
+
+        if(!name.equals(EMPTY)){
+            nameCheckBox.setChecked(false);
+            nameText.setVisibility(View.VISIBLE);
+            nameText.setText(name);
+        }
+
         workMinuteText.setText(formatEditTextData(work_time / 60));
         workSecondText.setText(formatEditTextData(work_time % 60));
 
@@ -88,7 +116,7 @@ public class IntervalEditDialog extends BaseFragment {
         restSecondText.setText(formatEditTextData(rest_time % 60));
     }
 
-    private void repairMemoryLeak(){
+    private void repairMemoryLeak() {
         workMinuteText.setCursorVisible(false);
         workSecondText.setCursorVisible(false);
 
@@ -96,32 +124,37 @@ public class IntervalEditDialog extends BaseFragment {
         restSecondText.setCursorVisible(false);
 
         repeatText.setCursorVisible(false);
+        nameText.setCursorVisible(false);
     }
 
     @OnClick(R.id.save_button)
-    void onSaveButtonClick(){
+    void onSaveButtonClick() {
         int workTime, restTime;
-        if (!workMinuteText.getText().toString().equals("") && !workSecondText.getText().toString().equals("")) {
+        String name = EMPTY;
+
+        if (!workMinuteText.getText().toString().equals(EMPTY) && !workSecondText.getText().toString().equals(EMPTY)) {
             workTime = convertToSeconds(workMinuteText.getText().toString(), workSecondText.getText().toString());
             if (workTime == 0) workTime = 1;
-        }else
+        } else
             workTime = 1;
 
 
-        if (!restMinuteText.getText().toString().equals("") && !restSecondText.getText().toString().equals("")) {
+        if (!restMinuteText.getText().toString().equals(EMPTY) && !restSecondText.getText().toString().equals(EMPTY)) {
             restTime = convertToSeconds(restMinuteText.getText().toString(), restSecondText.getText().toString());
             if (restTime == 0) restTime = 1;
-        }else
+        } else
             restTime = 1;
 
+        if (!nameText.getText().toString().equals(EMPTY))
+            name = nameText.getText().toString();
 
-        presenter.saveIntervalButtonClicked(workTime, restTime);
+        presenter.saveIntervalButtonClicked(name, workTime, restTime);
         repairMemoryLeak();
         dismiss();
     }
 
     @OnClick(R.id.delete_button)
-    void onDeleteButtonClick(){
+    void onDeleteButtonClick() {
         repairMemoryLeak();
         dismiss();
         presenter.deleteIntervalButtonClicked();

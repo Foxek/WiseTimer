@@ -11,6 +11,7 @@ public class Constants {
     public static final String EXTRA_WORKOUT_NAME = "workout_name";
     public static final String EXTRA_WORK_TIME = "work_time";
     public static final String EXTRA_REST_TIME = "rest_time";
+    public static final String EXTRA_INTERVAL_NAME = "interval_name";
 
     public static final String INTERVAL_EDIT_DIALOG = "interval_edit_dialog";
     public static final String INTERVAL_CREATE_DIALOG = "interval_create_dialog";

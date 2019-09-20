@@ -29,7 +29,7 @@ public interface IntervalContact {
 
         void startTimerActivity();
 
-        void showIntervalEditDialog(int workTime,int restTime);
+        void showIntervalEditDialog(String name, int workTime,int restTime);
 
         void showIntervalCreateDialog();
 
@@ -40,9 +40,9 @@ public interface IntervalContact {
 
         void viewIsReady(int id);
 
-        void saveIntervalButtonClicked(int workTime, int restTime);
+        void saveIntervalButtonClicked(String name, int workTime, int restTime);
 
-        void createIntervalButtonClicked(int workTime, int restTime);
+        void createIntervalButtonClicked(String name, int workTime, int restTime);
 
         void deleteIntervalButtonClicked();
 
@@ -65,9 +65,9 @@ public interface IntervalContact {
 
         Flowable<List<Interval>> fetchIntervalList();
 
-        Disposable addInterval(int work_time, int rest_time);
+        Disposable addInterval(String name, int work_time, int rest_time);
 
-        Disposable updateInterval(int work_time,int rest_time);
+        Disposable updateInterval(String name, int work_time,int rest_time);
 
         Disposable deleteInterval();
 

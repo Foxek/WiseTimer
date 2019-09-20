@@ -34,7 +34,9 @@
     <string name="dialog_interval_create_title">Создание интервала</string>
     <string name="dialog_interval_setting_description">Установите время работы и время отдыха для данного интервала</string>
     <string name="dialog_interval_setting_divider">:</string>
-    <string name="dialog_interval_setting_checkBox">Повторить несколько раз</string>
+    <string name="dialog_interval_setting_repeats">Повторить несколько раз</string>
+    <string name="dialog_interval_setting_name">Интервал без названия</string>
+    <string name="dialog_interval_setting_name_hint">Введите имя интервала</string>
 
     <string name="training_sector_title">Список тренировок</string>
     <string name="training_subtitle">Добро пожаловать</string>

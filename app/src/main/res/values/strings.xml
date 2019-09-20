@@ -27,7 +27,9 @@
     <string name="dialog_interval_create_title">Create interval</string>
     <string name="dialog_interval_setting_description">Set the workTime time and restTime time for a given interval</string>
     <string name="dialog_interval_setting_divider">:</string>
-    <string name="dialog_interval_setting_checkBox">Repeat several times</string>
+    <string name="dialog_interval_setting_repeats">Repeat several times</string>
+    <string name="dialog_interval_setting_name">Without name</string>
+    <string name="dialog_interval_setting_name_hint">Enter intervals name</string>
 
     <string name="training_subtitle">Welcome to</string>
     <string name="training_title">WiseTimer</string>

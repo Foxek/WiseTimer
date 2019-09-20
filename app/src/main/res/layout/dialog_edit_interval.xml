@@ -9,6 +9,125 @@
     android:paddingEnd="@dimen/dialog_horizontal_padding"
     android:paddingBottom="@dimen/dialog_vertical_padding">
 
+    <CheckBox
+        android:id="@+id/repeat_checkBox"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:buttonTint="@color/colorTint"
+        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
+        app:layout_constraintTop_toBottomOf="@+id/repeats_edit_text" />
+
+    <CheckBox
+        android:id="@+id/name_checkBox"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:buttonTint="@color/colorTint"
+        android:checked="true"
+        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
+        app:layout_constraintTop_toBottomOf="@+id/repeat_checkBox" />
+
+    <EditText
+        android:id="@+id/name_edit_text"
+        style="@style/CustomEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:hint="@string/dialog_interval_setting_name_hint"
+        android:inputType="text|textCapSentences|textNoSuggestions"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/work_minute_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:digits="0123456789"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:singleLine="false"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/work_divider"
+        app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
+
+    <EditText
+        android:id="@+id/work_second_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
+
+    <EditText
+        android:id="@+id/rest_second_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:digits="0123456789"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/work_second_text" />
+
+    <EditText
+        android:id="@+id/rest_minute_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
+        app:layout_constraintEnd_toStartOf="@+id/rest_divider"
+        app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
+
+    <EditText
+        android:id="@+id/repeats_edit_text"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:digits="0123456789"
+        android:ems="10"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="@+id/rest_minute_text"
+        app:layout_constraintTop_toBottomOf="@+id/rest_minute_text" />
+
     <TextView
         android:id="@+id/dialog_title"
         android:layout_width="0dp"
@@ -20,18 +139,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dialog_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto_condensed_light"
-        android:text="@string/dialog_interval_setting_description"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <TextView
         android:id="@+id/work_name"
@@ -58,37 +165,6 @@
         app:layout_constraintTop_toTopOf="@+id/work_minute_text"
         app:layout_constraintVertical_bias="0.523" />
 
-    <EditText
-        android:id="@+id/work_minute_text"
-        style="@style/CustomEditText"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:inputType="textNoSuggestions|number"
-        android:singleLine="false"
-        android:digits="0123456789"
-        android:maxLength="2"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/work_divider"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
-
-    <EditText
-        android:id="@+id/work_second_text"
-        style="@style/CustomEditText"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:inputType="textNoSuggestions|number"
-        android:textSize="24sp"
-        android:digits="0123456789"
-        android:maxLength="2"
-        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
-
     <TextView
         android:id="@+id/rest_name"
         android:layout_width="wrap_content"
@@ -112,36 +188,6 @@
         app:layout_constraintEnd_toStartOf="@+id/rest_second_text"
         app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
 
-    <EditText
-        android:id="@+id/rest_second_text"
-        style="@style/CustomEditText"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:inputType="textNoSuggestions|number"
-        android:textSize="24sp"
-        android:digits="0123456789"
-        android:maxLength="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_second_text" />
-
-    <EditText
-        android:id="@+id/rest_minute_text"
-        style="@style/CustomEditText"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:inputType="textNoSuggestions|number"
-        android:textSize="24sp"
-        android:digits="0123456789"
-        android:maxLength="2"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
-        app:layout_constraintEnd_toStartOf="@+id/rest_divider"
-        app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
-
     <TextView
         android:id="@+id/delete_button"
         style="@style/CustomDialogButton"
@@ -151,7 +197,7 @@
         android:text="@string/delete_interval_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repeat_checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/name_checkBox" />
 
     <TextView
         android:id="@+id/save_button"
@@ -179,40 +225,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/repeats_edit_text" />
 
-    <EditText
-        android:id="@+id/repeats_edit_text"
-        style="@style/CustomEditText"
-        android:layout_width="35dp"
+    <TextView
+        android:id="@+id/repeat_description"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:digits="0123456789"
-        android:ems="10"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:inputType="textNoSuggestions|number"
-        android:maxLength="2"
-        android:textSize="24sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/rest_minute_text"
-        app:layout_constraintTop_toBottomOf="@+id/rest_minute_text" />
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/roboto_condensed_light"
+        android:text="@string/dialog_interval_setting_repeats"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/repeat_checkBox"
+        app:layout_constraintEnd_toStartOf="@+id/repeat_checkBox"
+        app:layout_constraintStart_toStartOf="@+id/rest_name"
+        app:layout_constraintTop_toTopOf="@+id/repeat_checkBox" />
 
-    <CheckBox
-        android:id="@+id/repeat_checkBox"
-        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+    <TextView
+        android:id="@+id/name_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/roboto_condensed_light"
+        android:text="@string/dialog_interval_setting_name"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/name_checkBox"
+        app:layout_constraintEnd_toStartOf="@+id/name_checkBox"
+        app:layout_constraintStart_toStartOf="@+id/rest_name"
+        app:layout_constraintTop_toTopOf="@+id/name_checkBox" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/repeats_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="2dp"
-        android:buttonTint="@color/colorTint"
-        android:fontFamily="@font/roboto_condensed_light"
-        android:text="@string/dialog_interval_setting_checkBox"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repeats_edit_text" />
+        app:constraint_referenced_ids="repeat_checkBox,repeat_description"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

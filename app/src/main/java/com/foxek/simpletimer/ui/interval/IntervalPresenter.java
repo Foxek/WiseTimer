@@ -63,13 +63,13 @@ public class IntervalPresenter extends BasePresenter<IntervalContact.View,Interv
     }
 
     @Override
-    public void saveIntervalButtonClicked(int workTime, int restTime) {
-        getDisposable().add(getInteractor().updateInterval(workTime, restTime));
+    public void saveIntervalButtonClicked(String name, int workTime, int restTime) {
+        getDisposable().add(getInteractor().updateInterval(name, workTime, restTime));
     }
 
     @Override
-    public void createIntervalButtonClicked(int workTime, int restTime) {
-        getDisposable().add(getInteractor().addInterval(workTime, restTime));
+    public void createIntervalButtonClicked(String name, int workTime, int restTime) {
+        getDisposable().add(getInteractor().addInterval(name, workTime, restTime));
     }
 
     @Override
@@ -100,6 +100,6 @@ public class IntervalPresenter extends BasePresenter<IntervalContact.View,Interv
     @Override
     public void intervalItemClicked(Interval item) {
         getInteractor().setCurrentInterval(item.getId());
-        getView().showIntervalEditDialog(item.getWorkTime(), item.getRestTime());
+        getView().showIntervalEditDialog(item.getName(), item.getWorkTime(), item.getRestTime());
     }
 }

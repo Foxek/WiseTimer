@@ -14,6 +14,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.foxek.simpletimer.utils.Constants.EMPTY;
+
 
 public class WorkoutInteractor implements WorkoutContact.Interactor {
 
@@ -37,7 +39,7 @@ public class WorkoutInteractor implements WorkoutContact.Interactor {
                 .flatMapCompletable(id -> {
 
                     Workout workout = new Workout(name, id + 1, 1, true);
-                    Interval interval = new Interval(1, 1, id + 1, 0);
+                    Interval interval = new Interval(EMPTY,1, 1, id + 1, 0);
 
                     return Completable.concatArray(
                                 Completable.fromAction(() -> database.getWorkoutDAO().add(workout)),
