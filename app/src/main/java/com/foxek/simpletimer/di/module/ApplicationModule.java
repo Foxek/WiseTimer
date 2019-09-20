@@ -33,7 +33,7 @@ public class ApplicationModule {
     @Singleton
     LocalDatabase providesDatabaseHelper() {
         return  Room.databaseBuilder(mApplication, LocalDatabase.class, "training.db")
-                .addMigrations(MIGRATION_1_2,MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2,MIGRATION_2_3, MIGRATION_3_4)
                 .allowMainThreadQueries()
                 .build();
     }
@@ -49,6 +49,13 @@ public class ApplicationModule {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE trainings ADD COLUMN volumeState INTEGER DEFAULT 1 NOT NULL");
+        }
+    };
+
+    private static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE Interval ADD COLUMN name TEXT DEFAULT ''");
         }
     };
 }

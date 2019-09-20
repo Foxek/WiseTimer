@@ -11,6 +11,9 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(foreignKeys = @ForeignKey(entity = Workout.class, parentColumns = "uid", childColumns = "trainingID", onDelete = CASCADE))
 public class Interval {
 
+    @ColumnInfo(name = "name")
+    private String name;
+
     @ColumnInfo(name = "work_intervals")
     private int workTime;
 
@@ -31,6 +34,13 @@ public class Interval {
         this.restTime = restTime;
         this.workoutId = workoutId;
         this.position = position;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
