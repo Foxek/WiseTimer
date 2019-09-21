@@ -15,10 +15,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.foxek.simpletimer.utils.Constants.EMPTY;
 import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID;
 import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME;
 
-public class TimerActivity extends BaseView implements TimerContact.View,View.OnClickListener {
+public class TimerActivity extends BaseView implements TimerContact.View, View.OnClickListener {
 
     @BindView(R.id.reset_button)
     ImageButton resetButton;
@@ -38,6 +39,9 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
     @BindView(R.id.workout_name)
     TextView workoutName;
 
+    @BindView(R.id.interval_name)
+    TextView counterName;
+
     @Inject
     TimerContact.Presenter presenter;
 
@@ -53,7 +57,7 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
         getActivityComponent().inject(this);
         presenter.attachView(this);
 
-        presenter.prepareIntervals(intent.getIntExtra(EXTRA_WORKOUT_ID,0));
+        presenter.prepareIntervals(intent.getIntExtra(EXTRA_WORKOUT_ID, 0));
         presenter.viewIsReady();
     }
 
@@ -71,10 +75,10 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
         startActivity(startMain);
     }
 
-    @OnClick({R.id.pause_button,R.id.reset_button})
+    @OnClick({R.id.pause_button, R.id.reset_button})
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.pause_button:
                 presenter.pauseButtonClicked();
                 break;
@@ -115,6 +119,16 @@ public class TimerActivity extends BaseView implements TimerContact.View,View.On
     @Override
     public void showCounterNumber(String number) {
         counterNumber.setText(number);
+    }
+
+    @Override
+    public void showCounterName(String name) {
+        if (name.equals(EMPTY)){
+            counterName.setVisibility(View.GONE);
+        }else{
+            counterName.setVisibility(View.VISIBLE);
+            counterName.setText(name);
+        }
     }
 
 }

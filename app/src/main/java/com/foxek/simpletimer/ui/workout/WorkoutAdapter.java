@@ -18,14 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WorkoutAdapter extends ListAdapter <Workout, WorkoutAdapter.ViewHolder> {
+public class WorkoutAdapter extends ListAdapter<Workout, WorkoutAdapter.ViewHolder> {
 
-    private Context             mContext;
-    private Callback            mCallback;
+    private Context mContext;
+    private Callback mCallback;
 
     @Inject
     public WorkoutAdapter() {
@@ -63,6 +64,7 @@ public class WorkoutAdapter extends ListAdapter <Workout, WorkoutAdapter.ViewHol
                             (oldWorkout.getIntervalCount() == newWorkout.getIntervalCount()) &&
                             (oldWorkout.getUid() == newWorkout.getUid()));
                 }
+
                 @Override
                 public boolean areContentsTheSame(
                         @NonNull Workout oldWorkout, @NonNull Workout newWorkout) {

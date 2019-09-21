@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment;
 
 public abstract class BaseFragment extends DialogFragment implements MvpView {
 
-    private BaseView    mActivity;
+    private BaseView mActivity;
 
     @Override
     public void onAttach(Context context) {
@@ -23,6 +23,7 @@ public abstract class BaseFragment extends DialogFragment implements MvpView {
         mActivity = null;
         super.onDetach();
     }
+
     public BaseView getBaseActivity() {
         return mActivity;
     }

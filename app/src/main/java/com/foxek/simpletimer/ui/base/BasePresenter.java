@@ -2,7 +2,7 @@ package com.foxek.simpletimer.ui.base;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-public abstract class BasePresenter <V extends MvpView,I extends MvpInteractor> implements MvpPresenter<V,I> {
+public abstract class BasePresenter<V extends MvpView, I extends MvpInteractor> implements MvpPresenter<V, I> {
 
     private V view;
     private I interactor;

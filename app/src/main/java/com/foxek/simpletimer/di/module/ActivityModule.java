@@ -18,6 +18,7 @@ import com.foxek.simpletimer.ui.workout.WorkoutInteractor;
 import com.foxek.simpletimer.ui.workout.WorkoutPresenter;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,8 +26,8 @@ import io.reactivex.disposables.CompositeDisposable;
 @Module
 public class ActivityModule {
 
-    private final Bundle        args;
-    private AppCompatActivity   activity;
+    private final Bundle args;
+    private AppCompatActivity activity;
 
     public ActivityModule(AppCompatActivity activity, Bundle args) {
         this.args = args;
@@ -42,7 +43,7 @@ public class ActivityModule {
     /* Workout Activity */
     @Provides
     @PerActivity
-    WorkoutAdapter provideWorkoutAdapter(){
+    WorkoutAdapter provideWorkoutAdapter() {
         return new WorkoutAdapter();
     }
 
@@ -61,7 +62,7 @@ public class ActivityModule {
     /* Interval Activity */
     @Provides
     @PerActivity
-    IntervalAdapter provideIntervalAdapter(){
+    IntervalAdapter provideIntervalAdapter() {
         return new IntervalAdapter();
     }
 

@@ -30,7 +30,7 @@ import static com.foxek.simpletimer.utils.Constants.INTERVAL_CREATE_DIALOG;
 import static com.foxek.simpletimer.utils.Constants.INTERVAL_EDIT_DIALOG;
 import static com.foxek.simpletimer.utils.Constants.WORKOUT_EDIT_DIALOG;
 
-public class IntervalActivity extends BaseView implements IntervalContact.View, IntervalAdapter.Callback{
+public class IntervalActivity extends BaseView implements IntervalContact.View, IntervalAdapter.Callback {
 
     @BindView(R.id.interval_list)
     RecyclerView intervalList;
@@ -41,8 +41,10 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
     @BindView(R.id.set_volume_button)
     ImageButton volumeButton;
 
-    @Inject IntervalContact.Presenter   presenter;
-    @Inject IntervalAdapter             adapter;
+    @Inject
+    IntervalContact.Presenter presenter;
+    @Inject
+    IntervalAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
         getActivityComponent().inject(this);
 
         presenter.attachView(this);
-        presenter.viewIsReady(getIntent().getIntExtra(EXTRA_WORKOUT_ID,0));
+        presenter.viewIsReady(getIntent().getIntExtra(EXTRA_WORKOUT_ID, 0));
     }
 
     @Override
@@ -109,6 +111,7 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
                 .newInstance(getIntent().getStringExtra(EXTRA_WORKOUT_ID))
                 .show(getSupportFragmentManager(), WORKOUT_EDIT_DIALOG);
     }
+
     @Override
     public void startWorkoutActivity() {
         onBackPressed();
@@ -118,16 +121,16 @@ public class IntervalActivity extends BaseView implements IntervalContact.View, 
     public void startTimerActivity() {
         Intent timerIntent = new Intent(this, TimerActivity.class);
         timerIntent
-                .putExtra(EXTRA_WORKOUT_ID, getIntent().getIntExtra(EXTRA_WORKOUT_ID,0))
+                .putExtra(EXTRA_WORKOUT_ID, getIntent().getIntExtra(EXTRA_WORKOUT_ID, 0))
                 .putExtra("workout_name", getIntent().getStringExtra("workout_name"));
         startActivity(timerIntent);
         finish();
     }
 
-    @OnClick({R.id.back_button,R.id.edit_button,R.id.add_interval_button,
-              R.id.start_workout_button, R.id.set_volume_button})
+    @OnClick({R.id.back_button, R.id.edit_button, R.id.add_interval_button,
+            R.id.start_workout_button, R.id.set_volume_button})
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back_button:
                 onBackPressed();
                 break;

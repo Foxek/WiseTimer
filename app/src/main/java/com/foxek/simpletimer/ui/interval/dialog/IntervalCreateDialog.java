@@ -16,6 +16,7 @@ import com.foxek.simpletimer.ui.interval.IntervalContact;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -84,20 +85,20 @@ public class IntervalCreateDialog extends BaseFragment {
         dialogTitle.setText(R.string.dialog_interval_create_title);
 
         repeatCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) {
+            if (isChecked) {
                 repeatName.setVisibility(View.VISIBLE);
                 repeatText.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 repeatName.setVisibility(View.GONE);
                 repeatText.setVisibility(View.GONE);
             }
         });
 
         nameCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) {
+            if (isChecked) {
                 nameText.setText(EMPTY);
                 nameText.setVisibility(View.GONE);
-            }else{
+            } else {
                 nameText.setVisibility(View.VISIBLE);
             }
         });
@@ -157,7 +158,7 @@ public class IntervalCreateDialog extends BaseFragment {
         if (!nameText.getText().toString().equals(EMPTY))
             name = nameText.getText().toString();
 
-        for (int i=1; i<=repeat; i++)
+        for (int i = 1; i <= repeat; i++)
             presenter.createIntervalButtonClicked(name, workTime, restTime);
 
         repairMemoryLeak();

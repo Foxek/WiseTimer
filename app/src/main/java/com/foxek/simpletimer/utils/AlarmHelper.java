@@ -18,31 +18,31 @@ import static android.content.Context.VIBRATOR_SERVICE;
 
 public class AlarmHelper {
 
-    private Context     context;
-    private Vibrator    vibrator;
-    private SoundPool   soundPool;
-    private int         beepSound, longBeepSound, volume;
+    private Context context;
+    private Vibrator vibrator;
+    private SoundPool soundPool;
+    private int beepSound, longBeepSound, volume;
 
     @Inject
-    AlarmHelper(@ApplicationContext Context context){
+    AlarmHelper(@ApplicationContext Context context) {
         this.context = context;
         vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
         createNewSoundPool();
     }
 
-    public void oneShotVibrate(){
+    public void oneShotVibrate() {
         if (Build.VERSION.SDK_INT >= 26)
-            vibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
         else
             vibrator.vibrate(500);
     }
 
-    public void patternVibrate(){
+    public void patternVibrate() {
         long[] pattern = {0, 800, 200, 800, 200, 800};
         if (Build.VERSION.SDK_INT >= 26)
-            vibrator.vibrate(VibrationEffect.createWaveform(pattern,-1));
+            vibrator.vibrate(VibrationEffect.createWaveform(pattern, -1));
         else
-            vibrator.vibrate(pattern,-1);
+            vibrator.vibrate(pattern, -1);
     }
 
     private void createNewSoundPool() {
@@ -68,19 +68,19 @@ public class AlarmHelper {
         return soundPool.load(afd, 1);
     }
 
-    public void playLongSound(){
+    public void playLongSound() {
         soundPool.play(longBeepSound, volume, volume, 1, 0, 1);
     }
 
-    public void playSound(){
+    public void playSound() {
         soundPool.play(beepSound, volume, volume, 1, 0, 1);
     }
 
-    public  void playFinalSound(){
+    public void playFinalSound() {
         soundPool.play(longBeepSound, volume, volume, 1, 2, 1);
     }
 
-    public void setVolume(Boolean state){
+    public void setVolume(Boolean state) {
         volume = (state) ? 1 : 0;
     }
 }

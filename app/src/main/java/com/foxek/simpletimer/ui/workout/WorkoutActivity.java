@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,11 +26,13 @@ import static com.foxek.simpletimer.utils.Constants.WORKOUT_CREATE_DIALOG;
 
 public class WorkoutActivity extends BaseView implements WorkoutContact.View, WorkoutAdapter.Callback {
 
-    @BindView (R.id.workout_list)
+    @BindView(R.id.workout_list)
     RecyclerView workoutList;
 
-    @Inject WorkoutContact.Presenter    presenter;
-    @Inject WorkoutAdapter              adapter;
+    @Inject
+    WorkoutContact.Presenter presenter;
+    @Inject
+    WorkoutAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class WorkoutActivity extends BaseView implements WorkoutContact.View, Wo
     public void startIntervalActivity(int position, String name) {
         Intent intent = new Intent(this, IntervalActivity.class);
         intent.putExtra(EXTRA_WORKOUT_ID, position)
-              .putExtra(EXTRA_WORKOUT_NAME, name);
+                .putExtra(EXTRA_WORKOUT_NAME, name);
         startActivity(intent);
     }
 

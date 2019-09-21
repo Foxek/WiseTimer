@@ -17,12 +17,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class IntervalInteractor implements IntervalContact.Interactor {
 
-    private LocalDatabase   database;
-    private int             workoutId;
-    private int             intervalId;
+    private LocalDatabase database;
+    private int workoutId;
+    private int intervalId;
 
     @Inject
-    IntervalInteractor(LocalDatabase database){
+    IntervalInteractor(LocalDatabase database) {
         this.database = database;
     }
 
@@ -34,25 +34,27 @@ public class IntervalInteractor implements IntervalContact.Interactor {
     }
 
     @Override
-    public Flowable<List<Interval>> fetchIntervalList(){
+    public Flowable<List<Interval>> fetchIntervalList() {
         return database.getIntervalDAO().getAll(workoutId)
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public Disposable addInterval(String name, int work, int rest){
+    public Disposable addInterval(String name, int work, int rest) {
         return database.getIntervalDAO().getLastId()
                 .flatMapCompletable(id -> {
                     Interval interval = new Interval(name, work, rest, workoutId, id + 1);
-                    return Completable.fromAction(() ->  database.getIntervalDAO().add(interval));
+                    return Completable.fromAction(() -> database.getIntervalDAO().add(interval));
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {}, throwable -> {});
+                .subscribe(() -> {
+                }, throwable -> {
+                });
     }
 
     @Override
-    public Disposable updateInterval(String name, int work,int rest) {
+    public Disposable updateInterval(String name, int work, int rest) {
         return database.getIntervalDAO().getById(intervalId, workoutId)
                 .flatMapCompletable(interval -> {
                     interval.setName(name);
@@ -62,7 +64,9 @@ public class IntervalInteractor implements IntervalContact.Interactor {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {}, throwable -> {});
+                .subscribe(() -> {
+                }, throwable -> {
+                });
     }
 
     @Override
@@ -73,7 +77,9 @@ public class IntervalInteractor implements IntervalContact.Interactor {
                         Completable.fromAction(() -> database.getIntervalDAO().delete(intervalId, workoutId)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {}, throwable -> {});
+                .subscribe(() -> {
+                }, throwable -> {
+                });
     }
 
     @Override
@@ -81,7 +87,9 @@ public class IntervalInteractor implements IntervalContact.Interactor {
         return Completable.fromAction(() -> database.getWorkoutDAO().update(workoutName, workoutId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {}, throwable -> {});
+                .subscribe(() -> {
+                }, throwable -> {
+                });
     }
 
     @Override

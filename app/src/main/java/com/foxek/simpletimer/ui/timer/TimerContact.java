@@ -24,6 +24,7 @@ public interface TimerContact {
 
         void showCounterNumber(String number);
 
+        void showCounterName(String name);
     }
 
     interface Presenter extends MvpPresenter<View, Interactor> {
@@ -64,5 +65,7 @@ public interface TimerContact {
         void indicateLastSeconds();
 
         void deleteDependencies();
+
+        String getIntervalName(int id);
     }
 }

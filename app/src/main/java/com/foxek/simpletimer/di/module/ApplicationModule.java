@@ -11,13 +11,14 @@ import javax.inject.Singleton;
 import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class ApplicationModule {
 
-    private final Application           mApplication;
+    private final Application mApplication;
 
     public ApplicationModule(Application application) {
         mApplication = application;
@@ -32,8 +33,8 @@ public class ApplicationModule {
     @Provides
     @Singleton
     LocalDatabase providesDatabaseHelper() {
-        return  Room.databaseBuilder(mApplication, LocalDatabase.class, "training.db")
-                .addMigrations(MIGRATION_1_2,MIGRATION_2_3, MIGRATION_3_4)
+        return Room.databaseBuilder(mApplication, LocalDatabase.class, "training.db")
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .allowMainThreadQueries()
                 .build();
     }

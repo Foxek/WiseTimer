@@ -6,7 +6,7 @@ import com.foxek.simpletimer.ui.base.BasePresenter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter{
+public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter {
 
     public WorkoutPresenter(WorkoutContact.Interactor interactor, CompositeDisposable disposable) {
         super(interactor, disposable);
@@ -20,7 +20,8 @@ public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, Workout
                 .fetchWorkoutList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(workoutList -> getView().renderWorkoutList(workoutList),
-                        error -> {})
+                        error -> {
+                        })
         );
     }
 

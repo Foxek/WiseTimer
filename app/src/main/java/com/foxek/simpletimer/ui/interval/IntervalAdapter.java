@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,7 +23,7 @@ import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalData;
 
 public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewHolder> {
 
-    private Callback        mCallback;
+    private Callback mCallback;
 
     public IntervalAdapter() {
         super(DIFF_CALLBACK);
@@ -39,9 +40,9 @@ public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewH
     @Override
     public void onBindViewHolder(@NonNull IntervalAdapter.ViewHolder holder, int position) {
 
-        if (getItem(position).getName().equals(EMPTY)){
+        if (getItem(position).getName().equals(EMPTY)) {
             holder.mTitleGroup.setVisibility(View.GONE);
-        }else{
+        } else {
             holder.mTitleGroup.setVisibility(View.VISIBLE);
             holder.mTitle.setText(getItem(position).getName());
         }
@@ -66,6 +67,7 @@ public class IntervalAdapter extends ListAdapter<Interval, IntervalAdapter.ViewH
                             (oldInterval.getRestTime() == newInterval.getRestTime()) &&
                             (oldInterval.getName().equals(newInterval.getName())));
                 }
+
                 @Override
                 public boolean areContentsTheSame(
                         @NonNull Interval oldInterval, @NonNull Interval newInterval) {

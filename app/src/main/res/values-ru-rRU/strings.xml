@@ -29,6 +29,7 @@
     <string name="dialog_training_create_description">Для создания новой тренировки введите ее название</string>
     
     <string name="dialog_training_error_hint">Название должно содержать как минимум одну букву или цифру</string>
+    <string name="dialog_training_name_hint">Введите название тренировки</string>
 
     <string name="dialog_interval_setting_title">Настройка интервала</string>
     <string name="dialog_interval_create_title">Создание интервала</string>
@@ -36,7 +37,7 @@
     <string name="dialog_interval_setting_divider">:</string>
     <string name="dialog_interval_setting_repeats">Повторить несколько раз</string>
     <string name="dialog_interval_setting_name">Интервал без названия</string>
-    <string name="dialog_interval_setting_name_hint">Введите имя интервала</string>
+    <string name="dialog_interval_setting_name_hint">Введите название интервала</string>
 
     <string name="training_sector_title">Список тренировок</string>
     <string name="training_subtitle">Добро пожаловать</string>

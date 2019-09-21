@@ -29,7 +29,7 @@ public interface IntervalContact {
 
         void startTimerActivity();
 
-        void showIntervalEditDialog(String name, int workTime,int restTime);
+        void showIntervalEditDialog(String name, int workTime, int restTime);
 
         void showIntervalCreateDialog();
 
@@ -67,7 +67,7 @@ public interface IntervalContact {
 
         Disposable addInterval(String name, int work_time, int rest_time);
 
-        Disposable updateInterval(String name, int work_time,int rest_time);
+        Disposable updateInterval(String name, int work_time, int rest_time);
 
         Disposable deleteInterval();
 

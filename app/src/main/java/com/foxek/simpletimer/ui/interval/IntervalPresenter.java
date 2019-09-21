@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class IntervalPresenter extends BasePresenter<IntervalContact.View,IntervalContact.Interactor> implements IntervalContact.Presenter{
+public class IntervalPresenter extends BasePresenter<IntervalContact.View, IntervalContact.Interactor> implements IntervalContact.Presenter {
 
     public IntervalPresenter(IntervalContact.Interactor interactor, CompositeDisposable disposable) {
         super(interactor, disposable);
@@ -27,19 +27,21 @@ public class IntervalPresenter extends BasePresenter<IntervalContact.View,Interv
                 .subscribe(workout -> {
                     getView().setWorkoutName(workout.getName());
                     getView().setVolumeState(workout.isVolume());
-                }, throwable -> {})
+                }, throwable -> {
+                })
         );
 
         getDisposable().add(getInteractor()
                 .fetchIntervalList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(intervalList -> getView().renderIntervalList(intervalList),
-                        error -> {})
+                        error -> {
+                        })
         );
     }
 
     @Override
-    public void editWorkoutButtonClicked(){
+    public void editWorkoutButtonClicked() {
         getView().showWorkoutEditDialog();
     }
 
@@ -48,17 +50,19 @@ public class IntervalPresenter extends BasePresenter<IntervalContact.View,Interv
         getDisposable().add(getInteractor()
                 .getVolume()
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMapCompletable(state ->{
+                .flatMapCompletable(state -> {
                     getView().setVolumeState(!state);
                     return getInteractor().updateVolume(!state);
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {}, throwable -> {}));
+                .subscribe(() -> {
+                }, throwable -> {
+                }));
     }
 
     @Override
-    public void addIntervalButtonClicked(){
+    public void addIntervalButtonClicked() {
         getView().showIntervalCreateDialog();
     }
 
@@ -88,7 +92,8 @@ public class IntervalPresenter extends BasePresenter<IntervalContact.View,Interv
         getDisposable().add(getInteractor()
                 .deleteWorkout()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> getView().startWorkoutActivity(), throwable -> {})
+                .subscribe(() -> getView().startWorkoutActivity(), throwable -> {
+                })
         );
     }
 

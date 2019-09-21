@@ -10,6 +10,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
+
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;

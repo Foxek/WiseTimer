@@ -35,17 +35,16 @@
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:hint="@string/dialog_interval_setting_name_hint"
         android:inputType="text|textCapSentences|textNoSuggestions"
         android:textAlignment="viewStart"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
-        android:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <EditText
         android:id="@+id/work_minute_text"
@@ -233,6 +232,7 @@
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/dialog_interval_setting_repeats"
         android:textSize="14sp"
+        android:textColor="#424242"
         app:layout_constraintBottom_toBottomOf="@+id/repeat_checkBox"
         app:layout_constraintEnd_toStartOf="@+id/repeat_checkBox"
         app:layout_constraintStart_toStartOf="@+id/rest_name"
@@ -246,6 +246,7 @@
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/dialog_interval_setting_name"
         android:textSize="14sp"
+        android:textColor="#424242"
         app:layout_constraintBottom_toBottomOf="@+id/name_checkBox"
         app:layout_constraintEnd_toStartOf="@+id/name_checkBox"
         app:layout_constraintStart_toStartOf="@+id/rest_name"

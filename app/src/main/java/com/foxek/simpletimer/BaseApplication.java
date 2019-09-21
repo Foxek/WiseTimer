@@ -9,7 +9,7 @@ import com.foxek.simpletimer.di.module.ApplicationModule;
 
 public class BaseApplication extends Application {
 
-    private ApplicationComponent        mApplicationComponent;
+    private ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {

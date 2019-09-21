@@ -17,13 +17,17 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(WorkoutActivity activity);
+
     void inject(IntervalActivity activity);
+
     void inject(TimerActivity activity);
 
     void inject(WorkoutCreateDialog dialog);
+
     void inject(WorkoutEditDialog dialog);
 
     void inject(IntervalCreateDialog dialog);
+
     void inject(IntervalEditDialog dialog);
 
 }

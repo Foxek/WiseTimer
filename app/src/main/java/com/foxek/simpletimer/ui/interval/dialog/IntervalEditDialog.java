@@ -86,10 +86,10 @@ public class IntervalEditDialog extends BaseFragment {
                 getArguments().getInt(EXTRA_REST_TIME));
 
         nameCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) {
+            if (isChecked) {
                 nameText.setText(EMPTY);
                 nameText.setVisibility(View.GONE);
-            }else{
+            } else {
                 nameText.setVisibility(View.VISIBLE);
             }
         });
@@ -103,7 +103,7 @@ public class IntervalEditDialog extends BaseFragment {
 
     private void prepareEditText(String name, int work_time, int rest_time) {
 
-        if(!name.equals(EMPTY)){
+        if (!name.equals(EMPTY)) {
             nameCheckBox.setChecked(false);
             nameText.setVisibility(View.VISIBLE);
             nameText.setText(name);

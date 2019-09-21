@@ -15,12 +15,13 @@ import com.foxek.simpletimer.ui.workout.WorkoutContact;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class WorkoutCreateDialog extends BaseFragment{
+public class WorkoutCreateDialog extends BaseFragment {
 
     @Inject
     WorkoutContact.Presenter presenter;
@@ -53,12 +54,12 @@ public class WorkoutCreateDialog extends BaseFragment{
     }
 
     @OnClick(R.id.create_button)
-    void onCreateButtonClick(){
+    void onCreateButtonClick() {
         if (!workoutEditText.getText().toString().isEmpty()) {
             workoutEditText.setCursorVisible(false);
             dismiss();
             presenter.saveButtonClicked(workoutEditText.getText().toString());
-        }else{
+        } else {
             errorHint.setVisibility(View.VISIBLE);
         }
     }

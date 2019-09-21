@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -67,23 +68,22 @@ public class WorkoutEditDialog extends BaseFragment {
     }
 
     @OnClick(R.id.delete_button)
-    void onDeleteButtonClick(){
+    void onDeleteButtonClick() {
         if (getShowsDialog()) {
             workoutEditText.setCursorVisible(false);
             getDialog().cancel();
             presenter.deleteWorkoutButtonClicked();
-        }
-        else
+        } else
             dismiss();
     }
 
     @OnClick(R.id.save_button)
-    void onSaveButtonClick(){
+    void onSaveButtonClick() {
         if (!workoutEditText.getText().toString().isEmpty()) {
             workoutEditText.setCursorVisible(false);
             dismiss();
             presenter.saveWorkoutButtonClicked(workoutEditText.getText().toString());
-        }else
+        } else
             dismiss();
     }
 
