@@ -3,13 +3,16 @@ package com.foxek.simpletimer.ui.workout;
 import com.foxek.simpletimer.data.model.Workout;
 import com.foxek.simpletimer.ui.base.BasePresenter;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class WorkoutPresenter extends BasePresenter<WorkoutContact.View, WorkoutContact.Interactor> implements WorkoutContact.Presenter {
 
-    public WorkoutPresenter(WorkoutContact.Interactor interactor, CompositeDisposable disposable) {
-        super(interactor, disposable);
+    @Inject
+    public WorkoutPresenter(WorkoutContact.Interactor interactor) {
+        super(interactor);
     }
 
     @Override

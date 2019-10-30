@@ -2,7 +2,7 @@ package com.foxek.simpletimer.ui.base;
 
 import android.os.Bundle;
 
-import com.foxek.simpletimer.BaseApplication;
+import com.foxek.simpletimer.AndroidApplication;
 import com.foxek.simpletimer.di.component.ActivityComponent;
 import com.foxek.simpletimer.di.component.DaggerActivityComponent;
 import com.foxek.simpletimer.di.module.ActivityModule;
@@ -21,8 +21,8 @@ public abstract class BaseView extends AppCompatActivity implements MvpView {
         Bundle args = getIntent().getExtras();
 
         mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this, args))
-                .applicationComponent(((BaseApplication) getApplication()).getComponent())
+                .activityModule(new ActivityModule())
+                .applicationComponent(((AndroidApplication) getApplication()).getComponent())
                 .build();
     }
 

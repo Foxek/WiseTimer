@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.ui.interval;
 
-import com.foxek.simpletimer.data.database.LocalDatabase;
+import com.foxek.simpletimer.data.database.TimerDatabase;
 import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.data.model.Workout;
 
@@ -17,12 +17,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class IntervalInteractor implements IntervalContact.Interactor {
 
-    private LocalDatabase database;
+    private TimerDatabase database;
     private int workoutId;
     private int intervalId;
 
     @Inject
-    IntervalInteractor(LocalDatabase database) {
+    IntervalInteractor(TimerDatabase database) {
         this.database = database;
     }
 

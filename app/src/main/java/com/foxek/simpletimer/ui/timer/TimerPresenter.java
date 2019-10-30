@@ -3,6 +3,8 @@ package com.foxek.simpletimer.ui.timer;
 import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.ui.base.BasePresenter;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -15,9 +17,9 @@ import static com.foxek.simpletimer.utils.IntervalUtils.formatIntervalNumber;
 public class TimerPresenter extends BasePresenter<TimerContact.View, TimerContact.Interactor> implements TimerContact.Presenter {
 
     private int currentInterval;
-
-    public TimerPresenter(TimerContact.Interactor mvpInteractor, CompositeDisposable compositeDisposable) {
-        super(mvpInteractor, compositeDisposable);
+    @Inject
+    public TimerPresenter(TimerContact.Interactor mvpInteractor) {
+        super(mvpInteractor);
     }
 
     @Override

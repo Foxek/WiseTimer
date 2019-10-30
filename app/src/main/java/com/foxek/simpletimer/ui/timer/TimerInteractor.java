@@ -3,7 +3,7 @@ package com.foxek.simpletimer.ui.timer;
 import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.utils.AlarmHelper;
 import com.foxek.simpletimer.utils.TimerHelper;
-import com.foxek.simpletimer.data.database.LocalDatabase;
+import com.foxek.simpletimer.data.database.TimerDatabase;
 
 
 import java.util.ArrayList;
@@ -21,14 +21,14 @@ import static com.foxek.simpletimer.utils.Constants.PREPARE_INTERVAL;
 
 public class TimerInteractor implements TimerContact.Interactor {
 
-    private LocalDatabase database;
+    private TimerDatabase database;
     private ArrayList<Integer> intervalList;
     private ArrayList<String> nameList;
     private TimerHelper timerHelper;
     private AlarmHelper alarmHelper;
 
     @Inject
-    TimerInteractor(LocalDatabase database, AlarmHelper alarmHelper, TimerHelper timerHelper) {
+    TimerInteractor(TimerDatabase database, AlarmHelper alarmHelper, TimerHelper timerHelper) {
         this.database = database;
         this.timerHelper = timerHelper;
         this.alarmHelper = alarmHelper;

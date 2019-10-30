@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.ui.workout;
 
-import com.foxek.simpletimer.data.database.LocalDatabase;
+import com.foxek.simpletimer.data.database.TimerDatabase;
 import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.data.model.Workout;
 
@@ -19,10 +19,10 @@ import static com.foxek.simpletimer.utils.Constants.EMPTY;
 
 public class WorkoutInteractor implements WorkoutContact.Interactor {
 
-    private LocalDatabase database;
+    private TimerDatabase database;
 
     @Inject
-    WorkoutInteractor(LocalDatabase database) {
+    WorkoutInteractor(TimerDatabase database) {
         this.database = database;
     }
 

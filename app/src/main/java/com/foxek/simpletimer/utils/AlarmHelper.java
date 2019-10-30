@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 
-import com.foxek.simpletimer.di.ApplicationContext;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -24,7 +22,7 @@ public class AlarmHelper {
     private int beepSound, longBeepSound, volume;
 
     @Inject
-    AlarmHelper(@ApplicationContext Context context) {
+    AlarmHelper(Context context) {
         this.context = context;
         vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
         createNewSoundPool();

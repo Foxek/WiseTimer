@@ -9,9 +9,9 @@ public abstract class BasePresenter<V extends MvpView, I extends MvpInteractor> 
 
     private final CompositeDisposable disposable;
 
-    public BasePresenter(I mvpInteractor, CompositeDisposable compositeDisposable) {
+    public BasePresenter(I mvpInteractor) {
         interactor = mvpInteractor;
-        disposable = compositeDisposable;
+        disposable = new CompositeDisposable();
     }
 
     @Override

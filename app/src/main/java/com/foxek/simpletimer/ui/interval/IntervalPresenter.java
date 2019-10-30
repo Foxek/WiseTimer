@@ -3,14 +3,17 @@ package com.foxek.simpletimer.ui.interval;
 import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.ui.base.BasePresenter;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class IntervalPresenter extends BasePresenter<IntervalContact.View, IntervalContact.Interactor> implements IntervalContact.Presenter {
 
-    public IntervalPresenter(IntervalContact.Interactor interactor, CompositeDisposable disposable) {
-        super(interactor, disposable);
+    @Inject
+    public IntervalPresenter(IntervalContact.Interactor interactor) {
+        super(interactor);
     }
 
     @Override
