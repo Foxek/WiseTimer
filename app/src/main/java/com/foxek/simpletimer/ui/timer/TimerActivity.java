@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
-import com.foxek.simpletimer.ui.base.BaseView;
+import com.foxek.simpletimer.ui.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -19,7 +19,7 @@ import static com.foxek.simpletimer.utils.Constants.EMPTY;
 import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID;
 import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME;
 
-public class TimerActivity extends BaseView implements TimerContact.View, View.OnClickListener {
+public class TimerActivity extends BaseActivity implements TimerContact.View, View.OnClickListener {
 
     @BindView(R.id.reset_button)
     ImageButton resetButton;
@@ -36,7 +36,7 @@ public class TimerActivity extends BaseView implements TimerContact.View, View.O
     @BindView(R.id.counter_number)
     TextView counterNumber;
 
-    @BindView(R.id.workout_name)
+    @BindView(R.id.workoutName)
     TextView workoutName;
 
     @BindView(R.id.interval_name)

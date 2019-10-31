@@ -5,17 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.di.component.ActivityComponent;
-import com.foxek.simpletimer.ui.base.BaseFragment;
+import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,14 +25,14 @@ import butterknife.Unbinder;
 
 import static com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME;
 
-public class WorkoutEditDialog extends BaseFragment {
+public class WorkoutEditDialog extends BaseDialog {
 
     @Inject
     IntervalContact.Presenter presenter;
 
     private Unbinder binder;
 
-    @BindView(R.id.training_edit_text)
+    @BindView(R.id.workoutEditText)
     EditText workoutEditText;
 
     public static WorkoutEditDialog newInstance(String workoutName) {
@@ -92,5 +93,11 @@ public class WorkoutEditDialog extends BaseFragment {
         super.onDestroyView();
         workoutEditText.setCursorVisible(false);
         binder.unbind();
+    }
+
+    @NotNull
+    @Override
+    public String getDialogTag() {
+        return "WorkoutEditDialog";
     }
 }

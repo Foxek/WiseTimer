@@ -19,8 +19,8 @@ android {
         applicationId "com.foxek.simpletimer"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 14
-        versionName "4.0"
+        versionCode 15
+        versionName "5.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -29,6 +29,9 @@ android {
                                      "$projectDir/schemas".toString()]
             }
         }
+    }
+    kapt {
+        generateStubs = true
     }
     buildTypes {
         release {
@@ -70,7 +73,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-}
-kapt {
-    generateStubs = true
 }

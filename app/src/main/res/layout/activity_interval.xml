@@ -84,7 +84,7 @@
                 android:textSize="@dimen/h2_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/workout_name" />
+                app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/interval_list"
@@ -99,7 +99,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/workout_name"
+                android:id="@+id/workoutName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"

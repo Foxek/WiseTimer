@@ -9,13 +9,15 @@ import android.widget.EditText;
 
 import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.di.component.ActivityComponent;
-import com.foxek.simpletimer.ui.base.BaseFragment;
+import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.Group;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +31,7 @@ import static com.foxek.simpletimer.utils.Constants.EXTRA_WORK_TIME;
 import static com.foxek.simpletimer.utils.IntervalUtils.convertToSeconds;
 import static com.foxek.simpletimer.utils.IntervalUtils.formatEditTextData;
 
-public class IntervalEditDialog extends BaseFragment {
+public class IntervalEditDialog extends BaseDialog {
 
     @Inject
     IntervalContact.Presenter presenter;
@@ -165,5 +167,11 @@ public class IntervalEditDialog extends BaseFragment {
         super.onDestroyView();
         repairMemoryLeak();
         binder.unbind();
+    }
+
+    @NotNull
+    @Override
+    public String getDialogTag() {
+        return "IntervalEditDialog";
     }
 }

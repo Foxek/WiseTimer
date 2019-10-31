@@ -8,7 +8,7 @@ import com.foxek.simpletimer.ui.interval.IntervalPresenter
 import com.foxek.simpletimer.ui.timer.TimerContact
 import com.foxek.simpletimer.ui.timer.TimerInteractor
 import com.foxek.simpletimer.ui.timer.TimerPresenter
-import com.foxek.simpletimer.ui.workout.WorkoutAdapter
+import com.foxek.simpletimer.ui.workout.adapter.WorkoutAdapter
 import com.foxek.simpletimer.ui.workout.WorkoutContact
 import com.foxek.simpletimer.ui.workout.WorkoutInteractor
 import com.foxek.simpletimer.ui.workout.WorkoutPresenter

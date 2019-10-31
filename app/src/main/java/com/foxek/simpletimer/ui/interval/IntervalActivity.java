@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.data.model.Interval;
-import com.foxek.simpletimer.ui.base.BaseView;
+import com.foxek.simpletimer.ui.base.BaseActivity;
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog;
 import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog;
 import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog;
@@ -30,12 +30,12 @@ import static com.foxek.simpletimer.utils.Constants.INTERVAL_CREATE_DIALOG;
 import static com.foxek.simpletimer.utils.Constants.INTERVAL_EDIT_DIALOG;
 import static com.foxek.simpletimer.utils.Constants.WORKOUT_EDIT_DIALOG;
 
-public class IntervalActivity extends BaseView implements IntervalContact.View, IntervalAdapter.Callback {
+public class IntervalActivity extends BaseActivity implements IntervalContact.View, IntervalAdapter.Callback {
 
     @BindView(R.id.interval_list)
     RecyclerView intervalList;
 
-    @BindView(R.id.workout_name)
+    @BindView(R.id.workoutName)
     TextView workoutName;
 
     @BindView(R.id.set_volume_button)

@@ -20,7 +20,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/workout_name"
+        android:id="@+id/workoutName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -96,7 +96,7 @@
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_name" />
+        app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
     <!--<ImageButton-->
         <!--android:id="@+id/pause_button"-->

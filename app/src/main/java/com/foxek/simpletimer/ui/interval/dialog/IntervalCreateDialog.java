@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import com.foxek.simpletimer.R;
 import com.foxek.simpletimer.di.component.ActivityComponent;
-import com.foxek.simpletimer.ui.base.BaseFragment;
+import com.foxek.simpletimer.ui.base.BaseDialog;
 import com.foxek.simpletimer.ui.interval.IntervalContact;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +28,7 @@ import static com.foxek.simpletimer.utils.Constants.EMPTY;
 import static com.foxek.simpletimer.utils.IntervalUtils.convertToSeconds;
 import static com.foxek.simpletimer.utils.IntervalUtils.formatEditTextData;
 
-public class IntervalCreateDialog extends BaseFragment {
+public class IntervalCreateDialog extends BaseDialog {
 
     @Inject
     IntervalContact.Presenter presenter;
@@ -36,7 +38,7 @@ public class IntervalCreateDialog extends BaseFragment {
     @BindView(R.id.delete_button)
     TextView deleteButton;
 
-    @BindView(R.id.dialog_title)
+    @BindView(R.id.dialogTitle)
     TextView dialogTitle;
 
     @BindView(R.id.work_minute_text)
@@ -171,5 +173,11 @@ public class IntervalCreateDialog extends BaseFragment {
         super.onDestroyView();
         repairMemoryLeak();
         binder.unbind();
+    }
+
+    @NotNull
+    @Override
+    public String getDialogTag() {
+        return "IntervalCreateDialog";
     }
 }

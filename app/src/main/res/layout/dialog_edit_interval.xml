@@ -44,7 +44,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
     <EditText
         android:id="@+id/work_minute_text"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rest_minute_text" />
 
     <TextView
-        android:id="@+id/dialog_title"
+        android:id="@+id/dialogTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_bold"

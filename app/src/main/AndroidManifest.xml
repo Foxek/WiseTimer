@@ -35,6 +35,7 @@
             android:name=".ui.workout.WorkoutActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

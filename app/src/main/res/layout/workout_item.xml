@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/workout_item"
+    android:id="@+id/workoutItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
@@ -14,7 +14,7 @@
     android:foreground="?android:selectableItemBackground">
 
     <TextView
-        android:id="@+id/workout_name"
+        android:id="@+id/workoutName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -34,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/workout_description"
+        app:layout_constraintBottom_toBottomOf="@+id/workoutDescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/workout_name"
+        app:layout_constraintTop_toTopOf="@+id/workoutName"
         app:srcCompat="@drawable/ic_stopwatch"
         tools:ignore="ContentDescription" />
 
@@ -54,7 +54,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/workout_description"
+        android:id="@+id/workoutDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -66,6 +66,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/arrow_image"
         app:layout_constraintStart_toEndOf="@+id/workout_image"
-        app:layout_constraintTop_toBottomOf="@+id/workout_name" />
+        app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/dialog_vertical_padding">
 
     <TextView
-        android:id="@+id/dialog_title"
+        android:id="@+id/dialogTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_bold"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialog_description"
+        android:id="@+id/dialogDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -30,10 +30,10 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
     <EditText
-        android:id="@+id/training_edit_text"
+        android:id="@+id/workoutEditText"
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:textColorHighlight="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
 
     <TextView
         android:id="@+id/delete_button"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/training_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/workoutEditText" />
 
     <TextView
         android:id="@+id/save_button"

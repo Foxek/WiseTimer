@@ -2,7 +2,6 @@ package com.foxek.simpletimer.ui.interval;
 
 import com.foxek.simpletimer.data.model.Interval;
 import com.foxek.simpletimer.data.model.Workout;
-import com.foxek.simpletimer.ui.base.MvpInteractor;
 import com.foxek.simpletimer.ui.base.MvpPresenter;
 import com.foxek.simpletimer.ui.base.MvpView;
 
@@ -36,7 +35,7 @@ public interface IntervalContact {
         void showWorkoutEditDialog();
     }
 
-    interface Presenter extends MvpPresenter<View, Interactor> {
+    interface Presenter extends MvpPresenter<View> {
 
         void viewIsReady(int id);
 
@@ -61,7 +60,7 @@ public interface IntervalContact {
         void intervalItemClicked(Interval item);
     }
 
-    interface Interactor extends MvpInteractor {
+    interface Interactor {
 
         Flowable<List<Interval>> fetchIntervalList();
 
