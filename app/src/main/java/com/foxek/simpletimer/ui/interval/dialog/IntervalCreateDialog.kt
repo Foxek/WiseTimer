@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BaseDialog
@@ -14,12 +11,9 @@ import com.foxek.simpletimer.ui.interval.IntervalContact
 
 import javax.inject.Inject
 
-import butterknife.BindView
-import butterknife.OnClick
-
 import com.foxek.simpletimer.utils.Constants.EMPTY
-import com.foxek.simpletimer.utils.IntervalUtils.convertToSeconds
-import com.foxek.simpletimer.utils.IntervalUtils.formatEditTextData
+import com.foxek.simpletimer.utils.convertToSeconds
+import com.foxek.simpletimer.utils.formatEditTextData
 import kotlinx.android.synthetic.main.dialog_edit_interval.*
 
 class IntervalCreateDialog : BaseDialog() {
@@ -40,7 +34,7 @@ class IntervalCreateDialog : BaseDialog() {
 
         getActivityComponent()?.inject(this)
 
-        dialog!!.setCanceledOnTouchOutside(true)
+        dialog?.setCanceledOnTouchOutside(true)
 
         return dialogView
     }
@@ -96,7 +90,7 @@ class IntervalCreateDialog : BaseDialog() {
         etIntervalName.isCursorVisible = false
     }
 
-    internal fun onSaveButtonClick() {
+    private fun onSaveButtonClick() {
         var workTime: Int
         var restTime: Int
         var repeat: Int

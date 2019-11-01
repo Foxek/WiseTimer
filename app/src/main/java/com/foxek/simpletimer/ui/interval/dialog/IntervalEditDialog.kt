@@ -4,25 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.EditText
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BaseDialog
 import com.foxek.simpletimer.ui.interval.IntervalContact
 
 import javax.inject.Inject
-import androidx.constraintlayout.widget.Group
-
-import butterknife.BindView
-import butterknife.OnClick
 
 import com.foxek.simpletimer.utils.Constants.EMPTY
 import com.foxek.simpletimer.utils.Constants.EXTRA_INTERVAL_NAME
 import com.foxek.simpletimer.utils.Constants.EXTRA_REST_TIME
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORK_TIME
-import com.foxek.simpletimer.utils.IntervalUtils.convertToSeconds
-import com.foxek.simpletimer.utils.IntervalUtils.formatEditTextData
+import com.foxek.simpletimer.utils.convertToSeconds
+import com.foxek.simpletimer.utils.formatEditTextData
 import kotlinx.android.synthetic.main.dialog_edit_interval.*
 
 class IntervalEditDialog : BaseDialog() {
@@ -100,7 +94,7 @@ class IntervalEditDialog : BaseDialog() {
         etIntervalName.isCursorVisible = false
     }
 
-    fun onSaveButtonClick() {
+    private fun onSaveButtonClick() {
         var workTime: Int
         var restTime: Int
         var name = EMPTY
@@ -126,7 +120,7 @@ class IntervalEditDialog : BaseDialog() {
         dismiss()
     }
 
-    fun onDeleteButtonClick() {
+    private fun onDeleteButtonClick() {
         repairMemoryLeak()
         dismiss()
         presenter.deleteIntervalButtonClicked()

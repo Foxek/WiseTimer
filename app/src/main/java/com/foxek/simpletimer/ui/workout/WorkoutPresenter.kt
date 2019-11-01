@@ -33,6 +33,6 @@ class WorkoutPresenter @Inject constructor(
     }
 
     override fun onListItemClicked(item: Workout) {
-        view?.startIntervalActivity(item.uid, item.name)
+        view?.startIntervalActivity(item.uid, item.name!!)
     }
 }

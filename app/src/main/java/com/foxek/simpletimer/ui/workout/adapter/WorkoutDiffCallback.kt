@@ -2,7 +2,6 @@ package com.foxek.simpletimer.ui.workout.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.foxek.simpletimer.data.model.Workout
-import javax.inject.Inject
 
 class WorkoutDiffCallback : DiffUtil.ItemCallback<Workout>() {
 

@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.data.model.Workout
 
 import javax.inject.Inject
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.foxek.simpletimer.data.model.Workout
 
-import butterknife.OnClick
 import kotlinx.android.synthetic.main.workout_item.view.*
 
 class WorkoutAdapter @Inject constructor() : ListAdapter<Workout, WorkoutAdapter.ViewHolder>(WorkoutDiffCallback()) {

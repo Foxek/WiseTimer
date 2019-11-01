@@ -1,13 +1,11 @@
 package com.foxek.simpletimer.data.database
 
 
-import com.foxek.simpletimer.data.model.Workout
-
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.RoomWarnings
+import com.foxek.simpletimer.data.model.Workout
 
 import io.reactivex.Flowable
 import io.reactivex.Maybe

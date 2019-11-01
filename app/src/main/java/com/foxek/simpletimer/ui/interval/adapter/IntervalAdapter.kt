@@ -5,14 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.data.model.Interval
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-
-import butterknife.OnClick
+import com.foxek.simpletimer.data.model.Interval
 
 import com.foxek.simpletimer.utils.Constants.EMPTY
-import com.foxek.simpletimer.utils.IntervalUtils.formatIntervalData
+import com.foxek.simpletimer.utils.formatIntervalData
 import kotlinx.android.synthetic.main.interval_item.view.*
 
 class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder>(IntervalDiffCallback()) {

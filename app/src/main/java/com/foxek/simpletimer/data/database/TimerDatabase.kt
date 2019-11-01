@@ -1,14 +1,14 @@
 package com.foxek.simpletimer.data.database
 
 import android.content.Context
-import com.foxek.simpletimer.data.model.Interval
-import com.foxek.simpletimer.data.model.Workout
 
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.data.model.Workout
 
 
 @Database(entities = [Workout::class, Interval::class], version = 4, exportSchema = false)

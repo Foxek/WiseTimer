@@ -6,7 +6,6 @@ import com.foxek.simpletimer.ui.base.BasePresenter
 import javax.inject.Inject
 
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class IntervalPresenter @Inject constructor(
@@ -22,7 +21,7 @@ class IntervalPresenter @Inject constructor(
                 .getWorkout(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view?.setWorkoutName(it.name)
+                    view?.setWorkoutName(it.name!!)
                     view?.setVolumeState(it.isVolume)
                 }, {
 
@@ -92,7 +91,7 @@ class IntervalPresenter @Inject constructor(
     }
 
     override fun intervalItemClicked(item: Interval) {
-        interactor.setCurrentInterval(item.getId())
-        view?.showIntervalEditDialog(item.name, item.workTime, item.restTime)
+        interactor.setCurrentInterval(item.id)
+        view?.showIntervalEditDialog(item.name!!, item.workTime, item.restTime)
     }
 }

@@ -11,8 +11,6 @@ import com.foxek.simpletimer.ui.interval.IntervalContact
 
 import javax.inject.Inject
 
-import butterknife.OnClick
-
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.dialog_edit_workout.*
 

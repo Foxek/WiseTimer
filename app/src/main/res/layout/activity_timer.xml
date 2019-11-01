@@ -7,15 +7,15 @@
     android:keepScreenOn="true">
 
     <ImageButton
-        android:id="@+id/reset_button"
+        android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:background="?android:selectableItemBackground"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/pause_button"
+        app:layout_constraintBottom_toBottomOf="@+id/pauseButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pause_button"
+        app:layout_constraintTop_toTopOf="@+id/pauseButton"
         app:srcCompat="@drawable/ic_menu_refresh_white"
         tools:ignore="ContentDescription" />
 
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/counter_view"
+        android:id="@+id/counterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,13 +47,13 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:textColor="@android:color/white"
         android:textSize="96sp"
-        app:layout_constraintBottom_toTopOf="@+id/pause_button"
+        app:layout_constraintBottom_toTopOf="@+id/pauseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter_number" />
+        app:layout_constraintTop_toBottomOf="@+id/counterNumber" />
 
     <TextView
-        android:id="@+id/counter_type"
+        android:id="@+id/counterType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -63,12 +63,12 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/counter_view"
+        app:layout_constraintBottom_toTopOf="@+id/counterView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/interval_name"
+        android:id="@+id/intervalName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -81,10 +81,10 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter_number" />
+        app:layout_constraintTop_toBottomOf="@+id/counterNumber" />
 
     <TextView
-        android:id="@+id/counter_number"
+        android:id="@+id/counterNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -115,7 +115,7 @@
         <!--tools:ignore="ContentDescription" />-->
 
     <TextView
-        android:id="@+id/pause_button"
+        android:id="@+id/pauseButton"
         style="@style/CustomActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
