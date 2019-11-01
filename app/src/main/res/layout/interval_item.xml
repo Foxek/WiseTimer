@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/interval_item"
+    android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
@@ -34,7 +34,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/work_interval_text"
+        android:id="@+id/etWorkTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -54,7 +54,7 @@
         android:text="@string/time_min_hint"
         android:textColor="@color/colorTransparentWhite"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/work_interval_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkTime"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -66,9 +66,9 @@
         android:text="@string/timer_work_time"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/work_interval_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkTime"
         app:layout_constraintStart_toEndOf="@+id/work_image"
-        app:layout_constraintTop_toTopOf="@+id/work_interval_text" />
+        app:layout_constraintTop_toTopOf="@+id/etWorkTime" />
 
     <TextView
         android:id="@+id/rest_name"
@@ -79,12 +79,12 @@
         android:text="@string/timer_rest_time"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_interval_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etRestTime"
         app:layout_constraintStart_toEndOf="@+id/rest_image"
-        app:layout_constraintTop_toTopOf="@+id/rest_interval_text" />
+        app:layout_constraintTop_toTopOf="@+id/etRestTime" />
 
     <TextView
-        android:id="@+id/rest_interval_text"
+        android:id="@+id/etRestTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -95,7 +95,7 @@
         android:textSize="@dimen/dialog_header_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rest_time_unit"
-        app:layout_constraintTop_toBottomOf="@+id/work_interval_text" />
+        app:layout_constraintTop_toBottomOf="@+id/etWorkTime" />
 
     <TextView
         android:id="@+id/rest_time_unit"
@@ -106,11 +106,11 @@
         android:text="@string/time_min_hint"
         android:textColor="@color/colorTransparentWhite"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_interval_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etRestTime"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/intervalTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -131,13 +131,13 @@
         android:background="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/intervalTitle" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/title_group"
+        android:id="@+id/titleGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="title,divider"
+        app:constraint_referenced_ids="intervalTitle,divider"
         tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

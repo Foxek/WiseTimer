@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
     <EditText
-        android:id="@+id/workoutEditText"
+        android:id="@+id/etWorkoutName"
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
 
     <TextView
-        android:id="@+id/delete_button"
+        android:id="@+id/deleteButton"
         style="@style/CustomDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,10 +56,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workoutEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/etWorkoutName" />
 
     <TextView
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         style="@style/CustomDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,6 +69,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

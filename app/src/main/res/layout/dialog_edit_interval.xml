@@ -10,28 +10,28 @@
     android:paddingBottom="@dimen/dialog_vertical_padding">
 
     <CheckBox
-        android:id="@+id/repeat_checkBox"
+        android:id="@+id/cbRepeatVisibility"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:buttonTint="@color/colorTint"
-        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
-        app:layout_constraintTop_toBottomOf="@+id/repeats_edit_text" />
+        app:layout_constraintEnd_toEndOf="@+id/etRestSeconds"
+        app:layout_constraintTop_toBottomOf="@+id/etRepeatsCount" />
 
     <CheckBox
-        android:id="@+id/name_checkBox"
+        android:id="@+id/cbNameVisibility"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:buttonTint="@color/colorTint"
         android:checked="true"
-        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
-        app:layout_constraintTop_toBottomOf="@+id/repeat_checkBox" />
+        app:layout_constraintEnd_toEndOf="@+id/etRestSeconds"
+        app:layout_constraintTop_toBottomOf="@+id/cbRepeatVisibility" />
 
     <EditText
-        android:id="@+id/name_edit_text"
+        android:id="@+id/etIntervalName"
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
     <EditText
-        android:id="@+id/work_minute_text"
+        android:id="@+id/etWorkMinutes"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -60,10 +60,10 @@
         android:singleLine="false"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/work_divider"
-        app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/etIntervalName" />
 
     <EditText
-        android:id="@+id/work_second_text"
+        android:id="@+id/etWorkSeconds"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -73,12 +73,12 @@
         android:inputType="textNoSuggestions|number"
         android:maxLength="2"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkMinutes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
+        app:layout_constraintTop_toTopOf="@+id/etWorkMinutes" />
 
     <EditText
-        android:id="@+id/rest_second_text"
+        android:id="@+id/etRestSeconds"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -90,10 +90,10 @@
         android:maxLength="2"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_second_text" />
+        app:layout_constraintTop_toBottomOf="@+id/etWorkSeconds" />
 
     <EditText
-        android:id="@+id/rest_minute_text"
+        android:id="@+id/etRestMinutes"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -103,12 +103,12 @@
         android:inputType="textNoSuggestions|number"
         android:maxLength="2"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etRestSeconds"
         app:layout_constraintEnd_toStartOf="@+id/rest_divider"
-        app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
+        app:layout_constraintTop_toTopOf="@+id/etRestSeconds" />
 
     <EditText
-        android:id="@+id/repeats_edit_text"
+        android:id="@+id/etRepeatsCount"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -122,10 +122,10 @@
         android:maxLength="2"
         android:textSize="24sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/rest_second_text"
+        app:layout_constraintEnd_toEndOf="@+id/etRestSeconds"
         app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/rest_minute_text"
-        app:layout_constraintTop_toBottomOf="@+id/rest_minute_text" />
+        app:layout_constraintStart_toStartOf="@+id/etRestMinutes"
+        app:layout_constraintTop_toBottomOf="@+id/etRestMinutes" />
 
     <TextView
         android:id="@+id/dialogTitle"
@@ -147,9 +147,9 @@
         android:text="@string/timer_work_time"
         android:textColor="#424242"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkMinutes"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/work_minute_text" />
+        app:layout_constraintTop_toTopOf="@+id/etWorkMinutes" />
 
     <TextView
         android:id="@+id/work_divider"
@@ -159,9 +159,9 @@
         android:text="@string/dialog_interval_setting_divider"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dialog_header_size"
-        app:layout_constraintBottom_toBottomOf="@+id/work_minute_text"
-        app:layout_constraintEnd_toStartOf="@+id/work_second_text"
-        app:layout_constraintTop_toTopOf="@+id/work_minute_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkMinutes"
+        app:layout_constraintEnd_toStartOf="@+id/etWorkSeconds"
+        app:layout_constraintTop_toTopOf="@+id/etWorkMinutes"
         app:layout_constraintVertical_bias="0.523" />
 
     <TextView
@@ -172,9 +172,9 @@
         android:text="@string/timer_rest_time"
         android:textColor="#424242"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_minute_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etRestMinutes"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rest_minute_text" />
+        app:layout_constraintTop_toTopOf="@+id/etRestMinutes" />
 
     <TextView
         android:id="@+id/rest_divider"
@@ -183,12 +183,12 @@
         android:text="@string/dialog_interval_setting_divider"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dialog_header_size"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_second_text"
-        app:layout_constraintEnd_toStartOf="@+id/rest_second_text"
-        app:layout_constraintTop_toTopOf="@+id/rest_second_text" />
+        app:layout_constraintBottom_toBottomOf="@+id/etRestSeconds"
+        app:layout_constraintEnd_toStartOf="@+id/etRestSeconds"
+        app:layout_constraintTop_toTopOf="@+id/etRestSeconds" />
 
     <TextView
-        android:id="@+id/delete_button"
+        android:id="@+id/deleteButton"
         style="@style/CustomDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -196,10 +196,10 @@
         android:text="@string/delete_interval_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/cbNameVisibility" />
 
     <TextView
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         style="@style/CustomDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -209,10 +209,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
 
     <TextView
-        android:id="@+id/repeat_name"
+        android:id="@+id/repeatName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_regular"
@@ -220,9 +220,9 @@
         android:textColor="#424242"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/repeats_edit_text"
+        app:layout_constraintBottom_toBottomOf="@+id/etRepeatsCount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/repeats_edit_text" />
+        app:layout_constraintTop_toTopOf="@+id/etRepeatsCount" />
 
     <TextView
         android:id="@+id/repeat_description"
@@ -233,10 +233,10 @@
         android:text="@string/dialog_interval_setting_repeats"
         android:textSize="14sp"
         android:textColor="#424242"
-        app:layout_constraintBottom_toBottomOf="@+id/repeat_checkBox"
-        app:layout_constraintEnd_toStartOf="@+id/repeat_checkBox"
+        app:layout_constraintBottom_toBottomOf="@+id/cbRepeatVisibility"
+        app:layout_constraintEnd_toStartOf="@+id/cbRepeatVisibility"
         app:layout_constraintStart_toStartOf="@+id/rest_name"
-        app:layout_constraintTop_toTopOf="@+id/repeat_checkBox" />
+        app:layout_constraintTop_toTopOf="@+id/cbRepeatVisibility" />
 
     <TextView
         android:id="@+id/name_description"
@@ -247,16 +247,16 @@
         android:text="@string/dialog_interval_setting_name"
         android:textSize="14sp"
         android:textColor="#424242"
-        app:layout_constraintBottom_toBottomOf="@+id/name_checkBox"
-        app:layout_constraintEnd_toStartOf="@+id/name_checkBox"
+        app:layout_constraintBottom_toBottomOf="@+id/cbNameVisibility"
+        app:layout_constraintEnd_toStartOf="@+id/cbNameVisibility"
         app:layout_constraintStart_toStartOf="@+id/rest_name"
-        app:layout_constraintTop_toTopOf="@+id/name_checkBox" />
+        app:layout_constraintTop_toTopOf="@+id/cbNameVisibility" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/repeats_group"
+        android:id="@+id/repeatGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="repeat_checkBox,repeat_description"
+        app:constraint_referenced_ids="cbRepeatVisibility,repeat_description"
         tools:layout_editor_absoluteX="32dp"
         tools:layout_editor_absoluteY="16dp" />
 

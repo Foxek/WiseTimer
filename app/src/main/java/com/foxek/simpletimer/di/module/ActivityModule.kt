@@ -1,7 +1,7 @@
 package com.foxek.simpletimer.di.module
 
 import com.foxek.simpletimer.di.PerActivity
-import com.foxek.simpletimer.ui.interval.IntervalAdapter
+import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
 import com.foxek.simpletimer.ui.interval.IntervalContact
 import com.foxek.simpletimer.ui.interval.IntervalInteractor
 import com.foxek.simpletimer.ui.interval.IntervalPresenter

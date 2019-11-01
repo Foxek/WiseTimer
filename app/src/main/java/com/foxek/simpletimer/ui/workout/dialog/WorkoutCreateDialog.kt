@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BaseDialog
@@ -13,7 +11,6 @@ import com.foxek.simpletimer.ui.workout.WorkoutContact
 
 import javax.inject.Inject
 
-import butterknife.BindView
 import kotlinx.android.synthetic.main.dialog_add_workout.*
 
 class WorkoutCreateDialog : BaseDialog() {
@@ -39,10 +36,10 @@ class WorkoutCreateDialog : BaseDialog() {
         super.onViewCreated(view, savedInstanceState)
 
         createButton.setOnClickListener {
-            if (workoutEditText.text.toString().isNotEmpty()) {
-                workoutEditText.isCursorVisible = false
+            if (etWorkoutName.text.toString().isNotEmpty()) {
+                etWorkoutName.isCursorVisible = false
                 dismiss()
-                presenter.saveButtonClicked(workoutEditText.text.toString())
+                presenter.saveButtonClicked(etWorkoutName.text.toString())
             } else {
                 errorHint.visibility = View.VISIBLE
             }
@@ -51,6 +48,6 @@ class WorkoutCreateDialog : BaseDialog() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        workoutEditText.isCursorVisible = false
+        etWorkoutName.isCursorVisible = false
     }
 }
