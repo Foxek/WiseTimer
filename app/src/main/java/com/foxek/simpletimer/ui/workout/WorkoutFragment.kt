@@ -1,10 +1,9 @@
 package com.foxek.simpletimer.ui.workout
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 
-import com.foxek.simpletimer.ui.base.BaseActivity
-import com.foxek.simpletimer.ui.interval.IntervalActivity
+import com.foxek.simpletimer.ui.interval.IntervalFragment
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
 
@@ -12,6 +11,7 @@ import javax.inject.Inject
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.foxek.simpletimer.data.model.Workout
+import com.foxek.simpletimer.ui.base.BaseFragment
 
 import com.foxek.simpletimer.ui.workout.adapter.WorkoutAdapter
 
@@ -19,7 +19,9 @@ import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.activity_workout.*
 
-class WorkoutActivity : BaseActivity(), WorkoutContact.View,WorkoutAdapter.Callback {
+class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Callback {
+
+    override val layoutId = R.layout.activity_workout
 
     @Inject
     lateinit var presenter: WorkoutContact.Presenter
@@ -29,11 +31,14 @@ class WorkoutActivity : BaseActivity(), WorkoutContact.View,WorkoutAdapter.Callb
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_workout)
-
-        activityComponent?.inject(this)
-
+        executeInActivity {
+            activityComponent?.inject(this@WorkoutFragment)
+        }
         presenter.attachView(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         presenter.viewIsReady()
 
         createButton.setOnClickListener {
@@ -41,16 +46,22 @@ class WorkoutActivity : BaseActivity(), WorkoutContact.View,WorkoutAdapter.Callb
         }
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
     }
 
     override fun startIntervalActivity(position: Int, name: String) {
-        val intent = Intent(this, IntervalActivity::class.java)
-        intent.putExtra(EXTRA_WORKOUT_ID, position)
-                .putExtra(EXTRA_WORKOUT_NAME, name)
-        startActivity(intent)
+        val args =  Bundle().apply {
+            putInt(EXTRA_WORKOUT_ID, position)
+            putString(EXTRA_WORKOUT_NAME, name)
+        }
+        val fragment = IntervalFragment()
+        fragment.arguments = args
+
+        executeInActivity {
+            replaceFragment(fragment)
+        }
     }
 
     override fun setWorkoutList() {

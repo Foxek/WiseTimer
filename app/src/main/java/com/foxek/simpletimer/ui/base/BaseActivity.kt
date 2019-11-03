@@ -8,15 +8,16 @@ import android.widget.Toast
 
 import com.foxek.simpletimer.AndroidApplication
 import com.foxek.simpletimer.di.component.ActivityComponent
-import com.foxek.simpletimer.di.component.DaggerActivityComponent
 import com.foxek.simpletimer.di.module.ActivityModule
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.foxek.simpletimer.R
+import com.foxek.simpletimer.di.component.DaggerActivityComponent
 
 abstract class BaseActivity : AppCompatActivity(), MvpView {
 
+    abstract var fragment: BaseFragment
 
     var activityComponent: ActivityComponent? = null
         private set
@@ -29,27 +30,40 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
                 .activityModule(ActivityModule())
                 .applicationComponent((application as AndroidApplication).getComponent())
                 .build()
+
+        addFragment(fragment)
     }
 
-    fun addFragment(fragment: BaseFragment){
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount != 0)
+            ((supportFragmentManager.findFragmentById(R.id.container)) as BaseFragment).onBackPressed()
+        else
+            super.onBackPressed()
+    }
+
+    private fun addFragment(fragment: BaseFragment) {
         supportFragmentManager.transaction {
             add(R.id.container, fragment)
         }
     }
 
-    fun replaceFragment(fragment: BaseFragment){
+    fun replaceFragment(fragment: BaseFragment) {
         supportFragmentManager.transaction {
+            setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+                    android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             replace(R.id.container, fragment)
+            addToBackStack(fragment.tag)
         }
     }
 
-    fun showDialog(dialog: BaseDialog){
+    fun showDialog(dialog: BaseDialog) {
         dialog.show(supportFragmentManager, dialog.dialogTag)
     }
 
     fun hideSoftKeyboard() {
         if (currentFocus != null) {
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
         }
     }
@@ -62,6 +76,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 inline fun FragmentManager.transaction(operation: FragmentTransaction.() -> FragmentTransaction) =
         beginTransaction().operation().commit()
 
-inline fun Activity?.execute(body: BaseActivity.() -> Unit){
+inline fun Activity?.execute(body: BaseActivity.() -> Unit) {
     (this as? BaseActivity)?.body()
 }

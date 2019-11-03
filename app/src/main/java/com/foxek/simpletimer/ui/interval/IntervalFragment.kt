@@ -1,19 +1,19 @@
 package com.foxek.simpletimer.ui.interval
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.ui.base.BaseActivity
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog
 import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog
 import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog
-import com.foxek.simpletimer.ui.timer.TimerActivity
+import com.foxek.simpletimer.ui.timer.TimerFragment
 
 import javax.inject.Inject
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.ui.base.BaseFragment
 
 import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
 
@@ -21,8 +21,9 @@ import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.activity_interval.*
 
-class IntervalActivity : BaseActivity(), IntervalContact.View, IntervalAdapter.Callback {
+class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.Callback {
 
+    override val layoutId = R.layout.activity_interval
     @Inject
     lateinit var presenter: IntervalContact.Presenter
 
@@ -31,21 +32,27 @@ class IntervalActivity : BaseActivity(), IntervalContact.View, IntervalAdapter.C
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interval)
 
-        activityComponent?.inject(this)
+        executeInActivity { activityComponent?.inject(this@IntervalFragment) }
 
         presenter.attachView(this)
-        presenter.viewIsReady(intent.getIntExtra(EXTRA_WORKOUT_ID, 0))
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let { presenter.viewIsReady(it.getInt(EXTRA_WORKOUT_ID, 0)) }
 
         backButton.setOnClickListener { onBackPressed() }
         editButton.setOnClickListener { presenter.editWorkoutButtonClicked() }
         volumeButton.setOnClickListener { presenter.changeVolumeButtonClicked() }
         addIntervalButton.setOnClickListener { presenter.addIntervalButtonClicked() }
         startButton.setOnClickListener { presenter.startWorkoutButtonClicked() }
+
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
     }
@@ -84,7 +91,7 @@ class IntervalActivity : BaseActivity(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun showWorkoutEditDialog() {
-        showDialog(WorkoutEditDialog.newInstance(intent.getStringExtra(EXTRA_WORKOUT_NAME)))
+        showDialog(WorkoutEditDialog.newInstance(arguments?.getString(EXTRA_WORKOUT_NAME)))
     }
 
     override fun startWorkoutActivity() {
@@ -92,12 +99,14 @@ class IntervalActivity : BaseActivity(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun startTimerActivity() {
-        val timerIntent = Intent(this, TimerActivity::class.java)
-        timerIntent
-                .putExtra(EXTRA_WORKOUT_ID, intent.getIntExtra(EXTRA_WORKOUT_ID, 0))
-                .putExtra("workout_name", intent.getStringExtra("workout_name"))
-        startActivity(timerIntent)
-        finish()
+        val fragment = TimerFragment()
+        fragment.arguments = arguments
+        close()
+
+        executeInActivity {
+            replaceFragment(fragment)
+        }
+
     }
 
     override fun onListItemClick(item: Interval) {

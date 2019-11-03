@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.foxek.simpletimer.di.component.ActivityComponent
 
 abstract class BaseFragment : Fragment(), MvpView {
 
@@ -14,8 +15,12 @@ abstract class BaseFragment : Fragment(), MvpView {
         return inflater.inflate(layoutId, parent, false)
     }
 
-    private inline fun executeInActivity(body: BaseActivity.() -> Unit){
+    inline fun executeInActivity(body: BaseActivity.() -> Unit){
         activity?.execute(body)
+    }
+
+    open fun onBackPressed(){
+        close()
     }
 
     fun hideSoftKeyboard() = executeInActivity { hideSoftKeyboard() }

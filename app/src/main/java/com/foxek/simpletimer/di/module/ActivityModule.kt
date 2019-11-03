@@ -1,6 +1,5 @@
 package com.foxek.simpletimer.di.module
 
-import com.foxek.simpletimer.di.PerActivity
 import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
 import com.foxek.simpletimer.ui.interval.IntervalContact
 import com.foxek.simpletimer.ui.interval.IntervalInteractor
@@ -21,39 +20,31 @@ class ActivityModule {
 
     /* Workout Activity */
     @Provides
-    @PerActivity
     fun provideWorkoutAdapter(): WorkoutAdapter = WorkoutAdapter()
 
     @Provides
-    @PerActivity
     fun provideWorkoutInteractor(interactor: WorkoutInteractor): WorkoutContact.Interactor = interactor
 
     @Provides
-    @PerActivity
     fun provideWorkoutPresenter(presenter: WorkoutPresenter): WorkoutContact.Presenter = presenter
 
 
     /* Interval Activity */
     @Provides
-    @PerActivity
     fun provideIntervalAdapter(): IntervalAdapter = IntervalAdapter()
 
     @Provides
-    @PerActivity
     fun provideIntervalInteractor(interactor: IntervalInteractor): IntervalContact.Interactor = interactor
 
 
     @Provides
-    @PerActivity
     fun provideIntervalPresenter(presenter: IntervalPresenter): IntervalContact.Presenter = presenter
 
     /* Timer Activity */
     @Provides
-    @PerActivity
     fun provideTimerInteractor(interactor: TimerInteractor): TimerContact.Interactor = interactor
 
 
     @Provides
-    @PerActivity
     fun provideTimerPresenter(presenter: TimerPresenter): TimerContact.Presenter = presenter
 }

@@ -2,12 +2,12 @@ package com.foxek.simpletimer.di.component
 
 import com.foxek.simpletimer.di.PerActivity
 import com.foxek.simpletimer.di.module.ActivityModule
-import com.foxek.simpletimer.ui.interval.IntervalActivity
+import com.foxek.simpletimer.ui.interval.IntervalFragment
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog
 import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog
 import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog
-import com.foxek.simpletimer.ui.timer.TimerActivity
-import com.foxek.simpletimer.ui.workout.WorkoutActivity
+import com.foxek.simpletimer.ui.timer.TimerFragment
+import com.foxek.simpletimer.ui.workout.WorkoutFragment
 import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
 
 import dagger.Component
@@ -16,11 +16,11 @@ import dagger.Component
 @Component(dependencies = [ApplicationComponent::class], modules = [ActivityModule::class])
 interface ActivityComponent {
 
-    fun inject(activity: WorkoutActivity)
+    fun inject(activity: WorkoutFragment)
 
-    fun inject(activity: IntervalActivity)
+    fun inject(activity: IntervalFragment)
 
-    fun inject(activity: TimerActivity)
+    fun inject(activity: TimerFragment)
 
     fun inject(dialog: WorkoutCreateDialog)
 

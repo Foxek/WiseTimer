@@ -1,11 +1,10 @@
 package com.foxek.simpletimer.ui.timer
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.ui.base.BaseActivity
+import com.foxek.simpletimer.ui.base.BaseFragment
 
 import javax.inject.Inject
 
@@ -14,42 +13,41 @@ import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.activity_timer.*
 
-class TimerActivity : BaseActivity(), TimerContact.View {
+class TimerFragment : BaseFragment(), TimerContact.View {
+
+    override val layoutId = R.layout.activity_timer
 
     @Inject
     lateinit var presenter: TimerContact.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timer)
+        executeInActivity { activityComponent?.inject(this@TimerFragment) }
 
-        val intent = intent
-        workoutName.text = intent.getStringExtra(EXTRA_WORKOUT_NAME)
-
-        activityComponent?.inject(this)
         presenter.attachView(this)
+    }
 
-        presenter.prepareIntervals(intent.getIntExtra(EXTRA_WORKOUT_ID, 0))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            workoutName.text = it.getString(EXTRA_WORKOUT_NAME)
+            presenter.prepareIntervals(it.getInt(EXTRA_WORKOUT_ID, 0))
+        }
+
         presenter.viewIsReady()
 
         pauseButton.setOnClickListener { presenter.pauseButtonClicked() }
         resetButton.setOnClickListener { presenter.resetButtonClicked() }
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
     }
 
-    override fun onBackPressed() {
-        val startMain = Intent(Intent.ACTION_MAIN)
-        startMain.addCategory(Intent.CATEGORY_HOME)
-        startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(startMain)
-    }
-
     override fun startWorkoutActivity() {
-        finish()
+        onBackPressed()
     }
 
     override fun showPauseInterface() {

@@ -23,7 +23,7 @@ class WorkoutEditDialog : BaseDialog() {
 
     companion object {
 
-        fun newInstance(workoutName: String): WorkoutEditDialog {
+        fun newInstance(workoutName: String?): WorkoutEditDialog {
             val mWorkoutEditDialog = WorkoutEditDialog()
             val args = Bundle()
             args.putString(EXTRA_WORKOUT_NAME, workoutName)

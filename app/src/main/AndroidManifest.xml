@@ -24,18 +24,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.interval.IntervalActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.timer.TimerActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.workout.WorkoutActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.MainActivity" />
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"/>
     </application>
 
 </manifest>
