@@ -33,7 +33,7 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        executeInActivity { activityComponent?.inject(this@IntervalFragment) }
+        executeInActivity { component?.inject(this@IntervalFragment) }
 
         presenter.attachView(this)
 
@@ -82,8 +82,8 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
             volumeButton.setImageResource(R.drawable.ic_menu_volume_off_white)
     }
 
-    override fun showIntervalEditDialog(name: String, workTime: Int, restTime: Int) {
-        showDialog(IntervalEditDialog.newInstance(name, workTime, restTime))
+    override fun showIntervalEditDialog(interval: Interval) {
+        showDialog(IntervalEditDialog.newInstance(interval))
     }
 
     override fun showIntervalCreateDialog() {
@@ -99,14 +99,8 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun startTimerActivity() {
-        val fragment = TimerFragment()
-        fragment.arguments = arguments
         close()
-
-        executeInActivity {
-            replaceFragment(fragment)
-        }
-
+        executeInActivity { replaceFragment(TimerFragment(), arguments) }
     }
 
     override fun onListItemClick(item: Interval) {

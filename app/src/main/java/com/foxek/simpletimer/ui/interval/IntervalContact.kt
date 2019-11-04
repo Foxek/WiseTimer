@@ -26,7 +26,7 @@ interface IntervalContact {
 
         fun startTimerActivity()
 
-        fun showIntervalEditDialog(name: String, workTime: Int, restTime: Int)
+        fun showIntervalEditDialog(interval: Interval)
 
         fun showIntervalCreateDialog()
 

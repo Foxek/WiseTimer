@@ -19,14 +19,14 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     abstract var fragment: BaseFragment
 
-    var activityComponent: ActivityComponent? = null
+    var component: ActivityComponent? = null
         private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        activityComponent = DaggerActivityComponent.builder()
+        component = DaggerActivityComponent.builder()
                 .activityModule(ActivityModule())
                 .applicationComponent((application as AndroidApplication).getComponent())
                 .build()
@@ -47,10 +47,10 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
         }
     }
 
-    fun replaceFragment(fragment: BaseFragment) {
+    fun replaceFragment(fragment: BaseFragment, args: Bundle?) {
+        fragment.arguments = args
+
         supportFragmentManager.transaction {
-            setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
-                    android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             replace(R.id.container, fragment)
             addToBackStack(fragment.tag)
         }
@@ -74,7 +74,12 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 }
 
 inline fun FragmentManager.transaction(operation: FragmentTransaction.() -> FragmentTransaction) =
-        beginTransaction().operation().commit()
+        beginTransaction()
+                .setCustomAnimations(
+                        android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+                        android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .operation()
+                .commit()
 
 inline fun Activity?.execute(body: BaseActivity.() -> Unit) {
     (this as? BaseActivity)?.body()

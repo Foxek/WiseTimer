@@ -1,11 +1,11 @@
 package com.foxek.simpletimer.ui.interval.dialog
 
 import android.os.Bundle
-import android.view.LayoutInflater
+
 import android.view.View
-import android.view.ViewGroup
 
 import com.foxek.simpletimer.R
+import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.ui.base.BaseDialog
 import com.foxek.simpletimer.ui.interval.IntervalContact
 
@@ -25,35 +25,36 @@ class IntervalEditDialog : BaseDialog() {
     lateinit var presenter: IntervalContact.Presenter
 
     override val dialogTag = "IntervalEditDialog"
+    override val layoutId = R.layout.dialog_edit_interval
 
     companion object {
 
-        fun newInstance(name: String, work_time: Int, rest_time: Int): IntervalEditDialog {
-            val mIntervalEditDialog = IntervalEditDialog()
-            val args = Bundle()
-            args.putInt(EXTRA_WORK_TIME, work_time)
-            args.putInt(EXTRA_REST_TIME, rest_time)
-            args.putString(EXTRA_INTERVAL_NAME, name)
-            mIntervalEditDialog.arguments = args
-            return mIntervalEditDialog
+        fun newInstance(interval: Interval): IntervalEditDialog {
+            val dialog = IntervalEditDialog()
+            val args = Bundle().apply {
+                putInt(EXTRA_WORK_TIME, interval.workTime)
+                putInt(EXTRA_REST_TIME, interval.restTime)
+                putString(EXTRA_INTERVAL_NAME, interval.name)
+            }
+
+            dialog.arguments = args
+            return dialog
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val dialogView = inflater.inflate(R.layout.dialog_edit_interval, container, false)
-
-        getActivityComponent()?.inject(this)
-        dialog?.setCanceledOnTouchOutside(true)
-
-        return dialogView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activityComponent?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prepareEditText(arguments!!.getString(EXTRA_INTERVAL_NAME)!!,
+        prepareEditText(
+                arguments!!.getString(EXTRA_INTERVAL_NAME)!!,
                 arguments!!.getInt(EXTRA_WORK_TIME),
-                arguments!!.getInt(EXTRA_REST_TIME))
+                arguments!!.getInt(EXTRA_REST_TIME)
+        )
 
         cbNameVisibility.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -68,6 +69,7 @@ class IntervalEditDialog : BaseDialog() {
 
         repeatGroup.visibility = View.GONE
     }
+
     private fun prepareEditText(name: String, work_time: Int, rest_time: Int) {
 
         if (name != EMPTY) {
@@ -83,51 +85,42 @@ class IntervalEditDialog : BaseDialog() {
         etRestSeconds.setText(formatEditTextData(rest_time % 60))
     }
 
-    private fun repairMemoryLeak() {
-        etWorkMinutes.isCursorVisible = false
-        etWorkSeconds.isCursorVisible = false
-
-        etRestMinutes.isCursorVisible = false
-        etRestSeconds.isCursorVisible = false
-
-        etRepeatsCount.isCursorVisible = false
-        etIntervalName.isCursorVisible = false
-    }
-
     private fun onSaveButtonClick() {
         var workTime: Int
         var restTime: Int
         var name = EMPTY
 
-        if ((etWorkMinutes.text.toString() != EMPTY) and (etWorkSeconds.text.toString() != EMPTY)) {
+        if (checkNotEmpty(etWorkMinutes, etWorkSeconds)) {
             workTime = convertToSeconds(etWorkMinutes.text.toString(), etWorkSeconds.text.toString())
             if (workTime == 0) workTime = 1
         } else
             workTime = 1
 
 
-        if ((etRestMinutes.text.toString() != EMPTY) and (etRestSeconds.text.toString() != EMPTY)) {
+        if (checkNotEmpty(etRestMinutes, etRestSeconds)) {
             restTime = convertToSeconds(etRestMinutes.text.toString(), etRestSeconds.text.toString())
             if (restTime == 0) restTime = 1
         } else
             restTime = 1
 
-        if (etIntervalName.text.toString() != EMPTY)
+        if (checkNotEmpty(etIntervalName))
             name = etIntervalName.text.toString()
 
         presenter.saveIntervalButtonClicked(name, workTime, restTime)
-        repairMemoryLeak()
         dismiss()
     }
 
     private fun onDeleteButtonClick() {
-        repairMemoryLeak()
         dismiss()
         presenter.deleteIntervalButtonClicked()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repairMemoryLeak()
+        repairMemoryLeak(
+                etWorkMinutes, etWorkSeconds,
+                etRestMinutes, etRestSeconds,
+                etRepeatsCount, etIntervalName
+        )
     }
 }

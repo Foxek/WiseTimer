@@ -92,6 +92,6 @@ class IntervalPresenter @Inject constructor(
 
     override fun intervalItemClicked(item: Interval) {
         interactor.setCurrentInterval(item.id)
-        view?.showIntervalEditDialog(item.name!!, item.workTime, item.restTime)
+        view?.showIntervalEditDialog(item)
     }
 }

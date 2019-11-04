@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.dialog_add_workout.*
 class WorkoutCreateDialog : BaseDialog() {
 
     override val dialogTag = "WorkoutCreateDialog"
+    override val layoutId = R.layout.dialog_add_workout
 
     @Inject
     lateinit var presenter: WorkoutContact.Presenter
@@ -24,20 +25,16 @@ class WorkoutCreateDialog : BaseDialog() {
         fun newInstance(): WorkoutCreateDialog = WorkoutCreateDialog()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View? {
-        val dialogView = inflater.inflate(R.layout.dialog_add_workout, parent, false)
-
-        getActivityComponent()?.inject(this)
-
-        return dialogView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activityComponent?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         createButton.setOnClickListener {
-            if (etWorkoutName.text.toString().isNotEmpty()) {
-                etWorkoutName.isCursorVisible = false
+            if (checkNotEmpty(etWorkoutName)) {
                 dismiss()
                 presenter.saveButtonClicked(etWorkoutName.text.toString())
             } else {
@@ -48,6 +45,6 @@ class WorkoutCreateDialog : BaseDialog() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        etWorkoutName.isCursorVisible = false
+        repairMemoryLeak(etWorkoutName)
     }
 }

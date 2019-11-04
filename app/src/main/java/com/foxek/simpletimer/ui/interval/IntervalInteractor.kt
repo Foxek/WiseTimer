@@ -52,7 +52,7 @@ class IntervalInteractor @Inject constructor(
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({},{})
     }
 
     override fun deleteInterval(): Disposable {

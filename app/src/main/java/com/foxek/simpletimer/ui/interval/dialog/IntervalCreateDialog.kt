@@ -22,21 +22,15 @@ class IntervalCreateDialog : BaseDialog() {
     lateinit var presenter: IntervalContact.Presenter
 
     override val dialogTag = "IntervalCreateDialog"
+    override val layoutId = R.layout.dialog_edit_interval
 
     companion object {
-
         fun newInstance(): IntervalCreateDialog = IntervalCreateDialog()
-
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val dialogView = inflater.inflate(R.layout.dialog_edit_interval, container, false)
-
-        getActivityComponent()?.inject(this)
-
-        dialog?.setCanceledOnTouchOutside(true)
-
-        return dialogView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activityComponent?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,17 +73,6 @@ class IntervalCreateDialog : BaseDialog() {
         etRepeatsCount.setText("1")
     }
 
-    private fun repairMemoryLeak() {
-        etWorkMinutes.isCursorVisible = false
-        etWorkSeconds.isCursorVisible = false
-
-        etRestMinutes.isCursorVisible = false
-        etRestSeconds.isCursorVisible = false
-
-        etRepeatsCount.isCursorVisible = false
-        etIntervalName.isCursorVisible = false
-    }
-
     private fun onSaveButtonClick() {
         var workTime: Int
         var restTime: Int
@@ -121,13 +104,16 @@ class IntervalCreateDialog : BaseDialog() {
         for (i in 1..repeat)
             presenter.createIntervalButtonClicked(name, workTime, restTime)
 
-        repairMemoryLeak()
         dismiss()
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repairMemoryLeak()
+        repairMemoryLeak(
+                etWorkMinutes, etWorkSeconds,
+                etRestMinutes, etRestSeconds,
+                etRepeatsCount, etIntervalName
+        )
     }
 }

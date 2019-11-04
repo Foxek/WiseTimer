@@ -31,9 +31,8 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        executeInActivity {
-            activityComponent?.inject(this@WorkoutFragment)
-        }
+
+        executeInActivity { component?.inject(this@WorkoutFragment) }
         presenter.attachView(this)
     }
 
@@ -41,9 +40,7 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
         super.onViewCreated(view, savedInstanceState)
         presenter.viewIsReady()
 
-        createButton.setOnClickListener {
-            presenter.createButtonClicked()
-        }
+        createButton.setOnClickListener { presenter.createButtonClicked() }
     }
 
     override fun onDestroy() {
@@ -51,17 +48,13 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
         presenter.detachView()
     }
 
-    override fun startIntervalActivity(position: Int, name: String) {
-        val args =  Bundle().apply {
+    override fun startIntervalFragment(position: Int, name: String) {
+        val args = Bundle().apply {
             putInt(EXTRA_WORKOUT_ID, position)
             putString(EXTRA_WORKOUT_NAME, name)
         }
-        val fragment = IntervalFragment()
-        fragment.arguments = args
 
-        executeInActivity {
-            replaceFragment(fragment)
-        }
+        executeInActivity { replaceFragment(IntervalFragment(), args) }
     }
 
     override fun setWorkoutList() {
@@ -81,6 +74,7 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
     override fun showCreateDialog() {
         showDialog(WorkoutCreateDialog.newInstance())
     }
+
     override fun onListItemClick(workout: Workout) {
         presenter.onListItemClicked(workout)
     }

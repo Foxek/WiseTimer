@@ -39,12 +39,7 @@ class WorkoutInteractor @Inject constructor(
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-
-                }, {
-                    error ->
-
-                })
+                .subscribe()
 
 
 }

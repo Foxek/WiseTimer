@@ -1,9 +1,7 @@
 package com.foxek.simpletimer.ui.interval.dialog
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BaseDialog
@@ -20,13 +18,14 @@ class WorkoutEditDialog : BaseDialog() {
     lateinit var presenter: IntervalContact.Presenter
 
     override val dialogTag = "WorkoutEditDialog"
+    override val layoutId = R.layout.dialog_edit_workout
 
     companion object {
 
-        fun newInstance(workoutName: String?): WorkoutEditDialog {
+        fun newInstance(name: String?): WorkoutEditDialog {
             val mWorkoutEditDialog = WorkoutEditDialog()
             val args = Bundle()
-            args.putString(EXTRA_WORKOUT_NAME, workoutName)
+            args.putString(EXTRA_WORKOUT_NAME, name)
             mWorkoutEditDialog.arguments = args
             return mWorkoutEditDialog
         }
@@ -34,17 +33,7 @@ class WorkoutEditDialog : BaseDialog() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.CustomDialog)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val dialogView = inflater.inflate(R.layout.dialog_edit_workout, container, false)
-
-        getActivityComponent()?.inject(this)
-
-        dialog?.setCanceledOnTouchOutside(true)
-
-        return dialogView
+        activityComponent?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,26 +43,22 @@ class WorkoutEditDialog : BaseDialog() {
         etWorkoutName.setSelection(etWorkoutName.text.length)
 
         deleteButton.setOnClickListener {
+            dismiss()
             if (showsDialog) {
-                etWorkoutName.isCursorVisible = false
-                dialog?.cancel()
                 presenter.deleteWorkoutButtonClicked()
-            } else
-                dismiss()
+            }
         }
 
         saveButton.setOnClickListener {
-            if (etWorkoutName.text.toString().isNotEmpty()) {
-                etWorkoutName.isCursorVisible = false
-                dismiss()
+            dismiss()
+            if (checkNotEmpty(etWorkoutName)) {
                 presenter.saveWorkoutButtonClicked(etWorkoutName.text.toString())
-            } else
-                dismiss()
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        etWorkoutName.isCursorVisible = false
+        repairMemoryLeak(etWorkoutName)
     }
 }
