@@ -19,17 +19,9 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     abstract var fragment: BaseFragment
 
-    var component: ActivityComponent? = null
-        private set
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        component = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule())
-                .applicationComponent((application as AndroidApplication).getComponent())
-                .build()
 
         addFragment(fragment)
     }

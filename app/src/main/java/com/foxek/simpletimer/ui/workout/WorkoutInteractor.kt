@@ -20,26 +20,24 @@ class WorkoutInteractor @Inject constructor(
 ) : WorkoutContact.Interactor {
 
     override fun fetchWorkoutList(): Flowable<List<Workout>> =
-            database.workoutDAO.all
+            database.workoutDAO.getAll()
                     .subscribeOn(Schedulers.io())
 
 
     override fun createWorkout(name: String): Disposable =
-            database.workoutDAO.lastId
-                .defaultIfEmpty(0)
-                .flatMapCompletable { id ->
+            database.workoutDAO.getLastId()
+                    .defaultIfEmpty(0)
+                    .flatMapCompletable { id ->
 
-                    val workout = Workout(name, id + 1, 1, true)
-                    val interval = Interval(EMPTY, 1, 1, id + 1, 0)
+                        val workout = Workout(name, id + 1, 1, true)
+                        val interval = Interval(EMPTY, 1, 1, id + 1, 0)
 
-                    Completable.concatArray(
-                            Completable.fromAction { database.workoutDAO.add(workout) },
-                            Completable.fromAction { database.intervalDAO.add(interval) }
-                    )
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
-
-
+                        Completable.concatArray(
+                                Completable.fromAction { database.workoutDAO.add(workout) },
+                                Completable.fromAction { database.intervalDAO.add(interval) }
+                        )
+                    }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
 }

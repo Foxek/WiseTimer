@@ -31,13 +31,13 @@ class IntervalEditDialog : BaseDialog() {
 
         fun newInstance(interval: Interval): IntervalEditDialog {
             val dialog = IntervalEditDialog()
-            val args = Bundle().apply {
+
+            dialog.arguments = Bundle().apply {
                 putInt(EXTRA_WORK_TIME, interval.workTime)
                 putInt(EXTRA_REST_TIME, interval.restTime)
                 putString(EXTRA_INTERVAL_NAME, interval.name)
             }
 
-            dialog.arguments = args
             return dialog
         }
     }
@@ -50,11 +50,13 @@ class IntervalEditDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prepareEditText(
-                arguments!!.getString(EXTRA_INTERVAL_NAME)!!,
-                arguments!!.getInt(EXTRA_WORK_TIME),
-                arguments!!.getInt(EXTRA_REST_TIME)
-        )
+        arguments?.let {
+            prepareEditText(
+                    it.getString(EXTRA_INTERVAL_NAME),
+                    it.getInt(EXTRA_WORK_TIME),
+                    it.getInt(EXTRA_REST_TIME)
+            )
+        }
 
         cbNameVisibility.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -64,13 +66,14 @@ class IntervalEditDialog : BaseDialog() {
                 etIntervalName.visibility = View.VISIBLE
             }
         }
+
         saveButton.setOnClickListener { onSaveButtonClick() }
         deleteButton.setOnClickListener { onDeleteButtonClick() }
 
-        repeatGroup.visibility = View.GONE
+        repeatDescGroup.visibility = View.GONE
     }
 
-    private fun prepareEditText(name: String, work_time: Int, rest_time: Int) {
+    private fun prepareEditText(name: String?, work_time: Int, rest_time: Int) {
 
         if (name != EMPTY) {
             cbNameVisibility.isChecked = false
@@ -78,30 +81,16 @@ class IntervalEditDialog : BaseDialog() {
             etIntervalName.setText(name)
         }
 
-        etWorkMinutes.setText(formatEditTextData(work_time / 60))
-        etWorkSeconds.setText(formatEditTextData(work_time % 60))
-
-        etRestMinutes.setText(formatEditTextData(rest_time / 60))
-        etRestSeconds.setText(formatEditTextData(rest_time % 60))
+        etWorkMin.setText(formatEditTextData(work_time / 60))
+        etWorkSec.setText(formatEditTextData(work_time % 60))
+        etRestMin.setText(formatEditTextData(rest_time / 60))
+        etRestSec.setText(formatEditTextData(rest_time % 60))
     }
 
     private fun onSaveButtonClick() {
-        var workTime: Int
-        var restTime: Int
+        val workTime = convertToSeconds(etWorkMin.text.toString(), etWorkSec.text.toString())
+        val restTime = convertToSeconds(etRestMin.text.toString(), etRestSec.text.toString())
         var name = EMPTY
-
-        if (checkNotEmpty(etWorkMinutes, etWorkSeconds)) {
-            workTime = convertToSeconds(etWorkMinutes.text.toString(), etWorkSeconds.text.toString())
-            if (workTime == 0) workTime = 1
-        } else
-            workTime = 1
-
-
-        if (checkNotEmpty(etRestMinutes, etRestSeconds)) {
-            restTime = convertToSeconds(etRestMinutes.text.toString(), etRestSeconds.text.toString())
-            if (restTime == 0) restTime = 1
-        } else
-            restTime = 1
 
         if (checkNotEmpty(etIntervalName))
             name = etIntervalName.text.toString()
@@ -117,10 +106,6 @@ class IntervalEditDialog : BaseDialog() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repairMemoryLeak(
-                etWorkMinutes, etWorkSeconds,
-                etRestMinutes, etRestSeconds,
-                etRepeatsCount, etIntervalName
-        )
+        repairMemoryLeak(etWorkMin, etWorkSec, etRestMin, etRestSec, etRepeats, etIntervalName)
     }
 }

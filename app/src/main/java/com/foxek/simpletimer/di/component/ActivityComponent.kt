@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.di.component
 
-import com.foxek.simpletimer.di.PerActivity
+import com.foxek.simpletimer.di.PerFragment
 import com.foxek.simpletimer.di.module.ActivityModule
 import com.foxek.simpletimer.ui.interval.IntervalFragment
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog
@@ -12,7 +12,7 @@ import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
 
 import dagger.Component
 
-@PerActivity
+@PerFragment
 @Component(dependencies = [ApplicationComponent::class], modules = [ActivityModule::class])
 interface ActivityComponent {
 

@@ -15,7 +15,7 @@ abstract class BaseDialog : DialogFragment(), MvpView {
     abstract val dialogTag: String
 
     val activityComponent: ActivityComponent?
-        get() = (activity as BaseActivity).component
+        get() = (targetFragment as BaseFragment).component
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View? {
         dialog?.setCanceledOnTouchOutside(true)

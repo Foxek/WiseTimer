@@ -12,8 +12,6 @@ import io.reactivex.Single
 @Dao
 interface IntervalDAO {
 
-    @get:Query("SELECT MAX(id)  FROM Interval")
-    val lastId: Single<Int>
 
     @Insert
     fun add(interval: Interval)
@@ -32,4 +30,7 @@ interface IntervalDAO {
 
     @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
     fun getAll(workoutId: Int): Flowable<List<Interval>>
+
+    @Query("SELECT MAX(id)  FROM Interval")
+    fun getLastId(): Single<Int>
 }

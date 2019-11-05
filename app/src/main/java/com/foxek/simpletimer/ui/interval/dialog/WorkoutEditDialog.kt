@@ -24,9 +24,9 @@ class WorkoutEditDialog : BaseDialog() {
 
         fun newInstance(name: String?): WorkoutEditDialog {
             val mWorkoutEditDialog = WorkoutEditDialog()
-            val args = Bundle()
-            args.putString(EXTRA_WORKOUT_NAME, name)
-            mWorkoutEditDialog.arguments = args
+            mWorkoutEditDialog.arguments = Bundle().apply {
+                putString(EXTRA_WORKOUT_NAME, name)
+            }
             return mWorkoutEditDialog
         }
     }
@@ -39,21 +39,21 @@ class WorkoutEditDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        etWorkoutName.setText(arguments?.getString(EXTRA_WORKOUT_NAME))
-        etWorkoutName.setSelection(etWorkoutName.text.length)
+        etWorkoutName.apply {
+            setText(arguments?.getString(EXTRA_WORKOUT_NAME))
+            setSelection(etWorkoutName.text.length)
+        }
 
         deleteButton.setOnClickListener {
             dismiss()
-            if (showsDialog) {
+            if (showsDialog)
                 presenter.deleteWorkoutButtonClicked()
-            }
         }
 
         saveButton.setOnClickListener {
             dismiss()
-            if (checkNotEmpty(etWorkoutName)) {
+            if (checkNotEmpty(etWorkoutName))
                 presenter.saveWorkoutButtonClicked(etWorkoutName.text.toString())
-            }
         }
     }
 

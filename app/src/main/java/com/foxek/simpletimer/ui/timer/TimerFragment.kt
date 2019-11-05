@@ -22,8 +22,8 @@ class TimerFragment : BaseFragment(), TimerContact.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        executeInActivity { component?.inject(this@TimerFragment) }
 
+        component?.inject(this)
         presenter.attachView(this)
     }
 

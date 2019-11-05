@@ -32,14 +32,14 @@ class IntervalInteractor @Inject constructor(
     }
 
     override fun addInterval(name: String, work: Int, rest: Int): Disposable {
-        return database.intervalDAO.lastId
+        return database.intervalDAO.getLastId()
                 .flatMapCompletable {
                     val interval = Interval(name, work, rest, workoutId, it + 1)
                     Completable.fromAction { database.intervalDAO.add(interval) }
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({},{})
     }
 
     override fun updateInterval(name: String, work: Int, rest: Int): Disposable {
@@ -52,7 +52,9 @@ class IntervalInteractor @Inject constructor(
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({},{})
+                .subscribe({
+
+                },{ error -> })
     }
 
     override fun deleteInterval(): Disposable {
@@ -70,7 +72,7 @@ class IntervalInteractor @Inject constructor(
         return Completable.fromAction { database.workoutDAO.update(workoutName, workoutId) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({},{})
     }
 
     override fun updateVolume(state: Boolean): Completable {

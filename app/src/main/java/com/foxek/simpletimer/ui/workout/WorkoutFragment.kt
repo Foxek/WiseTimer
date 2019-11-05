@@ -32,43 +32,40 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        executeInActivity { component?.inject(this@WorkoutFragment) }
+        component?.inject(this)
         presenter.attachView(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         presenter.viewIsReady()
 
-        createButton.setOnClickListener { presenter.createButtonClicked() }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
-    }
-
-    override fun startIntervalFragment(position: Int, name: String) {
-        val args = Bundle().apply {
-            putInt(EXTRA_WORKOUT_ID, position)
-            putString(EXTRA_WORKOUT_NAME, name)
+        createButton.setOnClickListener {
+            presenter.createButtonClicked()
         }
 
-        executeInActivity { replaceFragment(IntervalFragment(), args) }
-    }
-
-    override fun setWorkoutList() {
-        viewAdapter.setCallback(this)
         workoutList.apply {
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
             isNestedScrollingEnabled = false
             adapter = viewAdapter
         }
+
+        viewAdapter.setCallback(this)
     }
 
-    override fun renderWorkoutList(workoutList: List<Workout>) {
-        viewAdapter.submitList(workoutList)
+    override fun startIntervalFragment(id: Int, name: String?) {
+        val args = Bundle().apply {
+            putInt(EXTRA_WORKOUT_ID, id)
+            putString(EXTRA_WORKOUT_NAME, name)
+        }
+
+        executeInActivity { replaceFragment(IntervalFragment(), args) }
+    }
+
+    override fun renderWorkoutList(list: List<Workout>) {
+        viewAdapter.submitList(list)
     }
 
     override fun showCreateDialog() {
@@ -77,5 +74,10 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
 
     override fun onListItemClick(workout: Workout) {
         presenter.onListItemClicked(workout)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 }

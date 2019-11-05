@@ -11,11 +11,9 @@ interface WorkoutContact {
 
     interface View : MvpView {
 
-        fun startIntervalFragment(position: Int, name: String)
+        fun startIntervalFragment(id: Int, name: String?)
 
-        fun setWorkoutList()
-
-        fun renderWorkoutList(workoutList: List<Workout>)
+        fun renderWorkoutList(list: List<Workout>)
 
         fun showCreateDialog()
     }

@@ -16,8 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:buttonTint="@color/colorTint"
-        app:layout_constraintEnd_toEndOf="@+id/etRestSeconds"
-        app:layout_constraintTop_toBottomOf="@+id/etRepeatsCount" />
+        app:layout_constraintEnd_toEndOf="@+id/etRestSec"
+        app:layout_constraintTop_toBottomOf="@+id/etRepeats" />
 
     <CheckBox
         android:id="@+id/cbNameVisibility"
@@ -27,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:buttonTint="@color/colorTint"
         android:checked="true"
-        app:layout_constraintEnd_toEndOf="@+id/etRestSeconds"
+        app:layout_constraintEnd_toEndOf="@+id/etRestSec"
         app:layout_constraintTop_toBottomOf="@+id/cbRepeatVisibility" />
 
     <EditText
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
     <EditText
-        android:id="@+id/etWorkMinutes"
+        android:id="@+id/etWorkMin"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etIntervalName" />
 
     <EditText
-        android:id="@+id/etWorkSeconds"
+        android:id="@+id/etWorkSec"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -73,12 +73,12 @@
         android:inputType="textNoSuggestions|number"
         android:maxLength="2"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etWorkMinutes"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkMin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etWorkMinutes" />
+        app:layout_constraintTop_toTopOf="@+id/etWorkMin" />
 
     <EditText
-        android:id="@+id/etRestSeconds"
+        android:id="@+id/etRestSec"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -90,10 +90,10 @@
         android:maxLength="2"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWorkSeconds" />
+        app:layout_constraintTop_toBottomOf="@+id/etWorkSec" />
 
     <EditText
-        android:id="@+id/etRestMinutes"
+        android:id="@+id/etRestMin"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -103,12 +103,12 @@
         android:inputType="textNoSuggestions|number"
         android:maxLength="2"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etRestSeconds"
+        app:layout_constraintBottom_toBottomOf="@+id/etRestSec"
         app:layout_constraintEnd_toStartOf="@+id/rest_divider"
-        app:layout_constraintTop_toTopOf="@+id/etRestSeconds" />
+        app:layout_constraintTop_toTopOf="@+id/etRestSec" />
 
     <EditText
-        android:id="@+id/etRepeatsCount"
+        android:id="@+id/etRepeats"
         style="@style/CustomEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -122,10 +122,10 @@
         android:maxLength="2"
         android:textSize="24sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/etRestSeconds"
+        app:layout_constraintEnd_toEndOf="@+id/etRestSec"
         app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/etRestMinutes"
-        app:layout_constraintTop_toBottomOf="@+id/etRestMinutes" />
+        app:layout_constraintStart_toStartOf="@+id/etRestMin"
+        app:layout_constraintTop_toBottomOf="@+id/etRestMin" />
 
     <TextView
         android:id="@+id/dialogTitle"
@@ -147,9 +147,9 @@
         android:text="@string/timer_work_time"
         android:textColor="#424242"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etWorkMinutes"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkMin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etWorkMinutes" />
+        app:layout_constraintTop_toTopOf="@+id/etWorkMin" />
 
     <TextView
         android:id="@+id/work_divider"
@@ -159,9 +159,9 @@
         android:text="@string/dialog_interval_setting_divider"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dialog_header_size"
-        app:layout_constraintBottom_toBottomOf="@+id/etWorkMinutes"
-        app:layout_constraintEnd_toStartOf="@+id/etWorkSeconds"
-        app:layout_constraintTop_toTopOf="@+id/etWorkMinutes"
+        app:layout_constraintBottom_toBottomOf="@+id/etWorkMin"
+        app:layout_constraintEnd_toStartOf="@+id/etWorkSec"
+        app:layout_constraintTop_toTopOf="@+id/etWorkMin"
         app:layout_constraintVertical_bias="0.523" />
 
     <TextView
@@ -172,9 +172,9 @@
         android:text="@string/timer_rest_time"
         android:textColor="#424242"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etRestMinutes"
+        app:layout_constraintBottom_toBottomOf="@+id/etRestMin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etRestMinutes" />
+        app:layout_constraintTop_toTopOf="@+id/etRestMin" />
 
     <TextView
         android:id="@+id/rest_divider"
@@ -183,9 +183,9 @@
         android:text="@string/dialog_interval_setting_divider"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dialog_header_size"
-        app:layout_constraintBottom_toBottomOf="@+id/etRestSeconds"
-        app:layout_constraintEnd_toStartOf="@+id/etRestSeconds"
-        app:layout_constraintTop_toTopOf="@+id/etRestSeconds" />
+        app:layout_constraintBottom_toBottomOf="@+id/etRestSec"
+        app:layout_constraintEnd_toStartOf="@+id/etRestSec"
+        app:layout_constraintTop_toTopOf="@+id/etRestSec" />
 
     <TextView
         android:id="@+id/deleteButton"
@@ -220,9 +220,9 @@
         android:textColor="#424242"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/etRepeatsCount"
+        app:layout_constraintBottom_toBottomOf="@+id/etRepeats"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etRepeatsCount" />
+        app:layout_constraintTop_toTopOf="@+id/etRepeats" />
 
     <TextView
         android:id="@+id/repeat_description"
@@ -231,8 +231,8 @@
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/dialog_interval_setting_repeats"
-        android:textSize="14sp"
         android:textColor="#424242"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/cbRepeatVisibility"
         app:layout_constraintEnd_toStartOf="@+id/cbRepeatVisibility"
         app:layout_constraintStart_toStartOf="@+id/rest_name"
@@ -245,15 +245,15 @@
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/dialog_interval_setting_name"
-        android:textSize="14sp"
         android:textColor="#424242"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/cbNameVisibility"
         app:layout_constraintEnd_toStartOf="@+id/cbNameVisibility"
         app:layout_constraintStart_toStartOf="@+id/rest_name"
         app:layout_constraintTop_toTopOf="@+id/cbNameVisibility" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/repeatGroup"
+        android:id="@+id/repeatDescGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="cbRepeatVisibility,repeat_description"

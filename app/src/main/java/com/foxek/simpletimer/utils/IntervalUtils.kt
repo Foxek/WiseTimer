@@ -1,8 +1,13 @@
 package com.foxek.simpletimer.utils
 
-
 fun convertToSeconds(minute: String, seconds: String): Int {
-    return Integer.valueOf(minute) * 60 + Integer.valueOf(seconds)
+    val result: Int
+
+    return if ((minute.isNotEmpty()) and (seconds.isNotEmpty())) {
+        result = minute.toInt() * 60 + seconds.toInt()
+        if (result == 0) 1 else result
+    } else
+        1
 }
 
 fun formatEditTextData(time: Int): String {

@@ -14,12 +14,6 @@ import io.reactivex.Single
 @Dao
 interface WorkoutDAO {
 
-    @get:Query("SELECT MAX(uid) FROM trainings")
-    val lastId: Maybe<Int>
-
-    @get:Query("SELECT *, COUNT(*) AS intervalNumber FROM trainings, Interval WHERE trainingID = uid GROUP BY trainingID HAVING intervalNumber != 0")
-    val all: Flowable<List<Workout>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(workout: Workout)
 
@@ -34,6 +28,12 @@ interface WorkoutDAO {
 
     @Query("SELECT * FROM trainings WHERE uid = :WorkoutID")
     fun getById(WorkoutID: Int): Single<Workout>
+
+    @Query("SELECT *, COUNT(*) AS intervalNumber FROM trainings, Interval WHERE trainingID = uid GROUP BY trainingID HAVING intervalNumber != 0")
+    fun getAll(): Flowable<List<Workout>>
+
+    @Query("SELECT MAX(uid) FROM trainings")
+    fun getLastId(): Maybe<Int>
 
     @Query("SELECT volumeState FROM trainings WHERE uid = :WorkoutID")
     fun getVolume(WorkoutID: Int): Single<Boolean>

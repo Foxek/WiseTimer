@@ -12,12 +12,10 @@ class WorkoutPresenter @Inject constructor(
 ) : BasePresenter<WorkoutContact.View>(), WorkoutContact.Presenter {
 
     override fun viewIsReady() {
-        view?.setWorkoutList()
-
         disposable.add(interactor.fetchWorkoutList()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ workoutList ->
-                    view?.renderWorkoutList(workoutList)
+                .subscribe({ workouts ->
+                    view?.renderWorkoutList(workouts)
                 }, {
 
                 })
@@ -33,6 +31,6 @@ class WorkoutPresenter @Inject constructor(
     }
 
     override fun onListItemClicked(item: Workout) {
-        view?.startIntervalFragment(item.uid, item.name!!)
+        view?.startIntervalFragment(item.uid, item.name)
     }
 }

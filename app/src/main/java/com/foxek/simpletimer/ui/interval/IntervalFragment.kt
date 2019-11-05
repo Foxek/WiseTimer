@@ -33,8 +33,7 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        executeInActivity { component?.inject(this@IntervalFragment) }
-
+        component?.inject(this)
         presenter.attachView(this)
 
     }

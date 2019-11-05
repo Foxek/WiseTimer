@@ -1,9 +1,7 @@
 package com.foxek.simpletimer.ui.interval.dialog
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BaseDialog
@@ -15,6 +13,9 @@ import com.foxek.simpletimer.utils.Constants.EMPTY
 import com.foxek.simpletimer.utils.convertToSeconds
 import com.foxek.simpletimer.utils.formatEditTextData
 import kotlinx.android.synthetic.main.dialog_edit_interval.*
+import kotlinx.android.synthetic.main.dialog_edit_interval.deleteButton
+import kotlinx.android.synthetic.main.dialog_edit_interval.dialogTitle
+import kotlinx.android.synthetic.main.dialog_edit_interval.saveButton
 
 class IntervalCreateDialog : BaseDialog() {
 
@@ -41,11 +42,11 @@ class IntervalCreateDialog : BaseDialog() {
 
         cbRepeatVisibility.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
+                etRepeats.visibility = View.VISIBLE
                 repeatName.visibility = View.VISIBLE
-                etRepeatsCount.visibility = View.VISIBLE
-            } else {
+            } else{
+                etRepeats.visibility = View.GONE
                 repeatName.visibility = View.GONE
-                etRepeatsCount.visibility = View.GONE
             }
         }
 
@@ -64,41 +65,22 @@ class IntervalCreateDialog : BaseDialog() {
     }
 
     private fun prepareEditText() {
-        etWorkMinutes.setText(formatEditTextData(0))
-        etWorkSeconds.setText(formatEditTextData(0))
+        etWorkMin.setText(formatEditTextData(0))
+        etWorkSec.setText(formatEditTextData(0))
 
-        etRestMinutes.setText(formatEditTextData(0))
-        etRestSeconds.setText(formatEditTextData(0))
+        etRestMin.setText(formatEditTextData(0))
+        etRestSec.setText(formatEditTextData(0))
 
-        etRepeatsCount.setText("1")
+        etRepeats.setText("1")
     }
 
     private fun onSaveButtonClick() {
-        var workTime: Int
-        var restTime: Int
-        var repeat: Int
+        val workTime = convertToSeconds(etWorkMin.text.toString(), etWorkSec.text.toString())
+        val restTime = convertToSeconds(etRestMin.text.toString(), etRestSec.text.toString())
+        val repeat = if (checkNotEmpty(etRepeats)) etRepeats.text.toString().toInt() else 1
         var name = EMPTY
 
-        if (etWorkMinutes.text.toString() != EMPTY && etWorkSeconds.text.toString() != EMPTY) {
-            workTime = convertToSeconds(etWorkMinutes.text.toString(), etWorkSeconds.text.toString())
-            if (workTime == 0) workTime = 1
-        } else
-            workTime = 1
-
-
-        if (etRestMinutes.text.toString() != EMPTY && etRestSeconds.text.toString() != EMPTY) {
-            restTime = convertToSeconds(etRestMinutes.text.toString(), etRestSeconds.text.toString())
-            if (restTime == 0) restTime = 1
-        } else
-            restTime = 1
-
-        if (etRepeatsCount.text.toString() != EMPTY) {
-            repeat = Integer.valueOf(etRepeatsCount.text.toString())
-            if (repeat == 0) repeat = 1
-        } else
-            repeat = 1
-
-        if (etIntervalName.text.toString() != EMPTY)
+        if (checkNotEmpty(etIntervalName))
             name = etIntervalName.text.toString()
 
         for (i in 1..repeat)
@@ -110,10 +92,6 @@ class IntervalCreateDialog : BaseDialog() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repairMemoryLeak(
-                etWorkMinutes, etWorkSeconds,
-                etRestMinutes, etRestSeconds,
-                etRepeatsCount, etIntervalName
-        )
+        repairMemoryLeak(etWorkMin, etWorkSec, etRestMin, etRestSec, etRepeats, etIntervalName)
     }
 }
