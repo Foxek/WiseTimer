@@ -19,9 +19,10 @@ abstract class BaseFragment : Fragment(), MvpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         component = DaggerActivityComponent.builder()
                 .activityModule(ActivityModule())
-                .applicationComponent((activity?.application as AndroidApplication).getComponent())
+                .applicationComponent(AndroidApplication.component)
                 .build()
     }
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View {
@@ -43,7 +44,7 @@ abstract class BaseFragment : Fragment(), MvpView {
     fun showDialog(dialog: BaseDialog){
         dialog.setTargetFragment(this,123)
         dialog.show(fragmentManager!!, dialog.dialogTag)
-    } //= executeInActivity { showDialog(dialog) }
+    }
 
     fun close() = fragmentManager?.popBackStack()
 }

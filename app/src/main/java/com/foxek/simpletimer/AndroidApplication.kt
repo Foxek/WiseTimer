@@ -10,18 +10,16 @@ import com.foxek.simpletimer.di.module.ApplicationModule
 class AndroidApplication : Application() {
 
     companion object {
-        lateinit var appComponent: ApplicationComponent
+        lateinit var component: ApplicationComponent
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerApplicationComponent.builder()
+        component = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .build()
 
-        appComponent.inject(this)
+        component.inject(this)
     }
-
-    fun getComponent(): ApplicationComponent = appComponent
 }

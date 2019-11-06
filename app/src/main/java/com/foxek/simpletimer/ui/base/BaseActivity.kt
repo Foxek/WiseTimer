@@ -6,20 +6,18 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
-import com.foxek.simpletimer.AndroidApplication
-import com.foxek.simpletimer.di.component.ActivityComponent
-import com.foxek.simpletimer.di.module.ActivityModule
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.di.component.DaggerActivityComponent
 
 abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     abstract var fragment: BaseFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -46,10 +44,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
             replace(R.id.container, fragment)
             addToBackStack(fragment.tag)
         }
-    }
-
-    fun showDialog(dialog: BaseDialog) {
-        dialog.show(supportFragmentManager, dialog.dialogTag)
     }
 
     fun hideSoftKeyboard() {
