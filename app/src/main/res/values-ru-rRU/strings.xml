@@ -37,6 +37,7 @@
     <string name="dialog_interval_setting_divider">:</string>
     <string name="dialog_interval_setting_repeats">Повторить несколько раз</string>
     <string name="dialog_interval_setting_name">Интервал без названия</string>
+    <string name="dialog_interval_setting_type">Тип интервала</string>
     <string name="dialog_interval_setting_name_hint">Введите название интервала</string>
 
     <string name="training_sector_title">Список тренировок</string>
@@ -54,4 +55,10 @@
     <string name="start_workout_button">Начать тренировку</string>
 
     <string name="interval_title">Список интервалов</string>
+
+    <string-array name="type_list">
+        <item>Работа/Отдых</item>
+        <item>Только работа</item>
+        <item>Только отдых</item>
+    </string-array>
 </resources>

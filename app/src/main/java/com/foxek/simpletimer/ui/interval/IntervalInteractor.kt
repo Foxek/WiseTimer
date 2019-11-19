@@ -31,10 +31,10 @@ class IntervalInteractor @Inject constructor(
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun addInterval(name: String, work: Int, rest: Int): Disposable {
+    override fun addInterval(name: String, type: Int, work: Int, rest: Int): Disposable {
         return database.intervalDAO.getLastId()
                 .flatMapCompletable {
-                    val interval = Interval(name, work, rest, workoutId, it + 1)
+                    val interval = Interval(name, work, rest, workoutId, type,it + 1)
                     Completable.fromAction { database.intervalDAO.add(interval) }
                 }
                 .subscribeOn(Schedulers.io())
@@ -42,10 +42,11 @@ class IntervalInteractor @Inject constructor(
                 .subscribe({},{})
     }
 
-    override fun updateInterval(name: String, work: Int, rest: Int): Disposable {
+    override fun updateInterval(name: String, type: Int, work: Int, rest: Int): Disposable {
         return database.intervalDAO.getById(intervalId, workoutId)
                 .flatMapCompletable {
                     it.name = name
+                    it.type = type
                     it.workTime = work
                     it.restTime = rest
                     Completable.fromAction { database.intervalDAO.update(it) }

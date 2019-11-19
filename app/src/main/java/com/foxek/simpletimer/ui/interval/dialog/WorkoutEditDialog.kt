@@ -59,6 +59,6 @@ class WorkoutEditDialog : BaseDialog() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repairMemoryLeak(etWorkoutName)
+        etWorkoutName.isCursorVisible = false
     }
 }

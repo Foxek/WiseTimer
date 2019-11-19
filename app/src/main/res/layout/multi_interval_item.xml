@@ -16,9 +16,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/work_name"
+        app:layout_constraintBottom_toBottomOf="@+id/workHint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/work_name"
+        app:layout_constraintTop_toTopOf="@+id/workHint"
         app:srcCompat="@drawable/ic_hourglass"
         tools:ignore="ContentDescription" />
 
@@ -27,9 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rest_name"
+        app:layout_constraintBottom_toBottomOf="@+id/restHint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rest_name"
+        app:layout_constraintTop_toTopOf="@+id/restHint"
         app:srcCompat="@drawable/ic_hourglass"
         tools:ignore="ContentDescription" />
 
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/work_name"
+        android:id="@+id/workHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toTopOf="@+id/etWorkTime" />
 
     <TextView
-        android:id="@+id/rest_name"
+        android:id="@+id/restHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

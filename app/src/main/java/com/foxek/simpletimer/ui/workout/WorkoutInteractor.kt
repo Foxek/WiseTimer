@@ -30,7 +30,7 @@ class WorkoutInteractor @Inject constructor(
                     .flatMapCompletable { id ->
 
                         val workout = Workout(name, id + 1, 1, true)
-                        val interval = Interval(EMPTY, 1, 1, id + 1, 0)
+                        val interval = Interval(EMPTY, 1, 1, id + 1, 0,0)
 
                         Completable.concatArray(
                                 Completable.fromAction { database.workoutDAO.add(workout) },

@@ -1,22 +1,5 @@
 package com.foxek.simpletimer.utils
 
-fun convertToSeconds(minute: String, seconds: String): Int {
-    val result: Int
-
-    return if ((minute.isNotEmpty()) and (seconds.isNotEmpty())) {
-        result = minute.toInt() * 60 + seconds.toInt()
-        if (result == 0) 1 else result
-    } else
-        1
-}
-
-fun formatEditTextData(time: Int): String {
-    return if (time < 10)
-        "0$time"
-    else
-        time.toString()
-}
-
 fun formatIntervalData(time: Int): String {
     val minutes: Int = time / 60
     val seconds: Int = time % 60

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -15,7 +15,7 @@
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
-    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+    <style name="CustomDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/dialog_bg</item>
         <item name="android:windowMinWidthMajor">80%</item>
@@ -59,4 +59,11 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="CustomSpinnerItems" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >16sp</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+        <item name="android:textColor">@color/colorTextHeader</item>
+    </style>
+
 </resources>

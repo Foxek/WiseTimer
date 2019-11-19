@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import com.foxek.simpletimer.R
 import com.foxek.simpletimer.di.component.ActivityComponent
+import kotlinx.android.synthetic.main.dialog_edit_interval.*
 
 abstract class BaseDialog : DialogFragment(), MvpView {
 
@@ -20,11 +20,6 @@ abstract class BaseDialog : DialogFragment(), MvpView {
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View? {
         dialog?.setCanceledOnTouchOutside(true)
         return inflater.inflate(layoutId, parent, false)
-    }
-
-    open fun repairMemoryLeak(vararg widgets: EditText) {
-        for (et in widgets)
-            et.isCursorVisible = false
     }
 
     fun checkNotEmpty(vararg widgets: EditText): Boolean {

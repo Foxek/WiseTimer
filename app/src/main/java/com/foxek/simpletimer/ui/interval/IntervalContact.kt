@@ -37,9 +37,9 @@ interface IntervalContact {
 
         fun viewIsReady(id: Int)
 
-        fun saveIntervalButtonClicked(name: String, workTime: Int, restTime: Int)
+        fun saveIntervalButtonClicked(name: String, type: Int, workTime: Int, restTime: Int)
 
-        fun createIntervalButtonClicked(name: String, workTime: Int, restTime: Int)
+        fun createIntervalButtonClicked(name: String, type: Int, workTime: Int, restTime: Int)
 
         fun deleteIntervalButtonClicked()
 
@@ -64,9 +64,9 @@ interface IntervalContact {
 
         fun fetchIntervalList(): Flowable<List<Interval>>
 
-        fun addInterval(name: String, work: Int, rest: Int): Disposable
+        fun addInterval(name: String, type: Int, work: Int, rest: Int): Disposable
 
-        fun updateInterval(name: String, work: Int, rest: Int): Disposable
+        fun updateInterval(name: String, type: Int, work: Int, rest: Int): Disposable
 
         fun deleteInterval(): Disposable
 

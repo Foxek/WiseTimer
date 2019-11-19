@@ -35,18 +35,20 @@ class WorkoutCreateDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createButton.setOnClickListener {
-            if (checkNotEmpty(etWorkoutName)) {
-                dismiss()
-                presenter.saveButtonClicked(etWorkoutName.text.toString())
-            } else {
-                errorHint.visibility = View.VISIBLE
-            }
+        createButton.setOnClickListener { createButtonClick() }
+    }
+
+    private fun createButtonClick(){
+        if (checkNotEmpty(etWorkoutName)) {
+            dismiss()
+            presenter.saveButtonClicked(etWorkoutName.text.toString())
+        } else {
+            errorHint.visibility = View.VISIBLE
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repairMemoryLeak(etWorkoutName)
+        etWorkoutName.isCursorVisible = false
     }
 }

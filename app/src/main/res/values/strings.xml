@@ -30,6 +30,7 @@
     <string name="dialog_interval_setting_divider">:</string>
     <string name="dialog_interval_setting_repeats">Repeat several times</string>
     <string name="dialog_interval_setting_name">Without name</string>
+    <string name="dialog_interval_setting_type">Interval type</string>
     <string name="dialog_interval_setting_name_hint">Enter intervals name</string>
 
     <string name="training_subtitle">Welcome to</string>
@@ -47,4 +48,10 @@
     <string name="start_workout_button">Start workout</string>
 
     <string name="interval_title">Interval List</string>
+
+    <string-array name="type_list">
+        <item>Work/Rest</item>
+        <item>Only work</item>
+        <item>Only rest</item>
+    </string-array>
 </resources>

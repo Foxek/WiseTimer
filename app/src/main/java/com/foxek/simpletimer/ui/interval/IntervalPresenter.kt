@@ -61,12 +61,12 @@ class IntervalPresenter @Inject constructor(
         view?.showIntervalCreateDialog()
     }
 
-    override fun saveIntervalButtonClicked(name: String, workTime: Int, restTime: Int) {
-        disposable.add(interactor.updateInterval(name, workTime, restTime))
+    override fun saveIntervalButtonClicked(name: String, type:Int, workTime: Int, restTime: Int) {
+        disposable.add(interactor.updateInterval(name, type, workTime, restTime))
     }
 
-    override fun createIntervalButtonClicked(name: String, workTime: Int, restTime: Int) {
-        disposable.add(interactor.addInterval(name, workTime, restTime))
+    override fun createIntervalButtonClicked(name: String, type:Int, workTime: Int, restTime: Int) {
+        disposable.add(interactor.addInterval(name, type, workTime, restTime))
     }
 
     override fun deleteIntervalButtonClicked() {

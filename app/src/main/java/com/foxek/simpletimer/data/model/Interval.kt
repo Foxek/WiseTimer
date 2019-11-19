@@ -22,6 +22,9 @@ class Interval(
         @ColumnInfo(name = "trainingID")
         var workoutId: Int,
 
+        @ColumnInfo(name = "interval_type")
+        var type: Int,
+
         @ColumnInfo(name = "position_id")
         var position: Int
 ) {

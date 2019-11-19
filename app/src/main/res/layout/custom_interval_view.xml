@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/etMinutes"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/etMinutes"
+        android:layout_toEndOf="@id/etMinutes"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/dialog_interval_setting_divider"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dialog_header_size" />
+
+    <EditText
+        android:id="@+id/etSeconds"
+        style="@style/CustomEditText"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/divider"
+        android:digits="0123456789"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions|number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        tools:ignore="LabelFor" />
+
+</RelativeLayout>
