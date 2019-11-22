@@ -2,6 +2,9 @@ package com.foxek.simpletimer.ui.timer
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BasePresenter
+import com.foxek.simpletimer.utils.Constants.POST_TIME_TYPE
+import com.foxek.simpletimer.utils.Constants.PREPARE_TIME_TYPE
+import com.foxek.simpletimer.utils.Constants.REST_TIME_TYPE
 
 import javax.inject.Inject
 
@@ -11,8 +14,10 @@ import io.reactivex.schedulers.Schedulers
 
 import com.foxek.simpletimer.utils.Constants.TIMER_PLAYING
 import com.foxek.simpletimer.utils.Constants.TIMER_STOPPED
+import com.foxek.simpletimer.utils.Constants.WORK_TIME_TYPE
 import com.foxek.simpletimer.utils.formatIntervalData
 import com.foxek.simpletimer.utils.formatIntervalNumber
+import java.util.*
 
 class TimerPresenter @Inject constructor(
         private var interactor: TimerContact.Interactor
@@ -28,7 +33,6 @@ class TimerPresenter @Inject constructor(
     override fun prepareIntervals(workoutId: Int) {
 
         disposable.add(interactor.getVolume(workoutId))
-
 
         disposable.add(interactor.fetchIntervalList(workoutId)
                 .subscribeOn(Schedulers.io())
@@ -69,23 +73,24 @@ class TimerPresenter @Inject constructor(
         disposable.add(interactor.intervalFinishedCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ intervalNumber ->
-                    if (intervalNumber < interactor.getIntervalSize()) {
-                        interactor.indicateEndOfInterval()
-                        if (intervalNumber and 1 == 0)
+                .subscribe({ time ->
+                    when (time.type) {
+                        REST_TIME_TYPE -> {
+                            interactor.indicateEndOfInterval()
                             view?.showCounterType(R.string.timer_rest_time)
-                        else {
+                        }
+                        WORK_TIME_TYPE -> {
+                            interactor.indicateEndOfInterval()
                             view?.showCounterType(R.string.timer_work_time)
                             view?.showCounterNumber(formatIntervalNumber(++currentInterval))
-                            view?.showCounterName(interactor.getIntervalName(currentInterval))
+                            view?.showCounterName(time.name)
                         }
-                    } else {
-                        interactor.indicateEndOfWorkout()
-                        view?.startWorkoutActivity()
+                        POST_TIME_TYPE -> {
+                            interactor.indicateEndOfWorkout()
+                            view?.startWorkoutActivity()
+                        }
                     }
-                }, {
-
-                })
+                }, { })
         )
     }
 
@@ -93,11 +98,7 @@ class TimerPresenter @Inject constructor(
         disposable.add(interactor.tickCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ time ->
-                    view?.showCurrentCounter(formatIntervalData(time!!))
-                }, {
-
-                })
+                .subscribe({ time -> view?.showCurrentCounter(formatIntervalData(time)) }, {})
         )
     }
 

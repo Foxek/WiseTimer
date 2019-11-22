@@ -7,6 +7,7 @@
     <string name="timer_prepare_number">Скоро начинаем</string>
     <string name="timer_work_time">Время работы</string>
     <string name="timer_rest_time">Время отдыха</string>
+    <string name="timer_without_rest">Без отдыха</string>
     <string name="timer_repeat">Повторы</string>
 
     <string name="time_min_hint">мин</string>
@@ -57,8 +58,7 @@
     <string name="interval_title">Список интервалов</string>
 
     <string-array name="type_list">
-        <item>Работа/Отдых</item>
-        <item>Только работа</item>
-        <item>Только отдых</item>
+        <item>С отдыхом</item>
+        <item>Без отдыха</item>
     </string-array>
 </resources>

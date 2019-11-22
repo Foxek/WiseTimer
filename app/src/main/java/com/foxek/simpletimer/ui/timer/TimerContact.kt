@@ -1,5 +1,6 @@
 package com.foxek.simpletimer.ui.timer
 
+import com.foxek.simpletimer.data.model.Time
 import com.foxek.simpletimer.ui.base.MvpPresenter
 import com.foxek.simpletimer.ui.base.MvpView
 
@@ -22,7 +23,7 @@ interface TimerContact {
 
         fun showCounterNumber(number: String)
 
-        fun showCounterName(name: String)
+        fun showCounterName(name: String?)
     }
 
     interface Presenter : MvpPresenter<View> {
@@ -38,11 +39,9 @@ interface TimerContact {
 
         fun getTimerState(): Boolean
 
-        fun getIntervalSize(): Int
-
         fun fetchIntervalList(workoutId: Int): Flowable<Int>
 
-        fun intervalFinishedCallback(): Observable<Int>
+        fun intervalFinishedCallback(): Observable<Time>
 
         fun tickCallback(): Observable<Int>
 
@@ -61,8 +60,6 @@ interface TimerContact {
         fun indicateLastSeconds()
 
         fun deleteDependencies()
-
-        fun getIntervalName(id: Int): String
 
         fun setTimerState(timerState: Boolean)
     }

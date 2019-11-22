@@ -16,10 +16,8 @@ import kotlinx.android.synthetic.main.dialog_edit_interval.saveButton
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import com.foxek.simpletimer.utils.Constants
-import com.foxek.simpletimer.utils.Constants.ONLY_REST_TYPE
-import com.foxek.simpletimer.utils.Constants.ONLY_WORK_TYPE
-import com.foxek.simpletimer.utils.Constants.WORK_AND_REST_TYPE
+import com.foxek.simpletimer.utils.Constants.WITHOUT_REST_TYPE
+import com.foxek.simpletimer.utils.Constants.WITH_REST_TYPE
 
 
 class IntervalCreateDialog : BaseDialog() {
@@ -62,23 +60,26 @@ class IntervalCreateDialog : BaseDialog() {
     }
 
     private fun setTypeSpinner() {
-        typeSpinner.adapter = ArrayAdapter(context!!, R.layout.custom_spinner_view, resources.getStringArray(R.array.type_list))
+        val arrayAdapter = ArrayAdapter.createFromResource(
+                context!!,
+                R.array.type_list,
+                R.layout.custom_spinner_view
+        )
+        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_drop_view)
+        typeSpinner.adapter = arrayAdapter
+
         typeSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
-                    WORK_AND_REST_TYPE -> {
+                    WITH_REST_TYPE -> {
                         restGroup.visibility = View.VISIBLE
                         workGroup.visibility = View.VISIBLE
                     }
-                    ONLY_WORK_TYPE -> {
+                    WITHOUT_REST_TYPE -> {
                         restGroup.visibility = View.GONE
                         workGroup.visibility = View.VISIBLE
-                    }
-                    ONLY_REST_TYPE -> {
-                        restGroup.visibility = View.VISIBLE
-                        workGroup.visibility = View.GONE
                     }
                 }
             }

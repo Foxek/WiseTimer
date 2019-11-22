@@ -73,7 +73,7 @@ class TimerFragment : BaseFragment(), TimerContact.View {
         counterNumber.text = number
     }
 
-    override fun showCounterName(name: String) {
+    override fun showCounterName(name: String?) {
         if (name == EMPTY) {
             intervalName.visibility = View.GONE
         } else {

@@ -7,6 +7,7 @@
     <string name="timer_prepare_number">Start soon</string>
     <string name="timer_work_time">Work time</string>
     <string name="timer_rest_time">Rest time</string>
+    <string name="timer_without_rest">Without rest</string>
     <string name="timer_repeat">Repeat</string>
 
     <string name="time_min_hint">min</string>
@@ -50,8 +51,7 @@
     <string name="interval_title">Interval List</string>
 
     <string-array name="type_list">
-        <item>Work/Rest</item>
-        <item>Only work</item>
-        <item>Only rest</item>
+        <item>With rest</item>
+        <item>Without rest</item>
     </string-array>
 </resources>

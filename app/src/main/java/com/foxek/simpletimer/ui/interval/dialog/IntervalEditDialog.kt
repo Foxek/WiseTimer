@@ -1,6 +1,5 @@
 package com.foxek.simpletimer.ui.interval.dialog
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 
 import android.view.View
@@ -85,23 +84,26 @@ class IntervalEditDialog : BaseDialog() {
     }
 
     private fun setTypeSpinner() {
-        typeSpinner.adapter = ArrayAdapter(context!!, R.layout.custom_spinner_view, resources.getStringArray(R.array.type_list))
+        val arrayAdapter = ArrayAdapter.createFromResource(
+                context!!,
+                R.array.type_list,
+                R.layout.custom_spinner_view
+        )
+        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_drop_view)
+        typeSpinner.adapter = arrayAdapter
+
         typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
-                    Constants.WORK_AND_REST_TYPE -> {
+                    Constants.WITH_REST_TYPE -> {
                         restGroup.visibility = View.VISIBLE
                         workGroup.visibility = View.VISIBLE
                     }
-                    Constants.ONLY_WORK_TYPE -> {
+                    Constants.WITHOUT_REST_TYPE -> {
                         restGroup.visibility = View.GONE
                         workGroup.visibility = View.VISIBLE
-                    }
-                    Constants.ONLY_REST_TYPE -> {
-                        restGroup.visibility = View.VISIBLE
-                        workGroup.visibility = View.GONE
                     }
                 }
             }

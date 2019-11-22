@@ -60,10 +60,23 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="CustomSpinnerSelected" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >16sp</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+        <item name="android:textColor">@color/colorTextHeader</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
     <style name="CustomSpinnerItems" parent="@android:style/Widget.TextView" >
         <item name="android:textSize" >16sp</item>
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
         <item name="android:textColor">@color/colorTextHeader</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
     </style>
-
 </resources>
