@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/workoutDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/workoutName"
-        app:srcCompat="@drawable/ic_stopwatch"
+        app:srcCompat="@drawable/ic_list"
         tools:ignore="ContentDescription" />
 
     <ImageView

@@ -2,6 +2,10 @@ package com.foxek.simpletimer.utils
 
 object Constants {
 
+    const val PREFERENCE_NAME = "app_preference"
+    const val KEY_CHANGELOG_VERSION_VIEWED = "viewed_changelog"
+
+
     const val TIMER_STOPPED = false
     const val TIMER_PLAYING = true
 
@@ -18,6 +22,7 @@ object Constants {
     const val EXTRA_REST_TIME = "rest_time"
     const val EXTRA_INTERVAL_NAME = "interval_name"
     const val EXTRA_TYPE = "interval_type"
+    const val EXTRA_VERSION_NUMBER = "version_number"
 
     const val EMPTY = ""
 

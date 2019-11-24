@@ -2,22 +2,18 @@ package com.foxek.simpletimer.ui.workout
 
 import android.os.Bundle
 import android.view.View
-
-import com.foxek.simpletimer.ui.interval.IntervalFragment
-import com.foxek.simpletimer.R
-import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
-
-import javax.inject.Inject
-
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.foxek.simpletimer.R
 import com.foxek.simpletimer.data.model.Workout
 import com.foxek.simpletimer.ui.base.BaseFragment
-
+import com.foxek.simpletimer.ui.interval.IntervalFragment
 import com.foxek.simpletimer.ui.workout.adapter.WorkoutAdapter
-
+import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.activity_workout.*
+import javax.inject.Inject
+
 
 class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Callback {
 
