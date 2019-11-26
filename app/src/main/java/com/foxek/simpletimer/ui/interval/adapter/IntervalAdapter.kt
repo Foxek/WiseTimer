@@ -47,6 +47,8 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
 
         if (getItem(position).type == WITH_REST_TYPE) {
             holder.itemView.restTime.text = formatIntervalData(getItem(position).restTime)
+        }else{
+            holder.itemView.restHint.text = holder.itemView.resources.getString(R.string.timer_without_rest)
         }
 
         if (getItem(position).name == EMPTY) {
@@ -59,13 +61,7 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-
-        val view = if (viewType == WITH_REST_TYPE) {
-            inflater.inflate(R.layout.multi_interval_item, parent, false)
-        } else {
-            inflater.inflate(R.layout.single_interval_item, parent, false)
-        }
-
+        val view = inflater.inflate(R.layout.multi_interval_item, parent, false)
         return ViewHolder(view)
     }
 
