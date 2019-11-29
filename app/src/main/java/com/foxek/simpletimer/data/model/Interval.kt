@@ -11,10 +11,10 @@ class Interval(
         var name: String?,
 
         @ColumnInfo(name = "work_intervals")
-        var workTime: Int,
+        var work: Int,
 
         @ColumnInfo(name = "rest_intervals")
-        var restTime: Int,
+        var rest: Int,
 
         @ColumnInfo(name = "trainingID")
         var workoutId: Int,

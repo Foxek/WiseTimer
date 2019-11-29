@@ -6,7 +6,6 @@ import com.foxek.simpletimer.ui.interval.IntervalFragment
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog
 import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog
 import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog
-import com.foxek.simpletimer.ui.timer.TimerFragment
 import com.foxek.simpletimer.ui.workout.WorkoutFragment
 import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
 
@@ -20,8 +19,6 @@ interface ActivityComponent {
 
     fun inject(activity: IntervalFragment)
 
-    fun inject(activity: TimerFragment)
-
     fun inject(dialog: WorkoutCreateDialog)
 
     fun inject(dialog: WorkoutEditDialog)
@@ -31,3 +28,4 @@ interface ActivityComponent {
     fun inject(dialog: IntervalEditDialog)
 
 }
+

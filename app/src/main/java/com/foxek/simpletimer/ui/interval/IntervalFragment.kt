@@ -1,5 +1,7 @@
 package com.foxek.simpletimer.ui.interval
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 
@@ -7,7 +9,6 @@ import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog
 import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog
 import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog
-import com.foxek.simpletimer.ui.timer.TimerFragment
 
 import javax.inject.Inject
 
@@ -16,6 +17,9 @@ import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.ui.base.BaseFragment
 
 import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
+import com.foxek.simpletimer.ui.timer.TimerFragment
+import com.foxek.simpletimer.ui.timer.TimerService
+import com.foxek.simpletimer.utils.Constants
 
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
@@ -98,7 +102,20 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun startTimerActivity() {
+//        close()
+//        executeInActivity { replaceFragment(TimerFragment(), arguments) }
         close()
+//        executeInActivity { replaceFragment(ServiceFragment(), arguments) }
+        val intent = Intent(context, TimerService::class.java).apply {
+            action = Constants.ACTION_START
+            putExtra(EXTRA_WORKOUT_ID, arguments?.getInt(EXTRA_WORKOUT_ID,0))
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context?.startForegroundService(intent)
+        }else{
+            context?.startService(intent)
+        }
         executeInActivity { replaceFragment(TimerFragment(), arguments) }
     }
 

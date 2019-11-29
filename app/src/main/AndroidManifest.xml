@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name=".AndroidApplication"
@@ -28,6 +29,7 @@
             </intent-filter>
 
         </activity>
+        <service android:name=".ui.timer.TimerService" />
     </application>
 
 </manifest>

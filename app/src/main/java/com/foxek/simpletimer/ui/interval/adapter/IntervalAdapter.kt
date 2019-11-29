@@ -13,7 +13,6 @@ import com.foxek.simpletimer.utils.formatIntervalData
 import com.foxek.simpletimer.utils.formatIntervalNumber
 import kotlinx.android.synthetic.main.multi_interval_item.view.*
 
-
 class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (IntervalDiffCallback()) {
 
     private var mCallback: Callback? = null
@@ -43,10 +42,10 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.itemView.workTime.text = formatIntervalData(getItem(position).workTime)
+        holder.itemView.workTime.text = formatIntervalData(getItem(position).work)
 
         if (getItem(position).type == WITH_REST_TYPE) {
-            holder.itemView.restTime.text = formatIntervalData(getItem(position).restTime)
+            holder.itemView.restTime.text = formatIntervalData(getItem(position).rest)
         }else{
             holder.itemView.restHint.text = holder.itemView.resources.getString(R.string.timer_without_rest)
         }

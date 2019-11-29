@@ -47,8 +47,8 @@ class IntervalInteractor @Inject constructor(
                 .flatMapCompletable {
                     it.name = name
                     it.type = type
-                    it.workTime = work
-                    it.restTime = rest
+                    it.work = work
+                    it.rest = rest
                     Completable.fromAction { database.intervalDAO.update(it) }
                 }
                 .subscribeOn(Schedulers.io())

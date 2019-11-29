@@ -6,12 +6,8 @@ import com.foxek.simpletimer.data.database.TimerDatabase
 
 import javax.inject.Singleton
 
-import com.foxek.dosimeter.utils.SchedulerProvider
-import com.foxek.dosimeter.utils.SchedulerProviderImpl
-
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
 
 @Module
 class ApplicationModule(private val context: Context) {

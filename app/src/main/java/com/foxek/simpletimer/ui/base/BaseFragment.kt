@@ -37,10 +37,6 @@ abstract class BaseFragment : Fragment(), MvpView {
         close()
     }
 
-    fun hideSoftKeyboard() = executeInActivity { hideSoftKeyboard() }
-
-    fun showMessage(message: String) = executeInActivity { showMessage(message) }
-
     fun showDialog(dialog: BaseDialog){
         dialog.setTargetFragment(this,123)
         dialog.show(fragmentManager!!, dialog.dialogTag)

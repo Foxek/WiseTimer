@@ -1,15 +1,14 @@
 package com.foxek.simpletimer.ui.timer
 
 import com.foxek.simpletimer.data.model.Time
-import com.foxek.simpletimer.ui.base.MvpPresenter
-import com.foxek.simpletimer.ui.base.MvpView
+import com.foxek.simpletimer.data.timer.IntervalTimer
 
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 interface TimerContact {
-    interface View : MvpView {
+
+    interface ServiceCallback {
 
         fun startWorkoutActivity()
 
@@ -26,20 +25,11 @@ interface TimerContact {
         fun showCounterName(name: String?)
     }
 
-    interface Presenter : MvpPresenter<View> {
-
-        fun prepareIntervals(workoutId: Int)
-
-        fun pauseButtonClicked()
-
-        fun resetButtonClicked()
-    }
-
     interface Interactor {
 
-        fun getTimerState(): Boolean
+        fun getTimerState(): IntervalTimer.State
 
-        fun fetchIntervalList(workoutId: Int): Flowable<Int>
+        fun fetchIntervalList(workoutId: Int): Disposable
 
         fun intervalFinishedCallback(): Observable<Time>
 
@@ -47,20 +37,10 @@ interface TimerContact {
 
         fun getVolume(id: Int): Disposable
 
-        fun loadIntervalListToTimer()
-
         fun continueTimer()
 
         fun stopTimer()
 
-        fun indicateEndOfWorkout()
-
-        fun indicateEndOfInterval()
-
-        fun indicateLastSeconds()
-
         fun deleteDependencies()
-
-        fun setTimerState(timerState: Boolean)
     }
 }

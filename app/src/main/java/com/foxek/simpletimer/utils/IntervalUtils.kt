@@ -1,5 +1,10 @@
 package com.foxek.simpletimer.utils
 
+import com.foxek.simpletimer.R
+import com.foxek.simpletimer.utils.Constants.POST_TIME_TYPE
+import com.foxek.simpletimer.utils.Constants.PREPARE_TIME_TYPE
+import com.foxek.simpletimer.utils.Constants.REST_TIME_TYPE
+import com.foxek.simpletimer.utils.Constants.WORK_TIME_TYPE
 import java.util.*
 
 fun formatIntervalData(time: Int): String {
@@ -24,6 +29,14 @@ fun formatIntervalNumber(number: Int): String {
         cyrillicOrdinal(number)
     else
         latinOrdinal(number)
+}
+
+fun formatIntervalType(type: Int?): Int {
+    return when (type) {
+        REST_TIME_TYPE -> R.string.timer_rest_time
+        WORK_TIME_TYPE -> R.string.timer_work_time
+        else -> R.string.timer_prepare
+    }
 }
 
 fun cyrillicOrdinal(number: Int): String {

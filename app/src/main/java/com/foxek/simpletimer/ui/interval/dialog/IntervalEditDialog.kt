@@ -35,8 +35,8 @@ class IntervalEditDialog : BaseDialog() {
             val dialog = IntervalEditDialog()
 
             dialog.arguments = Bundle().apply {
-                putInt(EXTRA_WORK_TIME, interval.workTime)
-                putInt(EXTRA_REST_TIME, interval.restTime)
+                putInt(EXTRA_WORK_TIME, interval.work)
+                putInt(EXTRA_REST_TIME, interval.rest)
                 putInt(EXTRA_TYPE, interval.type)
                 putString(EXTRA_INTERVAL_NAME, interval.name)
             }

@@ -1,10 +1,8 @@
 package com.foxek.simpletimer.ui.base
 
 import android.app.Activity
-import android.content.Context
+
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -44,18 +42,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
             replace(R.id.container, fragment)
             addToBackStack(fragment.tag)
         }
-    }
-
-    fun hideSoftKeyboard() {
-        if (currentFocus != null) {
-            val inputMethodManager =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
-        }
-    }
-
-    fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
 

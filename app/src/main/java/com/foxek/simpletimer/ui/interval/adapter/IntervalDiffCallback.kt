@@ -10,8 +10,8 @@ class IntervalDiffCallback : DiffUtil.ItemCallback<Interval>() {
     }
 
     override fun areContentsTheSame(oldInterval: Interval, newInterval: Interval): Boolean {
-        return (oldInterval.workTime == newInterval.workTime) and
-                (oldInterval.restTime == newInterval.restTime) and
+        return (oldInterval.work == newInterval.work) and
+                (oldInterval.rest == newInterval.rest) and
                 (oldInterval.name == newInterval.name) and
                 (oldInterval.type == newInterval.type)
     }
