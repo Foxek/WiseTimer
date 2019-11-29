@@ -1,8 +1,8 @@
 package com.foxek.simpletimer.ui.timer
 
 import com.foxek.simpletimer.data.database.TimerDatabase
+import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.data.model.Time
-import com.foxek.simpletimer.data.timer.AlarmHelper
 import com.foxek.simpletimer.utils.Constants.EMPTY
 import com.foxek.simpletimer.utils.Constants.POST_TIME_TYPE
 import com.foxek.simpletimer.utils.Constants.PREPARE_TIME
@@ -23,7 +23,7 @@ class TimerInteractor @Inject constructor(
         private val timer: IntervalTimer
 ) : TimerContact.Interactor {
 
-    private var timeList = ArrayList<Time>()
+    private var times = ArrayList<Time>()
 
     override fun deleteDependencies() {
         timer.stop()
@@ -33,29 +33,15 @@ class TimerInteractor @Inject constructor(
         return database.intervalDAO.getAll(workoutId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe{
-                    timeList.add(Time(PREPARE_TIME, PREPARE_TIME_TYPE, 0, EMPTY))
-                }
-                .map{
-                    for (time in it) {
-                        timeList.add(Time(time.work, WORK_TIME_TYPE, it.indexOf(time) + 1, time.name))
-
-                        if (time.type == WITH_REST_TYPE)
-                            timeList.add(Time(time.rest, REST_TIME_TYPE, it.indexOf(time) + 1, time.name))
-                    }
-                    return@map it
-                }
-                .subscribe({
-                    timeList.add(Time(0, POST_TIME_TYPE, timeList.lastIndex, null))
-                    timer.prepare(timeList)
-                }, {})
+                .doOnNext { fetchTimeList(it) }
+                .subscribe({ timer.prepare(times) }, {})
     }
 
     override fun getVolume(id: Int): Disposable {
         return database.workoutDAO.getVolume(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ volume -> timer.setVolume(volume) }, { })
+                .subscribe({ volume -> timer.enableSound(volume) }, { })
     }
 
     override fun continueTimer() {
@@ -67,14 +53,28 @@ class TimerInteractor @Inject constructor(
     }
 
     override fun intervalFinishedCallback(): Observable<Time> {
-        return timer.onIntervalFinished()
+        return timer.onIntervalFinished
     }
 
     override fun tickCallback(): Observable<Int> {
-        return timer.onTimerTickHappened()
+        return timer.onTimerTickHappened
     }
 
     override fun getTimerState(): IntervalTimer.State {
         return timer.state
+    }
+
+    private fun fetchTimeList(intervalList: List<Interval>) {
+
+        times.add(Time(PREPARE_TIME, PREPARE_TIME_TYPE, 0, EMPTY))
+
+        intervalList.forEachIndexed { idx, it ->
+            times.add(Time(it.work, WORK_TIME_TYPE, idx + 1, it.name))
+
+            if (it.type == WITH_REST_TYPE)
+                times.add(Time(it.rest, REST_TIME_TYPE, idx + 1, it.name))
+        }
+
+        times.add(Time(0, POST_TIME_TYPE, times.lastIndex, null))
     }
 }

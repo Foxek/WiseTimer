@@ -1,45 +1,37 @@
 package com.foxek.simpletimer.data.timer
 
 import android.os.CountDownTimer
-import com.foxek.simpletimer.R
 import com.foxek.simpletimer.data.model.Time
-import com.foxek.simpletimer.utils.Constants
 import com.foxek.simpletimer.utils.Constants.POST_TIME_TYPE
 import com.foxek.simpletimer.utils.Constants.REST_TIME_TYPE
 import com.foxek.simpletimer.utils.Constants.WORK_TIME_TYPE
-import com.foxek.simpletimer.utils.formatIntervalNumber
 
 import javax.inject.Inject
 
 import io.reactivex.subjects.PublishSubject
 
-class IntervalTimer @Inject constructor(
-        private val alarmHelper: AlarmHelper
-) {
+class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
+
     enum class State {
         STOPPED, STARTED
     }
 
-    private var timeList = ArrayList<Time>()
-    private var currentIdx: Int = 0
-    private var counter: Long = 0
-
     private var timer: CountDownTimer? = null
+    private var times = ArrayList<Time>()
+    private var currentTimeIndex: Int = 0
+    private var pastTimeInSeconds: Long = 0
+
+    val onTimerTickHappened = PublishSubject.create<Int>()
+    val onIntervalFinished = PublishSubject.create<Time>()
     var state = State.STOPPED
 
-    private val onTickSubject = PublishSubject.create<Int>()
-    private val onFinishSubject = PublishSubject.create<Time>()
-
     fun prepare(timeIntervals: ArrayList<Time>) {
-        timeList = timeIntervals
-        start(timeList[0].time.toLong())
+        times = timeIntervals
+        start(times[0].value.toLong())
     }
 
-    fun onTimerTickHappened() = onTickSubject
-    fun onIntervalFinished() = onFinishSubject
-
     fun restart() {
-        start(counter)
+        start(pastTimeInSeconds)
     }
 
     fun stop() {
@@ -48,8 +40,8 @@ class IntervalTimer @Inject constructor(
         state = State.STOPPED
     }
 
-    fun setVolume(volume: Boolean){
-        alarmHelper.setVolume(volume)
+    fun enableSound(isEnable: Boolean) {
+        alarmHelper.setVolume(isEnable)
     }
 
     private fun start(time: Long) {
@@ -58,7 +50,8 @@ class IntervalTimer @Inject constructor(
         timer = object : CountDownTimer(time * 1000, 500) {
 
             override fun onFinish() {
-                handleFinish(timeList[++currentIdx])
+                stop()
+                handleFinish(times[++currentTimeIndex])
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -69,8 +62,7 @@ class IntervalTimer @Inject constructor(
         timer?.start()
     }
 
-    private fun handleFinish(time: Time){
-        stop()
+    private fun handleFinish(time: Time) {
 
         when (time.type) {
             REST_TIME_TYPE -> indicateEndOfInterval()
@@ -78,17 +70,20 @@ class IntervalTimer @Inject constructor(
             POST_TIME_TYPE -> indicateEndOfWorkout()
         }
 
-        onFinishSubject.onNext(time)
+        onIntervalFinished.onNext(time)
 
-        if (currentIdx < timeList.size - 1) {
-            start(time.time.toLong())
+        if (currentTimeIndex < times.size - 1) {
+            start(time.value.toLong())
         }
     }
 
-    private fun handleTick(timeInMillis: Long){
-        indicateLastSeconds(timeInMillis)
-        counter = timeInMillis / 1000
-        onTickSubject.onNext((counter + 1).toInt())
+    private fun handleTick(pastMillis: Long) {
+
+        if ((pastMillis in 501..999) or (pastMillis in 1501..1999) or (pastMillis in 2501..2999))
+            indicateLastSeconds()
+
+        pastTimeInSeconds = pastMillis / 1000
+        onTimerTickHappened.onNext((pastTimeInSeconds + 1).toInt())
     }
 
     private fun indicateEndOfWorkout() {
@@ -101,8 +96,7 @@ class IntervalTimer @Inject constructor(
         alarmHelper.playLongSound()
     }
 
-    private fun indicateLastSeconds(time: Long) {
-        if ((time in 501..999) or (time in 1501..1999) or (time in 2501..2999))
-           alarmHelper.playSound()
+    private fun indicateLastSeconds() {
+        alarmHelper.playSound()
     }
 }
