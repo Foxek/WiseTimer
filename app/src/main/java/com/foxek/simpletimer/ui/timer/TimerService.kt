@@ -25,21 +25,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
 class TimerService : BaseService() {
 
-    companion object{
+    companion object {
         var isRunning = false
     }
-
-    override val notificationId = 1
-    override val channelId = "ForegroundServiceChannel"
 
     @Inject
     lateinit var interactor: TimerContact.Interactor
 
     private var currentTime: Time? = null
     private var callback: TimerContact.ServiceCallback? = null
+
+    override val notificationId = 1
+    override val channelId = "ForegroundServiceChannel"
 
     override fun onCreate() {
         super.onCreate()
@@ -51,8 +50,7 @@ class TimerService : BaseService() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.action = ACTION_OPEN_TIMER
 
-        val pendingIntent
-                = PendingIntent.getActivity(this, 0, intent, FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_UPDATE_CURRENT)
 
         val notification = createNotification {
             setContentIntent(pendingIntent)
@@ -116,9 +114,7 @@ class TimerService : BaseService() {
         when (time.type) {
             REST_TIME_TYPE -> callback?.showCounterType(R.string.timer_rest_time)
             WORK_TIME_TYPE -> {
-                updateNotification {
-                    setContentTitle(formatIntervalNumber(time.position))
-                }
+                updateNotification { setContentTitle(formatIntervalNumber(time.position)) }
                 callback?.let {
                     it.showCounterType(R.string.timer_work_time)
                     it.showCounterName(time.name)
@@ -130,6 +126,7 @@ class TimerService : BaseService() {
     }
 
     private fun handleTick(time: Int) {
+        currentTime?.value = time
         callback?.showCurrentCounter(formatIntervalData(time))
         updateNotification {
             setContentText("${getString(formatIntervalType(currentTime?.type))}: ${formatIntervalData(time)}")
@@ -137,10 +134,8 @@ class TimerService : BaseService() {
     }
 
     private fun prepareIntervals(workoutId: Int) {
-
         callback?.showCounterType(R.string.timer_prepare)
         disposable.add(interactor.getVolume(workoutId))
-
         disposable.add(interactor.fetchIntervalList(workoutId))
     }
 
@@ -148,9 +143,7 @@ class TimerService : BaseService() {
         disposable.add(interactor.intervalFinishedCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    handleFinish(it)
-                }, { })
+                .subscribe({ handleFinish(it) }, { })
         )
     }
 
@@ -158,11 +151,7 @@ class TimerService : BaseService() {
         disposable.add(interactor.tickCallback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    handleTick(it)
-                }, {
-
-                })
+                .subscribe({ handleTick(it) }, { })
         )
     }
 
@@ -171,12 +160,20 @@ class TimerService : BaseService() {
             get() = this@TimerService
     }
 
-    fun registerServiceClient(callback: TimerContact.ServiceCallback?) {
-        this.callback = callback
+    fun registerServiceClient(timerCallback: TimerContact.ServiceCallback?) {
+        callback = timerCallback
         if ((this.callback != null) and (currentTime != null)) {
-            this.callback?.showCounterType(formatIntervalType(currentTime?.type))
-            this.callback?.showCounterName(currentTime?.name)
-            this.callback?.showCounterNumber(formatIntervalNumber(currentTime?.position!!))
+
+            callback?.showCurrentCounter(formatIntervalData(currentTime?.value!!))
+            callback?.showCounterType(formatIntervalType(currentTime?.type))
+            callback?.showCounterName(currentTime?.name)
+            callback?.showCounterNumber(formatIntervalNumber(currentTime?.position!!))
+
+            if (interactor.getTimerState() == IntervalTimer.State.STARTED) {
+                callback?.showPlayInterface()
+            } else {
+                callback?.showPauseInterface()
+            }
         }
     }
 }

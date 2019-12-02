@@ -10,5 +10,4 @@ import dagger.Component
 interface ServiceComponent {
 
     fun inject(service: TimerService)
-
 }

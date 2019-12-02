@@ -16,7 +16,6 @@ import dagger.Provides
 @Module
 class ActivityModule {
 
-    /* Workout Activity */
     @Provides
     fun provideWorkoutAdapter(): WorkoutAdapter = WorkoutAdapter()
 
@@ -27,14 +26,11 @@ class ActivityModule {
     @PerFragment
     fun provideWorkoutPresenter(presenter: WorkoutPresenter): WorkoutContact.Presenter = presenter
 
-
-    /* Interval Activity */
     @Provides
     fun provideIntervalAdapter(): IntervalAdapter = IntervalAdapter()
 
     @Provides
     fun provideIntervalInteractor(interactor: IntervalInteractor): IntervalContact.Interactor = interactor
-
 
     @Provides
     @PerFragment

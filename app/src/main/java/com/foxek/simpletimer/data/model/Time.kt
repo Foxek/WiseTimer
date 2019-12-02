@@ -1,8 +1,8 @@
 package com.foxek.simpletimer.data.model
 
 data class Time(
-        val value: Int,
-        val type: Int,
+        var value: Int,
+        var type: Int,
         var position: Int,
-        val name: String?
+        var name: String?
 )

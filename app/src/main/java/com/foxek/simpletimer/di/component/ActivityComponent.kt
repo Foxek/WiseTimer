@@ -26,6 +26,5 @@ interface ActivityComponent {
     fun inject(dialog: IntervalCreateDialog)
 
     fun inject(dialog: IntervalEditDialog)
-
 }
 
