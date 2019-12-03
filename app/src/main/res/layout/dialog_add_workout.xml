@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/dialog_vertical_padding">
 
     <TextView
-        android:id="@+id/dialog_title"
+        android:id="@+id/dialogTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_bold"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialog_description"
+        android:id="@+id/dialogDescription"
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_marginTop="8dp"
@@ -30,10 +30,10 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
     <EditText
-        android:id="@+id/training_edit_text"
+        android:id="@+id/etWorkoutName"
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,10 +46,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_description" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
 
     <TextView
-        android:id="@+id/create_button"
+        android:id="@+id/createButton"
         style="@style/CustomDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -60,10 +60,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_hint" />
+        app:layout_constraintTop_toBottomOf="@+id/errorHint" />
 
     <TextView
-        android:id="@+id/error_hint"
+        android:id="@+id/errorHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -76,6 +76,6 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/training_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/etWorkoutName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

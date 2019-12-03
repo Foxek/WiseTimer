@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -11,15 +11,15 @@
         <item name="android:dialogTheme">@style/CustomDialog</item>
     </style>
 
-    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="CustomDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/dialog_bg</item>
         <item name="android:windowMinWidthMajor">80%</item>
         <item name="android:windowMinWidthMinor">80%</item>
-    </style>
-
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
     <style name="CustomEditText" parent="android:Widget.EditText">
@@ -58,5 +58,25 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="CustomSpinnerSelected" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >16sp</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+        <item name="android:textColor">@color/colorTextHeader</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
+    <style name="CustomSpinnerItems" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >16sp</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+        <item name="android:textColor">@color/colorTextHeader</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
     </style>
 </resources>

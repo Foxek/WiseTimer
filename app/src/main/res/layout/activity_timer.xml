@@ -7,20 +7,20 @@
     android:keepScreenOn="true">
 
     <ImageButton
-        android:id="@+id/reset_button"
+        android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:background="?android:selectableItemBackground"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/pause_button"
+        app:layout_constraintBottom_toBottomOf="@+id/pauseButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pause_button"
+        app:layout_constraintTop_toTopOf="@+id/pauseButton"
         app:srcCompat="@drawable/ic_menu_refresh_white"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/workout_name"
+        android:id="@+id/workoutName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/counter_view"
+        android:id="@+id/counterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,28 +47,29 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:textColor="@android:color/white"
         android:textSize="96sp"
-        app:layout_constraintBottom_toTopOf="@+id/pause_button"
+        app:layout_constraintBottom_toTopOf="@+id/pauseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter_number" />
+        app:layout_constraintTop_toBottomOf="@+id/counterNumber" />
 
     <TextView
-        android:id="@+id/counter_type"
+        android:id="@+id/counterType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/timer_prepare"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/counter_view"
+        app:layout_constraintBottom_toTopOf="@+id/counterView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/interval_name"
+        android:id="@+id/intervalName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -78,13 +79,13 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter_number" />
+        app:layout_constraintTop_toBottomOf="@+id/counterNumber" />
 
     <TextView
-        android:id="@+id/counter_number"
+        android:id="@+id/counterNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -96,26 +97,10 @@
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_name" />
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/pause_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:background="@drawable/button_bg"-->
-        <!--android:foreground="?android:selectableItemBackground"-->
-        <!--android:padding="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:srcCompat="@drawable/ic_menu_play_accent"-->
-        <!--tools:ignore="ContentDescription" />-->
+        app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
     <TextView
-        android:id="@+id/pause_button"
+        android:id="@+id/pauseButton"
         style="@style/CustomActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
