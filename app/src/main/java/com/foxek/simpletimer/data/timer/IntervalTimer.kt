@@ -1,6 +1,7 @@
 package com.foxek.simpletimer.data.timer
 
 import android.os.CountDownTimer
+import android.util.Log
 import com.foxek.simpletimer.data.model.Time
 import com.foxek.simpletimer.utils.Constants.POST_TIME_TYPE
 import com.foxek.simpletimer.utils.Constants.REST_TIME_TYPE
@@ -47,7 +48,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
     private fun start(time: Long) {
         state = State.STARTED
 
-        timer = object : CountDownTimer(time * 1000, 500) {
+        timer = object : CountDownTimer((time * 1000) - 1, 500) {
 
             override fun onFinish() {
                 stop()
@@ -83,6 +84,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
             indicateLastSeconds()
 
         pastTimeInSeconds = pastMillis / 1000
+        Log.d("Tick", "${pastMillis} - ${pastTimeInSeconds}" )
         onTimerTickHappened.onNext((pastTimeInSeconds + 1).toInt())
     }
 
