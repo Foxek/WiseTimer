@@ -75,6 +75,6 @@ class TimerInteractor @Inject constructor(
                 times.add(Time(it.rest, REST_TIME_TYPE, idx + 1, it.name))
         }
 
-        times.add(Time(0, POST_TIME_TYPE, times.lastIndex, null))
+        times.add(Time(1, POST_TIME_TYPE, times.lastIndex, null))
     }
 }

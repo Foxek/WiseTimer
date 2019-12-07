@@ -53,6 +53,12 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
             override fun onFinish() {
                 stop()
                 handleFinish(times[++currentTimeIndex])
+
+//                onFinishSubject.onNext(currentInterval + 1);
+//                if (currentInterval < intervalList.size() - 1) {
+//                    currentInterval++;
+//                    timerCreate(intervalList.get(currentInterval));
+//                }
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -84,7 +90,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
             indicateLastSeconds()
 
         pastTimeInSeconds = pastMillis / 1000
-        Log.d("Tick", "${pastMillis} - ${pastTimeInSeconds}" )
+
         onTimerTickHappened.onNext((pastTimeInSeconds + 1).toInt())
     }
 
