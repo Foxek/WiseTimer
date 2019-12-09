@@ -7,6 +7,7 @@ import com.foxek.simpletimer.ui.timer.TimerFragment
 import com.foxek.simpletimer.ui.timer.TimerService
 import com.foxek.simpletimer.ui.workout.WorkoutFragment
 import com.foxek.simpletimer.utils.Constants.ACTION_OPEN_TIMER
+import com.foxek.simpletimer.utils.ServiceTools
 
 class MainActivity : BaseActivity() {
     override var fragment: BaseFragment = WorkoutFragment()
@@ -14,7 +15,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if ((TimerService.isRunning) or (intent?.action == ACTION_OPEN_TIMER) ){
+        if (ServiceTools.isServiceRunning(this, TimerService::class.java)){
             replaceFragment(TimerFragment(), null)
         }
     }

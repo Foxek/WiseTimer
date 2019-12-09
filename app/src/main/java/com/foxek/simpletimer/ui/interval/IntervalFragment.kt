@@ -20,6 +20,7 @@ import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
 import com.foxek.simpletimer.ui.timer.TimerFragment
 import com.foxek.simpletimer.ui.timer.TimerService
 import com.foxek.simpletimer.utils.Constants
+import com.foxek.simpletimer.utils.Constants.ACTION_START
 
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
@@ -28,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_interval.*
 class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.Callback {
 
     override val layoutId = R.layout.activity_interval
+
     @Inject
     lateinit var presenter: IntervalContact.Presenter
 
@@ -102,12 +104,10 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun startTimerActivity() {
-//        close()
-//        executeInActivity { replaceFragment(TimerFragment(), arguments) }
         close()
-//        executeInActivity { replaceFragment(ServiceFragment(), arguments) }
+
         val intent = Intent(context, TimerService::class.java).apply {
-            action = Constants.ACTION_START
+            action = ACTION_START
             putExtra(EXTRA_WORKOUT_ID, arguments?.getInt(EXTRA_WORKOUT_ID,0))
         }
 
@@ -116,6 +116,8 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
         }else{
             context?.startService(intent)
         }
+
+        arguments?.putString(ACTION_START, ACTION_START)
         executeInActivity { replaceFragment(TimerFragment(), arguments) }
     }
 

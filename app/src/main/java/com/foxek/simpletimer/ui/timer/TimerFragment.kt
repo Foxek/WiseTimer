@@ -14,6 +14,7 @@ import com.foxek.simpletimer.ui.timer.TimerService.LocalBinder
 import com.foxek.simpletimer.utils.Constants
 import com.foxek.simpletimer.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.utils.Constants.ACTION_STOP
+import com.foxek.simpletimer.utils.ServiceTools.isServiceRunning
 import kotlinx.android.synthetic.main.activity_timer.*
 
 class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
@@ -40,7 +41,6 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
                 val timerService = (service as LocalBinder).instance
                 timerService.registerServiceClient(this@TimerFragment)
             }
-
         }
     }
 
@@ -51,19 +51,27 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
 
     override fun onStart() {
         super.onStart()
-        context?.bindService(
-                Intent(context, TimerService::class.java),
-                serviceConnection,
-                BIND_AUTO_CREATE)
+
+        if (isServiceRunning(context!!,TimerService::class.java)) {
+            context?.bindService(
+                    Intent(context, TimerService::class.java),
+                    serviceConnection,
+                    0)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        context?.unbindService(serviceConnection)
+
+        if (isServiceRunning(context!!,TimerService::class.java)) {
+            context?.unbindService(serviceConnection)
+        }
     }
 
     override fun startWorkoutActivity() {
-        onBackPressed()
+        super.onBackPressed()
     }
 
     override fun showPauseInterface() {

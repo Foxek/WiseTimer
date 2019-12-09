@@ -27,10 +27,6 @@ import javax.inject.Inject
 
 class TimerService : BaseService() {
 
-    companion object {
-        var isRunning = false
-    }
-
     @Inject
     lateinit var interactor: TimerContact.Interactor
 
@@ -44,7 +40,6 @@ class TimerService : BaseService() {
         super.onCreate()
 
         component?.inject(this)
-        isRunning = true
 
         val intent = Intent(applicationContext, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -84,7 +79,6 @@ class TimerService : BaseService() {
 
     override fun onDestroy() {
         super.onDestroy()
-        isRunning = false
         interactor.deleteDependencies()
     }
 
