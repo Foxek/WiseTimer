@@ -31,9 +31,9 @@ abstract class BaseService : Service() {
         super.onCreate()
 
         component = DaggerServiceComponent.builder()
-                .serviceModule(ServiceModule())
-                .applicationComponent(AndroidApplication.component)
-                .build()
+            .serviceModule(ServiceModule())
+            .applicationComponent(AndroidApplication.component)
+            .build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager = getSystemService(NotificationManager::class.java)
@@ -53,9 +53,9 @@ abstract class BaseService : Service() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
-                    channelId,
-                    "Foreground Service Channel",
-                    NotificationManager.IMPORTANCE_LOW
+                channelId,
+                "Foreground Service Channel",
+                NotificationManager.IMPORTANCE_LOW
             )
             notificationManager.createNotificationChannel(serviceChannel)
         }

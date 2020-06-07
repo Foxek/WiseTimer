@@ -85,11 +85,11 @@ class IntervalEditDialog : BaseDialog() {
 
     private fun setTypeSpinner() {
         val arrayAdapter = ArrayAdapter.createFromResource(
-                context!!,
-                R.array.type_list,
-                R.layout.custom_spinner_view
+            context!!,
+            R.array.type_list,
+            R.layout.view_spinner_selected
         )
-        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_drop_view)
+        arrayAdapter.setDropDownViewResource(R.layout.view_spinner_drop)
         typeSpinner.adapter = arrayAdapter
 
         typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

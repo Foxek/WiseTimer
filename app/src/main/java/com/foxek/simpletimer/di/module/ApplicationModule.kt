@@ -1,6 +1,7 @@
 package com.foxek.simpletimer.di.module
 
 import android.content.Context
+import com.foxek.simpletimer.data.UserPreferences
 
 import com.foxek.simpletimer.data.database.TimerDatabase
 
@@ -19,4 +20,8 @@ class ApplicationModule(private val context: Context) {
     @Provides
     @Singleton
     fun provideTimerDatabase(): TimerDatabase = TimerDatabase.getInstance(context)
+
+    @Provides
+    @Singleton
+    fun provideUserPreferences(): UserPreferences = UserPreferences(context)
 }

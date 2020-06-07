@@ -15,7 +15,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (ServiceTools.isServiceRunning(this, TimerService::class.java)){
+        if (ServiceTools.isServiceRunning(this, TimerService::class.java)) {
             replaceFragment(TimerFragment(), null)
         }
     }

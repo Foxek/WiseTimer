@@ -19,8 +19,8 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 class TimerInteractor @Inject constructor(
-        private val database: TimerDatabase,
-        private val timer: IntervalTimer
+    private val database: TimerDatabase,
+    private val timer: IntervalTimer
 ) : TimerContact.Interactor {
 
     private var times = ArrayList<Time>()
@@ -31,17 +31,17 @@ class TimerInteractor @Inject constructor(
 
     override fun fetchIntervalList(workoutId: Int): Disposable {
         return database.intervalDAO.getAll(workoutId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { fetchTimeList(it) }
-                .subscribe({ timer.prepare(times) }, {})
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { fetchTimeList(it) }
+            .subscribe({ timer.prepare(times) }, {})
     }
 
     override fun getVolume(id: Int): Disposable {
         return database.workoutDAO.getVolume(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ volume -> timer.enableSound(volume) }, { })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ volume -> timer.enableSound(volume) }, { })
     }
 
     override fun continueTimer() {

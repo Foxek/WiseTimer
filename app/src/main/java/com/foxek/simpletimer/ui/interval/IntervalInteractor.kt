@@ -14,7 +14,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class IntervalInteractor @Inject constructor(
-        private val database: TimerDatabase
+    private val database: TimerDatabase
 ) : IntervalContact.Interactor {
 
     private var workoutId: Int = 0
@@ -23,72 +23,72 @@ class IntervalInteractor @Inject constructor(
     override fun getWorkout(id: Int): Single<Workout> {
         workoutId = id
         return database.workoutDAO.getById(workoutId)
-                .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
     }
 
     override fun fetchIntervalList(): Flowable<List<Interval>> {
         return database.intervalDAO.getAll(workoutId)
-                .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
     }
 
     override fun addInterval(name: String, type: Int, work: Int, rest: Int): Disposable {
         return database.intervalDAO.getLastId()
-                .flatMapCompletable {
-                    val interval = Interval(name, work, rest, workoutId, type,it + 1)
-                    Completable.fromAction { database.intervalDAO.add(interval) }
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({},{})
+            .flatMapCompletable {
+                val interval = Interval(name, work, rest, workoutId, type, it + 1)
+                Completable.fromAction { database.intervalDAO.add(interval) }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({}, {})
     }
 
     override fun updateInterval(name: String, type: Int, work: Int, rest: Int): Disposable {
         return database.intervalDAO.getById(intervalId, workoutId)
-                .flatMapCompletable {
-                    it.name = name
-                    it.type = type
-                    it.work = work
-                    it.rest = rest
-                    Completable.fromAction { database.intervalDAO.update(it) }
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+            .flatMapCompletable {
+                it.name = name
+                it.type = type
+                it.work = work
+                it.rest = rest
+                Completable.fromAction { database.intervalDAO.update(it) }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
 
-                },{ error -> })
+            }, { error -> })
     }
 
     override fun deleteInterval(): Disposable {
         return database.intervalDAO.size(workoutId)
-                .filter { size -> size != 1 }
-                .flatMapCompletable {
-                    Completable.fromAction { database.intervalDAO.delete(intervalId, workoutId) }
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+            .filter { size -> size != 1 }
+            .flatMapCompletable {
+                Completable.fromAction { database.intervalDAO.delete(intervalId, workoutId) }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
     }
 
     override fun updateWorkout(workoutName: String): Disposable {
         return Completable.fromAction { database.workoutDAO.update(workoutName, workoutId) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({},{})
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({}, {})
     }
 
     override fun updateVolume(state: Boolean): Completable {
         return Completable.fromAction { database.workoutDAO.update(state, workoutId) }
-                .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
     }
 
     override fun deleteWorkout(): Completable {
         return Completable.fromAction { database.workoutDAO.delete(workoutId) }
-                .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
     }
 
     override fun getVolume(): Single<Boolean> {
         return database.workoutDAO.getVolume(workoutId)
-                .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
     }
 
     override fun setCurrentInterval(id: Int) {

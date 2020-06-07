@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class IntervalPresenter @Inject constructor(
-        val interactor: IntervalContact.Interactor
+    val interactor: IntervalContact.Interactor
 ) : BasePresenter<IntervalContact.View>(), IntervalContact.Presenter {
 
     override fun viewIsReady() {}
@@ -18,24 +18,24 @@ class IntervalPresenter @Inject constructor(
         view?.setIntervalList()
 
         disposable.add(interactor
-                .getWorkout(id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view?.setWorkoutName(it.name!!)
-                    view?.setVolumeState(it.isVolume)
-                }, {
+            .getWorkout(id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view?.setWorkoutName(it.name!!)
+                view?.setVolumeState(it.isVolume)
+            }, {
 
-                })
+            })
         )
 
         disposable.add(interactor
-                .fetchIntervalList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view?.renderIntervalList(it)
-                }, {
+            .fetchIntervalList()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view?.renderIntervalList(it)
+            }, {
 
-                })
+            })
         )
     }
 
@@ -45,15 +45,15 @@ class IntervalPresenter @Inject constructor(
 
     override fun changeVolumeButtonClicked() {
         disposable.add(interactor
-                .getVolume()
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMapCompletable { isEnabled ->
-                    view?.setVolumeState(!isEnabled)
-                    interactor.updateVolume(!isEnabled)
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+            .getVolume()
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMapCompletable { isEnabled ->
+                view?.setVolumeState(!isEnabled)
+                interactor.updateVolume(!isEnabled)
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
         )
     }
 
@@ -61,11 +61,11 @@ class IntervalPresenter @Inject constructor(
         view?.showIntervalCreateDialog()
     }
 
-    override fun saveIntervalButtonClicked(name: String, type:Int, workTime: Int, restTime: Int) {
+    override fun saveIntervalButtonClicked(name: String, type: Int, workTime: Int, restTime: Int) {
         disposable.add(interactor.updateInterval(name, type, workTime, restTime))
     }
 
-    override fun createIntervalButtonClicked(name: String, type:Int, workTime: Int, restTime: Int) {
+    override fun createIntervalButtonClicked(name: String, type: Int, workTime: Int, restTime: Int) {
         disposable.add(interactor.addInterval(name, type, workTime, restTime))
     }
 
@@ -80,9 +80,9 @@ class IntervalPresenter @Inject constructor(
 
     override fun deleteWorkoutButtonClicked() {
         disposable.add(interactor
-                .deleteWorkout()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ view?.startWorkoutActivity() }, {})
+            .deleteWorkout()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ view?.startWorkoutActivity() }, {})
         )
     }
 

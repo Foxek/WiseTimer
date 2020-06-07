@@ -46,12 +46,12 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 }
 
 inline fun FragmentManager.transaction(operation: FragmentTransaction.() -> FragmentTransaction) =
-        beginTransaction()
-                .setCustomAnimations(
-                        android.R.anim.slide_in_left, android.R.anim.slide_out_right,
-                        android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .operation()
-                .commit()
+    beginTransaction()
+        .setCustomAnimations(
+            android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+            android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        .operation()
+        .commit()
 
 inline fun Activity?.execute(body: BaseActivity.() -> Unit) {
     (this as? BaseActivity)?.body()

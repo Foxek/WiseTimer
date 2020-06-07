@@ -9,7 +9,7 @@
     android:paddingEnd="@dimen/dialog_horizontal_padding"
     android:paddingBottom="@dimen/dialog_vertical_padding">
 
-    <com.foxek.simpletimer.ui.custom.IntervalEditText
+    <com.foxek.simpletimer.ui.view.IntervalEditView
         android:id="@+id/etWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typeSpinner" />
 
-    <com.foxek.simpletimer.ui.custom.IntervalEditText
+    <com.foxek.simpletimer.ui.view.IntervalEditView
         android:id="@+id/etRest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

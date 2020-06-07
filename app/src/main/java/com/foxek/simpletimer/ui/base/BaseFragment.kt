@@ -21,24 +21,25 @@ abstract class BaseFragment : Fragment(), MvpView {
         super.onCreate(savedInstanceState)
 
         component = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule())
-                .applicationComponent(AndroidApplication.component)
-                .build()
+            .activityModule(ActivityModule())
+            .applicationComponent(AndroidApplication.component)
+            .build()
     }
+
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(layoutId, parent, false)
     }
 
-    inline fun executeInActivity(body: BaseActivity.() -> Unit){
+    inline fun executeInActivity(body: BaseActivity.() -> Unit) {
         activity?.execute(body)
     }
 
-    open fun onBackPressed(){
+    open fun onBackPressed() {
         close()
     }
 
-    fun showDialog(dialog: BaseDialog){
-        dialog.setTargetFragment(this,123)
+    fun showDialog(dialog: BaseDialog) {
+        dialog.setTargetFragment(this, 123)
         dialog.show(fragmentManager!!, dialog.dialogTag)
     }
 

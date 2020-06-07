@@ -38,7 +38,7 @@ class WorkoutCreateDialog : BaseDialog() {
         createButton.setOnClickListener { createButtonClick() }
     }
 
-    private fun createButtonClick(){
+    private fun createButtonClick() {
         if (checkNotEmpty(etWorkoutName)) {
             dismiss()
             presenter.saveButtonClicked(etWorkoutName.text.toString())
