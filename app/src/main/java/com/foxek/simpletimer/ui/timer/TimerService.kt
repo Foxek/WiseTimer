@@ -135,17 +135,17 @@ class TimerService : BaseService() {
 
     private fun registerTimerCallback() {
         disposable.add(interactor.intervalFinishedCallback()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ handleFinish(it) }, { })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ handleFinish(it) }, { })
         )
     }
 
     private fun registerTickCallback() {
         disposable.add(interactor.tickCallback()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ handleTick(it) }, { })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ handleTick(it) }, { })
         )
     }
 

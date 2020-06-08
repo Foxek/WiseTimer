@@ -12,7 +12,6 @@ import io.reactivex.Single
 @Dao
 interface IntervalDAO {
 
-
     @Insert
     fun add(interval: Interval)
 

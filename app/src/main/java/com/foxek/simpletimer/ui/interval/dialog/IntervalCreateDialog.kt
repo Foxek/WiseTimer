@@ -16,8 +16,6 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import com.foxek.simpletimer.utils.Constants.WITHOUT_REST_TYPE
 import com.foxek.simpletimer.utils.Constants.WITH_REST_TYPE
-
-
 class IntervalCreateDialog : BaseDialog() {
 
     @Inject
@@ -61,9 +59,9 @@ class IntervalCreateDialog : BaseDialog() {
         val arrayAdapter = ArrayAdapter.createFromResource(
                 context!!,
                 R.array.type_list,
-                R.layout.custom_spinner_view
+                R.layout.view_spinner_selected
         )
-        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_drop_view)
+        arrayAdapter.setDropDownViewResource(R.layout.view_spinner_drop)
         dialog_interval_spinner_type.adapter = arrayAdapter
 
         dialog_interval_spinner_type.onItemSelectedListener = object : OnItemSelectedListener {

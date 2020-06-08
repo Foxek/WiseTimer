@@ -10,8 +10,8 @@ import javax.inject.Inject
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.foxek.simpletimer.data.model.Workout
-
-import kotlinx.android.synthetic.main.workout_item.view.*
+import kotlinx.android.synthetic.main.item_workout.view.item_workout_description
+import kotlinx.android.synthetic.main.item_workout.view.item_workout_name
 
 class WorkoutAdapter @Inject constructor() : ListAdapter<Workout, WorkoutAdapter.ViewHolder>(WorkoutDiffCallback()) {
 
@@ -28,19 +28,19 @@ class WorkoutAdapter @Inject constructor() : ListAdapter<Workout, WorkoutAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.item_workout_name.text = getItem(position).name
         holder.itemView.item_workout_description.text = holder.itemView.resources.getString(R.string.number_of_intervals_text,
-                getItem(position).intervalCount)
+            getItem(position).intervalCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.workout_item, parent, false)
+        val view = inflater.inflate(R.layout.item_workout, parent, false)
         return ViewHolder(view)
     }
 
     inner class ViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
 
         init {
-            itemView.workoutItem.setOnClickListener {
+            itemView.setOnClickListener {
                 mCallback?.onListItemClick(getItem(adapterPosition))
             }
         }

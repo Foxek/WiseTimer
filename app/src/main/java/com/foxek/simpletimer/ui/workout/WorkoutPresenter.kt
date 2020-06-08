@@ -8,17 +8,17 @@ import javax.inject.Inject
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class WorkoutPresenter @Inject constructor(
-        private val interactor: WorkoutContact.Interactor
+    private val interactor: WorkoutContact.Interactor
 ) : BasePresenter<WorkoutContact.View>(), WorkoutContact.Presenter {
 
     override fun viewIsReady() {
         disposable.add(interactor.fetchWorkoutList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ workouts ->
-                    view?.renderWorkoutList(workouts)
-                }, {
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ workouts ->
+                view?.renderWorkoutList(workouts)
+            }, {
 
-                })
+            })
         )
     }
 

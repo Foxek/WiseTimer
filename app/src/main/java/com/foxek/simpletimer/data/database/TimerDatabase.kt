@@ -28,13 +28,13 @@ abstract class TimerDatabase : RoomDatabase() {
 
             if (instance == null) {
                 instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        TimerDatabase::class.java,
-                        "training.db"
+                    context.applicationContext,
+                    TimerDatabase::class.java,
+                    "training.db"
                 )
-                        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
-                        .allowMainThreadQueries()
-                        .build()
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                    .allowMainThreadQueries()
+                    .build()
                 INSTANCE = instance
             }
 

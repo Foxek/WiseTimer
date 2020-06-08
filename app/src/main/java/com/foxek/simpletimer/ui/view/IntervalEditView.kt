@@ -1,27 +1,17 @@
-package com.foxek.simpletimer.ui.custom
+package com.foxek.simpletimer.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import com.foxek.simpletimer.R
-import kotlinx.android.synthetic.main.custom_interval_view.view.*
+import kotlinx.android.synthetic.main.view_edit_interval.view.*
 
-class IntervalEditText : LinearLayout {
-
-    companion object {
-        private const val UNIT_DIVIDER = 60
-        private const val SINGLE_NUMERAL_LIMIT = 10
-    }
-
-    constructor(context: Context) : this(context, null)
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        View.inflate(context, R.layout.custom_interval_view, this)
-
-        if(!isInEditMode) { }
-    }
+class IntervalEditView(
+    context: Context,
+    attrs: AttributeSet?,
+    defStyleAttr: Int
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     fun setValue(time: Int) {
         view_interval_field_minutes.setText(format(time / UNIT_DIVIDER))
@@ -49,5 +39,10 @@ class IntervalEditText : LinearLayout {
         super.onDetachedFromWindow()
         view_interval_field_minutes.isCursorVisible = false
         view_interval_field_seconds.isCursorVisible = false
+    }
+
+    companion object {
+        private const val UNIT_DIVIDER = 60
+        private const val SINGLE_NUMERAL_LIMIT = 10
     }
 }

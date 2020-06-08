@@ -11,9 +11,9 @@ import com.foxek.simpletimer.utils.Constants.EMPTY
 import com.foxek.simpletimer.utils.Constants.WITH_REST_TYPE
 import com.foxek.simpletimer.utils.formatIntervalData
 import com.foxek.simpletimer.utils.formatIntervalNumber
-import kotlinx.android.synthetic.main.multi_interval_item.view.*
+import kotlinx.android.synthetic.main.item_interval.view.*
 
-class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (IntervalDiffCallback()) {
+class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder>(IntervalDiffCallback()) {
 
     private var mCallback: Callback? = null
 
@@ -37,7 +37,7 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
         super.onViewDetachedFromWindow(holder)
 
         // small fix
-        holder.itemView.post { notifyItemRangeChanged(holder.layoutPosition + 1,itemCount)}
+        holder.itemView.post { notifyItemRangeChanged(holder.layoutPosition + 1, itemCount) }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -46,13 +46,13 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
 
         if (getItem(position).type == WITH_REST_TYPE) {
             holder.itemView.item_interval_rest_time.text = formatIntervalData(getItem(position).rest)
-        }else{
+        } else {
             holder.itemView.item_interval_rest_hint.text = holder.itemView.resources.getString(R.string.timer_without_rest)
         }
 
         if (getItem(position).name == EMPTY) {
-            holder.itemView.item_interval_title.text = formatIntervalNumber(position+1)
-        }else{
+            holder.itemView.item_interval_title.text = formatIntervalNumber(position + 1)
+        } else {
             holder.itemView.item_interval_title.text = getItem(position).name
         }
 
@@ -60,7 +60,7 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.multi_interval_item, parent, false)
+        val view = inflater.inflate(R.layout.item_interval, parent, false)
         return ViewHolder(view)
     }
 
@@ -68,7 +68,7 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
     inner class ViewHolder constructor(v: View) : RecyclerView.ViewHolder(v) {
 
         init {
-            itemView.item.setOnClickListener { mCallback?.onListItemClick(getItem(adapterPosition)) }
+            itemView.setOnClickListener { mCallback?.onListItemClick(getItem(adapterPosition)) }
         }
     }
 }

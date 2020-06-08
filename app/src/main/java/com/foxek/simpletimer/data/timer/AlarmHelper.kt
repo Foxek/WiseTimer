@@ -42,12 +42,12 @@ class AlarmHelper @Inject constructor(private val context: Context) {
 
     private fun createNewSoundPool() {
         val attributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
         soundPool = SoundPool.Builder()
-                .setAudioAttributes(attributes)
-                .build()
+            .setAudioAttributes(attributes)
+            .build()
 
         beepSound = loadSound("beep.mp3")
         longBeepSound = loadSound("long_beep.mp3")

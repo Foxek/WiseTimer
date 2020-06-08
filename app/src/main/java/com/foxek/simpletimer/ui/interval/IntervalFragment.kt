@@ -23,11 +23,11 @@ import com.foxek.simpletimer.utils.Constants.ACTION_START
 
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
-import kotlinx.android.synthetic.main.activity_interval.*
+import kotlinx.android.synthetic.main.fragment_interval.*
 
 class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.Callback {
 
-    override val layoutId = R.layout.activity_interval
+    override val layoutId = R.layout.fragment_interval
 
     @Inject
     lateinit var presenter: IntervalContact.Presenter
@@ -107,12 +107,12 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
 
         val intent = Intent(context, TimerService::class.java).apply {
             action = ACTION_START
-            putExtra(EXTRA_WORKOUT_ID, arguments?.getInt(EXTRA_WORKOUT_ID,0))
+            putExtra(EXTRA_WORKOUT_ID, arguments?.getInt(EXTRA_WORKOUT_ID, 0))
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context?.startForegroundService(intent)
-        }else{
+        } else {
             context?.startService(intent)
         }
 

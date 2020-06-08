@@ -15,13 +15,6 @@
     <string name="timer_pause_button">Пауза</string>
     <string name="timer_continue_button">Продожить</string>
 
-
-
-
-
-
-
-
     /* Training activity and dialog */
     <string name="dialog_training_setting_title">Настройка тренировки</string>
     <string name="dialog_training_setting_description">Изменяйте название тренировки или удалите ее вовсе</string>
@@ -60,5 +53,18 @@
     <string-array name="type_list">
         <item>С отдыхом</item>
         <item>Без отдыха</item>
+    </string-array>
+
+
+    <string name="dialog_changelog_title">Что нового</string>
+    <string name="delete_changelog_accept_button">Понятно</string>
+    <string-array name="dialog_changelog_list">
+        <item>Сортировка интервалов</item>
+        <item>Индикация следующего интервала</item>
+    </string-array>
+
+    <string-array name="dialog_changelog_description_list">
+        <item>Теперь вы можете менять местами интервалы для более гибкой настройки вашей тренировки</item>
+        <item>Вы будете всегда уведомлены о том, какой интервал будет следующим</item>
     </string-array>
 </resources>

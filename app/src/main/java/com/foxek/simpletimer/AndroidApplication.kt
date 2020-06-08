@@ -17,8 +17,8 @@ class AndroidApplication : Application() {
         super.onCreate()
 
         component = DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(this))
-                .build()
+            .applicationModule(ApplicationModule(this))
+            .build()
 
         component.inject(this)
     }

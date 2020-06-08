@@ -14,11 +14,11 @@ import com.foxek.simpletimer.utils.Constants
 import com.foxek.simpletimer.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.utils.Constants.ACTION_STOP
 import com.foxek.simpletimer.utils.ServiceTools.isServiceRunning
-import kotlinx.android.synthetic.main.activity_timer.*
+import kotlinx.android.synthetic.main.fragment_timer.*
 
 class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
 
-    override val layoutId = R.layout.activity_timer
+    override val layoutId = R.layout.fragment_timer
     lateinit var serviceConnection: ServiceConnection
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,11 +51,11 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
     override fun onStart() {
         super.onStart()
 
-        if (isServiceRunning(context!!,TimerService::class.java)) {
+        if (isServiceRunning(context!!, TimerService::class.java)) {
             context?.bindService(
-                    Intent(context, TimerService::class.java),
-                    serviceConnection,
-                    0)
+                Intent(context, TimerService::class.java),
+                serviceConnection,
+                0)
         } else {
             super.onBackPressed()
         }
@@ -64,7 +64,7 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
     override fun onStop() {
         super.onStop()
 
-        if (isServiceRunning(context!!,TimerService::class.java)) {
+        if (isServiceRunning(context!!, TimerService::class.java)) {
             context?.unbindService(serviceConnection)
         }
     }

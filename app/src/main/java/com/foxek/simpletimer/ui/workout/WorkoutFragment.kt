@@ -1,26 +1,33 @@
 package com.foxek.simpletimer.ui.workout
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.foxek.simpletimer.R
+import com.foxek.simpletimer.data.UserPreferences
 import com.foxek.simpletimer.data.model.Workout
 import com.foxek.simpletimer.ui.base.BaseFragment
+import com.foxek.simpletimer.ui.changelog.ChangeLogDialog
 import com.foxek.simpletimer.ui.interval.IntervalFragment
 import com.foxek.simpletimer.ui.workout.adapter.WorkoutAdapter
 import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
+import com.foxek.simpletimer.utils.Constants.CHANGELOG_VERSION_VALUE
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_NAME
-import kotlinx.android.synthetic.main.activity_workout.*
+import kotlinx.android.synthetic.main.fragment_workout.*
 import javax.inject.Inject
 
 
 class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Callback {
 
-    override val layoutId = R.layout.activity_workout
+    override val layoutId = R.layout.fragment_workout
 
     @Inject
     lateinit var presenter: WorkoutContact.Presenter
+
+    @Inject
+    lateinit var userPreferences: UserPreferences
 
     @Inject
     lateinit var viewAdapter: WorkoutAdapter
@@ -49,6 +56,7 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
         }
 
         viewAdapter.setCallback(this)
+        showChangelogDialogIfNeeded()
     }
 
     override fun startIntervalFragment(id: Int, name: String?) {
@@ -75,5 +83,18 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+    }
+
+    private fun showChangelogDialogIfNeeded() {
+        var changelogVersion = 0
+
+        PreferenceManager.getDefaultSharedPreferences(context).run {
+            changelogVersion = userPreferences.changelogVersion
+            userPreferences.changelogVersion = CHANGELOG_VERSION_VALUE
+        }
+
+        if (changelogVersion < CHANGELOG_VERSION_VALUE) {
+            showDialog(ChangeLogDialog())
+        }
     }
 }
