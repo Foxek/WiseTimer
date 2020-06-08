@@ -10,9 +10,7 @@ import com.foxek.simpletimer.ui.interval.IntervalContact
 import javax.inject.Inject
 
 import com.foxek.simpletimer.utils.Constants.EMPTY
-import kotlinx.android.synthetic.main.dialog_edit_interval.*
-import kotlinx.android.synthetic.main.dialog_edit_interval.edit_dialog_delete_btn
-import kotlinx.android.synthetic.main.dialog_edit_interval.edit_dialog_save_btn
+import kotlinx.android.synthetic.main.dialog_interval.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
@@ -26,7 +24,7 @@ class IntervalCreateDialog : BaseDialog() {
     lateinit var presenter: IntervalContact.Presenter
 
     override val dialogTag = "IntervalCreateDialog"
-    override val layoutId = R.layout.dialog_edit_interval
+    override val layoutId = R.layout.dialog_interval
 
     companion object {
         fun newInstance(): IntervalCreateDialog = IntervalCreateDialog()
@@ -40,23 +38,23 @@ class IntervalCreateDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        edit_dialog_delete_btn.visibility = View.GONE
-        dialogTitle.text = resources.getString(R.string.dialog_interval_create_title)
+        dialog_interval_delete_btn.visibility = View.GONE
+        dialog_interval_title.text = resources.getString(R.string.dialog_interval_create_title)
 
-        cbRepeats.setOnCheckedChangeListener { _, isChecked -> onRepeatsCheckBoxClick(isChecked) }
-        cbName.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }
+        dialog_interval_checkbox_repeats.setOnCheckedChangeListener { _, isChecked -> onRepeatsCheckBoxClick(isChecked) }
+        dialog_interval_checkbox_name.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }
 
-        edit_dialog_save_btn.setOnClickListener { onSaveButtonClick() }
+        dialog_interval_save_btn.setOnClickListener { onSaveButtonClick() }
 
         setTypeSpinner()
         prepareEditText()
     }
 
     private fun prepareEditText() {
-        etWork.setValue(0)
-        etRest.setValue(0)
+        dialog_interval_field_work.setValue(0)
+        dialog_interval_field_rest.setValue(0)
 
-        etRepeats.setText("1")
+        dialog_interval_field_repeats.setText("1")
     }
 
     private fun setTypeSpinner() {
@@ -66,20 +64,20 @@ class IntervalCreateDialog : BaseDialog() {
                 R.layout.custom_spinner_view
         )
         arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_drop_view)
-        typeSpinner.adapter = arrayAdapter
+        dialog_interval_spinner_type.adapter = arrayAdapter
 
-        typeSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+        dialog_interval_spinner_type.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
                     WITH_REST_TYPE -> {
-                        restGroup.visibility = View.VISIBLE
-                        workGroup.visibility = View.VISIBLE
+                        dialog_interval_group_rest.visibility = View.VISIBLE
+                        dialog_interval_group_work.visibility = View.VISIBLE
                     }
                     WITHOUT_REST_TYPE -> {
-                        restGroup.visibility = View.GONE
-                        workGroup.visibility = View.VISIBLE
+                        dialog_interval_group_rest.visibility = View.GONE
+                        dialog_interval_group_work.visibility = View.VISIBLE
                     }
                 }
             }
@@ -89,33 +87,33 @@ class IntervalCreateDialog : BaseDialog() {
 
     private fun onNameCheckBoxClick(isChecked: Boolean) {
         if (isChecked) {
-            etName.setText(EMPTY)
-            etName.visibility = View.GONE
+            dialog_interval_field_name.setText(EMPTY)
+            dialog_interval_field_name.visibility = View.GONE
         } else {
-            etName.visibility = View.VISIBLE
+            dialog_interval_field_name.visibility = View.VISIBLE
         }
     }
 
     private fun onRepeatsCheckBoxClick(isChecked: Boolean) {
         if (isChecked) {
-            repeatsGroup.visibility = View.VISIBLE
+            dialog_interval_group_repeats.visibility = View.VISIBLE
         } else {
-            repeatsGroup.visibility = View.GONE
+            dialog_interval_group_repeats.visibility = View.GONE
         }
     }
 
     private fun onSaveButtonClick() {
 
-        val repeat = if (checkNotEmpty(etRepeats)) etRepeats.text.toString().toInt() else 1
+        val repeat = if (checkNotEmpty(dialog_interval_field_repeats)) dialog_interval_field_repeats.text.toString().toInt() else 1
         var name = EMPTY
 
-        val type = typeSpinner.selectedItemPosition
+        val type = dialog_interval_spinner_type.selectedItemPosition
 
-        if (checkNotEmpty(etName))
-            name = etName.text.toString()
+        if (checkNotEmpty(dialog_interval_field_name))
+            name = dialog_interval_field_name.text.toString()
 
         for (i in 1..repeat)
-            presenter.createIntervalButtonClicked(name, type, etWork.getValue(), etRest.getValue())
+            presenter.createIntervalButtonClicked(name, type, dialog_interval_field_work.getValue(), dialog_interval_field_rest.getValue())
 
         dismiss()
     }
@@ -123,7 +121,7 @@ class IntervalCreateDialog : BaseDialog() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        etRepeats.isCursorVisible = false
-        etName.isCursorVisible = false
+        dialog_interval_field_repeats.isCursorVisible = false
+        dialog_interval_field_name.isCursorVisible = false
     }
 }

@@ -13,7 +13,7 @@
         android:focusableInTouchMode="true">
 
         <TextView
-            android:id="@+id/intervalDescription"
+            android:id="@+id/fragment_interval_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_32dp"
@@ -25,10 +25,10 @@
             android:textSize="@dimen/text_16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intervalTitle" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_interval_title" />
 
         <ImageButton
-            android:id="@+id/editButton"
+            android:id="@+id/fragment_interval_edit_btn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="?android:selectableItemBackground"
@@ -39,30 +39,30 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/addIntervalButton"
+            android:id="@+id/fragment_interval_add_btn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:background="?android:selectableItemBackground"
             android:padding="@dimen/padding_16dp"
-            app:layout_constraintEnd_toStartOf="@id/volumeButton"
+            app:layout_constraintEnd_toStartOf="@id/fragment_interval_volume_btn"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_add_white"
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/volumeButton"
+            android:id="@+id/fragment_interval_volume_btn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:background="?android:selectableItemBackground"
             android:padding="@dimen/padding_16dp"
-            app:layout_constraintEnd_toStartOf="@id/editButton"
+            app:layout_constraintEnd_toStartOf="@id/fragment_interval_edit_btn"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/backButton"
+            android:id="@+id/fragment_interval_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="?android:selectableItemBackground"
@@ -73,7 +73,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/intervalTitle"
+            android:id="@+id/fragment_interval_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_32dp"
@@ -84,10 +84,10 @@
             android:textSize="@dimen/text_28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/workoutName" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_interval_workout_name" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/intervalList"
+            android:id="@+id/fragment_interval_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_24dp"
@@ -95,11 +95,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intervalDescription"
+            app:layout_constraintTop_toBottomOf="@id/fragment_interval_description"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/workoutName"
+            android:id="@+id/fragment_interval_workout_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_32dp"
@@ -111,10 +111,10 @@
             android:textSize="@dimen/text_16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/backButton" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_interval_back_btn" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/interval_start_btn"
+            android:id="@+id/fragment_interval_start_btn"
             style="@style/DefaultActivityButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intervalList"
+            app:layout_constraintTop_toBottomOf="@id/fragment_interval_list"
             app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

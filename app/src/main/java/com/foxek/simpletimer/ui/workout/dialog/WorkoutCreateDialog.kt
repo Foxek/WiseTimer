@@ -31,20 +31,20 @@ class WorkoutCreateDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        workout_create_btn.setOnClickListener { createButtonClick() }
+        dialog_add_workout_create_btn.setOnClickListener { createButtonClick() }
     }
 
     private fun createButtonClick(){
-        if (checkNotEmpty(etWorkoutName)) {
+        if (checkNotEmpty(dialog_add_workout_field_name)) {
             dismiss()
-            presenter.saveButtonClicked(etWorkoutName.text.toString())
+            presenter.saveButtonClicked(dialog_add_workout_field_name.text.toString())
         } else {
-            errorHint.visibility = View.VISIBLE
+            dialog_add_workout_error_hint.visibility = View.VISIBLE
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        etWorkoutName.isCursorVisible = false
+        dialog_add_workout_field_name.isCursorVisible = false
     }
 }

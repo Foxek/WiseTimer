@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/etMinutes"
+        android:id="@+id/view_interval_field_minutes"
         style="@style/DefaultEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -18,22 +18,22 @@
         tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/divider"
+        android:id="@+id/view_interval_divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/etMinutes"
-        android:layout_toEndOf="@id/etMinutes"
+        android:layout_alignBaseline="@id/view_interval_field_minutes"
+        android:layout_toEndOf="@id/view_interval_field_minutes"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/dialog_interval_setting_divider"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_24sp" />
 
     <EditText
-        android:id="@+id/etSeconds"
+        android:id="@+id/view_interval_field_seconds"
         style="@style/DefaultEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/divider"
+        android:layout_toEndOf="@id/view_interval_divider"
         android:digits="0123456789"
         android:fontFamily="@font/roboto_condensed_bold"
         android:importantForAutofill="no"

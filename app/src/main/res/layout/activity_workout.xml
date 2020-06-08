@@ -14,7 +14,7 @@
         android:focusableInTouchMode="true">
 
         <TextView
-            android:id="@+id/workoutTitle"
+            android:id="@+id/fragment_workout_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -26,20 +26,20 @@
             android:textSize="@dimen/text_38sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcomeTitle" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_workout_welcome" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/workoutList"
+            android:id="@+id/fragment_workout_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/workoutListTitle" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_workout_list_title" />
 
         <TextView
-            android:id="@+id/welcomeTitle"
+            android:id="@+id/fragment_workout_welcome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/workoutDescription"
+            android:id="@+id/fragment_workout_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -67,10 +67,10 @@
             android:textSize="@dimen/text_16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/workoutTitle" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_workout_title" />
 
         <TextView
-            android:id="@+id/workoutListTitle"
+            android:id="@+id/fragment_workout_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -80,10 +80,10 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/workoutDescription" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_workout_description" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/workout_create_btn"
+            android:id="@+id/fragment_workout_create_btn"
             style="@style/DefaultActivityButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/workoutList"
+            app:layout_constraintTop_toBottomOf="@id/fragment_workout_list"
             app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -26,8 +26,8 @@ class WorkoutAdapter @Inject constructor() : ListAdapter<Workout, WorkoutAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.workoutName.text = getItem(position).name
-        holder.itemView.workoutDescription.text = holder.itemView.resources.getString(R.string.number_of_intervals_text,
+        holder.itemView.item_workout_name.text = getItem(position).name
+        holder.itemView.item_workout_description.text = holder.itemView.resources.getString(R.string.number_of_intervals_text,
                 getItem(position).intervalCount)
     }
 

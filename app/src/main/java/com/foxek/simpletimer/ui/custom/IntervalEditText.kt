@@ -24,15 +24,15 @@ class IntervalEditText : LinearLayout {
     }
 
     fun setValue(time: Int) {
-        etMinutes.setText(format(time / UNIT_DIVIDER))
-        etSeconds.setText(format(time % UNIT_DIVIDER))
+        view_interval_field_minutes.setText(format(time / UNIT_DIVIDER))
+        view_interval_field_seconds.setText(format(time % UNIT_DIVIDER))
     }
 
     fun getValue(): Int {
         val result: Int
 
-        return if ((etMinutes.text.isNotEmpty()) and (etSeconds.text.isNotEmpty())) {
-            result = etMinutes.text.toString().toInt() * UNIT_DIVIDER + etSeconds.text.toString().toInt()
+        return if ((view_interval_field_minutes.text.isNotEmpty()) and (view_interval_field_seconds.text.isNotEmpty())) {
+            result = view_interval_field_minutes.text.toString().toInt() * UNIT_DIVIDER + view_interval_field_seconds.text.toString().toInt()
             if (result == 0) 1 else result
         } else
             1
@@ -47,7 +47,7 @@ class IntervalEditText : LinearLayout {
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        etMinutes.isCursorVisible = false
-        etSeconds.isCursorVisible = false
+        view_interval_field_minutes.isCursorVisible = false
+        view_interval_field_seconds.isCursorVisible = false
     }
 }

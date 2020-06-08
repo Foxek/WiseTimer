@@ -14,7 +14,7 @@
     android:foreground="?android:selectableItemBackground">
 
     <TextView
-        android:id="@+id/workoutName"
+        android:id="@+id/item_workout_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
@@ -24,24 +24,24 @@
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintEnd_toStartOf="@id/arrow_image"
-        app:layout_constraintStart_toEndOf="@id/workout_image"
+        app:layout_constraintEnd_toStartOf="@id/item_workout_arrow"
+        app:layout_constraintStart_toEndOf="@id/item_workout_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/workout_image"
+        android:id="@+id/item_workout_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
         android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="@id/workoutDescription"
+        app:layout_constraintBottom_toBottomOf="@id/item_workout_description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/workoutName"
+        app:layout_constraintTop_toTopOf="@id/item_workout_name"
         app:srcCompat="@drawable/ic_list"
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/arrow_image"
+        android:id="@+id/item_workout_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
@@ -54,7 +54,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/workoutDescription"
+        android:id="@+id/item_workout_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
@@ -64,8 +64,8 @@
         android:textColor="@color/colorGrey"
         android:textSize="@dimen/text_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/arrow_image"
-        app:layout_constraintStart_toEndOf="@id/workout_image"
-        app:layout_constraintTop_toBottomOf="@id/workoutName" />
+        app:layout_constraintEnd_toStartOf="@id/item_workout_arrow"
+        app:layout_constraintStart_toEndOf="@id/item_workout_image"
+        app:layout_constraintTop_toBottomOf="@id/item_workout_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,11 +37,11 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
 
         presenter.viewIsReady()
 
-        workout_create_btn.setOnClickListener {
+        fragment_workout_create_btn.setOnClickListener {
             presenter.createButtonClicked()
         }
 
-        workoutList.apply {
+        fragment_workout_list.apply {
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
             isNestedScrollingEnabled = false

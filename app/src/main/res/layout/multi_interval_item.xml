@@ -12,7 +12,7 @@
     android:background="@drawable/item_bg">
 
     <TextView
-        android:id="@+id/workTime"
+        android:id="@+id/item_interval_work_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/item_interval_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
@@ -36,12 +36,12 @@
         android:singleLine="true"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintEnd_toStartOf="@id/workTime"
-        app:layout_constraintStart_toEndOf="@id/icon"
+        app:layout_constraintEnd_toStartOf="@id/item_interval_work_time"
+        app:layout_constraintStart_toEndOf="@id/item_interval_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/restHint"
+        android:id="@+id/item_interval_rest_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
@@ -51,10 +51,10 @@
         android:textColor="@color/colorGrey"
         android:textSize="@dimen/text_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/icon" />
+        app:layout_constraintStart_toEndOf="@id/item_interval_icon" />
 
     <TextView
-        android:id="@+id/restTime"
+        android:id="@+id/item_interval_rest_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8dp"
@@ -63,11 +63,11 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/restHint"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintStart_toEndOf="@id/item_interval_rest_hint"
+        app:layout_constraintTop_toBottomOf="@id/item_interval_title" />
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/item_interval_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"

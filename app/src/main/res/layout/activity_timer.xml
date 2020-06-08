@@ -7,20 +7,20 @@
     android:keepScreenOn="true">
 
     <ImageButton
-        android:id="@+id/resetButton"
+        android:id="@+id/fragment_timer_reset_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_32dp"
         android:background="?android:selectableItemBackground"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/timer_pause_btn"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_timer_pause_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/timer_pause_btn"
+        app:layout_constraintTop_toTopOf="@id/fragment_timer_pause_btn"
         app:srcCompat="@drawable/ic_menu_refresh_white"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/workoutName"
+        android:id="@+id/fragment_timer_workout_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_32dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/counterView"
+        android:id="@+id/fragment_timer_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8dp"
@@ -46,13 +46,13 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:textColor="@color/colorWhite"
         android:textSize="96sp"
-        app:layout_constraintBottom_toTopOf="@id/timer_pause_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment_timer_pause_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/counterNumber" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_timer_counter_number" />
 
     <TextView
-        android:id="@+id/counterType"
+        android:id="@+id/fragment_timer_counter_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8dp"
@@ -63,12 +63,12 @@
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_24sp"
-        app:layout_constraintBottom_toTopOf="@id/counterView"
+        app:layout_constraintBottom_toTopOf="@id/fragment_timer_counter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/intervalName"
+        android:id="@+id/fragment_timer_interval_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_32dp"
@@ -81,10 +81,10 @@
         android:textSize="@dimen/text_18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/counterNumber" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_timer_counter_number" />
 
     <TextView
-        android:id="@+id/counterNumber"
+        android:id="@+id/fragment_timer_counter_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_32dp"
@@ -96,10 +96,10 @@
         android:textSize="@dimen/text_28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/workoutName" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_timer_workout_name" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/timer_pause_btn"
+        android:id="@+id/fragment_timer_pause_btn"
         style="@style/DefaultActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

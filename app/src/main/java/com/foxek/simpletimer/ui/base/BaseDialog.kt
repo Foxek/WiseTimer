@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.foxek.simpletimer.di.component.ActivityComponent
-import kotlinx.android.synthetic.main.dialog_edit_interval.*
+import kotlinx.android.synthetic.main.dialog_interval.*
 
 abstract class BaseDialog : DialogFragment(), MvpView {
 

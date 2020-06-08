@@ -25,11 +25,11 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
         super.onViewCreated(view, savedInstanceState)
 
 
-        timer_pause_btn.setOnClickListener {
+        fragment_timer_pause_btn.setOnClickListener {
             startForegroundService(context!!, Intent(context, TimerService::class.java).setAction(ACTION_PAUSE))
         }
 
-        resetButton.setOnClickListener {
+        fragment_timer_reset_btn.setOnClickListener {
             startForegroundService(context!!, Intent(context, TimerService::class.java).setAction(ACTION_STOP))
         }
 
@@ -74,33 +74,33 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
     }
 
     override fun showPauseInterface() {
-        resetButton.visibility = View.VISIBLE
-        timer_pause_btn.setText(R.string.timer_continue_button)
+        fragment_timer_reset_btn.visibility = View.VISIBLE
+        fragment_timer_pause_btn.setText(R.string.timer_continue_button)
     }
 
     override fun showPlayInterface() {
-        resetButton.visibility = View.GONE
-        timer_pause_btn.setText(R.string.timer_pause_button)
+        fragment_timer_reset_btn.visibility = View.GONE
+        fragment_timer_pause_btn.setText(R.string.timer_pause_button)
     }
 
     override fun showCurrentCounter(time: String) {
-        counterView.text = time
+        fragment_timer_counter.text = time
     }
 
     override fun showCounterType(type: Int) {
-        counterType.setText(type)
+        fragment_timer_counter_type.setText(type)
     }
 
     override fun showCounterNumber(number: String) {
-        counterNumber.text = number
+        fragment_timer_counter_number.text = number
     }
 
     override fun showCounterName(name: String?) {
         if (name == Constants.EMPTY) {
-            intervalName.visibility = View.GONE
+            fragment_timer_interval_name.visibility = View.GONE
         } else {
-            intervalName.visibility = View.VISIBLE
-            intervalName.text = name
+            fragment_timer_interval_name.visibility = View.VISIBLE
+            fragment_timer_interval_name.text = name
         }
     }
 }

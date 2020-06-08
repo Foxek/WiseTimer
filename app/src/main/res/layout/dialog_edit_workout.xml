@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/dialog_vertical_padding">
 
     <TextView
-        android:id="@+id/dialogTitle"
+        android:id="@+id/dialog_edit_workout_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_bold"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialogDescription"
+        android:id="@+id/dialog_edit_workout_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
@@ -30,10 +30,10 @@
         android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialogTitle" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_edit_workout_title" />
 
     <EditText
-        android:id="@+id/etWorkoutName"
+        android:id="@+id/dialog_edit_workout_field_name"
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -44,10 +44,10 @@
         android:textColorHighlight="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialogDescription" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_edit_workout_description" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/edit_dialog_delete_btn"
+        android:id="@+id/dialog_edit_workout_delete_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -55,10 +55,10 @@
         android:text="@string/delete_training_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etWorkoutName" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_edit_workout_field_name" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/edit_dialog_save_btn"
+        android:id="@+id/dialog_edit_workout_save_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -67,6 +67,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_dialog_delete_btn" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_edit_workout_delete_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

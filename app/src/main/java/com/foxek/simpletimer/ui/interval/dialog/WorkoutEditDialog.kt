@@ -39,26 +39,26 @@ class WorkoutEditDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        etWorkoutName.apply {
+        dialog_edit_workout_field_name.apply {
             setText(arguments?.getString(EXTRA_WORKOUT_NAME))
-            setSelection(etWorkoutName.text.length)
+            setSelection(dialog_edit_workout_field_name.text.length)
         }
 
-        edit_dialog_delete_btn.setOnClickListener {
+        dialog_edit_workout_delete_btn.setOnClickListener {
             dismiss()
             if (showsDialog)
                 presenter.deleteWorkoutButtonClicked()
         }
 
-        edit_dialog_save_btn.setOnClickListener {
+        dialog_edit_workout_save_btn.setOnClickListener {
             dismiss()
-            if (checkNotEmpty(etWorkoutName))
-                presenter.saveWorkoutButtonClicked(etWorkoutName.text.toString())
+            if (checkNotEmpty(dialog_edit_workout_field_name))
+                presenter.saveWorkoutButtonClicked(dialog_edit_workout_field_name.text.toString())
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        etWorkoutName.isCursorVisible = false
+        dialog_edit_workout_field_name.isCursorVisible = false
     }
 }

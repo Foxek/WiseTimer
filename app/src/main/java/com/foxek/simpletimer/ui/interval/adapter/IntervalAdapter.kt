@@ -42,18 +42,18 @@ class IntervalAdapter : ListAdapter<Interval, IntervalAdapter.ViewHolder> (Inter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.itemView.workTime.text = formatIntervalData(getItem(position).work)
+        holder.itemView.item_interval_work_time.text = formatIntervalData(getItem(position).work)
 
         if (getItem(position).type == WITH_REST_TYPE) {
-            holder.itemView.restTime.text = formatIntervalData(getItem(position).rest)
+            holder.itemView.item_interval_rest_time.text = formatIntervalData(getItem(position).rest)
         }else{
-            holder.itemView.restHint.text = holder.itemView.resources.getString(R.string.timer_without_rest)
+            holder.itemView.item_interval_rest_hint.text = holder.itemView.resources.getString(R.string.timer_without_rest)
         }
 
         if (getItem(position).name == EMPTY) {
-            holder.itemView.title.text = formatIntervalNumber(position+1)
+            holder.itemView.item_interval_title.text = formatIntervalNumber(position+1)
         }else{
-            holder.itemView.title.text = getItem(position).name
+            holder.itemView.item_interval_title.text = getItem(position).name
         }
 
     }

@@ -48,11 +48,11 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
 
         arguments?.let { presenter.viewIsReady(it.getInt(EXTRA_WORKOUT_ID, 0)) }
 
-        backButton.setOnClickListener { onBackPressed() }
-        editButton.setOnClickListener { presenter.editWorkoutButtonClicked() }
-        volumeButton.setOnClickListener { presenter.changeVolumeButtonClicked() }
-        addIntervalButton.setOnClickListener { presenter.addIntervalButtonClicked() }
-        interval_start_btn.setOnClickListener { presenter.startWorkoutButtonClicked() }
+        fragment_interval_back_btn.setOnClickListener { onBackPressed() }
+        fragment_interval_edit_btn.setOnClickListener { presenter.editWorkoutButtonClicked() }
+        fragment_interval_volume_btn.setOnClickListener { presenter.changeVolumeButtonClicked() }
+        fragment_interval_add_btn.setOnClickListener { presenter.addIntervalButtonClicked() }
+        fragment_interval_start_btn.setOnClickListener { presenter.startWorkoutButtonClicked() }
 
     }
 
@@ -66,13 +66,13 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun setWorkoutName(name: String) {
-        workoutName.text = name
+        fragment_interval_workout_name.text = name
     }
 
     override fun setIntervalList() {
         viewAdapter.setCallback(this)
 
-        intervalList.apply {
+        fragment_interval_list.apply {
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
             adapter = viewAdapter
@@ -81,9 +81,9 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
 
     override fun setVolumeState(state: Boolean) {
         if (state)
-            volumeButton.setImageResource(R.drawable.ic_menu_volume_on_white)
+            fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_on_white)
         else
-            volumeButton.setImageResource(R.drawable.ic_menu_volume_off_white)
+            fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_off_white)
     }
 
     override fun showIntervalEditDialog(interval: Interval) {
