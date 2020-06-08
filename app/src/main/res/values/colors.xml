@@ -5,5 +5,7 @@
     <color name="colorAccent">#feb692</color>
     <color name="colorTextHeader">#424242</color>
     <color name="colorTint">#907da0</color>
-    <color name="colorTransparentWhite">#cccccccc</color>
+    <color name="colorGrey">#cccccccc</color>
+
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

@@ -19,7 +19,6 @@ import com.foxek.simpletimer.ui.base.BaseFragment
 import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
 import com.foxek.simpletimer.ui.timer.TimerFragment
 import com.foxek.simpletimer.ui.timer.TimerService
-import com.foxek.simpletimer.utils.Constants
 import com.foxek.simpletimer.utils.Constants.ACTION_START
 
 import com.foxek.simpletimer.utils.Constants.EXTRA_WORKOUT_ID
@@ -53,7 +52,7 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
         editButton.setOnClickListener { presenter.editWorkoutButtonClicked() }
         volumeButton.setOnClickListener { presenter.changeVolumeButtonClicked() }
         addIntervalButton.setOnClickListener { presenter.addIntervalButtonClicked() }
-        startButton.setOnClickListener { presenter.startWorkoutButtonClicked() }
+        interval_start_btn.setOnClickListener { presenter.startWorkoutButtonClicked() }
 
     }
 

@@ -59,8 +59,8 @@ class IntervalEditDialog : BaseDialog() {
 
         cbName.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }
 
-        saveButton.setOnClickListener { onSaveButtonClick() }
-        deleteButton.setOnClickListener { onDeleteButtonClick() }
+        edit_dialog_save_btn.setOnClickListener { onSaveButtonClick() }
+        edit_dialog_delete_btn.setOnClickListener { onDeleteButtonClick() }
 
         setTypeSpinner()
         prepareEditText()

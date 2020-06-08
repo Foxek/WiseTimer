@@ -6,9 +6,22 @@
     <dimen name="dialog_horizontal_padding">32dp</dimen>
     <dimen name="dialog_vertical_padding">16dp</dimen>
 
-    <dimen name="h1_text_size">38sp</dimen>
-    <dimen name="h2_text_size">28sp</dimen>
-    <dimen name="dialog_header_size">24sp</dimen>
-    <dimen name="sector_text_size">18sp</dimen>
-    <dimen name="text_size">16sp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="padding_24dp">24dp</dimen>
+    <dimen name="padding_32dp">32dp</dimen>
+
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="text_28sp">28sp</dimen>
+    <dimen name="text_38sp">38sp</dimen>
+
 </resources>

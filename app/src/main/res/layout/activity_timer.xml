@@ -13,9 +13,9 @@
         android:layout_marginStart="32dp"
         android:background="?android:selectableItemBackground"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/pauseButton"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_pause_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pauseButton"
+        app:layout_constraintTop_toTopOf="@+id/timer_pause_btn"
         app:srcCompat="@drawable/ic_menu_refresh_white"
         tools:ignore="ContentDescription" />
 
@@ -47,7 +47,7 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:textColor="@android:color/white"
         android:textSize="96sp"
-        app:layout_constraintBottom_toTopOf="@+id/pauseButton"
+        app:layout_constraintBottom_toTopOf="@+id/timer_pause_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/counterNumber" />
@@ -99,9 +99,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
-    <TextView
-        android:id="@+id/pauseButton"
-        style="@style/CustomActivityButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/timer_pause_btn"
+        style="@style/DefaultActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

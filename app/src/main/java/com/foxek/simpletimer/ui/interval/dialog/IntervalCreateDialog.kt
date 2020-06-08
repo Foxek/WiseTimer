@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 import com.foxek.simpletimer.utils.Constants.EMPTY
 import kotlinx.android.synthetic.main.dialog_edit_interval.*
-import kotlinx.android.synthetic.main.dialog_edit_interval.deleteButton
-import kotlinx.android.synthetic.main.dialog_edit_interval.saveButton
+import kotlinx.android.synthetic.main.dialog_edit_interval.edit_dialog_delete_btn
+import kotlinx.android.synthetic.main.dialog_edit_interval.edit_dialog_save_btn
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
@@ -40,13 +40,13 @@ class IntervalCreateDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        deleteButton.visibility = View.GONE
+        edit_dialog_delete_btn.visibility = View.GONE
         dialogTitle.text = resources.getString(R.string.dialog_interval_create_title)
 
         cbRepeats.setOnCheckedChangeListener { _, isChecked -> onRepeatsCheckBoxClick(isChecked) }
         cbName.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }
 
-        saveButton.setOnClickListener { onSaveButtonClick() }
+        edit_dialog_save_btn.setOnClickListener { onSaveButtonClick() }
 
         setTypeSpinner()
         prepareEditText()

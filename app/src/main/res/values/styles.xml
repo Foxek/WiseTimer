@@ -8,21 +8,21 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:dialogTheme">@style/CustomDialog</item>
+        <item name="android:dialogTheme">@style/DefaultDialog</item>
     </style>
 
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
-    <style name="CustomDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
+    <style name="DefaultDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/dialog_bg</item>
         <item name="android:windowMinWidthMajor">80%</item>
         <item name="android:windowMinWidthMinor">80%</item>
     </style>
 
-    <style name="CustomEditText" parent="android:Widget.EditText">
+    <style name="DefaultEditText" parent="android:Widget.EditText">
         <item name="android:backgroundTint">@color/colorTint</item>
         <item name="android:textColor">@color/colorTextHeader</item>
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
@@ -31,36 +31,26 @@
         <item name="android:ems">10</item>
     </style>
 
-    <style name="CustomDialogButton" parent="android:Widget.Button">
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/item_bg</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
+    <style name="DefaultDialogButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/colorTint</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorTextHeader</item>
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:letterSpacing">0</item>
     </style>
 
-    <style name="CustomActivityButton" parent="android:Widget.Button">
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/text_button_bg</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
+    <style name="DefaultActivityButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:letterSpacing">0</item>
         <item name="android:textColor">@color/colorTextHeader</item>
         <item name="android:fontFamily">@font/roboto_condensed_bold</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textAlignment">center</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
     </style>
 
-    <style name="CustomSpinnerSelected" parent="@android:style/Widget.TextView" >
+    <style name="DefaultSpinnerSelected" parent="@android:style/Widget.TextView" >
         <item name="android:textSize" >16sp</item>
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
         <item name="android:textColor">@color/colorTextHeader</item>
@@ -70,7 +60,7 @@
         <item name="android:paddingEnd">8dp</item>
     </style>
 
-    <style name="CustomSpinnerItems" parent="@android:style/Widget.TextView" >
+    <style name="DefaultSpinnerItems" parent="@android:style/Widget.TextView" >
         <item name="android:textSize" >16sp</item>
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
         <item name="android:textColor">@color/colorTextHeader</item>

@@ -34,7 +34,7 @@
 
     <EditText
         android:id="@+id/etWorkoutName"
-        style="@style/CustomEditText"
+        style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -48,14 +48,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
 
-    <TextView
-        android:id="@+id/createButton"
-        style="@style/CustomDialogButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/workout_create_btn"
+        style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/create_training_button"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

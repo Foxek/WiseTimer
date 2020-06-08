@@ -1,7 +1,6 @@
 package com.foxek.simpletimer.ui.timer
 
 import android.content.ComponentName
-import android.content.Context.BIND_AUTO_CREATE
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
@@ -26,7 +25,7 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
         super.onViewCreated(view, savedInstanceState)
 
 
-        pauseButton.setOnClickListener {
+        timer_pause_btn.setOnClickListener {
             startForegroundService(context!!, Intent(context, TimerService::class.java).setAction(ACTION_PAUSE))
         }
 
@@ -76,12 +75,12 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
 
     override fun showPauseInterface() {
         resetButton.visibility = View.VISIBLE
-        pauseButton.setText(R.string.timer_continue_button)
+        timer_pause_btn.setText(R.string.timer_continue_button)
     }
 
     override fun showPlayInterface() {
         resetButton.visibility = View.GONE
-        pauseButton.setText(R.string.timer_pause_button)
+        timer_pause_btn.setText(R.string.timer_pause_button)
     }
 
     override fun showCurrentCounter(time: String) {

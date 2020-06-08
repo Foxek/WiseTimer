@@ -44,13 +44,13 @@ class WorkoutEditDialog : BaseDialog() {
             setSelection(etWorkoutName.text.length)
         }
 
-        deleteButton.setOnClickListener {
+        edit_dialog_delete_btn.setOnClickListener {
             dismiss()
             if (showsDialog)
                 presenter.deleteWorkoutButtonClicked()
         }
 
-        saveButton.setOnClickListener {
+        edit_dialog_save_btn.setOnClickListener {
             dismiss()
             if (checkNotEmpty(etWorkoutName))
                 presenter.saveWorkoutButtonClicked(etWorkoutName.text.toString())

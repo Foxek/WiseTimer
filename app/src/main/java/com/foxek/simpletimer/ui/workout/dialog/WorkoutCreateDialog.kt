@@ -1,11 +1,7 @@
 package com.foxek.simpletimer.ui.workout.dialog
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.ui.base.BaseDialog
@@ -35,7 +31,7 @@ class WorkoutCreateDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createButton.setOnClickListener { createButtonClick() }
+        workout_create_btn.setOnClickListener { createButtonClick() }
     }
 
     private fun createButtonClick(){

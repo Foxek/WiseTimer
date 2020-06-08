@@ -34,7 +34,7 @@
 
     <EditText
         android:id="@+id/etWorkoutName"
-        style="@style/CustomEditText"
+        style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -46,9 +46,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
 
-    <TextView
-        android:id="@+id/deleteButton"
-        style="@style/CustomDialogButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_dialog_delete_btn"
+        style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -58,9 +58,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etWorkoutName" />
 
-    <TextView
-        android:id="@+id/saveButton"
-        style="@style/CustomDialogButton"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_dialog_save_btn"
+        style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -69,6 +69,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_dialog_delete_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

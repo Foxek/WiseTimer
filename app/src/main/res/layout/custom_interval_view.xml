@@ -6,7 +6,7 @@
 
     <EditText
         android:id="@+id/etMinutes"
-        style="@style/CustomEditText"
+        style="@style/DefaultEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:digits="0123456789"
@@ -30,7 +30,7 @@
 
     <EditText
         android:id="@+id/etSeconds"
-        style="@style/CustomEditText"
+        style="@style/DefaultEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/divider"

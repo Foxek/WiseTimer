@@ -37,7 +37,7 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
 
         presenter.viewIsReady()
 
-        createButton.setOnClickListener {
+        workout_create_btn.setOnClickListener {
             presenter.createButtonClicked()
         }
 
