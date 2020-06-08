@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/margin_32dp"
+    android:paddingTop="@dimen/margin_16dp"
+    android:paddingEnd="@dimen/margin_32dp"
+    android:paddingBottom="@dimen/margin_16dp"
+    tools:background="@drawable/dialog_bg">
+
+    <TextView
+        android:id="@+id/base_dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/dialog_training_setting_title"/>
+
+    <TextView
+        android:id="@+id/base_dialog_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:fontFamily="@font/roboto_condensed_light"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/base_dialog_title"
+        tools:text="@string/dialog_training_setting_description"/>
+
+    <FrameLayout
+        android:id="@+id/base_dialog_layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:layout_goneMarginTop="@dimen/margin_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base_dialog_description" />
+</androidx.constraintlayout.widget.ConstraintLayout>

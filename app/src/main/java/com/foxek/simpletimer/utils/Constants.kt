@@ -27,4 +27,6 @@ object Constants {
 
     const val ACTION_OPEN_TIMER = "com.foxek.simpletimer.action.OPEN_TIMER"
 
+    const val NO_ID_INT = -1
+
 }

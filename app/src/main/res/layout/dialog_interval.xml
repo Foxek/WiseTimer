@@ -3,11 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="@dimen/dialog_horizontal_padding"
-    android:paddingTop="@dimen/dialog_vertical_padding"
-    android:paddingEnd="@dimen/dialog_horizontal_padding"
-    android:paddingBottom="@dimen/dialog_vertical_padding">
+    android:layout_height="wrap_content">
 
     <com.foxek.simpletimer.ui.custom.IntervalEditText
         android:id="@+id/dialog_interval_field_work"
@@ -52,7 +48,6 @@
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:hint="@string/dialog_interval_setting_name_hint"
         android:importantForAutofill="no"
@@ -62,7 +57,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_title"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -81,18 +76,6 @@
         app:layout_constraintEnd_toEndOf="@id/dialog_interval_field_rest"
         app:layout_constraintTop_toBottomOf="@id/dialog_interval_field_rest"
         tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/dialog_interval_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:text="@string/dialog_interval_setting_title"
-        android:textColor="@color/colorTextHeader"
-        android:textSize="@dimen/text_24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dialog_interval_hint_interval"

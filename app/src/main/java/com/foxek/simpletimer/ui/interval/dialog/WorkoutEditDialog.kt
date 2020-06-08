@@ -17,19 +17,11 @@ class WorkoutEditDialog : BaseDialog() {
     @Inject
     lateinit var presenter: IntervalContact.Presenter
 
-    override val dialogTag = "WorkoutEditDialog"
-    override val layoutId = R.layout.dialog_edit_workout
+    override var dialogTitle = R.string.dialog_training_setting_title
 
-    companion object {
+    override var dialogDescription = R.string.dialog_training_setting_description
 
-        fun newInstance(name: String?): WorkoutEditDialog {
-            val mWorkoutEditDialog = WorkoutEditDialog()
-            mWorkoutEditDialog.arguments = Bundle().apply {
-                putString(EXTRA_WORKOUT_NAME, name)
-            }
-            return mWorkoutEditDialog
-        }
-    }
+    override fun getLayout() = R.layout.dialog_edit_workout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,5 +52,15 @@ class WorkoutEditDialog : BaseDialog() {
     override fun onDestroyView() {
         super.onDestroyView()
         dialog_edit_workout_field_name.isCursorVisible = false
+    }
+
+    companion object {
+        fun newInstance(name: String?): WorkoutEditDialog {
+            val mWorkoutEditDialog = WorkoutEditDialog()
+            mWorkoutEditDialog.arguments = Bundle().apply {
+                putString(EXTRA_WORKOUT_NAME, name)
+            }
+            return mWorkoutEditDialog
+        }
     }
 }

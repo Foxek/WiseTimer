@@ -13,15 +13,14 @@ import kotlinx.android.synthetic.main.dialog_add_workout.*
 
 class WorkoutCreateDialog : BaseDialog() {
 
-    override val dialogTag = "WorkoutCreateDialog"
-    override val layoutId = R.layout.dialog_add_workout
-
     @Inject
     lateinit var presenter: WorkoutContact.Presenter
 
-    companion object {
-        fun newInstance(): WorkoutCreateDialog = WorkoutCreateDialog()
-    }
+    override var dialogTitle = R.string.dialog_training_create_title
+
+    override var dialogDescription = R.string.dialog_training_create_description
+
+    override fun getLayout(): Int = R.layout.dialog_add_workout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +45,9 @@ class WorkoutCreateDialog : BaseDialog() {
     override fun onDestroyView() {
         super.onDestroyView()
         dialog_add_workout_field_name.isCursorVisible = false
+    }
+
+    companion object {
+        fun newInstance(): WorkoutCreateDialog = WorkoutCreateDialog()
     }
 }

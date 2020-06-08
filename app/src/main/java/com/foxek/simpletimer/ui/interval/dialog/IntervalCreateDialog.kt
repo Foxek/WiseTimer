@@ -23,8 +23,9 @@ class IntervalCreateDialog : BaseDialog() {
     @Inject
     lateinit var presenter: IntervalContact.Presenter
 
-    override val dialogTag = "IntervalCreateDialog"
-    override val layoutId = R.layout.dialog_interval
+    override var dialogTitle = R.string.dialog_interval_create_title
+
+    override fun getLayout() = R.layout.dialog_interval
 
     companion object {
         fun newInstance(): IntervalCreateDialog = IntervalCreateDialog()
@@ -39,7 +40,6 @@ class IntervalCreateDialog : BaseDialog() {
         super.onViewCreated(view, savedInstanceState)
 
         dialog_interval_delete_btn.visibility = View.GONE
-        dialog_interval_title.text = resources.getString(R.string.dialog_interval_create_title)
 
         dialog_interval_checkbox_repeats.setOnCheckedChangeListener { _, isChecked -> onRepeatsCheckBoxClick(isChecked) }
         dialog_interval_checkbox_name.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }

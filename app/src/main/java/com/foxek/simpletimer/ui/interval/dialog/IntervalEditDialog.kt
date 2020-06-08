@@ -26,24 +26,9 @@ class IntervalEditDialog : BaseDialog() {
     @Inject
     lateinit var presenter: IntervalContact.Presenter
 
-    override val dialogTag = "IntervalEditDialog"
-    override val layoutId = R.layout.dialog_interval
+    override var dialogTitle = R.string.dialog_interval_setting_title
 
-    companion object {
-
-        fun newInstance(interval: Interval): IntervalEditDialog {
-            val dialog = IntervalEditDialog()
-
-            dialog.arguments = Bundle().apply {
-                putInt(EXTRA_WORK_TIME, interval.work)
-                putInt(EXTRA_REST_TIME, interval.rest)
-                putInt(EXTRA_TYPE, interval.type)
-                putString(EXTRA_INTERVAL_NAME, interval.name)
-            }
-
-            return dialog
-        }
-    }
+    override fun getLayout() = R.layout.dialog_interval
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +39,6 @@ class IntervalEditDialog : BaseDialog() {
         super.onViewCreated(view, savedInstanceState)
 
         dialog_interval_group_checkbox_repeats.visibility = View.GONE
-
-        dialog_interval_title.text = resources.getString(R.string.dialog_interval_setting_title)
 
         dialog_interval_checkbox_name.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }
 
@@ -140,5 +123,19 @@ class IntervalEditDialog : BaseDialog() {
 
         dialog_interval_field_repeats.isCursorVisible = false
         dialog_interval_field_name.isCursorVisible = false
+    }
+
+    companion object {
+        fun newInstance(interval: Interval): IntervalEditDialog {
+            val dialog = IntervalEditDialog()
+
+            dialog.arguments = Bundle().apply {
+                putInt(EXTRA_WORK_TIME, interval.work)
+                putInt(EXTRA_REST_TIME, interval.rest)
+                putInt(EXTRA_TYPE, interval.type)
+                putString(EXTRA_INTERVAL_NAME, interval.name)
+            }
+            return dialog
+        }
     }
 }

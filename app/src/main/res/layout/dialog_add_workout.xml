@@ -2,42 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="@dimen/dialog_horizontal_padding"
-    android:paddingTop="@dimen/dialog_vertical_padding"
-    android:paddingEnd="@dimen/dialog_horizontal_padding"
-    android:paddingBottom="@dimen/dialog_vertical_padding">
-
-    <TextView
-        android:id="@+id/dialog_add_workout_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_condensed_bold"
-        android:text="@string/dialog_training_create_title"
-        android:textColor="@color/colorTextHeader"
-        android:textSize="@dimen/text_24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dialog_add_workout_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:fontFamily="@font/roboto_condensed_light"
-        android:text="@string/dialog_training_create_description"
-        android:textSize="@dimen/text_16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_add_workout_title" />
+    android:layout_height="wrap_content">
 
     <EditText
         android:id="@+id/dialog_add_workout_field_name"
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
         android:ems="10"
         android:fontFamily="@font/roboto_condensed_regular"
         android:hint="@string/dialog_training_name_hint"
@@ -46,7 +17,7 @@
         android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_add_workout_description" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/dialog_add_workout_create_btn"

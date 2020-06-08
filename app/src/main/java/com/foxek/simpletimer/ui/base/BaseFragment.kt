@@ -9,6 +9,7 @@ import com.foxek.simpletimer.AndroidApplication
 import com.foxek.simpletimer.di.component.ActivityComponent
 import com.foxek.simpletimer.di.component.DaggerActivityComponent
 import com.foxek.simpletimer.di.module.ActivityModule
+import com.foxek.simpletimer.extensions.customTag
 
 abstract class BaseFragment : Fragment(), MvpView {
 
@@ -39,7 +40,7 @@ abstract class BaseFragment : Fragment(), MvpView {
 
     fun showDialog(dialog: BaseDialog){
         dialog.setTargetFragment(this,123)
-        dialog.show(fragmentManager!!, dialog.dialogTag)
+        dialog.show(fragmentManager!!, dialog.customTag())
     }
 
     fun close() = fragmentManager?.popBackStack()
