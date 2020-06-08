@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_bold"
         android:text="@string/dialog_training_setting_title"
-        android:textColor="#424242"
-        android:textSize="@dimen/dialog_header_size"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,27 +24,27 @@
         android:id="@+id/dialogDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/dialog_training_setting_description"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
+        app:layout_constraintTop_toBottomOf="@id/dialogTitle" />
 
     <EditText
         android:id="@+id/etWorkoutName"
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="text|textCapSentences|textNoSuggestions"
         android:textColorHighlight="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
+        app:layout_constraintTop_toBottomOf="@id/dialogDescription" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_dialog_delete_btn"
@@ -54,21 +54,19 @@
         android:layout_marginTop="24dp"
         android:text="@string/delete_training_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWorkoutName" />
+        app:layout_constraintTop_toBottomOf="@id/etWorkoutName" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_dialog_save_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:text="@string/save_training_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_dialog_delete_btn" />
+        app:layout_constraintTop_toBottomOf="@id/edit_dialog_delete_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

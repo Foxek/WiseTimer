@@ -13,56 +13,56 @@
         android:id="@+id/etWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeSpinner" />
+        app:layout_constraintTop_toBottomOf="@id/typeSpinner" />
 
     <com.foxek.simpletimer.ui.custom.IntervalEditText
         android:id="@+id/etRest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWork"
-        app:layout_goneMarginTop="8dp" />
+        app:layout_constraintTop_toBottomOf="@id/etWork"
+        app:layout_goneMarginTop="@dimen/margin_8dp" />
 
     <CheckBox
         android:id="@+id/cbRepeats"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:buttonTint="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etRepeats" />
+        app:layout_constraintTop_toBottomOf="@id/etRepeats" />
 
     <CheckBox
         android:id="@+id/cbName"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:buttonTint="@color/colorTint"
         android:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbRepeats"
-        app:layout_goneMarginTop="8dp" />
+        app:layout_constraintTop_toBottomOf="@id/cbRepeats"
+        app:layout_goneMarginTop="@dimen/margin_8dp" />
 
     <EditText
         android:id="@+id/etName"
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:hint="@string/dialog_interval_setting_name_hint"
         android:importantForAutofill="no"
         android:inputType="text|textCapSentences|textNoSuggestions"
         android:textAlignment="viewStart"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_16sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogTitle"
+        app:layout_constraintTop_toBottomOf="@id/dialogTitle"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -76,10 +76,10 @@
         android:importantForAutofill="no"
         android:inputType="textNoSuggestions|number"
         android:maxLength="2"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_24sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/etRest"
-        app:layout_constraintTop_toBottomOf="@+id/etRest"
+        app:layout_constraintEnd_toEndOf="@id/etRest"
+        app:layout_constraintTop_toBottomOf="@id/etRest"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -89,7 +89,7 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:text="@string/dialog_interval_setting_title"
         android:textColor="@color/colorTextHeader"
-        android:textSize="@dimen/dialog_header_size"
+        android:textSize="@dimen/text_24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -98,53 +98,52 @@
         android:id="@+id/intervalTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="@dimen/margin_32dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/timer_work_time"
-        android:textColor="#424242"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etWork"
-        app:layout_constraintEnd_toStartOf="@+id/etWork"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/etWork"
+        app:layout_constraintEnd_toStartOf="@id/etWork"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etWork" />
+        app:layout_constraintTop_toTopOf="@id/etWork" />
 
     <TextView
         android:id="@+id/restHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="@dimen/margin_32dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/timer_rest_time"
-        android:textColor="#424242"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etRest"
-        app:layout_constraintEnd_toStartOf="@+id/etRest"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/etRest"
+        app:layout_constraintEnd_toStartOf="@id/etRest"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWork" />
+        app:layout_constraintTop_toBottomOf="@id/etWork" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_dialog_delete_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/margin_24dp"
         android:text="@string/delete_interval_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbName" />
+        app:layout_constraintTop_toBottomOf="@id/cbName" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_dialog_save_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:text="@string/save_interval_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_dialog_delete_btn"
+        app:layout_constraintTop_toBottomOf="@id/edit_dialog_delete_btn"
         app:layout_goneMarginTop="24dp" />
 
     <TextView
@@ -153,97 +152,89 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/timer_repeat"
-        android:textColor="#424242"
-        android:textSize="16sp"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_16sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/etRepeats"
+        app:layout_constraintBottom_toBottomOf="@id/etRepeats"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etRepeats" />
+        app:layout_constraintTop_toTopOf="@id/etRepeats" />
 
     <TextView
         android:id="@+id/repeatCbHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="@dimen/margin_32dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/dialog_interval_setting_repeats"
-        android:textColor="#424242"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cbRepeats"
-        app:layout_constraintEnd_toStartOf="@+id/cbRepeats"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/cbRepeats"
+        app:layout_constraintEnd_toStartOf="@id/cbRepeats"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cbRepeats" />
+        app:layout_constraintTop_toTopOf="@id/cbRepeats" />
 
     <TextView
         android:id="@+id/nameCbHints"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="@dimen/margin_32dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/dialog_interval_setting_name"
-        android:textColor="#424242"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cbName"
-        app:layout_constraintEnd_toStartOf="@+id/cbName"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/cbName"
+        app:layout_constraintEnd_toStartOf="@id/cbName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cbName" />
+        app:layout_constraintTop_toTopOf="@id/cbName" />
 
     <TextView
         android:id="@+id/typeHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="@dimen/margin_32dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/dialog_interval_setting_type"
-        android:textColor="#424242"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/typeSpinner"
-        app:layout_constraintEnd_toStartOf="@+id/typeSpinner"
+        android:textColor="@color/colorTextHeader"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/typeSpinner"
+        app:layout_constraintEnd_toStartOf="@id/typeSpinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/typeSpinner" />
+        app:layout_constraintTop_toTopOf="@id/typeSpinner" />
 
     <Spinner
         android:id="@+id/typeSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:textAlignment="center"
         android:gravity="center"
         android:background="@drawable/spinner_bg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
+        app:layout_constraintTop_toBottomOf="@id/etName" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/repeatsCbGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="cbRepeats,repeatCbHint"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:constraint_referenced_ids="cbRepeats,repeatCbHint" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/repeatsGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="repeatsHint,etRepeats"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:constraint_referenced_ids="repeatsHint,etRepeats" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/workGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="intervalTitle,etWork"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:constraint_referenced_ids="intervalTitle,etWork" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/restGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="restHint,etRest"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:constraint_referenced_ids="restHint,etRest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

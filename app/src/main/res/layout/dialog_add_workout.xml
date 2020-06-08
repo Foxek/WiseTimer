@@ -15,7 +15,7 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:text="@string/dialog_training_create_title"
         android:textColor="@color/colorTextHeader"
-        android:textSize="@dimen/dialog_header_size"
+        android:textSize="@dimen/text_24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,58 +23,57 @@
     <TextView
         android:id="@+id/dialogDescription"
         android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/dialog_training_create_description"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
+        app:layout_constraintTop_toBottomOf="@id/dialogTitle" />
 
     <EditText
         android:id="@+id/etWorkoutName"
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:ems="10"
         android:fontFamily="@font/roboto_condensed_regular"
         android:hint="@string/dialog_training_name_hint"
         android:inputType="text|textCapSentences|textNoSuggestions"
         android:textAlignment="viewStart"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogDescription" />
+        app:layout_constraintTop_toBottomOf="@id/dialogDescription" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/workout_create_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/margin_24dp"
         android:text="@string/create_training_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/errorHint" />
+        app:layout_constraintTop_toBottomOf="@id/errorHint" />
 
     <TextView
         android:id="@+id/errorHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:layout_marginEnd="1dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/dialog_training_error_hint"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="14sp"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/text_14sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWorkoutName" />
+        app:layout_constraintTop_toBottomOf="@id/etWorkoutName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

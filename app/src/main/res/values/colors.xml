@@ -6,6 +6,7 @@
     <color name="colorTextHeader">#424242</color>
     <color name="colorTint">#907da0</color>
     <color name="colorGrey">#cccccccc</color>
-
+    <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#ffff4444</color>
 </resources>
