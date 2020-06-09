@@ -1,14 +1,16 @@
 package com.foxek.simpletimer.di.module
 
 import com.foxek.simpletimer.di.PerFragment
-import com.foxek.simpletimer.ui.interval.adapter.IntervalAdapter
-import com.foxek.simpletimer.ui.interval.IntervalContact
-import com.foxek.simpletimer.ui.interval.IntervalInteractor
-import com.foxek.simpletimer.ui.interval.IntervalPresenter
-import com.foxek.simpletimer.ui.workout.adapter.WorkoutAdapter
-import com.foxek.simpletimer.ui.workout.WorkoutContact
-import com.foxek.simpletimer.ui.workout.WorkoutInteractor
-import com.foxek.simpletimer.ui.workout.WorkoutPresenter
+import com.foxek.simpletimer.domain.interval.IntervalInteractor
+import com.foxek.simpletimer.presentation.interval.adapter.IntervalAdapter
+import com.foxek.simpletimer.presentation.interval.IntervalContact
+import com.foxek.simpletimer.domain.interval.IntervalInteractorImpl
+import com.foxek.simpletimer.domain.workout.WorkoutInteractor
+import com.foxek.simpletimer.presentation.interval.IntervalPresenter
+import com.foxek.simpletimer.presentation.workout.adapter.WorkoutAdapter
+import com.foxek.simpletimer.presentation.workout.WorkoutContact
+import com.foxek.simpletimer.domain.workout.WorkoutInteractorImpl
+import com.foxek.simpletimer.presentation.workout.WorkoutPresenter
 
 import dagger.Module
 import dagger.Provides
@@ -20,7 +22,7 @@ class ActivityModule {
     fun provideWorkoutAdapter(): WorkoutAdapter = WorkoutAdapter()
 
     @Provides
-    fun provideWorkoutInteractor(interactor: WorkoutInteractor): WorkoutContact.Interactor = interactor
+    fun provideWorkoutInteractor(interactor: WorkoutInteractorImpl): WorkoutInteractor = interactor
 
     @Provides
     @PerFragment
@@ -30,7 +32,7 @@ class ActivityModule {
     fun provideIntervalAdapter(): IntervalAdapter = IntervalAdapter()
 
     @Provides
-    fun provideIntervalInteractor(interactor: IntervalInteractor): IntervalContact.Interactor = interactor
+    fun provideIntervalInteractor(interactor: IntervalInteractorImpl): IntervalInteractor = interactor
 
     @Provides
     @PerFragment

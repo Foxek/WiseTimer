@@ -2,12 +2,12 @@ package com.foxek.simpletimer.di.component
 
 import com.foxek.simpletimer.di.PerFragment
 import com.foxek.simpletimer.di.module.ActivityModule
-import com.foxek.simpletimer.ui.interval.IntervalFragment
-import com.foxek.simpletimer.ui.interval.dialog.IntervalCreateDialog
-import com.foxek.simpletimer.ui.interval.dialog.IntervalEditDialog
-import com.foxek.simpletimer.ui.interval.dialog.WorkoutEditDialog
-import com.foxek.simpletimer.ui.workout.WorkoutFragment
-import com.foxek.simpletimer.ui.workout.dialog.WorkoutCreateDialog
+import com.foxek.simpletimer.presentation.interval.IntervalFragment
+import com.foxek.simpletimer.presentation.interval.dialog.IntervalCreateDialog
+import com.foxek.simpletimer.presentation.interval.dialog.IntervalEditDialog
+import com.foxek.simpletimer.presentation.interval.dialog.WorkoutEditDialog
+import com.foxek.simpletimer.presentation.workout.WorkoutFragment
+import com.foxek.simpletimer.presentation.workout.dialog.WorkoutCreateDialog
 
 import dagger.Component
 

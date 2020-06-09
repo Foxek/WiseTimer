@@ -1,11 +1,12 @@
 package com.foxek.simpletimer.data.timer
 
 import android.os.CountDownTimer
-import android.util.Log
+import com.foxek.simpletimer.common.utils.Constants
 import com.foxek.simpletimer.data.model.Time
-import com.foxek.simpletimer.utils.Constants.POST_TIME_TYPE
-import com.foxek.simpletimer.utils.Constants.REST_TIME_TYPE
-import com.foxek.simpletimer.utils.Constants.WORK_TIME_TYPE
+import com.foxek.simpletimer.common.utils.Constants.POST_TIME_TYPE
+import com.foxek.simpletimer.common.utils.Constants.REST_TIME_TYPE
+import com.foxek.simpletimer.common.utils.Constants.WORK_TIME_TYPE
+import com.foxek.simpletimer.data.model.Interval
 
 import javax.inject.Inject
 
@@ -26,8 +27,17 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
     val onIntervalFinished = PublishSubject.create<Time>()
     var state = State.STOPPED
 
-    fun prepare(timeIntervals: ArrayList<Time>) {
-        times = timeIntervals
+    fun prepare(intervalList: List<Interval>) {
+        times.add(Time(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, 0, Constants.EMPTY))
+
+        intervalList.forEachIndexed { idx, it ->
+            times.add(Time(it.work, WORK_TIME_TYPE, idx + 1, it.name))
+
+            if (it.type == Constants.WITH_REST_TYPE)
+                times.add(Time(it.rest, REST_TIME_TYPE, idx + 1, it.name))
+        }
+
+        times.add(Time(1, POST_TIME_TYPE, times.lastIndex, null))
         start(times[0].value.toLong())
     }
 
@@ -53,12 +63,6 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
             override fun onFinish() {
                 stop()
                 handleFinish(times[++currentTimeIndex])
-
-//                onFinishSubject.onNext(currentInterval + 1);
-//                if (currentInterval < intervalList.size() - 1) {
-//                    currentInterval++;
-//                    timerCreate(intervalList.get(currentInterval));
-//                }
             }
 
             override fun onTick(millisUntilFinished: Long) {

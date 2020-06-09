@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.foxek.simpletimer.ui.view.IntervalEditView
+    <com.foxek.simpletimer.presentation.interval.view.IntervalEditView
         android:id="@+id/dialog_interval_field_work"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_interval_spinner_type" />
 
-    <com.foxek.simpletimer.ui.view.IntervalEditView
+    <com.foxek.simpletimer.presentation.interval.view.IntervalEditView
         android:id="@+id/dialog_interval_field_rest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

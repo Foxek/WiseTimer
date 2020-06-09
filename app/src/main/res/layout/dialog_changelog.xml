@@ -9,6 +9,7 @@
         android:id="@+id/changelog_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_changelog"
         tools:itemCount="3"/>

@@ -28,7 +28,10 @@ interface IntervalDAO {
     fun size(workoutId: Int): Single<Int>
 
     @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
-    fun getAll(workoutId: Int): Flowable<List<Interval>>
+    fun observeAll(workoutId: Int): Flowable<List<Interval>>
+
+    @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
+    fun getAll(workoutId: Int): Single<List<Interval>>
 
     @Query("SELECT MAX(id)  FROM Interval")
     fun getLastId(): Single<Int>
