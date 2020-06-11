@@ -3,30 +3,27 @@ package com.foxek.simpletimer.domain.workout
 import com.foxek.simpletimer.common.utils.Constants
 import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.data.model.Workout
-import com.foxek.simpletimer.data.database.WorkoutDAO
+import com.foxek.simpletimer.data.database.TimerDAO
 import javax.inject.Inject
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.Single
 
 class WorkoutInteractorImpl @Inject constructor(
-    private val workoutDAO: WorkoutDAO
+    private val timerDAO: TimerDAO
 ) : WorkoutInteractor {
 
     override fun getWorkoutById(workoutId: Int): Single<Workout> {
-        return workoutDAO.getById(workoutId)
+        return timerDAO.getWorkoutById(workoutId)
     }
 
     override fun createWorkout(workoutName: String): Completable {
-        return workoutDAO.getLastId()
+        return timerDAO.getLastWorkoutId()
             .defaultIfEmpty(0)
             .flatMapCompletable {
                 Completable.fromAction {
-                    workoutDAO.addNewWorkout(
+                    timerDAO.addNewWorkout(
                         Workout(workoutName, it + 1, 1, true),
                         Interval(Constants.EMPTY, 1, 1, it + 1, 0, 0)
                     )
@@ -35,25 +32,25 @@ class WorkoutInteractorImpl @Inject constructor(
     }
 
     override fun observeWorkouts(): Flowable<List<Workout>> {
-        return workoutDAO.getAll()
+        return timerDAO.observeWorkouts()
     }
 
     override fun updateWorkoutName(workoutId: Int, workoutName: String): Completable {
-        return Completable.fromAction { workoutDAO.update(workoutName, workoutId) }
+        return Completable.fromAction { timerDAO.updateWorkoutName(workoutName, workoutId) }
     }
 
     override fun deleteWorkoutById(workoutId: Int): Completable {
-        return Completable.fromAction { workoutDAO.delete(workoutId) }
+        return Completable.fromAction { timerDAO.deleteWorkout(workoutId) }
     }
 
     override fun getWorkoutVolumeState(workoutId: Int): Single<Boolean> {
-        return workoutDAO.getVolume(workoutId)
+        return timerDAO.getWorkoutVolumeState(workoutId)
     }
 
     override fun toggleWorkoutVolumeState(workoutId: Int): Single<Boolean> {
-        return workoutDAO.getVolume(workoutId)
+        return timerDAO.getWorkoutVolumeState(workoutId)
             .map { isEnabled ->
-                workoutDAO.update(!isEnabled, workoutId)
+                timerDAO.updateWorkoutVolumeState(!isEnabled, workoutId)
                 !isEnabled
             }
     }

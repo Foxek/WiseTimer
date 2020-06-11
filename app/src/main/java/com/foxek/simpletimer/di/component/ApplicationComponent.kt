@@ -3,9 +3,8 @@ package com.foxek.simpletimer.di.component
 import android.content.Context
 
 import com.foxek.simpletimer.AndroidApplication
-import com.foxek.simpletimer.data.database.IntervalDAO
 import com.foxek.simpletimer.data.database.TimerDatabase
-import com.foxek.simpletimer.data.database.WorkoutDAO
+import com.foxek.simpletimer.data.database.TimerDAO
 import com.foxek.simpletimer.di.module.ApplicationModule
 
 import javax.inject.Singleton
@@ -22,7 +21,5 @@ interface ApplicationComponent {
 
     fun database(): TimerDatabase
 
-    fun workoutDao(): WorkoutDAO
-
-    fun intervalDao(): IntervalDAO
+    fun timerDao(): TimerDAO
 }

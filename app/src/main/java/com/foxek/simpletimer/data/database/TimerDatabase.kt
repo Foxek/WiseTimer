@@ -14,8 +14,7 @@ import com.foxek.simpletimer.data.model.Workout
 @Database(entities = [Workout::class, Interval::class], version = 5, exportSchema = false)
 abstract class TimerDatabase : RoomDatabase() {
 
-    abstract val workoutDAO: WorkoutDAO
-    abstract val intervalDAO: IntervalDAO
+    abstract val timerDAO: TimerDAO
 
     companion object {
 

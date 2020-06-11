@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.domain.interval
 
-import com.foxek.simpletimer.data.database.IntervalDAO
+import com.foxek.simpletimer.data.database.TimerDAO
 import com.foxek.simpletimer.data.model.Interval
 
 import javax.inject.Inject
@@ -10,22 +10,22 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 
 class IntervalInteractorImpl @Inject constructor(
-    private val intervalDAO: IntervalDAO
+    private val timerDAO: TimerDAO
 ) : IntervalInteractor {
 
     override fun observeIntervals(workoutId: Int): Flowable<List<Interval>> {
-        return intervalDAO.observeAll(workoutId)
+        return timerDAO.observeIntervals(workoutId)
     }
 
     override fun getIntervals(workoutId: Int): Single<List<Interval>> {
-        return intervalDAO.getAll(workoutId)
+        return timerDAO.getIntervals(workoutId)
     }
 
     override fun addInterval(interval: Interval): Completable {
-        return intervalDAO.getLastId()
+        return timerDAO.getLastIntervalId()
             .flatMapCompletable {
                 interval.position = it + 1
-                Completable.fromAction { intervalDAO.add(interval) }
+                Completable.fromAction { timerDAO.addInterval(interval) }
             }
     }
 
@@ -37,21 +37,21 @@ class IntervalInteractorImpl @Inject constructor(
         workTime: Int,
         restTime: Int
     ): Completable {
-        return intervalDAO.getById(intervalId, workoutId)
+        return timerDAO.getIntervalById(intervalId, workoutId)
             .flatMapCompletable {
                 it.name = intervalName
                 it.type = intervalType
                 it.work = workTime
                 it.rest = restTime
-                Completable.fromAction { intervalDAO.update(it) }
+                Completable.fromAction { timerDAO.updateInterval(it) }
             }
     }
 
     override fun deleteInterval(workoutId: Int, intervalId: Int): Completable {
-        return intervalDAO.size(workoutId)
+        return timerDAO.getNumberOfIntervalForWorkout(workoutId)
             .filter { it != 1 }
             .flatMapCompletable {
-                Completable.fromAction { intervalDAO.delete(intervalId, workoutId) }
+                Completable.fromAction { timerDAO.deleteInterval(intervalId, workoutId) }
             }
     }
 }

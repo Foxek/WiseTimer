@@ -2,10 +2,9 @@ package com.foxek.simpletimer.di.module
 
 import android.content.Context
 import com.foxek.simpletimer.data.UserPreferences
-import com.foxek.simpletimer.data.database.IntervalDAO
 
 import com.foxek.simpletimer.data.database.TimerDatabase
-import com.foxek.simpletimer.data.database.WorkoutDAO
+import com.foxek.simpletimer.data.database.TimerDAO
 
 import javax.inject.Singleton
 
@@ -30,11 +29,7 @@ class ApplicationModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideWorkoutDao(): WorkoutDAO = database.workoutDAO
-
-    @Provides
-    @Singleton
-    fun provideIntervalDao(): IntervalDAO = database.intervalDAO
+    fun provideTimerDao(): TimerDAO = database.timerDAO
 
     @Provides
     @Singleton
