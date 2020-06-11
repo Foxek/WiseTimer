@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.presentation.base.BaseFragment
 
-import com.foxek.simpletimer.presentation.interval.adapter.IntervalAdapter
 import com.foxek.simpletimer.presentation.timer.TimerFragment
 import com.foxek.simpletimer.presentation.timer.TimerService
 import com.foxek.simpletimer.common.utils.Constants.ACTION_START
@@ -25,22 +24,20 @@ import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.fragment_interval.*
 
-class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.Callback {
+class IntervalFragment : BaseFragment(), IntervalContact.View {
 
     override val layoutId = R.layout.fragment_interval
 
     @Inject
     lateinit var presenter: IntervalContact.Presenter
 
-    @Inject
-    lateinit var viewAdapter: IntervalAdapter
+    private val intervalAdapter: IntervalAdapter by lazy { IntervalAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         component?.inject(this)
         presenter.attachView(this)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +60,7 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun renderIntervalList(intervalList: List<Interval>) {
-        viewAdapter.submitList(intervalList)
+        intervalAdapter.setItems(intervalList)
     }
 
     override fun setWorkoutName(name: String) {
@@ -71,12 +68,12 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
     }
 
     override fun setIntervalList() {
-        viewAdapter.setCallback(this)
-
         fragment_interval_list.apply {
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
-            adapter = viewAdapter
+            adapter = intervalAdapter.apply {
+                clickListener = { presenter.intervalItemClicked(it) }
+            }
         }
     }
 
@@ -119,9 +116,5 @@ class IntervalFragment : BaseFragment(), IntervalContact.View, IntervalAdapter.C
 
         arguments?.putString(ACTION_START, ACTION_START)
         executeInActivity { replaceFragment(TimerFragment(), arguments) }
-    }
-
-    override fun onListItemClick(item: Interval) {
-        presenter.intervalItemClicked(item)
     }
 }

@@ -12,7 +12,7 @@ import io.reactivex.Single
 abstract class TimerDAO {
 
     @Transaction
-    fun addNewWorkout(workout: Workout, interval: Interval) {
+    open fun addNewWorkout(workout: Workout, interval: Interval) {
         addWorkout(workout)
         addInterval(interval)
     }

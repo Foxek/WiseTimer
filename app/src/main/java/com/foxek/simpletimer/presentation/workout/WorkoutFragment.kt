@@ -10,16 +10,14 @@ import com.foxek.simpletimer.data.model.Workout
 import com.foxek.simpletimer.presentation.base.BaseFragment
 import com.foxek.simpletimer.presentation.changelog.ChangeLogDialog
 import com.foxek.simpletimer.presentation.interval.IntervalFragment
-import com.foxek.simpletimer.presentation.workout.adapter.WorkoutAdapter
 import com.foxek.simpletimer.presentation.workout.dialog.WorkoutCreateDialog
 import com.foxek.simpletimer.common.utils.Constants.CHANGELOG_VERSION_VALUE
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
-import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.fragment_workout.*
 import javax.inject.Inject
 
 
-class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Callback {
+class WorkoutFragment : BaseFragment(), WorkoutContact.View {
 
     override val layoutId = R.layout.fragment_workout
 
@@ -29,8 +27,7 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
     @Inject
     lateinit var userPreferences: UserPreferences
 
-    @Inject
-    lateinit var viewAdapter: WorkoutAdapter
+    private val workoutAdapter: WorkoutAdapter by lazy { WorkoutAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +49,10 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
             isNestedScrollingEnabled = false
-            adapter = viewAdapter
+            adapter = workoutAdapter.apply {
+                clickListener = { presenter.onWorkoutItemClick(it) }
+            }
         }
-
-        viewAdapter.setCallback(this)
         showChangelogDialogIfNeeded()
     }
 
@@ -68,15 +65,11 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View, WorkoutAdapter.Call
     }
 
     override fun renderWorkoutList(items: List<Workout>) {
-        viewAdapter.submitList(items)
+        workoutAdapter.setItems(items)
     }
 
     override fun showCreateDialog() {
         showDialog(WorkoutCreateDialog.newInstance())
-    }
-
-    override fun onListItemClick(workout: Workout) {
-        presenter.onWorkoutItemClick(workout)
     }
 
     override fun onDestroy() {

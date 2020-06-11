@@ -5,8 +5,17 @@ import androidx.room.*
 
 import androidx.room.ForeignKey.CASCADE
 
-@Entity(foreignKeys = [ForeignKey(entity = Workout::class, parentColumns = ["uid"], childColumns = ["trainingID"], onDelete = CASCADE)])
-class Interval(
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = Workout::class,
+            parentColumns = ["uid"],
+            childColumns = ["trainingID"],
+            onDelete = CASCADE
+        )
+    ]
+)
+data class Interval(
     @ColumnInfo(name = "name")
     var name: String?,
 

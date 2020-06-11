@@ -2,12 +2,11 @@ package com.foxek.simpletimer.di.module
 
 import com.foxek.simpletimer.di.PerFragment
 import com.foxek.simpletimer.domain.interval.IntervalInteractor
-import com.foxek.simpletimer.presentation.interval.adapter.IntervalAdapter
+import com.foxek.simpletimer.presentation.interval.IntervalAdapter
 import com.foxek.simpletimer.presentation.interval.IntervalContact
 import com.foxek.simpletimer.domain.interval.IntervalInteractorImpl
 import com.foxek.simpletimer.domain.workout.WorkoutInteractor
 import com.foxek.simpletimer.presentation.interval.IntervalPresenter
-import com.foxek.simpletimer.presentation.workout.adapter.WorkoutAdapter
 import com.foxek.simpletimer.presentation.workout.WorkoutContact
 import com.foxek.simpletimer.domain.workout.WorkoutInteractorImpl
 import com.foxek.simpletimer.presentation.workout.WorkoutPresenter
@@ -19,17 +18,11 @@ import dagger.Provides
 class ActivityModule {
 
     @Provides
-    fun provideWorkoutAdapter(): WorkoutAdapter = WorkoutAdapter()
-
-    @Provides
     fun provideWorkoutInteractor(interactor: WorkoutInteractorImpl): WorkoutInteractor = interactor
 
     @Provides
     @PerFragment
     fun provideWorkoutPresenter(presenter: WorkoutPresenter): WorkoutContact.Presenter = presenter
-
-    @Provides
-    fun provideIntervalAdapter(): IntervalAdapter = IntervalAdapter()
 
     @Provides
     fun provideIntervalInteractor(interactor: IntervalInteractorImpl): IntervalInteractor = interactor
