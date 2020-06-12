@@ -14,6 +14,6 @@ interface TimerContact {
 
         fun showIntervalType(type: Int)
 
-        fun showIntervalInfo(name: String, number: String)
+        fun showIntervalInfo(currentName: String, nextName: String, number: String)
     }
 }

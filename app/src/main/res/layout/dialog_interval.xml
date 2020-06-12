@@ -121,7 +121,7 @@
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
+
         android:text="@string/save_interval_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

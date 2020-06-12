@@ -8,10 +8,11 @@ import android.os.IBinder
 import android.view.View
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.core.view.isVisible
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.presentation.base.BaseFragment
 import com.foxek.simpletimer.presentation.timer.TimerService.LocalBinder
-import com.foxek.simpletimer.common.utils.Constants
 import com.foxek.simpletimer.common.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.common.utils.Constants.ACTION_STOP
 import com.foxek.simpletimer.common.utils.ServiceTools.isServiceRunning
@@ -101,9 +102,13 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
         fragment_timer_counter_type.setText(type)
     }
 
-    override fun showIntervalInfo(name: String, number: String) {
+    override fun showIntervalInfo(currentName: String, nextName: String, number: String) {
         fragment_timer_counter_number.text = number
-        fragment_timer_interval_name.text = name
-        fragment_timer_interval_name.isVisible = name.isNotBlank()
+        
+        fragment_timer_current_interval_name.isVisible = currentName.isNotBlank()
+        fragment_timer_current_interval_name.text = currentName
+
+        fragment_timer_next_interval_name.isVisible = nextName.isNotBlank()
+        fragment_timer_next_interval_name.text = getString(R.string.timer_next_interval_hint, nextName)
     }
 }

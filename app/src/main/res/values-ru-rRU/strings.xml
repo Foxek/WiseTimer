@@ -15,6 +15,8 @@
     <string name="timer_pause_button">Пауза</string>
     <string name="timer_continue_button">Продожить</string>
 
+    <string name="timer_next_interval_hint">Далее: %s</string>
+
     /* Training activity and dialog */
     <string name="dialog_training_setting_title">Настройка тренировки</string>
     <string name="dialog_training_setting_description">Изменяйте название тренировки или удалите ее вовсе</string>
@@ -59,12 +61,14 @@
     <string name="dialog_changelog_title">Что нового</string>
     <string name="delete_changelog_accept_button">Понятно</string>
     <string-array name="dialog_changelog_list">
-        <item>Сортировка интервалов</item>
         <item>Индикация следующего интервала</item>
+        <item>[Скоро] Сортировка интервалов</item>
+        <item>[Скоро] Управление звуком</item>
     </string-array>
 
     <string-array name="dialog_changelog_description_list">
-        <item>Теперь вы можете менять местами интервалы для более гибкой настройки вашей тренировки</item>
-        <item>Вы будете всегда уведомлены о том, какой интервал будет следующим</item>
+        <item>Теперь вы сможете видеть имя следующего именованного интервала</item>
+        <item>Скоро вы сможете менять местами интервалы для более гибкой настройки вашей тренировки</item>
+        <item>Скоро вы сможете управлять звуковыми сигналами таймера</item>
     </string-array>
 </resources>

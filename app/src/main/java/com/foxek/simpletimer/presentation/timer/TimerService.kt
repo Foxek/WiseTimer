@@ -97,7 +97,7 @@ class TimerService : BaseService() {
             currentTime?.let {
                 showCurrentIntervalTime(formatIntervalData(it.value))
                 showIntervalType(formatIntervalType(it.type))
-                showIntervalInfo(it.name.orEmpty(), formatIntervalNumber(it.position))
+                showIntervalInfo(it.name.orEmpty(), it.nextName.orEmpty(), formatIntervalNumber(it.position))
 
                 if (intervalTimer.state == IntervalTimer.State.STARTED) {
                     showPlayInterface()
@@ -137,7 +137,7 @@ class TimerService : BaseService() {
                 updateNotification { setContentTitle(formatIntervalNumber(time.position)) }
                 callback?.let {
                     it.showIntervalType(R.string.timer_work_time)
-                    it.showIntervalInfo(time.name.orEmpty(), formatIntervalNumber(time.position))
+                    it.showIntervalInfo(time.name.orEmpty(), time.nextName.orEmpty(), formatIntervalNumber(time.position))
                 }
             }
             POST_TIME_TYPE -> handleStop()

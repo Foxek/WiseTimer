@@ -4,5 +4,6 @@ data class Time(
     var value: Int,
     var type: Int,
     var position: Int,
-    var name: String?
+    var name: String?,
+    var nextName: String?
 )

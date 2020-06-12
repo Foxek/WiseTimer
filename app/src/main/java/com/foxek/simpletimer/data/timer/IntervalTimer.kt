@@ -28,17 +28,25 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
     var state = State.STOPPED
 
     fun prepare(intervalList: List<Interval>) {
-        times.add(Time(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, 0, Constants.EMPTY))
+        times.add(Time(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, 0, Constants.EMPTY, Constants.EMPTY))
 
         intervalList.forEachIndexed { idx, it ->
-            times.add(Time(it.work, WORK_TIME_TYPE, idx + 1, it.name))
+            times.add(Time(it.work, WORK_TIME_TYPE, idx + 1, it.name, getNextName(intervalList, idx)))
 
             if (it.type == Constants.WITH_REST_TYPE)
-                times.add(Time(it.rest, REST_TIME_TYPE, idx + 1, it.name))
+                times.add(Time(it.rest, REST_TIME_TYPE, idx + 1, it.name, getNextName(intervalList, idx)))
         }
 
-        times.add(Time(1, POST_TIME_TYPE, times.lastIndex, null))
+        times.add(Time(1, POST_TIME_TYPE, times.lastIndex, Constants.EMPTY, Constants.EMPTY))
         start(times[0].value.toLong())
+    }
+
+    private fun getNextName(interval: List<Interval>, id: Int): String? {
+        return if (id + 1 < interval.size) {
+            interval[id + 1].name
+        } else {
+            "Завершение тренировки"
+        }
     }
 
     fun restart() {

@@ -13,6 +13,7 @@
     <string name="time_min_hint">min</string>
     <string name="timer_pause_button">Pause</string>
     <string name="timer_continue_button">Continue</string>
+    <string name="timer_next_interval_hint">Next: %s</string>
 
     /* Training activity and dialog */
     <string name="dialog_training_setting_title">Workout settings</string>
@@ -57,12 +58,14 @@
     <string name="delete_changelog_accept_button">Continue</string>
 
     <string-array name="dialog_changelog_list">
-        <item>Sorting Intervals</item>
         <item>Indication of the next interval</item>
+        <item>[Soon] Sorting Intervals</item>
+        <item>[Soon] Sound control</item>
     </string-array>
 
     <string-array name="dialog_changelog_description_list">
-        <item>Now you can swap intervals for a more flexible setup of your workout</item>
-        <item>You will always be notified of which interval will be next</item>
+        <item>Now you will always be notified of which interval will be next</item>
+        <item>Soon you will be able to swap intervals for a more flexible setup of your workout</item>
+        <item>Soon you will be able to control the sound of the timer</item>
     </string-array>
 </resources>

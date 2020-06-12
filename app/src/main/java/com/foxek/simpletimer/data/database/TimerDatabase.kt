@@ -10,7 +10,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.data.model.Workout
 
-
 @Database(entities = [Workout::class, Interval::class], version = 5, exportSchema = false)
 abstract class TimerDatabase : RoomDatabase() {
 
