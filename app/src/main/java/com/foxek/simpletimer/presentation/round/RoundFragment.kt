@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.presentation.interval
+package com.foxek.simpletimer.presentation.round
 
 import android.content.Intent
 import android.os.Build
@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.view.View
 
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.presentation.interval.dialog.IntervalCreateDialog
-import com.foxek.simpletimer.presentation.interval.dialog.IntervalEditDialog
-import com.foxek.simpletimer.presentation.interval.dialog.WorkoutEditDialog
+import com.foxek.simpletimer.presentation.round.dialog.RoundCreateDialog
+import com.foxek.simpletimer.presentation.round.dialog.RoundEditDialog
+import com.foxek.simpletimer.presentation.round.dialog.WorkoutEditDialog
 
 import javax.inject.Inject
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.presentation.base.BaseFragment
 
 import com.foxek.simpletimer.presentation.timer.TimerFragment
@@ -24,14 +24,14 @@ import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.fragment_interval.*
 
-class IntervalFragment : BaseFragment(), IntervalContact.View {
+class RoundFragment : BaseFragment(), RoundContact.View {
 
     override val layoutId = R.layout.fragment_interval
 
     @Inject
-    lateinit var presenter: IntervalContact.Presenter
+    lateinit var presenter: RoundContact.Presenter
 
-    private val intervalAdapter: IntervalAdapter by lazy { IntervalAdapter() }
+    private val roundAdapter: RoundAdapter by lazy { RoundAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +46,10 @@ class IntervalFragment : BaseFragment(), IntervalContact.View {
         arguments?.let { presenter.workoutId = (it.getInt(EXTRA_WORKOUT_ID, 0)) }
 
         fragment_interval_back_btn.setOnClickListener { onBackPressed() }
-        fragment_interval_edit_btn.setOnClickListener { presenter.editWorkoutButtonClicked() }
-        fragment_interval_volume_btn.setOnClickListener { presenter.changeVolumeButtonClicked() }
-        fragment_interval_add_btn.setOnClickListener { presenter.addIntervalButtonClicked() }
-        fragment_interval_start_btn.setOnClickListener { presenter.startWorkoutButtonClicked() }
+        fragment_interval_edit_btn.setOnClickListener { presenter.onEditWorkoutBtnClick() }
+        fragment_interval_volume_btn.setOnClickListener { presenter.onToggleSilentModeBtnClick() }
+        fragment_interval_add_btn.setOnClickListener { presenter.onAddRoundBtnClick() }
+        fragment_interval_start_btn.setOnClickListener { presenter.onStartWorkoutBtnClick() }
 
         presenter.viewIsReady()
     }
@@ -59,37 +59,37 @@ class IntervalFragment : BaseFragment(), IntervalContact.View {
         presenter.detachView()
     }
 
-    override fun renderIntervalList(intervalList: List<Interval>) {
-        intervalAdapter.setItems(intervalList)
+    override fun renderRoundList(roundList: List<Round>) {
+        roundAdapter.setItems(roundList)
     }
 
     override fun setWorkoutName(name: String) {
         fragment_interval_workout_name.text = name
     }
 
-    override fun setIntervalList() {
+    override fun setRoundList() {
         fragment_interval_list.apply {
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
-            adapter = intervalAdapter.apply {
-                clickListener = { presenter.intervalItemClicked(it) }
+            adapter = roundAdapter.apply {
+                clickListener = { presenter.onRoundItemClick(it) }
             }
         }
     }
 
-    override fun setVolumeState(state: Boolean) {
+    override fun setSilentMode(state: Boolean) {
         if (state)
             fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_on_white)
         else
             fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_off_white)
     }
 
-    override fun showIntervalEditDialog(interval: Interval) {
-        showDialog(IntervalEditDialog.newInstance(interval))
+    override fun showRoundEditDialog(round: Round) {
+        showDialog(RoundEditDialog.newInstance(round))
     }
 
-    override fun showIntervalCreateDialog() {
-        showDialog(IntervalCreateDialog.newInstance())
+    override fun showRoundCreateDialog() {
+        showDialog(RoundCreateDialog.newInstance())
     }
 
     override fun showWorkoutEditDialog() {

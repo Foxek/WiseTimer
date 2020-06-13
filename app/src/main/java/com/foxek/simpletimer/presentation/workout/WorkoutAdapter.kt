@@ -27,16 +27,16 @@ class WorkoutAdapter : BaseAdapter<Workout, WorkoutAdapter.ViewHolder>() {
                 val oldItem = oldItems[oldItemPosition]
                 val newItem = newItems[newItemPosition]
                 return oldItem.name == newItem.name
-                    && oldItem.uid == newItem.uid
-                    && oldItem.intervalCount == newItem.intervalCount
+                    && oldItem.id == newItem.id
+                    && oldItem.numberOfRounds == newItem.numberOfRounds
             }
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 val oldItem = oldItems[oldItemPosition]
                 val newItem = newItems[newItemPosition]
                 return oldItem.name == newItem.name
-                    && oldItem.uid == newItem.uid
-                    && oldItem.intervalCount == newItem.intervalCount
+                    && oldItem.id == newItem.id
+                    && oldItem.numberOfRounds == newItem.numberOfRounds
             }
         }
     }
@@ -48,7 +48,7 @@ class WorkoutAdapter : BaseAdapter<Workout, WorkoutAdapter.ViewHolder>() {
                 item_workout_name.text = model.name
                 item_workout_description.text = resources.getString(
                     R.string.number_of_intervals_text,
-                    model.intervalCount
+                    model.numberOfRounds
                 )
                 setOnClickListener {
                     clickListener?.invoke(model)

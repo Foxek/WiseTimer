@@ -1,9 +1,9 @@
-package com.foxek.simpletimer.presentation.interval
+package com.foxek.simpletimer.presentation.round
 
 import com.foxek.simpletimer.common.extensions.observeOnMain
 import com.foxek.simpletimer.common.utils.Constants.NO_ID_INT
-import com.foxek.simpletimer.data.model.Interval
-import com.foxek.simpletimer.domain.interval.IntervalInteractor
+import com.foxek.simpletimer.data.model.Round
+import com.foxek.simpletimer.domain.round.RoundInteractor
 import com.foxek.simpletimer.domain.workout.WorkoutInteractor
 import com.foxek.simpletimer.presentation.base.BasePresenter
 
@@ -11,58 +11,58 @@ import javax.inject.Inject
 
 import io.reactivex.rxkotlin.subscribeBy
 
-class IntervalPresenter @Inject constructor(
-    private val intervalInteractor: IntervalInteractor,
+class RoundPresenter @Inject constructor(
+    private val roundInteractor: RoundInteractor,
     private val workoutInteractor: WorkoutInteractor
-) : BasePresenter<IntervalContact.View>(), IntervalContact.Presenter {
+) : BasePresenter<RoundContact.View>(), RoundContact.Presenter {
 
     private var intervalId = NO_ID_INT
 
     override var workoutId: Int = NO_ID_INT
 
     override fun viewIsReady() {
-        view?.setIntervalList()
+        view?.setRoundList()
 
         getCurrentWorkout()
         fetchIntervalList()
     }
 
-    override fun editWorkoutButtonClicked() {
+    override fun onEditWorkoutBtnClick() {
         view?.showWorkoutEditDialog()
     }
 
-    override fun changeVolumeButtonClicked() {
+    override fun onToggleSilentModeBtnClick() {
         workoutInteractor.toggleWorkoutVolumeState(workoutId)
             .observeOnMain()
             .subscribeBy(
-                onSuccess = { view?.setVolumeState(it) }
+                onSuccess = { view?.setSilentMode(it) }
             )
             .disposeOnDestroy()
     }
 
-    override fun addIntervalButtonClicked() {
-        view?.showIntervalCreateDialog()
+    override fun onAddRoundBtnClick() {
+        view?.showRoundCreateDialog()
     }
 
-    override fun saveIntervalButtonClicked(name: String, type: Int, workTime: Int, restTime: Int) {
-        intervalInteractor.updateInterval(workoutId, intervalId,  name, type, workTime, restTime)
+    override fun onSaveRoundBtnClick(name: String, type: Int, workTime: Int, restTime: Int) {
+        roundInteractor.updateRound(workoutId, intervalId,  name, type, workTime, restTime)
             .subscribe()
             .disposeOnDestroy()
     }
 
-    override fun createIntervalButtonClicked(name: String, type: Int, workTime: Int, restTime: Int) {
-        intervalInteractor.addInterval(Interval(name, workTime, restTime, workoutId, type, 0))
+    override fun onCreateRoundBtnClick(name: String, type: Int, workTime: Int, restTime: Int) {
+        roundInteractor.addRound(Round(name, type, workTime, restTime, workoutId, 0))
             .subscribe()
             .disposeOnDestroy()
     }
 
-    override fun deleteIntervalButtonClicked() {
-        intervalInteractor.deleteInterval(workoutId, intervalId)
+    override fun onDeleteRoundBtnClick() {
+        roundInteractor.deleteRound(workoutId, intervalId)
             .subscribe()
             .disposeOnDestroy()
     }
 
-    override fun saveWorkoutButtonClicked(name: String) {
+    override fun onSaveWorkoutBtnClick(name: String) {
         workoutInteractor.updateWorkoutName(workoutId, name)
             .subscribe()
             .disposeOnDestroy()
@@ -70,7 +70,7 @@ class IntervalPresenter @Inject constructor(
         view?.setWorkoutName(name)
     }
 
-    override fun deleteWorkoutButtonClicked() {
+    override fun onDeleteWorkoutBtnClick() {
         workoutInteractor.deleteWorkoutById(workoutId)
             .observeOnMain()
             .subscribeBy(
@@ -79,21 +79,21 @@ class IntervalPresenter @Inject constructor(
             .disposeOnDestroy()
     }
 
-    override fun startWorkoutButtonClicked() {
+    override fun onStartWorkoutBtnClick() {
         view?.startTimerActivity()
     }
 
-    override fun intervalItemClicked(item: Interval) {
+    override fun onRoundItemClick(item: Round) {
         intervalId = item.id
-        view?.showIntervalEditDialog(item)
+        view?.showRoundEditDialog(item)
     }
 
     private fun fetchIntervalList() {
-        intervalInteractor.observeIntervals(workoutId)
+        roundInteractor.observeRounds(workoutId)
             .observeOnMain()
             .subscribeBy(
                 onNext = {
-                    view?.renderIntervalList(it)
+                    view?.renderRoundList(it)
                 }
             )
             .disposeOnDestroy()
@@ -104,8 +104,8 @@ class IntervalPresenter @Inject constructor(
             .observeOnMain()
             .subscribeBy(
                 onSuccess = {
-                    view?.setWorkoutName(it.name!!)
-                    view?.setVolumeState(it.isVolume)
+                    view?.setWorkoutName(it.name)
+                    view?.setSilentMode(!it.isSilentMode)
                 }
             )
             .disposeOnDestroy()

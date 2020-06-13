@@ -1,7 +1,7 @@
 package com.foxek.simpletimer.domain.workout
 
 import com.foxek.simpletimer.common.utils.Constants
-import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.data.model.Workout
 import com.foxek.simpletimer.data.database.TimerDAO
 import javax.inject.Inject
@@ -24,8 +24,8 @@ class WorkoutInteractorImpl @Inject constructor(
             .flatMapCompletable {
                 Completable.fromAction {
                     timerDAO.addNewWorkout(
-                        Workout(workoutName, it + 1, 1, true),
-                        Interval(Constants.EMPTY, 1, 1, it + 1, 0, 0)
+                        Workout(it + 1, workoutName, 1, true),
+                        Round(Constants.EMPTY, 0,1, 1, it + 1, 0)
                     )
                 }
             }

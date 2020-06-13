@@ -1,4 +1,4 @@
-package com.foxek.simpletimer.presentation.interval.view
+package com.foxek.simpletimer.presentation.round.view
 
 import android.content.Context
 import android.util.AttributeSet

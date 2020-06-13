@@ -9,7 +9,7 @@ import com.foxek.simpletimer.data.UserPreferences
 import com.foxek.simpletimer.data.model.Workout
 import com.foxek.simpletimer.presentation.base.BaseFragment
 import com.foxek.simpletimer.presentation.changelog.ChangeLogDialog
-import com.foxek.simpletimer.presentation.interval.IntervalFragment
+import com.foxek.simpletimer.presentation.round.RoundFragment
 import com.foxek.simpletimer.presentation.workout.dialog.WorkoutCreateDialog
 import com.foxek.simpletimer.common.utils.Constants.CHANGELOG_VERSION_VALUE
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
@@ -56,12 +56,12 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View {
         showChangelogDialogIfNeeded()
     }
 
-    override fun startIntervalFragment(workoutId: Int) {
+    override fun startRoundFragment(workoutId: Int) {
         val args = Bundle().apply {
             putInt(EXTRA_WORKOUT_ID, workoutId)
         }
 
-        executeInActivity { replaceFragment(IntervalFragment(), args) }
+        executeInActivity { replaceFragment(RoundFragment(), args) }
     }
 
     override fun renderWorkoutList(items: List<Workout>) {

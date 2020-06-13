@@ -11,7 +11,7 @@ interface WorkoutContact {
 
     interface View : MvpView {
         //TODO: передавать только id получать нейм в другом фрагменте
-        fun startIntervalFragment(workoutId: Int)
+        fun startRoundFragment(workoutId: Int)
         fun renderWorkoutList(items: List<Workout>)
         fun showCreateDialog()
     }

@@ -22,7 +22,7 @@ import com.foxek.simpletimer.common.utils.Constants.WORK_TIME_TYPE
 import com.foxek.simpletimer.common.utils.formatIntervalData
 import com.foxek.simpletimer.common.utils.formatIntervalNumber
 import com.foxek.simpletimer.common.utils.formatIntervalType
-import com.foxek.simpletimer.domain.interval.IntervalInteractor
+import com.foxek.simpletimer.domain.round.RoundInteractor
 import com.foxek.simpletimer.domain.workout.WorkoutInteractor
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -33,7 +33,7 @@ class TimerService : BaseService() {
     lateinit var workoutInteractor: WorkoutInteractor
 
     @Inject
-    lateinit var intervalInteractor: IntervalInteractor
+    lateinit var roundInteractor: RoundInteractor
 
     @Inject
     lateinit var intervalTimer: IntervalTimer
@@ -96,8 +96,8 @@ class TimerService : BaseService() {
         callback?.run {
             currentTime?.let {
                 showCurrentIntervalTime(formatIntervalData(it.value))
-                showIntervalType(formatIntervalType(it.type))
-                showIntervalInfo(it.name.orEmpty(), it.nextName.orEmpty(), formatIntervalNumber(it.position))
+                showRoundType(formatIntervalType(it.type))
+                showRoundInfo(it.name.orEmpty(), it.nextName.orEmpty(), formatIntervalNumber(it.position))
 
                 if (intervalTimer.state == IntervalTimer.State.STARTED) {
                     showPlayInterface()
@@ -132,12 +132,12 @@ class TimerService : BaseService() {
     private fun handleFinish(time: Time) {
         currentTime = time
         when (time.type) {
-            REST_TIME_TYPE -> callback?.showIntervalType(R.string.timer_rest_time)
+            REST_TIME_TYPE -> callback?.showRoundType(R.string.timer_rest_time)
             WORK_TIME_TYPE -> {
                 updateNotification { setContentTitle(formatIntervalNumber(time.position)) }
                 callback?.let {
-                    it.showIntervalType(R.string.timer_work_time)
-                    it.showIntervalInfo(time.name.orEmpty(), time.nextName.orEmpty(), formatIntervalNumber(time.position))
+                    it.showRoundType(R.string.timer_work_time)
+                    it.showRoundInfo(time.name.orEmpty(), time.nextName.orEmpty(), formatIntervalNumber(time.position))
                 }
             }
             POST_TIME_TYPE -> handleStop()
@@ -153,14 +153,14 @@ class TimerService : BaseService() {
     }
 
     private fun prepareIntervals(workoutId: Int) {
-        callback?.showIntervalType(R.string.timer_prepare)
+        callback?.showRoundType(R.string.timer_prepare)
 
         workoutInteractor.getWorkoutVolumeState(workoutId)
             .observeOnMain()
             .subscribeBy(onSuccess = intervalTimer::enableSound)
             .disposeOnDestroy()
 
-        intervalInteractor.getIntervals(workoutId)
+        roundInteractor.getRounds(workoutId)
             .observeOnMain()
             .subscribeBy(onSuccess = intervalTimer::prepare)
             .disposeOnDestroy()

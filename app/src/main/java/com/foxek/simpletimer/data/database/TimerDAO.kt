@@ -1,7 +1,7 @@
 package com.foxek.simpletimer.data.database
 
 import androidx.room.*
-import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.data.model.Workout
 
 import io.reactivex.Flowable
@@ -12,56 +12,56 @@ import io.reactivex.Single
 abstract class TimerDAO {
 
     @Transaction
-    open fun addNewWorkout(workout: Workout, interval: Interval) {
+    open fun addNewWorkout(workout: Workout, round: Round) {
         addWorkout(workout)
-        addInterval(interval)
+        addRound(round)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun addWorkout(workout: Workout)
 
-    @Query("DELETE FROM trainings WHERE uid = :WorkoutID")
-    abstract fun deleteWorkout(WorkoutID: Int)
+    @Query("DELETE FROM workout WHERE id = :workoutID")
+    abstract fun deleteWorkout(workoutID: Int)
 
-    @Query("UPDATE trainings SET volumeState =:volumeState WHERE uid = :workoutId")
+    @Query("UPDATE workout SET isSilentMode =:volumeState WHERE id = :workoutId")
     abstract fun updateWorkoutVolumeState(volumeState: Boolean, workoutId: Int)
 
-    @Query("UPDATE trainings SET training_name=:workoutName WHERE uid = :workoutId")
+    @Query("UPDATE workout SET name=:workoutName WHERE id = :workoutId")
     abstract fun updateWorkoutName(workoutName: String, workoutId: Int)
 
-    @Query("SELECT * FROM trainings WHERE uid = :WorkoutID")
+    @Query("SELECT * FROM workout WHERE id = :WorkoutID")
     abstract fun getWorkoutById(WorkoutID: Int): Single<Workout>
 
-    @Query("SELECT *, COUNT(*) AS intervalNumber FROM trainings, Interval WHERE trainingID = uid GROUP BY trainingID HAVING intervalNumber != 0")
+    @Query("SELECT w.*, COUNT(*) AS numberOfRounds FROM workout w, Round WHERE workoutId = w.id GROUP BY workoutId HAVING numberOfRounds != 0")
     abstract fun observeWorkouts(): Flowable<List<Workout>>
 
-    @Query("SELECT MAX(uid) FROM trainings")
+    @Query("SELECT MAX(id) FROM workout")
     abstract fun getLastWorkoutId(): Maybe<Int>
 
-    @Query("SELECT volumeState FROM trainings WHERE uid = :WorkoutID")
+    @Query("SELECT isSilentMode FROM workout WHERE id = :WorkoutID")
     abstract fun getWorkoutVolumeState(WorkoutID: Int): Single<Boolean>
 
-    @Query("SELECT COUNT(*) FROM Interval WHERE trainingID IS :workoutId")
-    abstract fun getNumberOfIntervalForWorkout(workoutId: Int): Single<Int>
+    @Query("SELECT COUNT(*) FROM Round WHERE workoutId IS :workoutId")
+    abstract fun getNumberOfRoundForWorkout(workoutId: Int): Single<Int>
 
     @Insert
-    abstract fun addInterval(interval: Interval)
+    abstract fun addRound(round: Round)
 
-    @Query("DELETE FROM Interval WHERE id IS :id AND trainingID IS :workoutId")
-    abstract fun deleteInterval(id: Int, workoutId: Int)
+    @Query("DELETE FROM Round WHERE id IS :id AND workoutId IS :workoutId")
+    abstract fun deleteRound(id: Int, workoutId: Int)
 
     @Update
-    abstract fun updateInterval(interval: Interval)
+    abstract fun updateRound(round: Round)
 
-    @Query("SELECT * FROM Interval WHERE id IS :id AND trainingID IS :workoutId")
-    abstract fun getIntervalById(id: Int, workoutId: Int): Single<Interval>
+    @Query("SELECT * FROM Round WHERE id IS :id AND workoutId IS :workoutId")
+    abstract fun getRoundById(id: Int, workoutId: Int): Single<Round>
 
-    @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
-    abstract fun observeIntervals(workoutId: Int): Flowable<List<Interval>>
+    @Query("SELECT * FROM Round WHERE workoutId IS :workoutId")
+    abstract fun observeRounds(workoutId: Int): Flowable<List<Round>>
 
-    @Query("SELECT * FROM Interval WHERE trainingID IS :workoutId")
-    abstract fun getIntervals(workoutId: Int): Single<List<Interval>>
+    @Query("SELECT * FROM Round WHERE workoutId IS :workoutId")
+    abstract fun getRounds(workoutId: Int): Single<List<Round>>
 
-    @Query("SELECT MAX(id)  FROM Interval")
-    abstract fun getLastIntervalId(): Single<Int>
+    @Query("SELECT MAX(id)  FROM Round")
+    abstract fun getLastRoundId(): Single<Int>
 }

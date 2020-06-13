@@ -1,13 +1,13 @@
-package com.foxek.simpletimer.presentation.interval.dialog
+package com.foxek.simpletimer.presentation.round.dialog
 
 import android.os.Bundle
 
 import android.view.View
 import android.widget.AdapterView
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.presentation.base.BaseDialog
-import com.foxek.simpletimer.presentation.interval.IntervalContact
+import com.foxek.simpletimer.presentation.round.RoundContact
 import com.foxek.simpletimer.common.utils.Constants
 
 import javax.inject.Inject
@@ -21,10 +21,10 @@ import kotlinx.android.synthetic.main.dialog_interval.*
 import android.widget.ArrayAdapter
 
 
-class IntervalEditDialog : BaseDialog() {
+class RoundEditDialog : BaseDialog() {
 
     @Inject
-    lateinit var presenter: IntervalContact.Presenter
+    lateinit var presenter: RoundContact.Presenter
 
     override var dialogTitle = R.string.dialog_interval_setting_title
 
@@ -109,13 +109,13 @@ class IntervalEditDialog : BaseDialog() {
         if (checkNotEmpty(dialog_interval_field_name))
             name = dialog_interval_field_name.text.toString()
 
-        presenter.saveIntervalButtonClicked(name, type, dialog_interval_field_work.getValue(), dialog_interval_field_rest.getValue())
+        presenter.onSaveRoundBtnClick(name, type, dialog_interval_field_work.getValue(), dialog_interval_field_rest.getValue())
         dismiss()
     }
 
     private fun onDeleteButtonClick() {
         dismiss()
-        presenter.deleteIntervalButtonClicked()
+        presenter.onDeleteRoundBtnClick()
     }
 
     override fun onDestroyView() {
@@ -126,14 +126,14 @@ class IntervalEditDialog : BaseDialog() {
     }
 
     companion object {
-        fun newInstance(interval: Interval): IntervalEditDialog {
-            val dialog = IntervalEditDialog()
+        fun newInstance(round: Round): RoundEditDialog {
+            val dialog = RoundEditDialog()
 
             dialog.arguments = Bundle().apply {
-                putInt(EXTRA_WORK_TIME, interval.work)
-                putInt(EXTRA_REST_TIME, interval.rest)
-                putInt(EXTRA_TYPE, interval.type)
-                putString(EXTRA_INTERVAL_NAME, interval.name)
+                putInt(EXTRA_WORK_TIME, round.workInterval)
+                putInt(EXTRA_REST_TIME, round.restInterval)
+                putInt(EXTRA_TYPE, round.type)
+                putString(EXTRA_INTERVAL_NAME, round.name)
             }
             return dialog
         }

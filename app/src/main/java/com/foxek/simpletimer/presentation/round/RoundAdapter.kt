@@ -1,11 +1,11 @@
-package com.foxek.simpletimer.presentation.interval
+package com.foxek.simpletimer.presentation.round
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.data.model.Interval
+import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.common.utils.Constants.EMPTY
 import com.foxek.simpletimer.common.utils.Constants.WITH_REST_TYPE
 import com.foxek.simpletimer.common.utils.formatIntervalData
@@ -14,9 +14,9 @@ import com.foxek.simpletimer.presentation.base.BaseAdapter
 import com.foxek.simpletimer.presentation.base.BaseDiffCallback
 import kotlinx.android.synthetic.main.item_interval.view.*
 
-class IntervalAdapter : BaseAdapter<Interval, IntervalAdapter.ViewHolder>() {
+class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
 
-    var clickListener: ((interval: Interval) -> Unit)? = null
+    var clickListener: ((round: Round) -> Unit)? = null
 
     init {
         setHasStableIds(true)
@@ -36,8 +36,8 @@ class IntervalAdapter : BaseAdapter<Interval, IntervalAdapter.ViewHolder>() {
         }.run(::ViewHolder)
     }
 
-    override fun getDiffCallback(oldItems: List<Interval>, newItems: List<Interval>): DiffUtil.Callback? {
-        return object : BaseDiffCallback<Interval>(oldItems, newItems) {
+    override fun getDiffCallback(oldItems: List<Round>, newItems: List<Round>): DiffUtil.Callback? {
+        return object : BaseDiffCallback<Round>(oldItems, newItems) {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 val oldItem = oldItems[oldItemPosition]
                 val newItem = newItems[newItemPosition]
@@ -47,22 +47,22 @@ class IntervalAdapter : BaseAdapter<Interval, IntervalAdapter.ViewHolder>() {
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 val oldItem = oldItems[oldItemPosition]
                 val newItem = newItems[newItemPosition]
-                return oldItem.work == newItem.work
-                    && oldItem.rest == newItem.rest
+                return oldItem.workInterval == newItem.workInterval
+                    && oldItem.restInterval == newItem.restInterval
                     && oldItem.name == newItem.name
                     && oldItem.type == newItem.type
             }
         }
     }
 
-    inner class ViewHolder constructor(view: View) : BaseViewHolder<Interval>(view) {
+    inner class ViewHolder constructor(view: View) : BaseViewHolder<Round>(view) {
 
-        override fun bind(model: Interval) {
+        override fun bind(model: Round) {
             itemView.apply {
-                item_interval_work_time.text = formatIntervalData(model.work)
+                item_interval_work_time.text = formatIntervalData(model.workInterval)
 
                 if (model.type == WITH_REST_TYPE) {
-                    item_interval_rest_time.text = formatIntervalData(model.rest)
+                    item_interval_rest_time.text = formatIntervalData(model.restInterval)
                 } else {
                     item_interval_rest_hint.text = resources.getString(R.string.timer_without_rest)
                 }

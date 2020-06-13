@@ -98,11 +98,11 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
         fragment_timer_counter.text = time
     }
 
-    override fun showIntervalType(type: Int) {
+    override fun showRoundType(type: Int) {
         fragment_timer_counter_type.setText(type)
     }
 
-    override fun showIntervalInfo(currentName: String, nextName: String, number: String) {
+    override fun showRoundInfo(currentName: String, nextName: String, number: String) {
         fragment_timer_counter_number.text = number
         
         fragment_timer_current_interval_name.isVisible = currentName.isNotBlank()

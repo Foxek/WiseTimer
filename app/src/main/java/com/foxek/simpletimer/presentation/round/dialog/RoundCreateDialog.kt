@@ -1,11 +1,11 @@
-package com.foxek.simpletimer.presentation.interval.dialog
+package com.foxek.simpletimer.presentation.round.dialog
 
 import android.os.Bundle
 import android.view.View
 
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.presentation.base.BaseDialog
-import com.foxek.simpletimer.presentation.interval.IntervalContact
+import com.foxek.simpletimer.presentation.round.RoundContact
 
 import javax.inject.Inject
 
@@ -16,17 +16,17 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import com.foxek.simpletimer.common.utils.Constants.WITHOUT_REST_TYPE
 import com.foxek.simpletimer.common.utils.Constants.WITH_REST_TYPE
-class IntervalCreateDialog : BaseDialog() {
+class RoundCreateDialog : BaseDialog() {
 
     @Inject
-    lateinit var presenter: IntervalContact.Presenter
+    lateinit var presenter: RoundContact.Presenter
 
     override var dialogTitle = R.string.dialog_interval_create_title
 
     override fun getLayout() = R.layout.dialog_interval
 
     companion object {
-        fun newInstance(): IntervalCreateDialog = IntervalCreateDialog()
+        fun newInstance(): RoundCreateDialog = RoundCreateDialog()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,7 +111,7 @@ class IntervalCreateDialog : BaseDialog() {
             name = dialog_interval_field_name.text.toString()
 
         for (i in 1..repeat)
-            presenter.createIntervalButtonClicked(name, type, dialog_interval_field_work.getValue(), dialog_interval_field_rest.getValue())
+            presenter.onCreateRoundBtnClick(name, type, dialog_interval_field_work.getValue(), dialog_interval_field_rest.getValue())
 
         dismiss()
     }

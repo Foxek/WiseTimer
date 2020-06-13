@@ -28,7 +28,7 @@ class WorkoutPresenter @Inject constructor(
     }
 
     override fun onWorkoutItemClick(workout: Workout) {
-        view?.startIntervalFragment(workout.uid)
+        view?.startRoundFragment(workout.id)
     }
 
     private fun fetchWorkoutList() {
