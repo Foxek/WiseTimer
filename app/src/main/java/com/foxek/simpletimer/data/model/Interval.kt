@@ -1,6 +1,6 @@
 package com.foxek.simpletimer.data.model
 
-data class Time(
+data class Interval(
     var value: Int,
     var type: Int,
     var position: Int,

@@ -1,8 +1,9 @@
 package com.foxek.simpletimer.data.timer
 
 import android.os.CountDownTimer
+import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.utils.Constants
-import com.foxek.simpletimer.data.model.Time
+import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.common.utils.Constants.POST_TIME_TYPE
 import com.foxek.simpletimer.common.utils.Constants.REST_TIME_TYPE
 import com.foxek.simpletimer.common.utils.Constants.WITH_REST_TYPE
@@ -15,30 +16,31 @@ import io.reactivex.subjects.PublishSubject
 
 class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
 
-    enum class State {
-        STOPPED, STARTED
+    enum class State (val buttonText: Int, val isRestartAllowed: Boolean) {
+        PAUSED(R.string.timer_continue_button, true),
+        STARTED(R.string.timer_pause_button, false)
     }
 
     private var timer: CountDownTimer? = null
-    private var times = ArrayList<Time>()
+    private var times = ArrayList<Interval>()
     private var currentTimeIndex: Int = 0
     private var pastTimeInSeconds: Long = 0
 
     val onTimerTickHappened = PublishSubject.create<Int>()
-    val onIntervalFinished = PublishSubject.create<Time>()
-    var state = State.STOPPED
+    val onIntervalFinished = PublishSubject.create<Interval>()
+    var state = State.PAUSED
 
     fun prepare(roundList: List<Round>) {
-        times.add(Time(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, 0, Constants.EMPTY, Constants.EMPTY))
+        times.add(Interval(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, 0, Constants.EMPTY, Constants.EMPTY))
 
         roundList.forEachIndexed { idx, it ->
-            times.add(Time(it.workInterval, WORK_TIME_TYPE, idx + 1, it.name, getNextName(roundList, idx)))
+            times.add(Interval(it.workInterval, WORK_TIME_TYPE, idx + 1, it.name, getNextName(roundList, idx)))
 
             if (it.type == WITH_REST_TYPE)
-                times.add(Time(it.restInterval, REST_TIME_TYPE, idx + 1, it.name, getNextName(roundList, idx)))
+                times.add(Interval(it.restInterval, REST_TIME_TYPE, idx + 1, it.name, getNextName(roundList, idx)))
         }
 
-        times.add(Time(1, POST_TIME_TYPE, times.lastIndex, Constants.EMPTY, Constants.EMPTY))
+        times.add(Interval(1, POST_TIME_TYPE, times.lastIndex, Constants.EMPTY, Constants.EMPTY))
         start(times[0].value.toLong())
     }
 
@@ -57,7 +59,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
     fun stop() {
         timer?.cancel()
         timer = null
-        state = State.STOPPED
+        state = State.PAUSED
     }
 
     fun enableSound(isEnable: Boolean) {
@@ -82,18 +84,18 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
         timer?.start()
     }
 
-    private fun handleFinish(time: Time) {
+    private fun handleFinish(interval: Interval) {
 
-        when (time.type) {
+        when (interval.type) {
             REST_TIME_TYPE -> indicateEndOfInterval()
             WORK_TIME_TYPE -> indicateEndOfInterval()
             POST_TIME_TYPE -> indicateEndOfWorkout()
         }
 
-        onIntervalFinished.onNext(time)
+        onIntervalFinished.onNext(interval)
 
         if (currentTimeIndex < times.size - 1) {
-            start(time.value.toLong())
+            start(interval.value.toLong())
         }
     }
 

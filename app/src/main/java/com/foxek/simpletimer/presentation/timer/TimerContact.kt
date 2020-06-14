@@ -6,9 +6,7 @@ interface TimerContact {
 
         fun startWorkoutActivity()
 
-        fun showPauseInterface()
-
-        fun showPlayInterface()
+        fun showTimerState(buttonState: Int, isRestartAllowed: Boolean)
 
         fun showCurrentIntervalTime(time: String)
 

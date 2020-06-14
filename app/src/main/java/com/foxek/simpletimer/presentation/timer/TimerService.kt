@@ -7,7 +7,7 @@ import android.os.Binder
 import android.os.IBinder
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.extensions.observeOnMain
-import com.foxek.simpletimer.data.model.Time
+import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.data.timer.IntervalTimer
 import com.foxek.simpletimer.presentation.MainActivity
 import com.foxek.simpletimer.presentation.base.BaseService
@@ -38,7 +38,7 @@ class TimerService : BaseService() {
     @Inject
     lateinit var intervalTimer: IntervalTimer
 
-    private var currentTime: Time? = null
+    private var currentInterval: Interval? = null
     private var callback: TimerContact.ServiceCallback? = null
 
     override val notificationId = 1
@@ -94,16 +94,12 @@ class TimerService : BaseService() {
     fun registerServiceClient(timerCallback: TimerContact.ServiceCallback?) {
         callback = timerCallback
         callback?.run {
-            currentTime?.let {
+            currentInterval?.let {
                 showCurrentIntervalTime(formatIntervalData(it.value))
                 showRoundType(formatIntervalType(it.type))
                 showRoundInfo(it.name.orEmpty(), it.nextName.orEmpty(), formatIntervalNumber(it.position))
 
-                if (intervalTimer.state == IntervalTimer.State.STARTED) {
-                    showPlayInterface()
-                } else {
-                    showPauseInterface()
-                }
+                showTimerState(intervalTimer.state.buttonText, intervalTimer.state.isRestartAllowed)
             }
         }
     }
@@ -111,11 +107,10 @@ class TimerService : BaseService() {
     private fun handlePause() {
         if (intervalTimer.state == IntervalTimer.State.STARTED) {
             intervalTimer.stop()
-            callback?.showPauseInterface()
         } else {
             intervalTimer.restart()
-            callback?.showPlayInterface()
         }
+        callback?.showTimerState(intervalTimer.state.buttonText, intervalTimer.state.isRestartAllowed)
     }
 
     private fun handleStart(id: Int) {
@@ -129,15 +124,15 @@ class TimerService : BaseService() {
         callback?.startWorkoutActivity()
     }
 
-    private fun handleFinish(time: Time) {
-        currentTime = time
-        when (time.type) {
+    private fun handleFinish(interval: Interval) {
+        currentInterval = interval
+        when (interval.type) {
             REST_TIME_TYPE -> callback?.showRoundType(R.string.timer_rest_time)
             WORK_TIME_TYPE -> {
-                updateNotification { setContentTitle(formatIntervalNumber(time.position)) }
+                updateNotification { setContentTitle(formatIntervalNumber(interval.position)) }
                 callback?.let {
                     it.showRoundType(R.string.timer_work_time)
-                    it.showRoundInfo(time.name.orEmpty(), time.nextName.orEmpty(), formatIntervalNumber(time.position))
+                    it.showRoundInfo(interval.name.orEmpty(), interval.nextName.orEmpty(), formatIntervalNumber(interval.position))
                 }
             }
             POST_TIME_TYPE -> handleStop()
@@ -145,10 +140,10 @@ class TimerService : BaseService() {
     }
 
     private fun handleTick(time: Int) {
-        currentTime?.value = time
+        currentInterval?.value = time
         callback?.showCurrentIntervalTime(formatIntervalData(time))
         updateNotification {
-            setContentText("${getString(formatIntervalType(currentTime?.type))}: ${formatIntervalData(time)}")
+            setContentText("${getString(formatIntervalType(currentInterval?.type))}: ${formatIntervalData(time)}")
         }
     }
 

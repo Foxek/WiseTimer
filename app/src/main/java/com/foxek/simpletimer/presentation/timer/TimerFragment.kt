@@ -84,14 +84,9 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
         super.onBackPressed()
     }
 
-    override fun showPauseInterface() {
-        fragment_timer_reset_btn.visibility = View.VISIBLE
-        fragment_timer_pause_btn.setText(R.string.timer_continue_button)
-    }
-
-    override fun showPlayInterface() {
-        fragment_timer_reset_btn.visibility = View.GONE
-        fragment_timer_pause_btn.setText(R.string.timer_pause_button)
+    override fun showTimerState(buttonState: Int, isRestartAllowed: Boolean) {
+        fragment_timer_reset_btn.isVisible = isRestartAllowed
+        fragment_timer_pause_btn.text = getString(buttonState)
     }
 
     override fun showCurrentIntervalTime(time: String) {
