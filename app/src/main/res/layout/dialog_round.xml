@@ -6,33 +6,33 @@
     android:layout_height="wrap_content">
 
     <com.foxek.simpletimer.presentation.round.view.IntervalEditView
-        android:id="@+id/dialog_interval_field_work"
+        android:id="@+id/dialog_round_field_work"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_spinner_type" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_spinner_type" />
 
     <com.foxek.simpletimer.presentation.round.view.IntervalEditView
-        android:id="@+id/dialog_interval_field_rest"
+        android:id="@+id/dialog_round_field_rest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_field_work"
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_field_work"
         app:layout_goneMarginTop="@dimen/margin_8dp" />
 
     <CheckBox
-        android:id="@+id/dialog_interval_checkbox_repeats"
+        android:id="@+id/dialog_round_checkbox_repeats"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
         android:buttonTint="@color/colorTint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_field_repeats" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_field_repeats" />
 
     <CheckBox
-        android:id="@+id/dialog_interval_checkbox_name"
+        android:id="@+id/dialog_round_checkbox_name"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,11 +40,11 @@
         android:buttonTint="@color/colorTint"
         android:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_checkbox_repeats"
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_checkbox_repeats"
         app:layout_goneMarginTop="@dimen/margin_8dp" />
 
     <EditText
-        android:id="@+id/dialog_interval_field_name"
+        android:id="@+id/dialog_round_field_name"
         style="@style/DefaultEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/dialog_interval_field_repeats"
+        android:id="@+id/dialog_round_field_repeats"
         style="@style/DefaultEditText"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
@@ -73,12 +73,12 @@
         android:maxLength="2"
         android:textSize="@dimen/text_24sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/dialog_interval_field_rest"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_field_rest"
+        app:layout_constraintEnd_toEndOf="@id/dialog_round_field_rest"
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_field_rest"
         tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/dialog_interval_hint_interval"
+        android:id="@+id/dialog_round_hint_work"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_32dp"
@@ -86,13 +86,13 @@
         android:text="@string/timer_work_time"
         android:textColor="@color/colorTextHeader"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@id/dialog_interval_field_work"
-        app:layout_constraintEnd_toStartOf="@id/dialog_interval_field_work"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_round_field_work"
+        app:layout_constraintEnd_toStartOf="@id/dialog_round_field_work"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dialog_interval_field_work" />
+        app:layout_constraintTop_toTopOf="@id/dialog_round_field_work" />
 
     <TextView
-        android:id="@+id/dialog_interval_hint_rest"
+        android:id="@+id/dialog_round_hint_rest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_32dp"
@@ -100,13 +100,13 @@
         android:text="@string/timer_rest_time"
         android:textColor="@color/colorTextHeader"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@id/dialog_interval_field_rest"
-        app:layout_constraintEnd_toStartOf="@id/dialog_interval_field_rest"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_round_field_rest"
+        app:layout_constraintEnd_toStartOf="@id/dialog_round_field_rest"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_field_work" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_field_work" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/dialog_interval_delete_btn"
+        android:id="@+id/dialog_round_delete_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -114,10 +114,10 @@
         android:text="@string/delete_interval_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_checkbox_name" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_checkbox_name" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/dialog_interval_save_btn"
+        android:id="@+id/dialog_round_save_btn"
         style="@style/DefaultDialogButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -126,11 +126,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_delete_btn"
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_delete_btn"
         app:layout_goneMarginTop="24dp" />
 
     <TextView
-        android:id="@+id/dialog_interval_hint_repeats"
+        android:id="@+id/dialog_round_hint_repeats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_regular"
@@ -138,12 +138,12 @@
         android:textColor="@color/colorTextHeader"
         android:textSize="@dimen/text_16sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/dialog_interval_field_repeats"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_round_field_repeats"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dialog_interval_field_repeats" />
+        app:layout_constraintTop_toTopOf="@id/dialog_round_field_repeats" />
 
     <TextView
-        android:id="@+id/dialog_interval_hint_show_repeats"
+        android:id="@+id/dialog_round_hint_show_repeats"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_32dp"
@@ -151,13 +151,13 @@
         android:text="@string/dialog_interval_setting_repeats"
         android:textColor="@color/colorTextHeader"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@id/dialog_interval_checkbox_repeats"
-        app:layout_constraintEnd_toStartOf="@id/dialog_interval_checkbox_repeats"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_round_checkbox_repeats"
+        app:layout_constraintEnd_toStartOf="@id/dialog_round_checkbox_repeats"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dialog_interval_checkbox_repeats" />
+        app:layout_constraintTop_toTopOf="@id/dialog_round_checkbox_repeats" />
 
     <TextView
-        android:id="@+id/dialog_interval_hint_show_name"
+        android:id="@+id/dialog_round_hint_show_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_32dp"
@@ -165,13 +165,13 @@
         android:text="@string/dialog_interval_setting_name"
         android:textColor="@color/colorTextHeader"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@id/dialog_interval_checkbox_name"
-        app:layout_constraintEnd_toStartOf="@id/dialog_interval_checkbox_name"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_round_checkbox_name"
+        app:layout_constraintEnd_toStartOf="@id/dialog_round_checkbox_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dialog_interval_checkbox_name" />
+        app:layout_constraintTop_toTopOf="@id/dialog_round_checkbox_name" />
 
     <TextView
-        android:id="@+id/dialog_interval_hint_type"
+        android:id="@+id/dialog_round_hint_type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_32dp"
@@ -179,13 +179,13 @@
         android:text="@string/dialog_interval_setting_type"
         android:textColor="@color/colorTextHeader"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@id/dialog_interval_spinner_type"
-        app:layout_constraintEnd_toStartOf="@id/dialog_interval_spinner_type"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_round_spinner_type"
+        app:layout_constraintEnd_toStartOf="@id/dialog_round_spinner_type"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dialog_interval_spinner_type" />
+        app:layout_constraintTop_toTopOf="@id/dialog_round_spinner_type" />
 
     <Spinner
-        android:id="@+id/dialog_interval_spinner_type"
+        android:id="@+id/dialog_round_spinner_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16dp"
@@ -193,31 +193,31 @@
         android:gravity="center"
         android:background="@drawable/spinner_bg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_interval_field_name" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_round_field_name" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/dialog_interval_group_checkbox_repeats"
+        android:id="@+id/dialog_round_group_checkbox_repeats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="dialog_interval_checkbox_repeats,dialog_interval_hint_show_repeats" />
+        app:constraint_referenced_ids="dialog_round_checkbox_repeats,dialog_round_hint_show_repeats" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/dialog_interval_group_repeats"
+        android:id="@+id/dialog_round_group_repeats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="dialog_interval_hint_repeats,dialog_interval_field_repeats" />
+        app:constraint_referenced_ids="dialog_round_hint_repeats,dialog_round_field_repeats" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/dialog_interval_group_work"
+        android:id="@+id/dialog_round_group_work"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="dialog_interval_hint_interval,dialog_interval_field_work" />
+        app:constraint_referenced_ids="dialog_round_hint_work,dialog_round_field_work" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/dialog_interval_group_rest"
+        android:id="@+id/dialog_round_group_rest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="dialog_interval_hint_rest,dialog_interval_field_rest" />
+        app:constraint_referenced_ids="dialog_round_field_rest, @+id/dialog_round_hint_rest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -95,9 +95,10 @@ class TimerService : BaseService() {
         callback = timerCallback
         callback?.run {
             currentInterval?.let {
+                val nextIntervalName = intervalTimer.getNextIntervalName()
                 showCurrentIntervalTime(formatIntervalData(it.value))
                 showRoundType(formatIntervalType(it.type))
-                showRoundInfo(it.name.orEmpty(), it.nextName.orEmpty(), formatIntervalNumber(it.position))
+                showRoundInfo(it.name, nextIntervalName.orEmpty(), formatIntervalNumber(it.roundId))
 
                 showTimerState(intervalTimer.state.buttonText, intervalTimer.state.isRestartAllowed)
             }
@@ -129,10 +130,11 @@ class TimerService : BaseService() {
         when (interval.type) {
             REST_TIME_TYPE -> callback?.showRoundType(R.string.timer_rest_time)
             WORK_TIME_TYPE -> {
-                updateNotification { setContentTitle(formatIntervalNumber(interval.position)) }
+                updateNotification { setContentTitle(formatIntervalNumber(interval.roundId)) }
                 callback?.let {
+                    val nextIntervalName = intervalTimer.getNextIntervalName()
                     it.showRoundType(R.string.timer_work_time)
-                    it.showRoundInfo(interval.name.orEmpty(), interval.nextName.orEmpty(), formatIntervalNumber(interval.position))
+                    it.showRoundInfo(interval.name, nextIntervalName.orEmpty(), formatIntervalNumber(interval.roundId))
                 }
             }
             POST_TIME_TYPE -> handleStop()
@@ -152,7 +154,7 @@ class TimerService : BaseService() {
 
         workoutInteractor.getWorkoutVolumeState(workoutId)
             .observeOnMain()
-            .subscribeBy(onSuccess = intervalTimer::enableSound)
+            .subscribeBy(onSuccess = intervalTimer::setSilentMode)
             .disposeOnDestroy()
 
         roundInteractor.getRounds(workoutId)

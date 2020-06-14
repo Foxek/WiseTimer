@@ -22,11 +22,11 @@ import com.foxek.simpletimer.common.utils.Constants.ACTION_START
 
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
-import kotlinx.android.synthetic.main.fragment_interval.*
+import kotlinx.android.synthetic.main.fragment_round.*
 
 class RoundFragment : BaseFragment(), RoundContact.View {
 
-    override val layoutId = R.layout.fragment_interval
+    override val layoutId = R.layout.fragment_round
 
     @Inject
     lateinit var presenter: RoundContact.Presenter
@@ -79,9 +79,9 @@ class RoundFragment : BaseFragment(), RoundContact.View {
 
     override fun setSilentMode(state: Boolean) {
         if (state)
-            fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_on_white)
-        else
             fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_off_white)
+        else
+            fragment_interval_volume_btn.setImageResource(R.drawable.ic_menu_volume_on_white)
     }
 
     override fun showRoundEditDialog(round: Round) {

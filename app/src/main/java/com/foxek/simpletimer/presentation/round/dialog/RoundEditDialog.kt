@@ -17,9 +17,9 @@ import com.foxek.simpletimer.common.utils.Constants.EXTRA_INTERVAL_NAME
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_REST_TIME
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_TYPE
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORK_TIME
-import kotlinx.android.synthetic.main.dialog_interval.*
+import kotlinx.android.synthetic.main.dialog_round.*
 import android.widget.ArrayAdapter
-
+import androidx.core.view.isVisible
 
 class RoundEditDialog : BaseDialog() {
 
@@ -28,7 +28,7 @@ class RoundEditDialog : BaseDialog() {
 
     override var dialogTitle = R.string.dialog_interval_setting_title
 
-    override fun getLayout() = R.layout.dialog_interval
+    override fun getLayout() = R.layout.dialog_round
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,78 +38,92 @@ class RoundEditDialog : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialog_interval_group_checkbox_repeats.visibility = View.GONE
-
-        dialog_interval_checkbox_name.setOnCheckedChangeListener { _, isChecked -> onNameCheckBoxClick(isChecked) }
-
-        dialog_interval_save_btn.setOnClickListener { onSaveButtonClick() }
-        dialog_interval_delete_btn.setOnClickListener { onDeleteButtonClick() }
-
-        setTypeSpinner()
-        prepareEditText()
-    }
-
-    private fun prepareEditText() {
+        dialog_round_group_checkbox_repeats.isVisible = false
 
         arguments?.let {
-            if (it.getString(EXTRA_INTERVAL_NAME) != EMPTY) {
-                dialog_interval_checkbox_name.isChecked = false
-                dialog_interval_field_name.visibility = View.VISIBLE
-                dialog_interval_field_name.setText(it.getString(EXTRA_INTERVAL_NAME))
-            }
-
-            dialog_interval_spinner_type.setSelection((it.getInt(EXTRA_TYPE)))
-            dialog_interval_field_work.setValue(it.getInt(EXTRA_WORK_TIME))
-            dialog_interval_field_rest.setValue(it.getInt(EXTRA_REST_TIME))
+            setRoundType(it.getInt(EXTRA_TYPE))
+            prepareTypeSpinner(it.getInt(EXTRA_TYPE))
+            prepareEditText(
+                it.getString(EXTRA_INTERVAL_NAME).orEmpty(),
+                it.getInt(EXTRA_WORK_TIME),
+                it.getInt(EXTRA_REST_TIME)
+            )
         }
-
-
     }
 
-    private fun setTypeSpinner() {
+    override fun attachListeners() {
+        dialog_round_checkbox_name.setOnCheckedChangeListener { _, isChecked ->
+            onNameCheckBoxClick(isChecked)
+        }
+        dialog_round_save_btn.setOnClickListener { onSaveButtonClick() }
+        dialog_round_delete_btn.setOnClickListener { onDeleteButtonClick() }
+    }
+
+    private fun prepareEditText(roundName: String, workInterval: Int, restInterval: Int) {
+        if (roundName.isNotBlank()) {
+            dialog_round_checkbox_name.isChecked = false
+            dialog_round_field_name.visibility = View.VISIBLE
+            dialog_round_field_name.setText(roundName)
+        }
+
+        dialog_round_field_work.setValue(workInterval)
+        dialog_round_field_rest.setValue(restInterval)
+    }
+
+    private fun prepareTypeSpinner(type: Int) {
         val arrayAdapter = ArrayAdapter.createFromResource(
-                context!!,
-                R.array.type_list,
-                R.layout.view_spinner_selected
+            context!!,
+            R.array.type_list,
+            R.layout.view_spinner_selected
         )
         arrayAdapter.setDropDownViewResource(R.layout.view_spinner_drop)
-        dialog_interval_spinner_type.adapter = arrayAdapter
 
-        dialog_interval_spinner_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        dialog_round_spinner_type.adapter = arrayAdapter
+        dialog_round_spinner_type.setSelection(type)
+
+        dialog_round_spinner_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (position) {
-                    Constants.WITH_REST_TYPE -> {
-                        dialog_interval_group_rest.visibility = View.VISIBLE
-                        dialog_interval_group_work.visibility = View.VISIBLE
-                    }
-                    Constants.WITHOUT_REST_TYPE -> {
-                        dialog_interval_group_rest.visibility = View.GONE
-                        dialog_interval_group_work.visibility = View.VISIBLE
-                    }
-                }
+                setRoundType(position)
             }
         }
-
     }
 
     private fun onNameCheckBoxClick(isChecked: Boolean) {
         if (isChecked) {
-            dialog_interval_field_name.setText(EMPTY)
-            dialog_interval_field_name.visibility = View.GONE
+            dialog_round_field_name.setText(EMPTY)
+            dialog_round_field_name.visibility = View.GONE
         } else {
-            dialog_interval_field_name.visibility = View.VISIBLE
+            dialog_round_field_name.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setRoundType(type: Int) {
+        when (type) {
+            Constants.WITH_REST_TYPE -> {
+                dialog_round_group_rest.isVisible = true
+                dialog_round_group_work.isVisible = true
+            }
+            Constants.WITHOUT_REST_TYPE -> {
+                dialog_round_group_work.isVisible = true
+                dialog_round_group_rest.isVisible = false
+            }
         }
     }
 
     private fun onSaveButtonClick() {
         var name = EMPTY
-        val type = dialog_interval_spinner_type.selectedItemPosition
-        if (checkNotEmpty(dialog_interval_field_name))
-            name = dialog_interval_field_name.text.toString()
+        val type = dialog_round_spinner_type.selectedItemPosition
+        if (checkNotEmpty(dialog_round_field_name))
+            name = dialog_round_field_name.text.toString()
 
-        presenter.onSaveRoundBtnClick(name, type, dialog_interval_field_work.getValue(), dialog_interval_field_rest.getValue())
+        presenter.onSaveRoundBtnClick(
+            name,
+            type,
+            dialog_round_field_work.getValue(),
+            dialog_round_field_rest.getValue()
+        )
         dismiss()
     }
 
@@ -121,8 +135,8 @@ class RoundEditDialog : BaseDialog() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        dialog_interval_field_repeats.isCursorVisible = false
-        dialog_interval_field_name.isCursorVisible = false
+        dialog_round_field_repeats.isCursorVisible = false
+        dialog_round_field_name.isCursorVisible = false
     }
 
     companion object {

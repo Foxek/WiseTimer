@@ -105,7 +105,7 @@ class RoundPresenter @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     view?.setWorkoutName(it.name)
-                    view?.setSilentMode(!it.isSilentMode)
+                    view?.setSilentMode(it.isSilentMode)
                 }
             )
             .disposeOnDestroy()

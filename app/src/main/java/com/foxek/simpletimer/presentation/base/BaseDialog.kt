@@ -36,7 +36,10 @@ abstract class BaseDialog : DialogFragment(), MvpView {
         layoutInflater.inflate(getLayout(), placeHolder)
 
         setupHeader()
+        attachListeners()
     }
+
+    protected open fun attachListeners() {}
 
     fun checkNotEmpty(vararg widgets: EditText): Boolean {
         return widgets.all { it.text.isNotEmpty() }

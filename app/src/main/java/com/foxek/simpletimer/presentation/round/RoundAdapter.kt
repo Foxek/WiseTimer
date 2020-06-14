@@ -12,7 +12,7 @@ import com.foxek.simpletimer.common.utils.formatIntervalData
 import com.foxek.simpletimer.common.utils.formatIntervalNumber
 import com.foxek.simpletimer.presentation.base.BaseAdapter
 import com.foxek.simpletimer.presentation.base.BaseDiffCallback
-import kotlinx.android.synthetic.main.item_interval.view.*
+import kotlinx.android.synthetic.main.item_round.view.*
 
 class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
 
@@ -32,7 +32,7 @@ class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return with(parent) {
-            LayoutInflater.from(context).inflate(R.layout.item_interval, this, false)
+            LayoutInflater.from(context).inflate(R.layout.item_round, this, false)
         }.run(::ViewHolder)
     }
 
@@ -63,7 +63,9 @@ class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
 
                 if (model.type == WITH_REST_TYPE) {
                     item_interval_rest_time.text = formatIntervalData(model.restInterval)
+                    item_interval_rest_hint.text = resources.getString(R.string.timer_rest_time)
                 } else {
+                    item_interval_rest_time.text = ""
                     item_interval_rest_hint.text = resources.getString(R.string.timer_without_rest)
                 }
 

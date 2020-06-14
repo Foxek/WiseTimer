@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import com.foxek.simpletimer.R
-import kotlinx.android.synthetic.main.view_edit_interval.view.*
+import kotlinx.android.synthetic.main.view_edit_round.view.*
 
 class IntervalEditView(
     context: Context,
@@ -17,7 +17,7 @@ class IntervalEditView(
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
-        View.inflate(context, R.layout.view_edit_interval, this)
+        View.inflate(context, R.layout.view_edit_round, this)
     }
 
     fun setValue(time: Int) {

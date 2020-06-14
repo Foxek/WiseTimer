@@ -22,7 +22,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
     }
 
     private var timer: CountDownTimer? = null
-    private var times = ArrayList<Interval>()
+    private var intervals = ArrayList<Interval>()
     private var currentTimeIndex: Int = 0
     private var pastTimeInSeconds: Long = 0
 
@@ -31,25 +31,25 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
     var state = State.PAUSED
 
     fun prepare(roundList: List<Round>) {
-        times.add(Interval(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, 0, Constants.EMPTY, Constants.EMPTY))
+        intervals.add(Interval(Constants.PREPARE_TIME, Constants.PREPARE_TIME_TYPE, "", 0))
 
         roundList.forEachIndexed { idx, it ->
-            times.add(Interval(it.workInterval, WORK_TIME_TYPE, idx + 1, it.name, getNextName(roundList, idx)))
+            intervals.add(Interval(it.workInterval, WORK_TIME_TYPE, it.name,idx + 1))
 
             if (it.type == WITH_REST_TYPE)
-                times.add(Interval(it.restInterval, REST_TIME_TYPE, idx + 1, it.name, getNextName(roundList, idx)))
+                intervals.add(Interval(it.restInterval, REST_TIME_TYPE, it.name, idx + 1))
         }
 
-        times.add(Interval(1, POST_TIME_TYPE, times.lastIndex, Constants.EMPTY, Constants.EMPTY))
-        start(times[0].value.toLong())
+        intervals.add(Interval(1, POST_TIME_TYPE, "Завершение тренировки", intervals.lastIndex))
+        start(intervals[0].value.toLong())
     }
 
-    private fun getNextName(round: List<Round>, id: Int): String? {
-        return if (id + 1 < round.size) {
-            round[id + 1].name
-        } else {
-            "Завершение тренировки"
+    fun getNextIntervalName(): String? {
+        val nextInterval = intervals.find {
+            ((it.roundId > intervals[currentTimeIndex].roundId)
+               && (it.roundId != intervals[currentTimeIndex].roundId))
         }
+        return nextInterval?.name
     }
 
     fun restart() {
@@ -62,8 +62,8 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
         state = State.PAUSED
     }
 
-    fun enableSound(isEnable: Boolean) {
-        alarmHelper.setVolume(isEnable)
+    fun setSilentMode(isEnable: Boolean) {
+        alarmHelper.setVolume(!isEnable)
     }
 
     private fun start(time: Long) {
@@ -73,7 +73,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
 
             override fun onFinish() {
                 stop()
-                handleFinish(times[++currentTimeIndex])
+                handleFinish(intervals[++currentTimeIndex])
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -94,7 +94,7 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
 
         onIntervalFinished.onNext(interval)
 
-        if (currentTimeIndex < times.size - 1) {
+        if (currentTimeIndex < intervals.size - 1) {
             start(interval.value.toLong())
         }
     }
