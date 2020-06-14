@@ -1,0 +1,29 @@
+ext {
+    base = [
+            version_name      : "2.0.1",
+            version_code      : 21,
+    ]
+
+    versions = [
+            junit             :  "4.12",
+            runner            :  "1.2.0",
+            espresso          :  "3.2.0",
+            debug_db          :  "1.0.6",
+            dagger            :  "2.27",
+            dagger_compiler   :  "2.27",
+
+            room_runtime      :  "2.2.5",
+            room_rxjava       :  "2.2.5",
+            room_compiler     :  "2.2.5",
+
+            rxjava_rxandroid  :  "2.1.1",
+            rxjava_rxkotlin   :  "2.3.0",
+
+            constraint        :  "1.1.3",
+            recyclerview      :  "1.1.0",
+            material          :  "1.1.0",
+
+            kotlin_std        : "1.3.72",
+            kotlin_core       : "1.3.0"
+    ]
+}
