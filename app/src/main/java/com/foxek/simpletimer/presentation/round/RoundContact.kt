@@ -8,7 +8,7 @@ interface RoundContact {
 
     interface View : MvpView {
 
-        fun setRoundList()
+        fun setupRoundAdapter()
 
         fun renderRoundList(roundList: List<Round>)
 
@@ -16,15 +16,15 @@ interface RoundContact {
 
         fun setWorkoutName(name: String)
 
-        fun startWorkoutActivity()
+        fun startWorkoutFragment()
 
-        fun startTimerActivity()
+        fun startTimerFragment()
 
         fun showRoundEditDialog(round: Round)
 
         fun showRoundCreateDialog()
 
-        fun showWorkoutEditDialog()
+        fun startEditWorkoutFragment(workoutId: Int)
     }
 
     interface Presenter : MvpPresenter<View> {

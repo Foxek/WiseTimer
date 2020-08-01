@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.foxek.simpletimer.AndroidApplication
 import com.foxek.simpletimer.di.component.ActivityComponent
@@ -26,6 +27,7 @@ abstract class BaseFragment : Fragment(), MvpView {
                 .applicationComponent(AndroidApplication.component)
                 .build()
     }
+
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(layoutId, parent, false)
     }

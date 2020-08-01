@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:animateLayoutChanges="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fragment_edit_workout_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:singleLine="true"
+            android:text="@string/edit_workout_title"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_edit_workout_close_btn"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_edit_workout_save_btn"
+            app:layout_constraintStart_toEndOf="@+id/fragment_edit_workout_close_btn"
+            app:layout_constraintTop_toTopOf="@+id/fragment_edit_workout_close_btn" />
+
+        <ImageButton
+            android:id="@+id/fragment_edit_workout_save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="?android:selectableItemBackground"
+            android:padding="@dimen/padding_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_check_white"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/fragment_edit_workout_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="?android:selectableItemBackground"
+            android:padding="@dimen/padding_16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_close_white"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/fragment_edit_workout_name"
+            style="@style/DefaultEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:ems="10"
+            android:textSize="@dimen/text_24sp"
+            android:importantForAutofill="no"
+            android:inputType="text|textCapSentences|textNoSuggestions"
+            android:textColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorTint"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_workout_description"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_workout_description"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_workout_close_btn"
+            tools:text="Тренировка по боксу"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_edit_workout_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_workout_name"
+            tools:listitem="@layout/item_round"
+            tools:itemCount="4"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

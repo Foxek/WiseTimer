@@ -1,28 +1,25 @@
 package com.foxek.simpletimer.presentation.round
 
+
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.foxek.simpletimer.R
+import com.foxek.simpletimer.common.utils.Constants.ACTION_START
+import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
+import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
+import com.foxek.simpletimer.data.model.Round
+import com.foxek.simpletimer.presentation.base.BaseFragment
+import com.foxek.simpletimer.presentation.editworkout.EditWorkoutFragment
 import com.foxek.simpletimer.presentation.round.dialog.RoundCreateDialog
 import com.foxek.simpletimer.presentation.round.dialog.RoundEditDialog
 import com.foxek.simpletimer.presentation.round.dialog.WorkoutEditDialog
-
-import javax.inject.Inject
-
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.foxek.simpletimer.data.model.Round
-import com.foxek.simpletimer.presentation.base.BaseFragment
-
 import com.foxek.simpletimer.presentation.timer.TimerFragment
 import com.foxek.simpletimer.presentation.timer.TimerService
-import com.foxek.simpletimer.common.utils.Constants.ACTION_START
-
-import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
-import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
 import kotlinx.android.synthetic.main.fragment_round.*
+import javax.inject.Inject
 
 class RoundFragment : BaseFragment(), RoundContact.View {
 
@@ -67,7 +64,7 @@ class RoundFragment : BaseFragment(), RoundContact.View {
         fragment_interval_workout_name.text = name
     }
 
-    override fun setRoundList() {
+    override fun setupRoundAdapter() {
         fragment_interval_list.apply {
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
@@ -92,15 +89,19 @@ class RoundFragment : BaseFragment(), RoundContact.View {
         showDialog(RoundCreateDialog.newInstance())
     }
 
-    override fun showWorkoutEditDialog() {
-        showDialog(WorkoutEditDialog.newInstance(arguments?.getString(EXTRA_WORKOUT_NAME)))
+    override fun startEditWorkoutFragment(workoutId: Int) {
+        val args = Bundle().apply {
+            putInt(EXTRA_WORKOUT_ID, workoutId)
+        }
+
+        executeInActivity { replaceFragment(EditWorkoutFragment(), args) }
     }
 
-    override fun startWorkoutActivity() {
+    override fun startWorkoutFragment() {
         onBackPressed()
     }
 
-    override fun startTimerActivity() {
+    override fun startTimerFragment() {
         close()
 
         val intent = Intent(context, TimerService::class.java).apply {

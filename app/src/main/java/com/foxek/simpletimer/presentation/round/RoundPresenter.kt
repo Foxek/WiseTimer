@@ -21,14 +21,14 @@ class RoundPresenter @Inject constructor(
     override var workoutId: Int = NO_ID_INT
 
     override fun viewIsReady() {
-        view?.setRoundList()
+        view?.setupRoundAdapter()
 
         getCurrentWorkout()
         fetchIntervalList()
     }
 
     override fun onEditWorkoutBtnClick() {
-        view?.showWorkoutEditDialog()
+        view?.startEditWorkoutFragment(workoutId)
     }
 
     override fun onToggleSilentModeBtnClick() {
@@ -74,13 +74,13 @@ class RoundPresenter @Inject constructor(
         workoutInteractor.deleteWorkoutById(workoutId)
             .observeOnMain()
             .subscribeBy(
-                onComplete = { view?.startWorkoutActivity() }
+                onComplete = { view?.startWorkoutFragment() }
             )
             .disposeOnDestroy()
     }
 
     override fun onStartWorkoutBtnClick() {
-        view?.startTimerActivity()
+        view?.startTimerFragment()
     }
 
     override fun onRoundItemClick(item: Round) {

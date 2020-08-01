@@ -52,6 +52,8 @@
 
     <string name="interval_title">Список интервалов</string>
 
+    <string name="edit_workout_title">Редактирование тренировки</string>
+
     <string-array name="type_list">
         <item>С отдыхом</item>
         <item>Без отдыха</item>

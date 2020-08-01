@@ -48,6 +48,8 @@
 
     <string name="interval_title">Interval List</string>
 
+    <string name="edit_workout_title">Edit workout</string>
+
     <string-array name="type_list">
         <item>With rest</item>
         <item>Without rest</item>
