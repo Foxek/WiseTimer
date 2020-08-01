@@ -1,9 +1,11 @@
 package com.foxek.simpletimer.presentation.editworkout
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.utils.Constants
 import com.foxek.simpletimer.common.utils.formatIntervalData
@@ -17,6 +19,7 @@ import java.util.*
 class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), RoundMoveListener {
 
     var onItemMovedListener: ((List<Round>) -> Unit)? = null
+    var onDragListener: ((viewHolder: RecyclerView.ViewHolder) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return with(parent) {
@@ -60,6 +63,16 @@ class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), 
                     formatIntervalNumber(adapterPosition + 1)
                 } else {
                     model.name
+                }
+                setOnTouchListener { v, event ->
+                    if (event.action == MotionEvent.ACTION_DOWN) {
+                        onDragListener?.invoke(this@ViewHolder)
+                        return@setOnTouchListener true
+                    } else if (event.action == MotionEvent.ACTION_UP) {
+                        performClick()
+                        return@setOnTouchListener true
+                    }
+                    return@setOnTouchListener false
                 }
             }
         }

@@ -13,7 +13,7 @@ class ItemTouchHelperCallback(
 
     override fun isItemViewSwipeEnabled(): Boolean = false
 
-    override fun isLongPressDragEnabled(): Boolean = true
+    override fun isLongPressDragEnabled(): Boolean = false
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,

@@ -49,6 +49,7 @@
     <string name="interval_title">Interval List</string>
 
     <string name="edit_workout_title">Edit workout</string>
+    <string name="edit_workout_description">You can change the order of the intervals in the list by dragging the intervals</string>
 
     <string-array name="type_list">
         <item>With rest</item>

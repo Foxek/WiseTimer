@@ -11,21 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/fragment_edit_workout_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_condensed_bold"
-            android:singleLine="true"
-            android:text="@string/edit_workout_title"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_edit_workout_close_btn"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_edit_workout_save_btn"
-            app:layout_constraintStart_toEndOf="@+id/fragment_edit_workout_close_btn"
-            app:layout_constraintTop_toTopOf="@+id/fragment_edit_workout_close_btn" />
-
         <ImageButton
             android:id="@+id/fragment_edit_workout_save_btn"
             android:layout_width="wrap_content"
@@ -48,22 +33,54 @@
             app:srcCompat="@drawable/ic_close_white"
             tools:ignore="ContentDescription" />
 
+        <TextView
+            android:id="@+id/fragment_edit_workout_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/margin_32dp"
+            android:elevation="4dp"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:text="@string/edit_workout_title"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_edit_workout_close_btn" />
+
         <EditText
             android:id="@+id/fragment_edit_workout_name"
             style="@style/DefaultEditText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
             android:ems="10"
-            android:textSize="@dimen/text_24sp"
+            android:fontFamily="@font/roboto_condensed_bold"
             android:importantForAutofill="no"
             android:inputType="text|textCapSentences|textNoSuggestions"
+            android:textAlignment="textStart"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorTint"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_workout_description"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_workout_description"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_workout_close_btn"
-            tools:text="Тренировка по боксу"/>
+            android:textSize="@dimen/text_24sp"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_workout_title"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_workout_title"
+            tools:text="Тренировка по боксу" />
+
+        <TextView
+            android:id="@+id/fragment_edit_workout_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_32dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            android:fontFamily="@font/roboto_condensed_light"
+            android:text="@string/edit_workout_description"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_edit_workout_name" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_edit_workout_list"
@@ -74,9 +91,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_workout_name"
-            tools:listitem="@layout/item_round"
-            tools:itemCount="4"/>
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_workout_description"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_round" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

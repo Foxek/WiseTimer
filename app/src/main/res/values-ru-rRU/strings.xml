@@ -53,6 +53,7 @@
     <string name="interval_title">Список интервалов</string>
 
     <string name="edit_workout_title">Редактирование тренировки</string>
+    <string name="edit_workout_description">Вы можете изменить порядок интервалов в списке путем их перетягивания на нужную позицию</string>
 
     <string-array name="type_list">
         <item>С отдыхом</item>

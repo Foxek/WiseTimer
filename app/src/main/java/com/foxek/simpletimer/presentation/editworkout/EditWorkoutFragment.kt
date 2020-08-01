@@ -15,6 +15,8 @@ class EditWorkoutFragment : BaseFragment(), EditWorkoutContract.View {
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { EditWorkoutAdapter() }
 
+    private lateinit var touchHelper: ItemTouchHelper
+
     @Inject
     lateinit var presenter: EditWorkoutContract.Presenter
 
@@ -49,12 +51,14 @@ class EditWorkoutFragment : BaseFragment(), EditWorkoutContract.View {
 
     override fun setupRoundAdapter() {
         val callback = ItemTouchHelperCallback(adapter)
-        ItemTouchHelper(callback).apply {
+        touchHelper = ItemTouchHelper(callback).apply {
             attachToRecyclerView(fragment_edit_workout_list)
         }
         fragment_edit_workout_list.apply {
             itemAnimator = null
-            adapter = this@EditWorkoutFragment.adapter
+            adapter = this@EditWorkoutFragment.adapter.apply {
+                onDragListener = { touchHelper.startDrag(it) }
+            }
         }
     }
 
