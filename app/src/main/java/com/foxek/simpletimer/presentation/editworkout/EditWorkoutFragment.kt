@@ -7,6 +7,7 @@ import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.utils.Constants
 import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.presentation.base.BaseFragment
+import com.foxek.simpletimer.presentation.base.FragmentFactory
 import kotlinx.android.synthetic.main.fragment_edit_workout.*
 import javax.inject.Inject
 
@@ -67,5 +68,11 @@ class EditWorkoutFragment : BaseFragment(), EditWorkoutContract.View {
 
     override fun startRoundFragment() {
         onBackPressed()
+    }
+
+    companion object : FragmentFactory<EditWorkoutFragment> {
+        override fun getInstance(bundle: Bundle?): EditWorkoutFragment = EditWorkoutFragment().apply {
+            arguments = bundle
+        }
     }
 }

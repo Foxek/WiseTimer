@@ -35,9 +35,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
         }
     }
 
-    fun replaceFragment(fragment: BaseFragment, args: Bundle?) {
-        fragment.arguments = args
-
+    fun replaceFragment(fragment: BaseFragment) {
         supportFragmentManager.transaction {
             replace(R.id.container, fragment)
             addToBackStack(fragment.tag)

@@ -6,7 +6,6 @@ import com.foxek.simpletimer.presentation.editworkout.EditWorkoutFragment
 import com.foxek.simpletimer.presentation.round.RoundFragment
 import com.foxek.simpletimer.presentation.round.dialog.RoundCreateDialog
 import com.foxek.simpletimer.presentation.round.dialog.RoundEditDialog
-import com.foxek.simpletimer.presentation.round.dialog.WorkoutEditDialog
 import com.foxek.simpletimer.presentation.workout.WorkoutFragment
 import com.foxek.simpletimer.presentation.workout.dialog.WorkoutCreateDialog
 
@@ -23,8 +22,6 @@ interface ActivityComponent {
     fun inject(fragment: EditWorkoutFragment)
 
     fun inject(dialog: WorkoutCreateDialog)
-
-    fun inject(dialog: WorkoutEditDialog)
 
     fun inject(dialog: RoundCreateDialog)
 

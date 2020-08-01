@@ -16,6 +16,7 @@ import com.foxek.simpletimer.presentation.timer.TimerService.LocalBinder
 import com.foxek.simpletimer.common.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.common.utils.Constants.ACTION_STOP
 import com.foxek.simpletimer.common.utils.ServiceTools.isServiceRunning
+import com.foxek.simpletimer.presentation.base.FragmentFactory
 import kotlinx.android.synthetic.main.fragment_timer.*
 
 class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
@@ -105,5 +106,11 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
 
         fragment_timer_next_interval_name.isVisible = nextName.isNotBlank()
         fragment_timer_next_interval_name.text = getString(R.string.timer_next_interval_hint, nextName)
+    }
+
+    companion object : FragmentFactory<TimerFragment> {
+        override fun getInstance(bundle: Bundle?): TimerFragment = TimerFragment().apply {
+            arguments = bundle
+        }
     }
 }

@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.utils.Constants.ACTION_START
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
-import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_NAME
 import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.presentation.base.BaseFragment
+import com.foxek.simpletimer.presentation.base.FragmentFactory
 import com.foxek.simpletimer.presentation.editworkout.EditWorkoutFragment
 import com.foxek.simpletimer.presentation.round.dialog.RoundCreateDialog
 import com.foxek.simpletimer.presentation.round.dialog.RoundEditDialog
-import com.foxek.simpletimer.presentation.round.dialog.WorkoutEditDialog
 import com.foxek.simpletimer.presentation.timer.TimerFragment
 import com.foxek.simpletimer.presentation.timer.TimerService
 import kotlinx.android.synthetic.main.fragment_round.*
@@ -94,7 +93,7 @@ class RoundFragment : BaseFragment(), RoundContact.View {
             putInt(EXTRA_WORKOUT_ID, workoutId)
         }
 
-        executeInActivity { replaceFragment(EditWorkoutFragment(), args) }
+        executeInActivity { replaceFragment(EditWorkoutFragment.getInstance(args)) }
     }
 
     override fun startWorkoutFragment() {
@@ -116,6 +115,12 @@ class RoundFragment : BaseFragment(), RoundContact.View {
         }
 
         arguments?.putString(ACTION_START, ACTION_START)
-        executeInActivity { replaceFragment(TimerFragment(), arguments) }
+        executeInActivity { replaceFragment(TimerFragment.getInstance(arguments)) }
+    }
+
+    companion object : FragmentFactory<RoundFragment> {
+        override fun getInstance(bundle: Bundle?): RoundFragment = RoundFragment().apply {
+            arguments = bundle
+        }
     }
 }

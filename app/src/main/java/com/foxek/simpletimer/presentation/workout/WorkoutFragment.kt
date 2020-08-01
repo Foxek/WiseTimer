@@ -13,6 +13,7 @@ import com.foxek.simpletimer.presentation.round.RoundFragment
 import com.foxek.simpletimer.presentation.workout.dialog.WorkoutCreateDialog
 import com.foxek.simpletimer.common.utils.Constants.CHANGELOG_VERSION_VALUE
 import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORKOUT_ID
+import com.foxek.simpletimer.presentation.base.FragmentFactory
 import kotlinx.android.synthetic.main.fragment_workout.*
 import javax.inject.Inject
 
@@ -61,7 +62,7 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View {
             putInt(EXTRA_WORKOUT_ID, workoutId)
         }
 
-        executeInActivity { replaceFragment(RoundFragment(), args) }
+        executeInActivity { replaceFragment(RoundFragment.getInstance(args)) }
     }
 
     override fun renderWorkoutList(items: List<Workout>) {
@@ -87,6 +88,12 @@ class WorkoutFragment : BaseFragment(), WorkoutContact.View {
 
         if (changelogVersion < CHANGELOG_VERSION_VALUE) {
             showDialog(ChangeLogDialog())
+        }
+    }
+
+    companion object : FragmentFactory<WorkoutFragment> {
+        override fun getInstance(bundle: Bundle?): WorkoutFragment = WorkoutFragment().apply {
+            arguments = bundle
         }
     }
 }
