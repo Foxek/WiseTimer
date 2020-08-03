@@ -1,19 +1,18 @@
 package com.foxek.simpletimer.presentation.editworkout
 
 import com.foxek.simpletimer.data.model.Round
-import com.foxek.simpletimer.presentation.base.MvpPresenter
-import com.foxek.simpletimer.presentation.base.MvpView
+import com.foxek.simpletimer.presentation.base.BaseContract
 
 interface EditWorkoutContract {
 
-    interface View : MvpView {
-        fun setupRoundAdapter()
+    interface View : BaseContract.View {
+
         fun renderRoundList(rounds: List<Round>)
+
         fun setWorkoutName(name: String)
-        fun startRoundFragment()
     }
 
-    interface Presenter : MvpPresenter<View> {
+    interface Presenter : BaseContract.Presenter<View> {
         var workoutId: Int
 
         fun onSaveBtnClick(rounds: List<Round>, workoutName: String)

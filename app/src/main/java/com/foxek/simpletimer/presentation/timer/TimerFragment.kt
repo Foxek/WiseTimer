@@ -16,10 +16,12 @@ import com.foxek.simpletimer.presentation.timer.TimerService.LocalBinder
 import com.foxek.simpletimer.common.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.common.utils.Constants.ACTION_STOP
 import com.foxek.simpletimer.common.utils.ServiceTools.isServiceRunning
+import com.foxek.simpletimer.presentation.base.BaseContract
+import com.foxek.simpletimer.presentation.base.BaseStandaloneFragment
 import com.foxek.simpletimer.presentation.base.FragmentFactory
 import kotlinx.android.synthetic.main.fragment_timer.*
 
-class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
+class TimerFragment : BaseStandaloneFragment(), TimerContact.ServiceCallback {
 
     override val layoutId = R.layout.fragment_timer
     lateinit var serviceConnection: ServiceConnection
@@ -27,7 +29,17 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        serviceConnection = object : ServiceConnection {
+            override fun onServiceDisconnected(name: ComponentName?) {}
 
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                val timerService = (service as LocalBinder).instance
+                timerService.registerServiceClient(this@TimerFragment)
+            }
+        }
+    }
+
+    override fun attachListeners() {
         fragment_timer_pause_btn.setOnClickListener {
             startForegroundService(
                 context!!,
@@ -40,15 +52,6 @@ class TimerFragment : BaseFragment(), TimerContact.ServiceCallback {
                 context!!,
                 Intent(context, TimerService::class.java).setAction(ACTION_STOP)
             )
-        }
-
-        serviceConnection = object : ServiceConnection {
-            override fun onServiceDisconnected(name: ComponentName?) {}
-
-            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                val timerService = (service as LocalBinder).instance
-                timerService.registerServiceClient(this@TimerFragment)
-            }
         }
     }
 

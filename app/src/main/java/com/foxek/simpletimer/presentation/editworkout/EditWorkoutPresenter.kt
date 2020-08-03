@@ -16,9 +16,7 @@ class EditWorkoutPresenter @Inject constructor(
 
     override var workoutId: Int = Constants.NO_ID_INT
 
-    override fun viewIsReady() {
-        view?.setupRoundAdapter()
-
+    override fun onViewResumed() {
         getCurrentWorkout()
         fetchIntervalList()
     }
@@ -26,9 +24,9 @@ class EditWorkoutPresenter @Inject constructor(
     override fun onSaveBtnClick(rounds: List<Round>, workoutName: String) {
         workoutInteractor.updateWorkoutName(workoutId, workoutName)
             .subscribeBy(
-                onComplete = { view?.startRoundFragment() }
+                onComplete = { view?.onBackPressed() }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     private fun fetchIntervalList() {
@@ -39,7 +37,7 @@ class EditWorkoutPresenter @Inject constructor(
                     view?.renderRoundList(it)
                 }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     private fun getCurrentWorkout() {
@@ -50,6 +48,6 @@ class EditWorkoutPresenter @Inject constructor(
                     view?.setWorkoutName(it.name)
                 }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 }

@@ -1,7 +1,7 @@
 package com.foxek.simpletimer.di.component
 
 import com.foxek.simpletimer.di.PerFragment
-import com.foxek.simpletimer.di.module.ActivityModule
+import com.foxek.simpletimer.di.module.FragmentModule
 import com.foxek.simpletimer.presentation.editworkout.EditWorkoutFragment
 import com.foxek.simpletimer.presentation.round.RoundFragment
 import com.foxek.simpletimer.presentation.round.dialog.RoundCreateDialog
@@ -12,8 +12,8 @@ import com.foxek.simpletimer.presentation.workout.dialog.WorkoutCreateDialog
 import dagger.Component
 
 @PerFragment
-@Component(dependencies = [ApplicationComponent::class], modules = [ActivityModule::class])
-interface ActivityComponent {
+@Component(dependencies = [ApplicationComponent::class], modules = [FragmentModule::class])
+interface FragmentComponent {
 
     fun inject(fragment: WorkoutFragment)
 

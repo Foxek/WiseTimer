@@ -20,6 +20,7 @@ import com.foxek.simpletimer.common.utils.Constants.EXTRA_WORK_TIME
 import kotlinx.android.synthetic.main.dialog_round.*
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import com.foxek.simpletimer.di.PerFragment
 
 class RoundEditDialog : BaseDialog() {
 
@@ -32,7 +33,7 @@ class RoundEditDialog : BaseDialog() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent?.inject(this)
+        component?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

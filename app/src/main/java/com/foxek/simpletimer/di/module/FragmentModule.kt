@@ -16,7 +16,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ActivityModule {
+class FragmentModule {
 
     @Provides
     fun provideWorkoutInteractor(interactor: WorkoutInteractorImpl): WorkoutInteractor = interactor

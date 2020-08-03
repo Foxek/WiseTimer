@@ -9,18 +9,17 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.di.component.ActivityComponent
 import com.foxek.simpletimer.common.utils.Constants.NO_ID_INT
-import kotlinx.android.synthetic.main.base_dialog.base_dialog_description
-import kotlinx.android.synthetic.main.base_dialog.base_dialog_title
+import com.foxek.simpletimer.di.component.FragmentComponent
+import kotlinx.android.synthetic.main.base_dialog.*
 
 abstract class BaseDialog : DialogFragment(), MvpView {
 
     abstract var dialogTitle: Int
     open var dialogDescription: Int = NO_ID_INT
 
-    val activityComponent: ActivityComponent?
-        get() = (targetFragment as BaseFragment).component
+    val component: FragmentComponent?
+        get() = (targetFragment as BaseFragment<*,*>).component
 
     abstract fun getLayout(): Int
 

@@ -1,42 +1,85 @@
 package com.foxek.simpletimer.presentation.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
+import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import com.foxek.simpletimer.AndroidApplication
-import com.foxek.simpletimer.di.component.ActivityComponent
-import com.foxek.simpletimer.di.component.DaggerActivityComponent
-import com.foxek.simpletimer.di.module.ActivityModule
+import com.foxek.simpletimer.di.component.FragmentComponent
+import com.foxek.simpletimer.di.component.DaggerFragmentComponent
+import com.foxek.simpletimer.di.module.FragmentModule
 import com.foxek.simpletimer.common.extensions.customTag
+import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
-abstract class BaseFragment : Fragment(), MvpView {
+abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> :
+    Fragment(),
+    BaseContract.View {
 
     abstract val layoutId: Int
 
-    var component: ActivityComponent? = null
+    @Inject
+    lateinit var presenter: P
+
+    var component: FragmentComponent? = null
         private set
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    abstract fun onInject(component: FragmentComponent)
 
-        component = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule())
-                .applicationComponent(AndroidApplication.component)
-                .build()
+    @CallSuper
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        component = DaggerFragmentComponent.builder()
+            .fragmentModule(FragmentModule())
+            .applicationComponent(AndroidApplication.component)
+            .build()
+
+        component ?: throw IllegalArgumentException("Dagger fragment component should not be null")
+
+        onInject(component!!)
+        presenter.attachToLifecycle(lifecycle)
     }
 
+    @CallSuper
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(layoutId, parent, false)
     }
 
-    inline fun executeInActivity(body: BaseActivity.() -> Unit){
-        activity?.execute(body)
+    @CallSuper
+    @Suppress("UNCHECKED_CAST")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        presenter.attachView(this as V)
     }
 
-    open fun onBackPressed(){
+    @CallSuper
+    override fun onResume() {
+        super.onResume()
+        attachListeners()
+    }
+
+    @CallSuper
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.detachView()
+    }
+
+    @CallSuper
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachFromLifecycle(lifecycle)
+    }
+
+    protected open fun attachListeners() {}
+
+    override fun activityFinish() {
+        activity?.finish()
+    }
+
+    override fun onBackPressed(){
         close()
     }
 

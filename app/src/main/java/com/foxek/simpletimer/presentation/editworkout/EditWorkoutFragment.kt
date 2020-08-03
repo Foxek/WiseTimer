@@ -6,59 +6,36 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.utils.Constants
 import com.foxek.simpletimer.data.model.Round
+import com.foxek.simpletimer.di.component.FragmentComponent
 import com.foxek.simpletimer.presentation.base.BaseFragment
 import com.foxek.simpletimer.presentation.base.FragmentFactory
 import kotlinx.android.synthetic.main.fragment_edit_workout.*
-import javax.inject.Inject
 
-class EditWorkoutFragment : BaseFragment(), EditWorkoutContract.View {
+class EditWorkoutFragment : BaseFragment<EditWorkoutContract.View, EditWorkoutContract.Presenter>(),
+    EditWorkoutContract.View {
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { EditWorkoutAdapter() }
 
     private lateinit var touchHelper: ItemTouchHelper
 
-    @Inject
-    lateinit var presenter: EditWorkoutContract.Presenter
-
     override val layoutId: Int = R.layout.fragment_edit_workout
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        component?.inject(this)
-        presenter.attachView(this)
+    override fun onInject(component: FragmentComponent) {
+        component.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            presenter.workoutId = (it.getInt(Constants.EXTRA_WORKOUT_ID, 0))
-        }
+        presenter.workoutId = requireArguments().getInt(Constants.EXTRA_WORKOUT_ID, 0)
 
-        fragment_edit_workout_close_btn.setOnClickListener { startRoundFragment() }
+        setupRoundList()
+    }
+
+    override fun attachListeners() {
+        fragment_edit_workout_close_btn.setOnClickListener { onBackPressed() }
         fragment_edit_workout_save_btn.setOnClickListener {
             presenter.onSaveBtnClick(adapter.getItems(), fragment_edit_workout_name.text.toString())
-        }
-
-        presenter.viewIsReady()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
-    }
-
-    override fun setupRoundAdapter() {
-        val callback = ItemTouchHelperCallback(adapter)
-        touchHelper = ItemTouchHelper(callback).apply {
-            attachToRecyclerView(fragment_edit_workout_list)
-        }
-        fragment_edit_workout_list.apply {
-            itemAnimator = null
-            adapter = this@EditWorkoutFragment.adapter.apply {
-                onDragListener = { touchHelper.startDrag(it) }
-            }
         }
     }
 
@@ -70,8 +47,16 @@ class EditWorkoutFragment : BaseFragment(), EditWorkoutContract.View {
         fragment_edit_workout_name.setText(name)
     }
 
-    override fun startRoundFragment() {
-        onBackPressed()
+    private fun setupRoundList() {
+        touchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
+        touchHelper.attachToRecyclerView(fragment_edit_workout_list)
+
+        fragment_edit_workout_list.apply {
+            itemAnimator = null
+            adapter = this@EditWorkoutFragment.adapter.apply {
+                onDragListener = { touchHelper.startDrag(it) }
+            }
+        }
     }
 
     companion object : FragmentFactory<EditWorkoutFragment> {

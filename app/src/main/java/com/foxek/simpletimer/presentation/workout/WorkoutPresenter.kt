@@ -12,7 +12,7 @@ class WorkoutPresenter @Inject constructor(
     private val interactor: WorkoutInteractor
 ) : BasePresenter<WorkoutContact.View>(), WorkoutContact.Presenter {
 
-    override fun viewIsReady() {
+    override fun onViewResumed() {
         fetchWorkoutList()
     }
 
@@ -20,7 +20,7 @@ class WorkoutPresenter @Inject constructor(
         interactor.createWorkout(workoutName)
             .observeOnMain()
             .subscribe()
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     override fun onCreateButtonClick() {
@@ -35,7 +35,6 @@ class WorkoutPresenter @Inject constructor(
         interactor.observeWorkouts()
             .observeOnMain()
             .subscribeBy { view?.renderWorkoutList(it) }
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
-
 }

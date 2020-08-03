@@ -93,6 +93,7 @@
             android:layout_marginTop="@dimen/margin_24dp"
             android:layout_marginBottom="96dp"
             android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -31,7 +31,7 @@ class RoundCreateDialog : BaseDialog() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent?.inject(this)
+        component?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

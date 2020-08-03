@@ -1,22 +1,17 @@
 package com.foxek.simpletimer.presentation.round
 
 import com.foxek.simpletimer.data.model.Round
-import com.foxek.simpletimer.presentation.base.MvpPresenter
-import com.foxek.simpletimer.presentation.base.MvpView
+import com.foxek.simpletimer.presentation.base.BaseContract
 
 interface RoundContact {
 
-    interface View : MvpView {
-
-        fun setupRoundAdapter()
+    interface View : BaseContract.View {
 
         fun renderRoundList(roundList: List<Round>)
 
         fun setSilentMode(state: Boolean)
 
         fun setWorkoutName(name: String)
-
-        fun startWorkoutFragment()
 
         fun startTimerFragment()
 
@@ -27,7 +22,7 @@ interface RoundContact {
         fun startEditWorkoutFragment(workoutId: Int)
     }
 
-    interface Presenter : MvpPresenter<View> {
+    interface Presenter : BaseContract.Presenter<View> {
 
         var workoutId: Int
 

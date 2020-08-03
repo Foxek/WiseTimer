@@ -20,9 +20,7 @@ class RoundPresenter @Inject constructor(
 
     override var workoutId: Int = NO_ID_INT
 
-    override fun viewIsReady() {
-        view?.setupRoundAdapter()
-
+    override fun onViewResumed() {
         getCurrentWorkout()
         fetchIntervalList()
     }
@@ -37,7 +35,7 @@ class RoundPresenter @Inject constructor(
             .subscribeBy(
                 onSuccess = { view?.setSilentMode(it) }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     override fun onAddRoundBtnClick() {
@@ -47,25 +45,25 @@ class RoundPresenter @Inject constructor(
     override fun onSaveRoundBtnClick(name: String, type: Int, workTime: Int, restTime: Int) {
         roundInteractor.updateRound(workoutId, intervalId,  name, type, workTime, restTime)
             .subscribe()
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     override fun onCreateRoundBtnClick(name: String, type: Int, workTime: Int, restTime: Int) {
         roundInteractor.addRound(Round(name, type, workTime, restTime, workoutId, 0))
             .subscribe()
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     override fun onDeleteRoundBtnClick() {
         roundInteractor.deleteRound(workoutId, intervalId)
             .subscribe()
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     override fun onSaveWorkoutBtnClick(name: String) {
         workoutInteractor.updateWorkoutName(workoutId, name)
             .subscribe()
-            .disposeOnDestroy()
+            .disposeOnPause()
 
         view?.setWorkoutName(name)
     }
@@ -74,9 +72,9 @@ class RoundPresenter @Inject constructor(
         workoutInteractor.deleteWorkoutById(workoutId)
             .observeOnMain()
             .subscribeBy(
-                onComplete = { view?.startWorkoutFragment() }
+                onComplete = { view?.onBackPressed() }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     override fun onStartWorkoutBtnClick() {
@@ -96,7 +94,7 @@ class RoundPresenter @Inject constructor(
                     view?.renderRoundList(it)
                 }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 
     private fun getCurrentWorkout() {
@@ -108,6 +106,6 @@ class RoundPresenter @Inject constructor(
                     view?.setSilentMode(it.isSilentMode)
                 }
             )
-            .disposeOnDestroy()
+            .disposeOnPause()
     }
 }
