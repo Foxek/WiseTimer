@@ -6,7 +6,6 @@ import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.domain.round.RoundInteractor
 import com.foxek.simpletimer.domain.workout.WorkoutInteractor
 import com.foxek.simpletimer.presentation.base.BasePresenter
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 class EditWorkoutPresenter @Inject constructor(
@@ -23,31 +22,21 @@ class EditWorkoutPresenter @Inject constructor(
 
     override fun onSaveBtnClick(rounds: List<Round>, workoutName: String) {
         workoutInteractor.updateWorkoutName(workoutId, workoutName)
-            .subscribeBy(
-                onComplete = { view?.onBackPressed() }
-            )
+            .subscribe { view?.onBackPressed() }
             .disposeOnPause()
     }
 
     private fun fetchIntervalList() {
         roundInteractor.observeRounds(workoutId)
             .observeOnMain()
-            .subscribeBy(
-                onNext = {
-                    view?.renderRoundList(it)
-                }
-            )
+            .subscribe { view?.renderRoundList(it) }
             .disposeOnPause()
     }
 
     private fun getCurrentWorkout() {
         workoutInteractor.getWorkoutById(workoutId)
             .observeOnMain()
-            .subscribeBy(
-                onSuccess = {
-                    view?.setWorkoutName(it.name)
-                }
-            )
+            .subscribe { workout -> view?.setWorkoutName(workout.name) }
             .disposeOnPause()
     }
 }

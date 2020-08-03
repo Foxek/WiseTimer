@@ -24,7 +24,6 @@ import com.foxek.simpletimer.common.utils.formatIntervalNumber
 import com.foxek.simpletimer.common.utils.formatIntervalType
 import com.foxek.simpletimer.domain.round.RoundInteractor
 import com.foxek.simpletimer.domain.workout.WorkoutInteractor
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 class TimerService : BaseService() {
@@ -154,26 +153,26 @@ class TimerService : BaseService() {
 
         workoutInteractor.getWorkoutVolumeState(workoutId)
             .observeOnMain()
-            .subscribeBy(onSuccess = intervalTimer::setSilentMode)
+            .subscribe(intervalTimer::setSilentMode)
             .disposeOnDestroy()
 
         roundInteractor.getRounds(workoutId)
             .observeOnMain()
-            .subscribeBy(onSuccess = intervalTimer::prepare)
+            .subscribe(intervalTimer::prepare)
             .disposeOnDestroy()
     }
 
     private fun registerTimerCallback() {
         intervalTimer.onIntervalFinished
             .observeOnMain()
-            .subscribeBy(onNext = ::handleFinish)
+            .subscribe(::handleFinish)
             .disposeOnDestroy()
     }
 
     private fun registerTickCallback() {
         intervalTimer.onTimerTickHappened
             .observeOnMain()
-            .subscribeBy(onNext = ::handleTick)
+            .subscribe(::handleTick)
             .disposeOnDestroy()
     }
 

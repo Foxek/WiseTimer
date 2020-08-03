@@ -24,6 +24,6 @@ ext {
             material          :  "1.1.0",
 
             kotlin_std        : "1.3.72",
-            kotlin_core       : "1.3.0"
+            kotlin_core       : "1.3.1"
     ]
 }

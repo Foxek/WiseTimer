@@ -4,7 +4,6 @@ import com.foxek.simpletimer.common.extensions.observeOnMain
 import com.foxek.simpletimer.data.model.Workout
 import com.foxek.simpletimer.domain.workout.WorkoutInteractor
 import com.foxek.simpletimer.presentation.base.BasePresenter
-import io.reactivex.rxkotlin.subscribeBy
 
 import javax.inject.Inject
 
@@ -34,7 +33,7 @@ class WorkoutPresenter @Inject constructor(
     private fun fetchWorkoutList() {
         interactor.observeWorkouts()
             .observeOnMain()
-            .subscribeBy { view?.renderWorkoutList(it) }
+            .subscribe { view?.renderWorkoutList(it) }
             .disposeOnPause()
     }
 }

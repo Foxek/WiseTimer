@@ -9,8 +9,6 @@ import com.foxek.simpletimer.presentation.base.BasePresenter
 
 import javax.inject.Inject
 
-import io.reactivex.rxkotlin.subscribeBy
-
 class RoundPresenter @Inject constructor(
     private val roundInteractor: RoundInteractor,
     private val workoutInteractor: WorkoutInteractor
@@ -32,9 +30,7 @@ class RoundPresenter @Inject constructor(
     override fun onToggleSilentModeBtnClick() {
         workoutInteractor.toggleWorkoutVolumeState(workoutId)
             .observeOnMain()
-            .subscribeBy(
-                onSuccess = { view?.setSilentMode(it) }
-            )
+            .subscribe { isSilentMode -> view?.setSilentMode(isSilentMode) }
             .disposeOnPause()
     }
 
@@ -71,9 +67,7 @@ class RoundPresenter @Inject constructor(
     override fun onDeleteWorkoutBtnClick() {
         workoutInteractor.deleteWorkoutById(workoutId)
             .observeOnMain()
-            .subscribeBy(
-                onComplete = { view?.onBackPressed() }
-            )
+            .subscribe { view?.onBackPressed() }
             .disposeOnPause()
     }
 
@@ -89,23 +83,17 @@ class RoundPresenter @Inject constructor(
     private fun fetchIntervalList() {
         roundInteractor.observeRounds(workoutId)
             .observeOnMain()
-            .subscribeBy(
-                onNext = {
-                    view?.renderRoundList(it)
-                }
-            )
+            .subscribe { view?.renderRoundList(it) }
             .disposeOnPause()
     }
 
     private fun getCurrentWorkout() {
         workoutInteractor.getWorkoutById(workoutId)
             .observeOnMain()
-            .subscribeBy(
-                onSuccess = {
-                    view?.setWorkoutName(it.name)
-                    view?.setSilentMode(it.isSilentMode)
-                }
-            )
+            .subscribe { workout ->
+                view?.setWorkoutName(workout.name)
+                view?.setSilentMode(workout.isSilentMode)
+            }
             .disposeOnPause()
     }
 }
