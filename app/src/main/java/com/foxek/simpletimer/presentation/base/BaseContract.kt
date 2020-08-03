@@ -7,6 +7,7 @@ interface BaseContract {
     interface View : MvpView {
         fun onBackPressed()
         fun activityFinish()
+        fun returnToMainScreen()
     }
 
     interface Presenter<V : View> : MvpPresenter<V> {

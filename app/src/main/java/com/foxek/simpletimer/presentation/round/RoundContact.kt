@@ -32,11 +32,7 @@ interface RoundContact {
 
         fun onDeleteRoundBtnClick()
 
-        fun onSaveWorkoutBtnClick(name: String)
-
         fun onEditWorkoutBtnClick()
-
-        fun onDeleteWorkoutBtnClick()
 
         fun onStartWorkoutBtnClick()
 

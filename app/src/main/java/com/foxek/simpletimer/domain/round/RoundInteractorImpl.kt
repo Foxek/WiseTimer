@@ -15,14 +15,20 @@ class RoundInteractorImpl @Inject constructor(
 
     override fun observeRounds(workoutId: Int): Flowable<List<Round>> {
         return timerDAO.observeRounds(workoutId)
+            .map {
+                it.sortedBy { it.positionInWorkout }
+            }
     }
 
     override fun getRounds(workoutId: Int): Single<List<Round>> {
         return timerDAO.getRounds(workoutId)
+            .map {
+                it.sortedBy { it.positionInWorkout }
+            }
     }
 
     override fun addRound(round: Round): Completable {
-        return timerDAO.getLastRoundId()
+        return timerDAO.getLastPositionInWorkout(round.workoutId)
             .flatMapCompletable {
                 round.positionInWorkout = it + 1
                 Completable.fromAction { timerDAO.addRound(round) }

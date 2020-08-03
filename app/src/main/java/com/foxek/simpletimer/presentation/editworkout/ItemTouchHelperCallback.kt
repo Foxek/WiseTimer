@@ -8,7 +8,6 @@ class ItemTouchHelperCallback(
 ) : ItemTouchHelper.Callback() {
 
     private var positionFrom = -1
-
     private var positionTo = -1
 
     override fun isItemViewSwipeEnabled(): Boolean = false
@@ -30,7 +29,7 @@ class ItemTouchHelperCallback(
         }
         positionTo = target.adapterPosition
 
-        moveListener.onRoundMove(positionFrom, positionTo)
+        moveListener.onRoundMove(current.adapterPosition, positionTo)
         return true
     }
 

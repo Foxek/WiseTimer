@@ -83,6 +83,10 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         close()
     }
 
+    override fun returnToMainScreen() {
+        (activity as? BaseActivity)?.returnToMainScreen()
+    }
+
     fun showDialog(dialog: BaseDialog){
         dialog.setTargetFragment(this,123)
         dialog.show(fragmentManager!!, dialog.customTag())

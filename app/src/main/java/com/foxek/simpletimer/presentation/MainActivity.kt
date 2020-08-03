@@ -9,7 +9,6 @@ import com.foxek.simpletimer.presentation.timer.TimerFragment
 import com.foxek.simpletimer.presentation.timer.TimerService
 import com.foxek.simpletimer.presentation.workout.WorkoutFragment
 
-
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

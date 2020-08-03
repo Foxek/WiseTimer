@@ -15,6 +15,7 @@ interface EditWorkoutContract {
     interface Presenter : BaseContract.Presenter<View> {
         var workoutId: Int
 
-        fun onSaveBtnClick(rounds: List<Round>, workoutName: String)
+        fun onSaveWorkoutBtnClick(rounds: List<Round>, workoutName: String)
+        fun onDeleteWorkoutBtnClick()
     }
 }

@@ -20,9 +20,16 @@ class EditWorkoutPresenter @Inject constructor(
         fetchIntervalList()
     }
 
-    override fun onSaveBtnClick(rounds: List<Round>, workoutName: String) {
-        workoutInteractor.updateWorkoutName(workoutId, workoutName)
+    override fun onSaveWorkoutBtnClick(rounds: List<Round>, workoutName: String) {
+        workoutInteractor.updateWorkout(workoutId, workoutName, rounds)
             .subscribe { view?.onBackPressed() }
+            .disposeOnPause()
+    }
+
+    override fun onDeleteWorkoutBtnClick() {
+        workoutInteractor.deleteWorkoutById(workoutId)
+            .observeOnMain()
+            .subscribe { view?.returnToMainScreen() }
             .disposeOnPause()
     }
 

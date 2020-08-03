@@ -1,5 +1,6 @@
 package com.foxek.simpletimer.domain.workout
 
+import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.data.model.Workout
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -14,7 +15,7 @@ interface WorkoutInteractor {
 
     fun deleteWorkoutById(workoutId: Int): Completable
 
-    fun updateWorkoutName(workoutId: Int, workoutName: String): Completable
+    fun updateWorkout(workoutId: Int, workoutName: String, rounds: List<Round>): Completable
 
     fun getWorkoutVolumeState(workoutId: Int): Single<Boolean>
 

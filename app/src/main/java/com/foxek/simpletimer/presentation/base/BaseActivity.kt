@@ -1,13 +1,8 @@
 package com.foxek.simpletimer.presentation.base
 
-import android.app.Activity
-
 import android.os.Bundle
 import androidx.annotation.CallSuper
-
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.foxek.simpletimer.R
 
 abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
@@ -29,5 +24,11 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
             ((supportFragmentManager.findFragmentById(R.id.container)) as BaseFragment<*, *>).onBackPressed()
         else
             super.onBackPressed()
+    }
+
+    override fun returnToMainScreen() {
+        while (supportFragmentManager.backStackEntryCount != 0) {
+            supportFragmentManager.popBackStackImmediate()
+        }
     }
 }

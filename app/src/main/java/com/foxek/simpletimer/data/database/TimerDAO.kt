@@ -17,6 +17,12 @@ abstract class TimerDAO {
         addRound(round)
     }
 
+    @Transaction
+    open fun updateWorkout(workoutId: Int, workoutName: String, rounds: List<Round>) {
+        updateWorkoutName(workoutName, workoutId)
+        rounds.forEach { updatePositionInWorkout(it.id, it.positionInWorkout) }
+    }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun addWorkout(workout: Workout)
 
@@ -62,6 +68,9 @@ abstract class TimerDAO {
     @Query("SELECT * FROM Round WHERE workoutId IS :workoutId")
     abstract fun getRounds(workoutId: Int): Single<List<Round>>
 
-    @Query("SELECT MAX(id)  FROM Round")
-    abstract fun getLastRoundId(): Single<Int>
+    @Query("UPDATE round SET positionInWorkout = :newPosition WHERE id IS :roundId")
+    abstract fun updatePositionInWorkout(roundId: Int, newPosition: Int)
+
+    @Query("SELECT MAX(positionInWorkout) FROM Round WHERE workoutId IS :workoutId")
+    abstract fun getLastPositionInWorkout(workoutId: Int): Single<Int>
 }

@@ -56,21 +56,6 @@ class RoundPresenter @Inject constructor(
             .disposeOnPause()
     }
 
-    override fun onSaveWorkoutBtnClick(name: String) {
-        workoutInteractor.updateWorkoutName(workoutId, name)
-            .subscribe()
-            .disposeOnPause()
-
-        view?.setWorkoutName(name)
-    }
-
-    override fun onDeleteWorkoutBtnClick() {
-        workoutInteractor.deleteWorkoutById(workoutId)
-            .observeOnMain()
-            .subscribe { view?.onBackPressed() }
-            .disposeOnPause()
-    }
-
     override fun onStartWorkoutBtnClick() {
         view?.startTimerFragment()
     }

@@ -65,13 +65,13 @@
     <string name="delete_changelog_accept_button">Понятно</string>
     <string-array name="dialog_changelog_list">
         <item>Индикация следующего интервала</item>
-        <item>[Скоро] Сортировка интервалов</item>
+        <item>Сортировка интервалов</item>
         <item>[Скоро] Управление звуком</item>
     </string-array>
 
     <string-array name="dialog_changelog_description_list">
         <item>Теперь вы сможете видеть имя следующего именованного интервала</item>
-        <item>Скоро вы сможете менять местами интервалы для более гибкой настройки вашей тренировки</item>
+        <item>Теперь вы можете менять местами интервалы для более гибкой настройки вашей тренировки</item>
         <item>Скоро вы сможете управлять звуковыми сигналами таймера</item>
     </string-array>
 </resources>

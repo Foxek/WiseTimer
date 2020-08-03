@@ -35,12 +35,12 @@ class WorkoutInteractorImpl @Inject constructor(
         return timerDAO.observeWorkouts()
     }
 
-    override fun updateWorkoutName(workoutId: Int, workoutName: String): Completable {
-        return Completable.fromAction { timerDAO.updateWorkoutName(workoutName, workoutId) }
-    }
-
     override fun deleteWorkoutById(workoutId: Int): Completable {
         return Completable.fromAction { timerDAO.deleteWorkout(workoutId) }
+    }
+
+    override fun updateWorkout(workoutId: Int, workoutName: String, rounds: List<Round>): Completable {
+        return Completable.fromRunnable { timerDAO.updateWorkout(workoutId, workoutName, rounds) }
     }
 
     override fun getWorkoutVolumeState(workoutId: Int): Single<Boolean> {

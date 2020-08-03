@@ -18,7 +18,6 @@ import java.util.*
 
 class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), RoundMoveListener {
 
-    var onItemMovedListener: ((List<Round>) -> Unit)? = null
     var onDragListener: ((viewHolder: RecyclerView.ViewHolder) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -60,7 +59,7 @@ class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), 
                 }
 
                 item_interval_title.text = if (model.name == Constants.EMPTY) {
-                    formatIntervalNumber(adapterPosition + 1)
+                    formatIntervalNumber(model.positionInWorkout + 1)
                 } else {
                     model.name
                 }
@@ -93,7 +92,11 @@ class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), 
     }
 
     override fun onRoundMoved(fromPosition: Int, toPosition: Int) {
-        onItemMovedListener?.invoke(getItems())
+        applyNewRoundsOrder(getItems())
+    }
+
+    private fun applyNewRoundsOrder(rounds: List<Round>) {
+        rounds.forEachIndexed { idx, value -> value.positionInWorkout = idx }
     }
 }
 

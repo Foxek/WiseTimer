@@ -62,13 +62,13 @@
 
     <string-array name="dialog_changelog_list">
         <item>Indication of the next interval</item>
-        <item>[Soon] Sorting Intervals</item>
+        <item>Sorting Intervals</item>
         <item>[Soon] Sound control</item>
     </string-array>
 
     <string-array name="dialog_changelog_description_list">
         <item>Now you will always be notified of which interval will be next</item>
-        <item>Soon you will be able to swap intervals for a more flexible setup of your workout</item>
+        <item>Now you can change intervals for more flexible workout customization</item>
         <item>Soon you will be able to control the sound of the timer</item>
     </string-array>
 </resources>

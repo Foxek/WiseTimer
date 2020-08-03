@@ -51,6 +51,7 @@ class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
                     && oldItem.restInterval == newItem.restInterval
                     && oldItem.name == newItem.name
                     && oldItem.type == newItem.type
+                    && oldItem.positionInWorkout == newItem.positionInWorkout
             }
         }
     }
@@ -70,7 +71,7 @@ class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
                 }
 
                 item_interval_title.text = if (model.name == EMPTY) {
-                    formatIntervalNumber(adapterPosition + 1)
+                    formatIntervalNumber(model.positionInWorkout + 1)
                 } else {
                     model.name
                 }
