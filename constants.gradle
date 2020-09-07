@@ -1,7 +1,7 @@
 ext {
     base = [
-            version_name      : "2.0.1",
-            version_code      : 21,
+            version_name      : "2.1.0",
+            version_code      : 22,
     ]
 
     versions = [
