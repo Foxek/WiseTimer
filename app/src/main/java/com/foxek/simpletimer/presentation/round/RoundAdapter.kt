@@ -18,10 +18,6 @@ class RoundAdapter : BaseAdapter<Round, RoundAdapter.ViewHolder>() {
 
     var clickListener: ((round: Round) -> Unit)? = null
 
-    init {
-        setHasStableIds(true)
-    }
-
     override fun onViewDetachedFromWindow(holder: ViewHolder) {
         super.onViewDetachedFromWindow(holder)
         // small fix
