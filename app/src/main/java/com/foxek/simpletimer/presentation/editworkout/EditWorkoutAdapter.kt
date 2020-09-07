@@ -13,7 +13,7 @@ import com.foxek.simpletimer.common.utils.formatIntervalNumber
 import com.foxek.simpletimer.data.model.Round
 import com.foxek.simpletimer.presentation.base.BaseAdapter
 import com.foxek.simpletimer.presentation.base.BaseDiffCallback
-import kotlinx.android.synthetic.main.item_round.view.*
+import kotlinx.android.synthetic.main.item_edit_workout.view.*
 import java.util.*
 
 class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), RoundMoveListener {
@@ -22,7 +22,7 @@ class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return with(parent) {
-            LayoutInflater.from(context).inflate(R.layout.item_round, this, false)
+            LayoutInflater.from(context).inflate(R.layout.item_edit_workout, this, false)
         }.run(::ViewHolder)
     }
 
@@ -48,22 +48,22 @@ class EditWorkoutAdapter : BaseAdapter<Round, EditWorkoutAdapter.ViewHolder>(), 
     inner class ViewHolder(itemView: View) : BaseAdapter.BaseViewHolder<Round>(itemView) {
         override fun bind(model: Round) {
             itemView.apply {
-                item_interval_work_time.text = formatIntervalData(model.workInterval)
+                item_edit_workout_work_time.text = formatIntervalData(model.workInterval)
 
                 if (model.type == Constants.WITH_REST_TYPE) {
-                    item_interval_rest_time.text = formatIntervalData(model.restInterval)
-                    item_interval_rest_hint.text = resources.getString(R.string.timer_rest_time)
+                    item_edit_workout_rest_time.text = formatIntervalData(model.restInterval)
+                    item_edit_workout_rest_hint.text = resources.getString(R.string.timer_rest_time)
                 } else {
-                    item_interval_rest_time.text = ""
-                    item_interval_rest_hint.text = resources.getString(R.string.timer_without_rest)
+                    item_edit_workout_rest_time.text = ""
+                    item_edit_workout_rest_hint.text = resources.getString(R.string.timer_without_rest)
                 }
 
-                item_interval_title.text = if (model.name == Constants.EMPTY) {
+                item_edit_workout_title.text = if (model.name == Constants.EMPTY) {
                     formatIntervalNumber(model.positionInWorkout + 1)
                 } else {
                     model.name
                 }
-                setOnTouchListener { v, event ->
+                item_edit_workout_icon.setOnTouchListener { v, event ->
                     if (event.action == MotionEvent.ACTION_DOWN) {
                         onDragListener?.invoke(this@ViewHolder)
                         return@setOnTouchListener true
