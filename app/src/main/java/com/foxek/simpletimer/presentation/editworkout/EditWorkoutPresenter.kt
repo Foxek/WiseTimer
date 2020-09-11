@@ -22,7 +22,7 @@ class EditWorkoutPresenter @Inject constructor(
 
     override fun onSaveWorkoutBtnClick(rounds: List<Round>, workoutName: String) {
         workoutInteractor.updateWorkout(workoutId, workoutName, rounds)
-            .subscribe { view?.onBackPressed() }
+            .subscribe { view?.closeFragment() }
             .disposeOnPause()
     }
 

@@ -20,10 +20,16 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount != 0)
-            ((supportFragmentManager.findFragmentById(R.id.container)) as BaseFragment<*, *>).onBackPressed()
-        else
+        if (!onBackPressedConsumedByFragment())
             super.onBackPressed()
+    }
+
+    protected fun onBackPressedConsumedByFragment(): Boolean {
+        val fragment = supportFragmentManager.findFragmentById(R.id.container)
+        if (fragment is BackPressedListener && fragment.onBackPressedConsumed())
+            return true
+
+        return false
     }
 
     override fun returnToMainScreen() {

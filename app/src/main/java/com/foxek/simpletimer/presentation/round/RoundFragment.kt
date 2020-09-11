@@ -39,7 +39,7 @@ class RoundFragment : BaseFragment<RoundContact.View, RoundContact.Presenter>(),
     }
 
     override fun attachListeners() {
-        fragment_interval_back_btn.setOnClickListener { onBackPressed() }
+        fragment_interval_back_btn.setOnClickListener { close() }
         fragment_interval_edit_btn.setOnClickListener { presenter.onEditWorkoutBtnClick() }
         fragment_interval_volume_btn.setOnClickListener { presenter.onToggleSilentModeBtnClick() }
         fragment_interval_add_btn.setOnClickListener { presenter.onAddRoundBtnClick() }

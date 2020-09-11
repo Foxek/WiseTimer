@@ -5,6 +5,7 @@ import com.foxek.simpletimer.R
 import com.foxek.simpletimer.common.extensions.transaction
 import com.foxek.simpletimer.common.utils.ServiceTools
 import com.foxek.simpletimer.presentation.base.BaseActivity
+import com.foxek.simpletimer.presentation.base.BaseFragment
 import com.foxek.simpletimer.presentation.timer.TimerFragment
 import com.foxek.simpletimer.presentation.timer.TimerService
 import com.foxek.simpletimer.presentation.workout.WorkoutFragment
@@ -23,6 +24,16 @@ class MainActivity : BaseActivity() {
                 replace(R.id.container, fragment)
                 addToBackStack(fragment.tag)
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (onBackPressedConsumedByFragment()) return
+
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            super.onBackPressed()
+        } else {
+            activityFinish()
         }
     }
 }

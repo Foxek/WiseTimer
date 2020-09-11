@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> :
     Fragment(),
-    BaseContract.View {
+    BaseContract.View,
+    BackPressedListener {
 
     abstract val layoutId: Int
 
@@ -73,14 +74,12 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         presenter.detachFromLifecycle(lifecycle)
     }
 
+    override fun onBackPressedConsumed(): Boolean = false
+
     protected open fun attachListeners() {}
 
     override fun activityFinish() {
         activity?.finish()
-    }
-
-    override fun onBackPressed(){
-        close()
     }
 
     override fun returnToMainScreen() {

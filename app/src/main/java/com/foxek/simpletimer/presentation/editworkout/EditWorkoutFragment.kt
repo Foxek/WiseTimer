@@ -33,7 +33,7 @@ class EditWorkoutFragment : BaseFragment<EditWorkoutContract.View, EditWorkoutCo
     }
 
     override fun attachListeners() {
-        fragment_edit_workout_close_btn.setOnClickListener { onBackPressed() }
+        fragment_edit_workout_close_btn.setOnClickListener { close() }
         fragment_edit_workout_delete_btn.setOnClickListener { presenter.onDeleteWorkoutBtnClick() }
         fragment_edit_workout_save_btn.setOnClickListener {
             presenter.onSaveWorkoutBtnClick(adapter.getItems(), fragment_edit_workout_name.text.toString())
@@ -42,6 +42,10 @@ class EditWorkoutFragment : BaseFragment<EditWorkoutContract.View, EditWorkoutCo
 
     override fun renderRoundList(rounds: List<Round>) {
         adapter.setItems(rounds)
+    }
+
+    override fun closeFragment() {
+        close()
     }
 
     override fun setWorkoutName(name: String) {

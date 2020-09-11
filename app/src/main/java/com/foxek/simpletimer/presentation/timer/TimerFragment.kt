@@ -55,12 +55,12 @@ class TimerFragment : BaseStandaloneFragment(), TimerContact.ServiceCallback {
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressedConsumed(): Boolean {
         startForegroundService(
             context!!,
             Intent(context, TimerService::class.java).setAction(ACTION_STOP)
         )
-        super.onBackPressed()
+        return true
     }
 
     override fun onStart() {
@@ -72,7 +72,7 @@ class TimerFragment : BaseStandaloneFragment(), TimerContact.ServiceCallback {
                 serviceConnection,
                 0)
         } else {
-            super.onBackPressed()
+            close()
         }
     }
 
@@ -85,8 +85,9 @@ class TimerFragment : BaseStandaloneFragment(), TimerContact.ServiceCallback {
     }
 
     override fun startWorkoutActivity() {
-        super.onBackPressed()
+        close()
     }
+
 
     override fun showTimerState(buttonState: Int, isRestartAllowed: Boolean) {
         fragment_timer_reset_btn.isVisible = isRestartAllowed

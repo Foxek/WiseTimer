@@ -8,7 +8,7 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import com.foxek.simpletimer.common.extensions.customTag
 
-abstract class BaseStandaloneFragment : Fragment() {
+abstract class BaseStandaloneFragment : Fragment(), BackPressedListener {
 
     abstract val layoutId: Int
 
@@ -23,14 +23,12 @@ abstract class BaseStandaloneFragment : Fragment() {
         attachListeners()
     }
 
+    override fun onBackPressedConsumed(): Boolean = false
+
     protected open fun attachListeners() {}
 
     fun activityFinish() {
         activity?.finish()
-    }
-
-    protected open fun onBackPressed() {
-        close()
     }
 
     fun showDialog(dialog: BaseDialog) {

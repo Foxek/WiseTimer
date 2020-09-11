@@ -8,7 +8,7 @@ interface EditWorkoutContract {
     interface View : BaseContract.View {
 
         fun renderRoundList(rounds: List<Round>)
-
+        fun closeFragment()
         fun setWorkoutName(name: String)
     }
 

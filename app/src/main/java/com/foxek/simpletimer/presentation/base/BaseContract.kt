@@ -5,7 +5,6 @@ import androidx.lifecycle.Lifecycle
 interface BaseContract {
 
     interface View : MvpView {
-        fun onBackPressed()
         fun activityFinish()
         fun returnToMainScreen()
     }
