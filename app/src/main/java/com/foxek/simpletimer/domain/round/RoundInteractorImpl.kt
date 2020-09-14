@@ -57,7 +57,7 @@ class RoundInteractorImpl @Inject constructor(
         return timerDAO.getNumberOfRoundForWorkout(workoutId)
             .filter { it != 1 }
             .flatMapCompletable {
-                Completable.fromAction { timerDAO.deleteRound(roundId, workoutId) }
+                Completable.fromAction { timerDAO.deleteRoundAndRearrangeOthers(roundId, workoutId) }
             }
     }
 }

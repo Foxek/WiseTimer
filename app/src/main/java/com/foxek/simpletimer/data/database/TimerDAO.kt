@@ -53,6 +53,15 @@ abstract class TimerDAO {
     @Insert
     abstract fun addRound(round: Round)
 
+    @Transaction
+    open fun deleteRoundAndRearrangeOthers(roundId: Int, workoutId: Int) {
+        deleteRound(roundId, workoutId)
+        getRounds(workoutId).blockingGet().forEachIndexed { idx, round ->
+            round.positionInWorkout = idx
+            updatePositionInWorkout(round.id, round.positionInWorkout)
+        }
+    }
+
     @Query("DELETE FROM Round WHERE id IS :id AND workoutId IS :workoutId")
     abstract fun deleteRound(id: Int, workoutId: Int)
 

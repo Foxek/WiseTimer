@@ -14,7 +14,8 @@ class RoundPresenter @Inject constructor(
     private val workoutInteractor: WorkoutInteractor
 ) : BasePresenter<RoundContact.View>(), RoundContact.Presenter {
 
-    private var intervalId = NO_ID_INT
+    private var roundId = NO_ID_INT
+    private var rounds: List<Round> = emptyList()
 
     override var workoutId: Int = NO_ID_INT
 
@@ -39,7 +40,7 @@ class RoundPresenter @Inject constructor(
     }
 
     override fun onSaveRoundBtnClick(name: String, type: Int, workTime: Int, restTime: Int) {
-        roundInteractor.updateRound(workoutId, intervalId,  name, type, workTime, restTime)
+        roundInteractor.updateRound(workoutId, roundId,  name, type, workTime, restTime)
             .subscribe()
             .disposeOnPause()
     }
@@ -51,7 +52,7 @@ class RoundPresenter @Inject constructor(
     }
 
     override fun onDeleteRoundBtnClick() {
-        roundInteractor.deleteRound(workoutId, intervalId)
+        roundInteractor.deleteRound(workoutId, roundId)
             .subscribe()
             .disposeOnPause()
     }
@@ -61,14 +62,17 @@ class RoundPresenter @Inject constructor(
     }
 
     override fun onRoundItemClick(item: Round) {
-        intervalId = item.id
+        roundId = item.id
         view?.showRoundEditDialog(item)
     }
 
     private fun fetchIntervalList() {
         roundInteractor.observeRounds(workoutId)
             .observeOnMain()
-            .subscribe { view?.renderRoundList(it) }
+            .subscribe {
+                rounds = it
+                view?.renderRoundList(rounds)
+            }
             .disposeOnPause()
     }
 
