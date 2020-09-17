@@ -1,0 +1,71 @@
+<resources>
+    <string name="training_desc">You can add, edit and start an already created workout</string>
+
+    <string name="timer_prepare">Przygotuj się</string>
+    <string name="timer_prepare_number">Rozpoczęcie wkrótce</string>
+    <string name="timer_work_time">Czas ćwiczeń</string>
+    <string name="timer_rest_time">Czas odpoczynku</string>
+    <string name="timer_without_rest">Bez odpoczynku</string>
+    <string name="timer_repeat">Powtórz</string>
+
+    <string name="time_min_hint">minimum</string>
+    <string name="timer_pause_button">Pauzuj</string>
+    <string name="timer_continue_button">Kontynuuj</string>
+    <string name="timer_next_interval_hint">Następne: %s</string>
+
+    /* Training activity and dialog */
+    <string name="dialog_training_setting_title">Ustawienia treningu</string>
+    <string name="dialog_training_create_title">Stwórz trening</string>
+    <string name="dialog_training_setting_description">Zmień nazwę treningu bądź go usuń</string>
+    <string name="dialog_training_create_description">Aby stworzyć nowy trening, wprowadź jego nazwę</string>
+    <string name="dialog_training_error_hint">Nazwa musi zawierać co najmniej jedną literę bądź cyfrę</string>
+    <string name="dialog_training_name_hint">Wprowadź nazwę treningu</string>
+
+    <string name="dialog_interval_setting_title">Ustawienia interwału</string>
+    <string name="dialog_interval_create_title">Stwórz interwał</string>
+    <string name="dialog_interval_setting_description">Ustaw czas ćwiczeń i czas odpoczynku dla wybranego interwału</string>
+    <string name="dialog_interval_setting_repeats">Powtórz kilkakrotnie</string>
+    <string name="dialog_interval_setting_name">Bez nazwy</string>
+    <string name="dialog_interval_setting_type">Typ interwału</string>
+    <string name="dialog_interval_setting_name_hint">Wprowadź nazwę interwału</string>
+
+    <string name="training_subtitle">Witaj w</string>
+    <string name="training_title">WiseTimer</string>
+    <string name="training_sector_title">Lista treningów</string>
+
+    <string name="number_of_intervals_text">Liczba interwałów: %1$d</string>
+
+    <string name="delete_training_button">Usuń trening</string>
+    <string name="save_training_button">Zapisz zmiany</string>
+    <string name="create_training_button">Stwórz trening</string>
+
+    <string name="delete_interval_button">Usuń interwał</string>
+    <string name="save_interval_button">Zapisz interwał</string>
+    <string name="start_workout_button">Rozpocznij trening</string>
+
+    <string name="interval_title">Lista interwałów</string>
+
+    <string name="edit_workout_title">Edytuj trening</string>
+    <string name="edit_workout_description">Możesz zmienić kolejność interwałów przeciągając je na liście</string>
+
+    <string-array name="type_list">
+        <item>Z odpoczynkiem</item>
+        <item>Bez odpoczynku</item>
+    </string-array>
+
+
+    <string name="dialog_changelog_title">W nowej wersji</string>
+    <string name="delete_changelog_accept_button">Kontynuuj</string>
+
+    <string-array name="dialog_changelog_list">
+        <item>Wskazanie kolejnego interwału</item>
+        <item>Sortowanie interwałów</item>
+        <item>[Wkrótce] Kontrola dźwięku</item>
+    </string-array>
+
+    <string-array name="dialog_changelog_description_list">
+        <item>Informowanie o kolejnym interwale jest już dostępne</item>
+        <item>Personalizacja interwałów jest już dostępna</item>
+        <item>Kontrola dźwięku stopera będzie wkrótce dostępna</item>
+    </string-array>
+</resources>
