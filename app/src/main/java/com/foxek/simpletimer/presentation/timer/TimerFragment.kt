@@ -8,17 +8,13 @@ import android.os.IBinder
 import android.view.View
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.core.view.isVisible
-import androidx.transition.Fade
-import androidx.transition.TransitionManager
 import com.foxek.simpletimer.R
-import com.foxek.simpletimer.presentation.base.BaseFragment
-import com.foxek.simpletimer.presentation.timer.TimerService.LocalBinder
 import com.foxek.simpletimer.common.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.common.utils.Constants.ACTION_STOP
-import com.foxek.simpletimer.common.utils.ServiceTools.isServiceRunning
-import com.foxek.simpletimer.presentation.base.BaseContract
+import com.foxek.simpletimer.common.utils.isServiceRunning
 import com.foxek.simpletimer.presentation.base.BaseStandaloneFragment
 import com.foxek.simpletimer.presentation.base.FragmentFactory
+import com.foxek.simpletimer.presentation.timer.TimerService.LocalBinder
 import kotlinx.android.synthetic.main.fragment_timer.*
 
 class TimerFragment : BaseStandaloneFragment(), TimerContact.ServiceCallback {

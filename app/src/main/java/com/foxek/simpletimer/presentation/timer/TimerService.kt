@@ -3,6 +3,8 @@ package com.foxek.simpletimer.presentation.timer
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import android.os.Binder
 import android.os.IBinder
 import com.foxek.simpletimer.R
@@ -11,7 +13,6 @@ import com.foxek.simpletimer.data.model.Interval
 import com.foxek.simpletimer.data.timer.IntervalTimer
 import com.foxek.simpletimer.presentation.MainActivity
 import com.foxek.simpletimer.presentation.base.BaseService
-import com.foxek.simpletimer.common.utils.Constants.ACTION_OPEN_TIMER
 import com.foxek.simpletimer.common.utils.Constants.ACTION_PAUSE
 import com.foxek.simpletimer.common.utils.Constants.ACTION_START
 import com.foxek.simpletimer.common.utils.Constants.ACTION_STOP
@@ -49,8 +50,9 @@ class TimerService : BaseService() {
         component?.inject(this)
 
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            action = ACTION_OPEN_TIMER
+            addCategory(Intent.CATEGORY_LAUNCHER)
+            addFlags(FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_SINGLE_TOP)
+            action = Intent.ACTION_MAIN
         }
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_UPDATE_CURRENT)

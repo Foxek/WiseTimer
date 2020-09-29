@@ -25,8 +25,6 @@ object Constants {
     const val ACTION_STOP = "com.foxek.simpletimer.action.STOP"
     const val ACTION_PAUSE = "com.foxek.simpletimer.action.PAUSE"
 
-    const val ACTION_OPEN_TIMER = "com.foxek.simpletimer.action.OPEN_TIMER"
-
     const val CHANGELOG_VERSION_VALUE = 3
 
     const val NO_ID_INT = -1
