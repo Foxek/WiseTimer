@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WiseTimer</string>
+    <string name="app_name" translatable="false">WiseTimer</string>
 
     <string name="training_desc">You can add, edit and start an already created workout</string>
 
@@ -26,14 +26,14 @@
     <string name="dialog_interval_setting_title">Interval settings</string>
     <string name="dialog_interval_create_title">Create interval</string>
     <string name="dialog_interval_setting_description">Set the workTime time and restTime time for a given interval</string>
-    <string name="dialog_interval_setting_divider">:</string>
+    <string name="dialog_interval_setting_divider" translatable="false">:</string>
     <string name="dialog_interval_setting_repeats">Repeat several times</string>
     <string name="dialog_interval_setting_name">Without name</string>
     <string name="dialog_interval_setting_type">Interval type</string>
     <string name="dialog_interval_setting_name_hint">Enter intervals name</string>
 
     <string name="training_subtitle">Welcome to</string>
-    <string name="training_title">WiseTimer</string>
+    <string name="training_title" translatable="false">WiseTimer</string>
     <string name="training_sector_title">Workout list</string>
 
     <string name="number_of_intervals_text">Number of intervals: %1$d</string>
