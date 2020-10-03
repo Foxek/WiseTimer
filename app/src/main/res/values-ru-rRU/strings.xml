@@ -16,6 +16,7 @@
     <string name="timer_continue_button">Продожить</string>
 
     <string name="timer_next_interval_hint">Далее: %s</string>
+    <string name="timer_end_of_workout_hint">Завершение тренировки</string>
 
     /* Training activity and dialog */
     <string name="dialog_training_setting_title">Настройка тренировки</string>

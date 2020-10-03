@@ -9,12 +9,16 @@ import com.foxek.simpletimer.common.utils.Constants.REST_TIME_TYPE
 import com.foxek.simpletimer.common.utils.Constants.WITH_REST_TYPE
 import com.foxek.simpletimer.common.utils.Constants.WORK_TIME_TYPE
 import com.foxek.simpletimer.data.model.Round
+import com.foxek.simpletimer.presentation.base.StringProvider
 
 import javax.inject.Inject
 
 import io.reactivex.subjects.PublishSubject
 
-class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
+class IntervalTimer @Inject constructor(
+    private val alarmHelper: AlarmHelper,
+    private val stringProvider: StringProvider
+) {
 
     enum class State (val buttonText: Int, val isRestartAllowed: Boolean) {
         PAUSED(R.string.timer_continue_button, true),
@@ -40,7 +44,8 @@ class IntervalTimer @Inject constructor(private val alarmHelper: AlarmHelper) {
                 intervals.add(Interval(it.restInterval, REST_TIME_TYPE, it.name, idx + 1))
         }
 
-        intervals.add(Interval(1, POST_TIME_TYPE, "Завершение тренировки", intervals.lastIndex))
+        intervals.add(
+            Interval(1, POST_TIME_TYPE, stringProvider.getString(R.string.timer_end_of_workout_hint), intervals.lastIndex))
         start(intervals[0].value.toLong())
     }
 
