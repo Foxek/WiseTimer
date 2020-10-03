@@ -1,6 +1,6 @@
 object Versions {
 
-    const val VERSION_CODE = 25
+    const val VERSION_CODE = 26
     const val VERSION_NAME = "2.1.3"
 
     object Sdk {
